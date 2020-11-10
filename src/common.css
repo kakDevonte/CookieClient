@@ -1,0 +1,7 @@
+.cookie-roulette{
+  display: flex;
+  flex-flow: column nowrap;
+  width: 90vw;
+  height: 90vh;
+  background-color: #ebf6ff;
+}
