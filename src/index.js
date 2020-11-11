@@ -63,6 +63,8 @@ class CookieRoulette extends React.Component{
         users: response
       });
     });
+
+    this._socket.on('console', (res)=> console.log(res));
   }
 
   _stage(){
