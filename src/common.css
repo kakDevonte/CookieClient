@@ -1,7 +1,98 @@
 .cookie-roulette{
   display: flex;
   flex-flow: column nowrap;
-  width: 90vw;
-  height: 90vh;
+  width: 375px;
+  height: 667px;
   background-color: #ebf6ff;
+}
+
+.table{
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  height: 448px;
+  border: solid 1px black;
+  justify-content: space-around;
+  align-content: space-around;
+  position: relative;
+}
+
+.player, .cookie{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  border: solid 1px #00780e;
+  position: relative;
+}
+
+.table .player:nth-child(1){top: 10px; left: 10px}
+.table .player:nth-child(3){top: 10px; left: -10px}
+.table .player:nth-child(7){top: -10px; left: 10px}
+.table .player:nth-child(9){top: -10px; left: -10px}
+
+.cookie{
+  font-size: 30px;
+  background-color: #f9e808;
+  border: solid 1px #ffe200;
+  border-radius: 100%;
+}
+
+.player.turn{
+  font-size: 20px;
+  font-weight: bold;
+  border: dotted 2px #ff0002;
+}
+
+.player .kissed{
+  font-size: 14px;
+  position: absolute;
+  bottom: 0;
+}
+
+.center-screen{
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.kiss{
+  display: none;
+  position: absolute;
+  width: 400px;
+  height: 300px;
+  background-color: #fff89f;
+  border: solid 1px black;
+  flex-flow: column nowrap;
+}
+.kiss.opened{
+  display: flex;
+}
+
+.kiss .info{
+  height: 200px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.kiss .question{
+  display: flex;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+}
+
+.kiss .actions{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.kiss .actions input{
+  margin: 0 25px;
 }
