@@ -41,7 +41,7 @@ class CookieRoulette extends React.Component{
     this._socket = null;
 
     this.state = {
-      gameStage: 'lobby',
+      gameStage: 'connection',
       users: []
     };
 
@@ -54,13 +54,21 @@ class CookieRoulette extends React.Component{
 
     this._socket.on('request-info', ()=>{
       this._socket.emit('user-info', $user);
+    });
+
+    this._socket.on('connect-success', ()=>{
       this._onLobby();
     });
 
     this._socket.on('receive-users', (response)=>{
       this.setState({
-        gameStage: 'table',
         users: response
+      });
+    });
+
+    this._socket.on('current-stage', (stage)=>{
+      this.setState({
+        gameStage: stage.current
       });
     });
 
@@ -76,8 +84,11 @@ class CookieRoulette extends React.Component{
         return <UserProfile />;
 
       case 'lobby':
-      default:
         return <GameLobby />;
+
+      case 'connection':
+      default:
+        return <div className="please-wait" />;
     }
   }
 
