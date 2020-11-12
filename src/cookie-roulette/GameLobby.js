@@ -5,10 +5,15 @@ class GameLobby extends React.Component{
     super(props);
   }
 
+
   render(){
     return (
       <section className="lobby">
-        Ожидаем
+        <div className="cookie center-screen" />
+        <div className="kiss kiss-one" />
+        <div className="kiss kiss-two" />
+        <div className="kiss kiss-three" />
+        <div className="kiss kiss-four" />
       </section>
     );
   }
