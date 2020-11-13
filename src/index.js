@@ -9,29 +9,15 @@ import GameLobby from "./cookie-roulette/GameLobby";
 import UserProfile from "./cookie-roulette/UserProfile";
 import GameTable from "./cookie-roulette/GameTable/GameTable";
 
-//import bridge from "@vkontakte/vk-bridge";
+import bridge_moc from "@vkontakte/vk-bridge-mock";
+import bridge_real from "@vkontakte/vk-bridge";
 
-//bridge.send("VKWebAppInit");
 
-const $user = {
-  "id": 281254431,
-  "first_name": "Григорий",
-  "last_name": "Семенов",
-  "sex": 2,
-  "city": {
-    "id": 2801,
-    "title": "Обь"
-  },
-  "country": {
-    "id": 1,
-    "title": "Россия"
-  },
-  "photo_100": "https://sun4-16.userapi.com/impf/c622220/v622220431/1ef0b/eE9frixxpWQ.jpg?size=100x0&quality=88&crop=192,311,496,496&sign=31cd07ba2fcad66bfc4602072c1d2843&ava=1",
-  "photo_max_orig": "https://sun4-16.userapi.com/impf/c622220/v622220431/1ef0b/eE9frixxpWQ.jpg?size=0x0&quality=90&crop=192,311,496,600&sign=1653ca457df49480da802d9a069c3c14&ava=1",
-  "bdate": "27.11.1989",
-  "photo_200": "https://sun4-16.userapi.com/impf/c622220/v622220431/1ef0b/eE9frixxpWQ.jpg?size=200x0&quality=88&crop=192,311,496,496&sign=9c9ca8248bd9bfb451ca681507c9f8db&ava=1",
-  "timezone": 7
-};
+const bridge = process.env.NODE_ENV === 'production' ? bridge_real : bridge_moc;
+
+bridge.send("VKWebAppInit");
+
+let $user;
 
 
 class CookieRoulette extends React.Component{
@@ -45,12 +31,14 @@ class CookieRoulette extends React.Component{
       users: []
     };
 
-    this._sockets();
+    bridge.send('VKWebAppGetUserInfo').then((response)=>{
+      $user = response;
+      this._sockets();
+    });
   }
 
   _sockets(){
-    this._socket = io('http://localhost:5000/');
-    //this._socket = io('https://chat-test-irs-server.herokuapp.com/?user=' + this._user.id);
+    this._socket = io(process.env.REACT_APP_SOCKET_SERVER);
 
     this._socket.on('request-info', ()=>{
       this._socket.emit('user-info', $user);
