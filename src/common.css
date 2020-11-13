@@ -17,10 +17,15 @@
 
 .lobby{
   display: flex;
+  flex-flow: column nowrap;
   position: relative;
   width: 100%;
   height: 100%;
   background: radial-gradient(46.39% 46.39% at 50% 53.61%, #8543D9 49.15%, #7219A8 100%), #F7ECDA;
+}
+
+.lobby i{
+  display: block;
 }
 
 .lobby .cookie{
@@ -32,6 +37,24 @@
   background-image: url("./images/lobbyCookie.svg");
   background-position: center;
   z-index: 1;
+}
+
+.lobby .message{
+  display: flex;
+  flex-flow: column nowrap;
+  margin-top: 70px;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: white;
+}
+
+.lobby header{
+  font-size: 30px;
+  padding: 10px;
+}
+.lobby span{
+  font-size: 15px;
 }
 
 .lobby .kiss{

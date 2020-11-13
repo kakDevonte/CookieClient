@@ -9,11 +9,15 @@ class GameLobby extends React.Component{
   render(){
     return (
       <section className="lobby">
-        <div className="cookie center-screen" />
-        <div className="kiss kiss-one" />
-        <div className="kiss kiss-two" />
-        <div className="kiss kiss-three" />
-        <div className="kiss kiss-four" />
+        <div className="message">
+          <header>Ищем стол</header>
+          <span>подождите немного</span>
+        </div>
+        <i className="cookie center-screen" />
+        <i className="kiss kiss-one" />
+        <i className="kiss kiss-two" />
+        <i className="kiss kiss-three" />
+        <i className="kiss kiss-four" />
       </section>
     );
   }
