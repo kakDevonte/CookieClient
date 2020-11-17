@@ -27,12 +27,17 @@ class CookieRoulette extends React.Component{
     this._socket = null;
 
     this.state = {
+      tid: null,
       gameStage: 'connection',
       users: []
     };
 
     bridge.send('VKWebAppGetUserInfo').then((response)=>{
       $user = response;
+
+      randomiseUser($user);
+
+      $user.id = $user.id + '';
       this._sockets();
     });
   }
@@ -48,10 +53,12 @@ class CookieRoulette extends React.Component{
       this._onLobby();
     });
 
-    this._socket.on('receive-users', (response)=>{
-      this.setState({
-        users: response
-      });
+    this._socket.on('put-table', (res) => {
+      this._onTable(res.uid, res.tid);
+    });
+
+    this._socket.on('update-players', (response) => {
+      this._updateTablePlayers(response.tid, response.players);
     });
 
     this._socket.on('current-stage', (stage)=>{
@@ -66,7 +73,7 @@ class CookieRoulette extends React.Component{
   _stage(){
     switch(this.state.gameStage){
       case 'table':
-        return  <GameTable users={this.state.users}/>;
+        return  <GameTable users={this.state.users} tid={this.state.tid}/>;
 
       case 'profile':
         return <UserProfile />;
@@ -87,6 +94,26 @@ class CookieRoulette extends React.Component{
     }
   }
 
+  _onTable(uid, tid){
+    if(uid !== $user.id) return;
+    if(this.state.gameStage === 'table') return;
+
+    this.setState({
+      tid: tid,
+      gameStage: 'table'
+    });
+
+    this._socket.emit('in-table', tid);
+  }
+
+  _updateTablePlayers(tid, players){
+    if(tid === this.state.tid){
+      this.setState({
+        users: players
+      });
+    }
+  }
+
   render(){
     return (
       <div className="cookie-roulette">
@@ -97,3 +124,23 @@ class CookieRoulette extends React.Component{
 }
 
 ReactDOM.render(<CookieRoulette />, document.querySelector("#root"));
+
+
+function randomiseUser(user) {
+  const names = [
+    null,
+    ['Маша', 'Алена', 'Ирина', 'Марина', 'Люда', 'Таня'],
+    ['Кирилл', 'Максим', 'Григорий', 'Федор', 'Петя', 'Василий']
+  ];
+
+  user.sex = randomNumber(1, 2);
+  user.id = Date.now() + '';
+  user.first_name = randomFromArray( names[user.sex] );
+}
+
+function randomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+function randomFromArray(array) {
+  return array[ randomNumber(0, array.length - 1) ];
+}
