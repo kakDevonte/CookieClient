@@ -125,6 +125,12 @@
   position: relative;
 }
 
+.table .table-id {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
 .player{
   display: flex;
   justify-content: center;
