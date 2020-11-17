@@ -5,10 +5,27 @@ class Player extends React.Component{
     super(props);
   }
 
+  userName(){
+    if(this.props.user) {
+      return this.props.user.name;
+    } else {
+      return '';
+    }
+  }
+
+  userKissed(){
+    if(this.props.user) {
+      return <Kissed count={this.props.user.kissed.length} />
+    } else {
+      return '';
+    }
+  }
+
   render(){
     return (
       <article className="player">
-        <Kissed count={this.props.kissed.length} />
+        {this.userName()}
+        {this.userKissed()}
       </article>
     );
   }
@@ -17,7 +34,7 @@ class Player extends React.Component{
 class Kissed extends React.Component{
   render(){
     return(
-      <span>Поцелуев: {this.props.count}</span>
+      <span className='kissed'>Поцелуев: {this.props.count}</span>
     );
   }
 }

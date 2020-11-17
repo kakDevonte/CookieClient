@@ -19,6 +19,7 @@ class GameTable extends React.Component{
         <Player user={this.props.users[6]} />
         <Player user={this.props.users[5]} />
         <Player user={this.props.users[4]} />
+        <span className='table-id'>{this.props.tid}</span>
       </section>
     );
   }
