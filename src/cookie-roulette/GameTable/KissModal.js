@@ -3,7 +3,7 @@ import React from "react";
 class KissModal extends React.Component{
   render(){
     return (
-      <section className="kiss center-screen">
+      <section className="kiss-modal center-screen">
         <div className="info">
           <article className="player" />
           <article className="player" />

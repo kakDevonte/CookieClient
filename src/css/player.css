@@ -1,0 +1,56 @@
+.player{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 16.5%;
+  height: 60%;
+  border-radius: 9px;
+  background-image: url("../images/empty-seat-logo.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #611F8A;
+}
+
+.player.p7{top: 17%; left: 4%}
+.player.p1{top: 17%; left: -6%}
+.player.p3{top: -14%; left: -6%}
+.player.p5{top: -14%; left: 4%}
+
+.player .player-name{
+  position: relative;
+  align-self: flex-end;
+  top: 18px;
+  font-weight: 500;
+}
+
+.player .turn-player {
+  position: absolute;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 120%;
+  height: 26%;
+  background: linear-gradient(#62ce1a, #29d35a);
+  border-radius: 20px;
+  bottom: -5%;
+  font-size: 10px;
+}
+
+.player.turn .turn-player{
+  display: flex;
+}
+
+.player .current-kiss{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 49%;
+  height: 38%;
+  left: -24%;
+  top: 65%;
+  transform: translateY(-50%);
+  background: url("../images/kiss-count.svg") center no-repeat;
+  background-size: 90%;
+}

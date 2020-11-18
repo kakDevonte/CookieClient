@@ -1,4 +1,6 @@
-import './common.css';
+import './fonts/GothamPro/stylesheet.css';
+import './css/common.css';
+
 import "core-js/features/map";
 import "core-js/features/set";
 import React from "react";
@@ -108,6 +110,15 @@ class CookieRoulette extends React.Component{
 
   _updateTablePlayers(tid, players){
     if(tid === this.state.tid){
+
+      for(const player of players){
+        if(randomNumber(0, 1)) player.kissed.push(true);
+        if(player.id === $user.id) {
+          player.itsMe = true;
+          break;
+        }
+      }
+
       this.setState({
         users: players
       });
