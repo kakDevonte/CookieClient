@@ -18,19 +18,19 @@ class GameTable extends React.Component{
         <article className="table">
           <HeaderMenu />
           <div className="wrap-players">
-            <Player user={this.props.users[0]} index="7" />
-            <Player user={this.props.users[1]} index="0" />
-            <Player user={this.props.users[2]} index="1" />
+            <Player user={this.props.users[7]} index="7" />
+            <Player user={this.props.users[0]} index="0" />
+            <Player user={this.props.users[1]} index="1" />
           </div>
           <div className="wrap-players">
-            <Player user={this.props.users[7]} index="6" />
+            <Player user={this.props.users[6]} index="6" />
             <div className="cookie-space" />
-            <Player user={this.props.users[3]} index="2" />
+            <Player user={this.props.users[2]} index="2" />
           </div>
           <div className="wrap-players">
-            <Player user={this.props.users[6]} index="5" />
-            <Player user={this.props.users[5]} index="4" />
-            <Player user={this.props.users[4]} index="3" />
+            <Player user={this.props.users[5]} index="5" />
+            <Player user={this.props.users[4]} index="4" />
+            <Player user={this.props.users[3]} index="3" />
           </div>
           <span className='table-id'>{this.props.tid}</span>
           <CookieSelector />
