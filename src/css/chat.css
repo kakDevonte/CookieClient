@@ -1,14 +1,15 @@
 .game .chat{
   display: flex;
   flex-flow: column nowrap;
-  flex-grow: 1;
-  background-color: white;
+  background-color: #f7f6ff;
+  height: 32%;
 }
 
 .chat header{
   display: flex;
   width: 100%;
   height: 40px;
+  flex-shrink: 0;
 }
 
 .chat header div{
@@ -30,25 +31,34 @@
   width: 100%;
   height: 2px;
   bottom: 0;
-  background-color: white;
 }
 
 .chat header div.selected:after{
   background-color: #eec44b;
 }
 
+.chat header em {
+  position: relative;
+  border-radius: 100%;
+  font-weight: 700;
+  font-size: 100%;
+  background-color: #FF3E28;
+  color: white;
+  font-style: normal;
+  padding: 5px;
+}
+
 .chat .messages{
   display: flex;
   flex-flow: column nowrap;
   flex-grow: 1;
-  width: 100%;
   overflow-y: scroll;
 }
-
 
 .chat .messages {
   scrollbar-width: thin;
   scrollbar-color: #b8b8b8 #ececec;
+  padding: 13px;
 }
 .chat .messages::-webkit-scrollbar {
   width: 12px;
@@ -61,9 +71,57 @@
   border-radius: 20px;
   border: 3px solid #ececec;
 }
+.chat .message{
+  position: relative;
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-weight: 400;
+  background-color: #ffffff;
+  margin: 5px 0;
+}
+
+.chat .message legend{
+  display: inline-block;
+  font-weight: 700;
+}
+
+.chat .my-message{
+  color: white;
+  background-color: #913BFF;
+}
+
+.chat .message .colored-1{ color: #29d35a; }
+.chat .message .colored-2{ color: #d37140; }
+.chat .message .colored-3{ color: #1c1fd3; }
+.chat .message .colored-4{ color: #d32000; }
+.chat .message .colored-5{ color: #009123; }
+.chat .message .colored-6{ color: #cc18d3; }
+.chat .message .colored-7{ color: #ffdc00; }
+.chat .message .colored-8{ color: #00d2d3; }
+
 
 .chat footer{
+  display: flex;
+  justify-content: space-evenly;
+  align-content: center;
   width: 100%;
-  height: 30px;
+  height: 45px;
+  background-color: #8932DA;
   align-self: flex-end;
+  flex-shrink: 0;
+}
+
+.chat footer input[type="text"]{
+  background-color: transparent;
+  width: 85%;
+  border: none;
+  outline: none;
+  color: white;
+}
+
+.chat footer input[type="button"]{
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 18px;
 }

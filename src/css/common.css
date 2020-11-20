@@ -1,8 +1,29 @@
+html, body{
+  padding: 0;
+  margin: 0;
+}
+.wrapper-container{
+  font-size: 100vh;
+  height: 1em;
+}
+.wrapped-content{
+  position: relative;
+  height: 100%;
+  width: .56em;
+}
+
+#root{
+  width: 100%;
+  height: 100%;
+}
+
 .cookie-roulette{
   display: flex;
   flex-flow: column nowrap;
-  width: 375px;
-  height: 667px;
+  /*width: 375px;*/
+  /*height: 667px;*/
+  width: 100%;
+  height: 100%;
   background-color: #ebf6ff;
 
   font-family: Gotham Pro;
@@ -126,8 +147,8 @@
 
 .game{
   position: relative;
-  display: flex;
-  flex-flow: column nowrap;
+  /*display: flex;*/
+  /*flex-flow: column nowrap;*/
   width: 100%;
   height: 100%;
 }
