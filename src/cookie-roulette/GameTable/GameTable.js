@@ -7,7 +7,7 @@ import HeaderMenu from "./HeaderMenu";
 import CookieSelector from "./CookieSelector";
 import Chat from "./Chat";
 
-import { inject, observer } from "mobx-react"
+import { inject, observer } from "mobx-react";
 
 const GameTable = ({store, users}) => {
   return (

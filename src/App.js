@@ -1,4 +1,4 @@
-//import './fonts/GothamPro/stylesheet.css';
+import './fonts/GothamPro/stylesheet.css';
 import './css/common.css';
 
 import "core-js/features/map";
@@ -24,13 +24,13 @@ const CookieRoulette = ({store}) => {
         if (store.user.data) {
             loadSockets()
         }
-    }, [store.user.data])
+    }, [store.user.data]);
 
     useEffect(() => {
         if (store.user.table) {
             socket.emit('in-table', store.user.table)
         }
-    }, [store.user.table])
+    }, [store.user.table]);
 
     const loadSockets = () => {
         socket.on('request-info', () => {
@@ -54,22 +54,22 @@ const CookieRoulette = ({store}) => {
         });
 
         socket.on('console', (res) => console.log(res));
-    }
+    };
 
     const toLobby = () => {
         if(gameStage !== 'lobby'){
             setGameStage('lobby');
             socket.emit('in-lobby');
         }
-    }
+    };
 
     const onTable = (uid, tid) => {
         if(uid !== store.user.data.id) return;
         if(gameStage === 'table') return;
 
-        store.user.table = tid
+        store.user.table = tid;
         setGameStage('table')
-    }
+    };
 
     const updatePlayers = (tid, players) => {
         if(tid === store.user.table) {
@@ -82,7 +82,7 @@ const CookieRoulette = ({store}) => {
 
             setUsers(players)
         }
-    }
+    };
 
     return (
         <div className="cookie-roulette">
@@ -96,6 +96,6 @@ const CookieRoulette = ({store}) => {
             }
         </div>
     )
-}
+};
 
 export default inject('store')(observer(CookieRoulette));
