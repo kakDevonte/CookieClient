@@ -8,12 +8,10 @@ const bridge = process.env.NODE_ENV === 'production' ? bridge_real : bridge_moc;
 class UserStore {
 
     data = false;
-    table = false;
 
     constructor (store) {
         makeObservable(this, {
             data: observable,
-            table: observable,
             auth: action
         });
 
