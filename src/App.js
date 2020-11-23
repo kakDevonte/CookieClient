@@ -28,7 +28,7 @@ const CookieRoulette = ({store}) => {
                   connection: (<div className="please-wait" />),
                   lobby: (<GameLobby />),
                   profile: (<UserProfile />),
-                  table: (<GameTable game={store.game} />),
+                  table: (<GameTable />),
               }[store.game.stage]
           }
       </div>
