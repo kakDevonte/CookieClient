@@ -1,64 +1,75 @@
 import '../../css/player.css';
 
 import React from "react";
+import {inject, observer} from "mobx-react";
 
-class Player extends React.Component{
-  constructor(props){
-    super(props);
-  }
 
-  _userName(){
-    if(this.props.user) {
-      if(this.props.user.itsMe){
+function Player ({store, player, index}) {
+  // function foo(){
+  //   if(player) {
+  //     console.log('Render Player!', player.name, player.id);
+  //   }else{
+  //     console.log('Render Empty Seat!');
+  //   }
+  // }
+  //
+  // foo();
+
+  const _userName = () => {
+    if(player) {
+      if(player.itsMe){
         return (<span className="player-name">Вы</span>);
       } else {
-        return <span className="player-name">{this.props.user.name}</span>
+        return <span className="player-name">{player.name}</span>
       }
     } else {
       return '';
     }
-  }
+  };
 
-  _userKissed(){
-    if(this.props.user && this.props.user.kissed.length) {
-      return <Kissed count={this.props.user.kissed.length} />
+  const _userKissed = () => {
+    if(player && player.kissed.length) {
+      return <Kissed count={player.kissed.length} />
     } else {
       return '';
     }
-  }
+  };
 
-  _playerClass(){
-    return 'player p' + this.props.index;
-  }
+  const _playerClass = () => {
+    return `player p${index} ${_turn()}`;
+  };
 
-  _playerPhoto(){
-    if(this.props.user) {
+  const _turn = () => {
+    if(player){
+      console.log("Turn", player.name, store.game.currentTurn);
+    }
+    return store.game.currentTurn === index ? 'turn' : '';
+  };
+
+  const _playerPhoto = () => {
+    if(player) {
       return {
-        backgroundImage: `url("${this.props.user.photo}")`,
+        backgroundImage: `url("${player.photo}")`,
         backgroundSize: 'cover'
       }
     } else {
       return {};
     }
-  }
+  };
 
-  render(){
-    return (
-      <article className={this._playerClass()} style={this._playerPhoto()}>
-        <span className="turn-player">Крутит</span>
-        {this._userName()}
-        {this._userKissed()}
-      </article>
-    );
-  }
+  return (
+    <article className={_playerClass()} style={_playerPhoto()}>
+      <span className="turn-player">Крутит</span>
+      {_userName()}
+      {_userKissed()}
+    </article>
+  );
 }
 
-class Kissed extends React.Component{
-  render(){
-    return(
-      <span className='current-kiss'>{this.props.count}</span>
-    );
-  }
+function Kissed() {
+  return(
+    <span className='current-kiss'>{this.props.count}</span>
+  );
 }
 
-export default Player;
+export default inject('store')(observer(Player));
