@@ -7,27 +7,34 @@ const bridge = process.env.NODE_ENV === 'production' ? bridge_real : bridge_moc;
 
 class UserStore {
 
-    data = false;
+    _data = false;
 
     constructor (store) {
         makeObservable(this, {
-            data: observable,
-            auth: action
+            _data: observable,
+            _auth: action
         });
 
-        this.store = store;
-
-        this.auth();
+        this._store = store;
+        this._auth();
     }
 
-    auth = async () => {
+    _auth = async () => {
         await bridge.send("VKWebAppInit");
         const result = await bridge.send('VKWebAppGetUserInfo');
 
         common.randomiseUser(result);
         result.id = result.id + '';
 
-        this.data = result;
+        this.setData(result);
+    };
+
+    get data(){
+        return this._data;
+    }
+
+    setData(data){
+        this._data = data;
     }
 }
 
