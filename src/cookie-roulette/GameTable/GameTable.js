@@ -36,6 +36,6 @@ const GameTable = ({store, users}) => {
         <Chat />
       </section>
   );
-}
+};
 
 export default inject('store')(observer(GameTable));

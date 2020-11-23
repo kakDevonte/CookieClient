@@ -16,7 +16,7 @@ class Chat extends React.Component{
         </header>
         <section className="messages" />
         <footer>
-          <input type="text" value="Написать в чат"/>
+          <input type="text" value="Написать в чат" onChange={() => {}}/>
           <input type="button"/>
         </footer>
       </article>

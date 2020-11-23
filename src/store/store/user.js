@@ -19,7 +19,7 @@ class UserStore {
 
         this.store = store;
 
-        this.auth()
+        this.auth();
     }
 
     auth = async () => {
