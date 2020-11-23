@@ -3,7 +3,7 @@ import './css/common.css';
 
 import "core-js/features/map";
 import "core-js/features/set";
-import React, {useState, useEffect, useRef} from "react";
+import React, {useState, useEffect} from "react";
 //import io from 'socket.io-client';
 
 import GameLobby from "./cookie-roulette/GameLobby";
@@ -18,16 +18,8 @@ import {inject, observer} from "mobx-react";
 
 const CookieRoulette = ({store}) => {
 
-  const [gameStage, setGameStage] = useState('connection');
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    setGameStage(store.game.stage);
-  }, [store.game.stage]);
-
-  useEffect(() => {
-    setUsers(store.game.players);
-  }, [store.game.players]);
+  // const [gameStage, setGameStage] = useState('connection');
+  // const [users, setUsers] = useState([]);
 
   return (
       <div className="cookie-roulette">
@@ -36,8 +28,8 @@ const CookieRoulette = ({store}) => {
                   connection: (<div className="please-wait" />),
                   lobby: (<GameLobby />),
                   profile: (<UserProfile />),
-                  table: (<GameTable users={users} />),
-              }[gameStage]
+                  table: (<GameTable game={store.game} />),
+              }[store.game.stage]
           }
       </div>
   )
