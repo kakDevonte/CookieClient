@@ -1,15 +1,16 @@
 import '../../css/kiss-modal.css';
 
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import {inject, observer} from "mobx-react";
 
 function KissModal({store}) {
   const decision = store.game.kissDecision;
 
   const [action, setActions] = useState(true);
-  const [resultKiss, setResultKiss] = useState(null);
   const [timeStart, setTimeStart] = useState(null);
+  const [kissResult, setKissResult] = useState(null);
 
+  let timeoutId = useRef(0);
 
   useEffect(() => {
     if(decision.stage === 'open') {
@@ -19,12 +20,23 @@ function KissModal({store}) {
       }, 250);
 
 
-      setTimeout(() => {
+      timeoutId.current = setTimeout(() => {
         clickHandler(false);
       }, 5250);
 
     }
   }, [decision.stage]);
+
+  useEffect(() => {
+    if(decision.current.result !== null && decision.target.result !== null) {
+      setKissResult(
+        decision.current.result && decision.target.result
+      );
+      setTimeout(() => {
+        store.game.setStageDecision('closed');
+      }, 2500);
+    }
+  }, [decision.current.result, decision.target.result]);
 
   const opened = () => {
     const state = decision.stage !== 'closed' ? 'opened' : '';
@@ -33,11 +45,9 @@ function KissModal({store}) {
   };
 
   const question = () => {
-    if(true) {
-      return (<div className="question">Поцелуете?</div>);
-    } else {
-      return (<div className="question">На этот раз <br/> без поцелуев</div>);
-    }
+    if(kissResult === null) return (<div className="question">Поцелуете?</div>);
+    if(kissResult) return (<div className="question">Взаимный поцелуй</div>);
+    return (<div className="question">На этот раз <br/> без поцелуев</div>);
   };
 
   const time = () => {
@@ -60,20 +70,16 @@ function KissModal({store}) {
     );
   };
 
-  const currentIcon = () => {
-    if(resultKiss == null) return '';
-    const icon = resultKiss ? 'accepted' : 'declined';
+  const icon = (type) => {
+    if(decision[type].result == null) return '';
+    const icon = decision[type].result ? 'accepted' : 'declined';
 
-    return (<i className={`current ${icon}`} />);
-  };
-
-  const targetIcon = () => {
-    if(true) return '';
-    return (<i className="target" />);
+    return (<i className={`${type} ${icon}`} />);
   };
 
   const clickHandler = (result) => {
-    setResultKiss(result);
+    if(timeoutId.current !== 0) clearTimeout(timeoutId.current);
+    store.game.updateDecisionResult('current', result);
     setTimeStart(false);
     setActions(false);
   };
@@ -93,8 +99,8 @@ function KissModal({store}) {
       {question()}
       {time()}
       <div className="info">
-        <article className="player" style={ photo('current') }>{ currentIcon() }</article>
-        <article className="player" style={ photo('target') }>{ targetIcon() }</article>
+        <article className="player" style={ photo('current') }>{ icon('current') }</article>
+        <article className="player" style={ photo('target') }>{ icon('target') }</article>
       </div>
       {actions()}
     </section>
