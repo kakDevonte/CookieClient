@@ -181,7 +181,6 @@ class GameStore {
 
       this.setTID(response.tid);
       this.setStage('table');
-
       console.log('put-table');
       socket.emit('in-table', this.tid);
     });
@@ -209,6 +208,11 @@ class GameStore {
       setTimeout( () => {
         this.setStageDecision('open');
       }, 1000);
+    });
+
+    socket.on('opponent-result-kiss', (kiss) => {
+      console.log(kiss);
+      this.updateDecisionResult('target', kiss);
     });
 
     socket.on('console', (res) => console.log(res));
