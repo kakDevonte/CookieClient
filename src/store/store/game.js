@@ -16,6 +16,18 @@ class GameStore {
     female: 0
   };
 
+  _kissDecision = {
+    stage: 'closed',
+    current: {
+      player: null,
+      result: null,
+    },
+    target: {
+      player: null,
+      result: null
+    }
+  };
+
   constructor (store) {
     this.getPlayer = this.getPlayer.bind(this);
     //this._players.set('getPlayer', this.getPlayer);
@@ -27,6 +39,7 @@ class GameStore {
       _currentTurn: observable,
       _currentTarget: observable,
       _turnRemain: observable,
+      _kissDecision: observable,
 
       setTID: action,
       setStage: action,
@@ -34,7 +47,9 @@ class GameStore {
       updatePlayers: action,
       setCurrentTurn: action,
       setCurrentTarget: action,
-      setTurnRemain: action
+      setTurnRemain: action,
+      setStageDecision: action,
+      updateDecisionResult: action
     });
 
     this._store = store;
@@ -64,6 +79,10 @@ class GameStore {
     return this._players.get(index);
   }
 
+  get kissDecision() {
+    return this._kissDecision;
+  }
+
   get currentTurn() {
     return this._currentTurn;
   }
@@ -74,6 +93,12 @@ class GameStore {
 
   get turnRemain() {
     return this._turnRemain;
+  }
+
+  updateDecisionResult(group, result, player){
+    this._kissDecision[group].result = result;
+
+    if(player) this._kissDecision[group].player = player;
   }
 
   setTurnRemain(count){
@@ -98,6 +123,10 @@ class GameStore {
 
   setCurrentTarget(target){
     this._currentTarget = target;
+  }
+
+  setStageDecision(stage){
+    this._kissDecision.stage = stage;
   }
 
   _calculateTurnRemain(){
@@ -174,6 +203,12 @@ class GameStore {
     socket.on('kiss-question', ({uid, seat}) => {
       console.log(this.getPlayer(seat).name);
       this.setCurrentTarget(seat);
+
+      this.updateDecisionResult('target', null, this.getPlayer(seat));
+
+      setTimeout( () => {
+        this.setStageDecision('open');
+      }, 1000);
     });
 
     socket.on('console', (res) => console.log(res));
@@ -190,6 +225,7 @@ class GameStore {
     if(this._isPlayersReady()) return;
 
     this.setCurrentTurn(current);
+    this.updateDecisionResult('current', null, player);
 
     setTimeout(() => {
       this._rotateRoulette();
