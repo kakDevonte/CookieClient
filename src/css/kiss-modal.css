@@ -25,6 +25,7 @@
 .kiss-modal .player{
   margin: 0 9%;
   width: 19%;
+  background-size: cover;
 }
 
 .kiss-modal .player i{
