@@ -36,14 +36,36 @@ function Player ({store, player, index}) {
   };
 
   const _playerClass = () => {
-    return `player p${index} ${_turn()}`;
-  };
+    const
+      className = ['player'],
 
-  const _turn = () => {
-    if(player){
-      console.log("Turn", player.name, store.game.currentTurn);
-    }
-    return store.game.currentTurn === index ? 'turn' : '';
+      playerIndex = () => {
+        className.push('p' + index);
+      },
+
+      turn = () => {
+        // if(player){
+        //   console.log("Turn", player.name, store.game.currentTurn);
+        // }
+        if(store.game.currentTurn === index) {
+          className.push('turn');
+        }
+      },
+
+      target = () => {
+        if(store.game.currentTurn === null) return;
+        if(store.game.currentTurn === store.game.currentTarget) return;
+
+        if(store.game.currentTarget === index) {
+          className.push('target-kiss');
+        }
+      };
+
+    playerIndex();
+    turn();
+    target();
+
+    return className.join(' ');
   };
 
   const _playerPhoto = () => {
