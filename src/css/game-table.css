@@ -44,5 +44,45 @@
 
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -33%) rotate(0deg);
+  transition: all ease-in-out 0.5s;
+  /*transform: translate(-50%, -33%) rotate(0deg);*/
+}
+
+.table .cookie-selector:hover + .cookie-tooltip{
+  visibility: visible;
+  /*display: block;*/
+  opacity: 1;
+  transition: visibility ease-in-out 0.3s, opacity ease-in-out 0.7s;
+  transition-delay: 1s;
+}
+
+.table .cookie-tooltip{
+  position: absolute;
+  padding: 8px 12px;
+  transform: translate(-50%, -33%);
+  left: 50%;
+  top: 43%;
+  background-color: rgba(255, 255, 255, 0.56);
+  color: rgba(0, 0, 0, 0.45);
+  border-radius: 7px;
+
+  /*display: none;*/
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility ease-in-out 0.3s, opacity ease-in-out 0.7s;
+}
+
+.cookie-tooltip .arrow-down {
+  display: block;
+  margin: 0 auto;
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  border-top: 20px solid rgba(255, 255, 255, 0.56);;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
 }

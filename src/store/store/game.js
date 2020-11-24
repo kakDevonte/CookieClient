@@ -9,6 +9,8 @@ class GameStore {
   _stage = 'connection';
   _players = new Map();
   _currentTurn = null;
+  _currentTarget = 0;
+  _turnRemain = 0;
   _groups = {
     male: 0,
     female: 0
@@ -16,19 +18,23 @@ class GameStore {
 
   constructor (store) {
     this.getPlayer = this.getPlayer.bind(this);
-    this._players.set('getPlayer', this.getPlayer);
+    //this._players.set('getPlayer', this.getPlayer);
 
     makeObservable(this, {
       _tid: observable,
       _stage: observable,
       _players: observable,
       _currentTurn: observable,
+      _currentTarget: observable,
+      _turnRemain: observable,
 
       setTID: action,
       setStage: action,
       setPlayer: action,
       updatePlayers: action,
-      setCurrentTurn: action
+      setCurrentTurn: action,
+      setCurrentTarget: action,
+      setTurnRemain: action
     });
 
     this._store = store;
@@ -62,6 +68,18 @@ class GameStore {
     return this._currentTurn;
   }
 
+  get currentTarget() {
+    return this._currentTarget;
+  }
+
+  get turnRemain() {
+    return this._turnRemain;
+  }
+
+  setTurnRemain(count){
+    this._turnRemain = count;
+  }
+
   setTID(tid) {
     this._tid = tid;
   }
@@ -76,6 +94,38 @@ class GameStore {
 
   setCurrentTurn(index){
     this._currentTurn = index;
+  }
+
+  setCurrentTarget(target){
+    this._currentTarget = target;
+  }
+
+  _calculateTurnRemain(){
+    const uid = this._store.user.data.id;
+    let index, current, my, result;
+
+
+    index = 0;
+
+    for(const player of this.players.values()) {
+      if(player !== null){
+        if(this.currentTurn === index){
+          current = index;
+        }
+
+        if(uid === player.id){
+          my = index;
+        }
+        index++;
+      }
+    }
+
+    result = my - current;
+    result = !isNaN(result) && result > -1 ? result : index - 1;
+
+    //console.log('Turns!:', result);
+
+    this.setTurnRemain(result);
   }
 
   _sockets() {
@@ -110,6 +160,7 @@ class GameStore {
     socket.on('update-players', (response) => {
       this._groups = response.groups;
       this.updatePlayers(response.tid, response.players);
+      this._calculateTurnRemain();
       this._startGame(response.current);
 
       console.log("update-players", response.current);
@@ -122,6 +173,7 @@ class GameStore {
 
     socket.on('kiss-question', ({uid, seat}) => {
       console.log(this.getPlayer(seat).name);
+      this.setCurrentTarget(seat);
     });
 
     socket.on('console', (res) => console.log(res));
@@ -131,7 +183,7 @@ class GameStore {
     if(current === null) return;
     if(this.currentTurn === current) return;
 
-    const player = Collection.takeOne(this._players, current + 1);
+    const player = Collection.takeOne(this._players, current);
 
     if(player === null) return;
     if(player.id !== this._store.user.data.id) return;

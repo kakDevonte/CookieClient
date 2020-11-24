@@ -6,6 +6,7 @@ import KissModal from "./KissModal";
 import HeaderMenu from "./HeaderMenu";
 import CookieSelector from "./CookieSelector";
 import Chat from "./Chat";
+import TurnCountTooltip from "./TurnsCountTooltip";
 
 import { inject, observer } from "mobx-react";
 
@@ -38,6 +39,7 @@ const GameTable = ({store}) => {
           </div>
           <span className='table-id'>{store.game.tid}</span>
           <CookieSelector />
+          <TurnCountTooltip/>
         </article>
         <KissModal />
         <Chat />
