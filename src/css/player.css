@@ -10,6 +10,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-color: #611F8A;
+  border: 3px solid transparent;
 }
 
 .player.p7{top: 17%; left: 4%}
@@ -39,6 +40,10 @@
 
 .player.turn .turn-player{
   display: flex;
+}
+
+.player.target-kiss{
+  border: 3px solid #EDBB2C;
 }
 
 .player .current-kiss{
