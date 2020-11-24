@@ -1,11 +1,17 @@
 import React from "react";
+import {inject, observer} from "mobx-react";
 
-class CookieSelector extends React.Component{
-  render() {
-    return (
-      <div className='cookie-selector' />
-    );
-  }
+function CookieSelector({store}) {
+  const
+    angle = [ 0, 45, 90, 135, 180, 225, 270, 315, 360],
+
+    style = {
+      transform: `translate(-50%, -33%) rotate(${angle[store.game.currentTarget]}deg)`
+    };
+
+  return (
+    <div className='cookie-selector' style={style}/>
+  )
 }
 
-export default CookieSelector;
+export default inject('store')( observer(CookieSelector) );
