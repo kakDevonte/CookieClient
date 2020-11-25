@@ -29,7 +29,7 @@ const CookieRoulette = ({store}) => {
                   lobby: (<GameLobby />),
                   profile: (<UserProfile />),
                   table: (<GameTable />),
-              }[store.game.stage]
+              }[store.app.stage]
           }
       </div>
   )

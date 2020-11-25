@@ -1,20 +1,14 @@
 import {makeObservable, observable, action} from "mobx";
-import io from "socket.io-client";
+
 import common from "../../config/common";
 import Collection from "../../helpers/Collection";
 
 class GameStore {
 
-  _tid = null;
-  _stage = 'connection';
-  _players = new Map();
   _currentTurn = null;
   _currentTarget = 0;
   _turnRemain = 0;
-  _groups = {
-    male: 0,
-    female: 0
-  };
+
 
   _kissDecision = {
     stage: 'closed',
@@ -28,23 +22,25 @@ class GameStore {
     }
   };
 
+  // _game = {
+  //   state: null,
+  //   round: null,
+  //   player: [],
+  //   target: [],
+  //   result: null
+  // };
+
   constructor (store) {
     this.getPlayer = this.getPlayer.bind(this);
     //this._players.set('getPlayer', this.getPlayer);
 
     makeObservable(this, {
-      _tid: observable,
-      _stage: observable,
-      _players: observable,
       _currentTurn: observable,
       _currentTarget: observable,
       _turnRemain: observable,
       _kissDecision: observable,
+      _game: observable,
 
-      setTID: action,
-      setStage: action,
-      setPlayer: action,
-      updatePlayers: action,
       setCurrentTurn: action,
       setCurrentTarget: action,
       setTurnRemain: action,
@@ -56,7 +52,6 @@ class GameStore {
     this._socket = null;
 
     this._connect();
-    this._sockets();
   }
 
   _connect() {
@@ -67,17 +62,9 @@ class GameStore {
     return this._tid;
   }
 
-  get stage() {
-    return this._stage;
-  }
 
-  get players() {
-    return this._players;
-  }
 
-  getPlayer(index) {
-    return this._players.get(index);
-  }
+
 
   get kissDecision() {
     return this._kissDecision;
@@ -105,16 +92,21 @@ class GameStore {
     this._turnRemain = count;
   }
 
-  setTID(tid) {
-    this._tid = tid;
+  updateCurrentPlayer () {
+    const player = this._store.table.findPlayer(uid);
+
+    if(player) this.setCurrentTurn(player.seat);
   }
 
-  setStage(stage) {
-    this._stage = stage;
-  }
 
-  setPlayer(index, object) {
-    this._players.set(index, object);
+  kissQuestion(seat){
+    this.setCurrentTarget(seat);
+
+    this.updateDecisionResult('target', null, this._store.table.getPlayer(seat));
+
+    setTimeout( () => {
+      this.setStageDecision('open');
+    }, 1000);
   }
 
   setCurrentTurn(index){
@@ -129,14 +121,17 @@ class GameStore {
     this._kissDecision.stage = stage;
   }
 
-  _calculateTurnRemain(){
-    const uid = this._store.user.data.id;
+  calculateTurnRemain(){
+    const
+      store = this._store,
+      uid = store.user.id;
+
     let index, current, my, result;
 
 
     index = 0;
 
-    for(const player of this.players.values()) {
+    for(const player of store.players.values()) {
       if(player !== null){
         if(this.currentTurn === index){
           current = index;
@@ -157,66 +152,7 @@ class GameStore {
     this.setTurnRemain(result);
   }
 
-  _sockets() {
-    const
-      store = this._store,
-      socket = this._socket;
 
-    socket.on('request-info', () => {
-      socket.emit('user-info', store.user.data);
-      console.log('request-info');
-    });
-
-    socket.on('connect-success', () => {
-      if(this.stage !== 'lobby'){
-        socket.emit('in-lobby');
-        this.setStage('lobby');
-        console.log('connect-success');
-      }
-    });
-
-    socket.on('put-table', (response) => {
-      if(response.uid !== store.user.data.id) return;
-      if(this.stage === 'table') return;
-
-      this.setTID(response.tid);
-      this.setStage('table');
-      console.log('put-table');
-      socket.emit('in-table', this.tid);
-    });
-
-    socket.on('update-players', (response) => {
-      this._groups = response.groups;
-      this.updatePlayers(response.tid, response.players);
-      this._calculateTurnRemain();
-      this._startGame(response.current);
-
-      console.log("update-players", response.current);
-    });
-
-    socket.on('current-stage', (stage) => {
-      console.log('current-stage', stage);
-      this.setStage(stage.current);
-    });
-
-    socket.on('kiss-question', ({uid, seat}) => {
-      console.log(this.getPlayer(seat).name);
-      this.setCurrentTarget(seat);
-
-      this.updateDecisionResult('target', null, this.getPlayer(seat));
-
-      setTimeout( () => {
-        this.setStageDecision('open');
-      }, 1000);
-    });
-
-    socket.on('opponent-result-kiss', (kiss) => {
-      console.log(kiss);
-      this.updateDecisionResult('target', kiss);
-    });
-
-    socket.on('console', (res) => console.log(res));
-  }
 
   _startGame(current) {
     if(current === null) return;
@@ -247,37 +183,10 @@ class GameStore {
     this._socket.emit('rotate-roulette', data);
   }
 
-  _isPlayersReady(){
-    return (this._groups.male < 2 && this._groups.female < 2);
+  updateGameData(game){
+
   }
 
-
-  updatePlayers(tid, players){
-    if(tid === this.tid) {
-      players.forEach((player, index) => {
-        let update;
-        const current = this.getPlayer(index);
-
-        if(player){
-          if(player.id === this._store.user.data.id) {
-            player.itsMe = true;
-          }
-
-          if(!current) {
-            update = true;
-          }
-
-          if(current && current.id !== player.id) {
-            update = true;
-          }
-        } else {
-          if(current) update = true;
-        }
-
-        if(update) this._players.set(index, player);
-      });
-    }
-  }
 }
 
 export default GameStore
