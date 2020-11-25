@@ -82,6 +82,29 @@ class Collection {
   static extract(map, start, count = 1) {
     return this.take(map, start, count, true);
   }
+
+  /**
+   * Находит один елемент в коллекции и возвращает его или null
+   * @param map {Map}
+   * @param value {*}
+   * @param key {string}
+   * @returns {null|*}
+   */
+  static findOne(map, value, key) {
+    let item;
+
+    if(key) {
+      for(item of map.values()) {
+        if(item[key] === value) return item;
+      }
+    } else {
+      for(item of map.values()) {
+        if(item === value) return item;
+      }
+    }
+
+    return null;
+  }
 }
 
 export default Collection;
