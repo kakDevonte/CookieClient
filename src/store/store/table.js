@@ -11,11 +11,13 @@ class TableStore {
   };
 
   constructor (store) {
+    this.getPlayer = this.getPlayer.bind(this);
+
     makeObservable(this, {
       _id: observable,
       _players: observable,
 
-      id: action,
+      setId: action,
       setPlayer: action,
       updatePlayers: action,
     });
@@ -28,13 +30,17 @@ class TableStore {
   get players() { return this._players; }
 
   getPlayer(index) { return this._players.get(index); }
+
+  /**
+   * @param uid {string}
+   * @returns {{id, name, photo, gender, kissed, gifted, seat, type} | null}
+   */
   findPlayer(uid) { return Collection.findOne(this.players, uid, 'id'); }
 
   //////////////////////////////////////////////////////////////////
 
-  set id(id) { this._id = id; }
+  setId(id) { this._id = id; }
 
-  put(tid) { this.id = tid; }
   setPlayer(index, object) { this._players.set(index, object); }
 
   updatePlayers(tid, players){

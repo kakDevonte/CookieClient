@@ -15,7 +15,7 @@ function Player ({store, player, index}) {
   //
   // foo();
 
-  const _userName = () => {
+  const userName = () => {
     if(player) {
       if(player.itsMe){
         return (<span className="player-name">Вы</span>);
@@ -27,7 +27,7 @@ function Player ({store, player, index}) {
     }
   };
 
-  const _userKissed = () => {
+  const userKissed = () => {
     if(player && player.kissed.length) {
       return <Kissed count={player.kissed.length} />
     } else {
@@ -35,7 +35,7 @@ function Player ({store, player, index}) {
     }
   };
 
-  const _playerClass = () => {
+  const playerClass = () => {
     const
       className = ['player'],
 
@@ -68,7 +68,7 @@ function Player ({store, player, index}) {
     return className.join(' ');
   };
 
-  const _playerPhoto = () => {
+  const playerPhoto = () => {
     if(player) {
       return {
         backgroundImage: `url("${player.photo}")`,
@@ -80,10 +80,10 @@ function Player ({store, player, index}) {
   };
 
   return (
-    <article className={_playerClass()} style={_playerPhoto()}>
+    <article className={playerClass()} style={playerPhoto()}>
       <span className="turn-player">Крутит</span>
-      {_userName()}
-      {_userKissed()}
+      {userName()}
+      {userKissed()}
     </article>
   );
 }

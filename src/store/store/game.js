@@ -1,124 +1,168 @@
-import {makeObservable, observable, action} from "mobx";
-
-import common from "../../config/common";
-import Collection from "../../helpers/Collection";
+import {makeObservable, observable, action, reaction} from "mobx";
 
 class GameStore {
 
-  _currentTurn = null;
-  _currentTarget = 0;
-  _turnRemain = 0;
+  _state = null;
+  _round = null;
+  _kissWindow = 'closed';
+  _turnsRemain = 0;
 
+  _active = null;
+  _activeSeat = null;
+  _activePlayer = null;
+  _activeKiss = null;
 
-  _kissDecision = {
-    stage: 'closed',
-    current: {
-      player: null,
-      result: null,
-    },
-    target: {
-      player: null,
-      result: null
-    }
-  };
+  _target = null;
+  _targetSeat = null;
+  _targetPlayer = null;
+  _targetKiss = null;
 
-  // _game = {
-  //   state: null,
-  //   round: null,
-  //   player: [],
-  //   target: [],
-  //   result: null
-  // };
+  _kissResult = null;
 
   constructor (store) {
-    this.getPlayer = this.getPlayer.bind(this);
-    //this._players.set('getPlayer', this.getPlayer);
-
     makeObservable(this, {
-      _currentTurn: observable,
-      _currentTarget: observable,
-      _turnRemain: observable,
-      _kissDecision: observable,
-      _game: observable,
+      _state: observable,
+      _round: observable,
+      _kissWindow: observable,
+      _turnsRemain: observable,
+      _activeSeat: observable,
+      _activePlayer: observable,
+      _activeKiss: observable,
+      _targetSeat: observable,
+      _targetPlayer: observable,
+      _targetKiss: observable,
+      _kissResult: observable,
 
-      setCurrentTurn: action,
-      setCurrentTarget: action,
-      setTurnRemain: action,
-      setStageDecision: action,
-      updateDecisionResult: action
+      setState: action,
+      setRound: action,
+      setKissWindow: action,
+      setTurnsRemain: action,
+      setActiveSeat: action,
+      setActivePlayer: action,
+      setActiveKiss: action,
+      setTargetSeat: action,
+      setTargetPlayer: action,
+      setTargetKiss: action,
+      setKissResult: action,
     });
 
     this._store = store;
-    this._socket = null;
 
-    this._connect();
+    reaction(() => this.activeKiss, () => this.calculateKissResult());
+    reaction(() => this.targetKiss, () => this.calculateKissResult());
   }
 
-  _connect() {
-    this._socket = io(process.env.REACT_APP_SOCKET_SERVER);
+  get state() { return this._state; }
+  get round() { return this._round; }
+  get kissWindow() { return this._kissWindow; }
+  get turnsRemain() { return this._turnsRemain; }
+
+  get activeSeat() { return this._activeSeat; }
+  get activePlayer() { return this._activePlayer; }
+  get activeKiss() { return this._activeKiss; }
+
+  get targetSeat() { return this._targetSeat; }
+  get targetPlayer() { return this._targetPlayer; }
+  get targetKiss() { return this._targetKiss; }
+
+  get kissResult() { return this._kissResult; }
+
+  //////////////////////////////////////////////////////////////////////////
+
+  setState(state) {
+    if(state === this._state) return;
+    this._state = state;
   }
 
-  get tid() {
-    return this._tid;
+  setRound(round) {
+    if(round === this._round) return;
+    this._round = round;
   }
 
-
-
-
-
-  get kissDecision() {
-    return this._kissDecision;
+  setKissWindow(state) {
+    if(state === this._kissWindow) return;
+    this._kissWindow = state;
   }
 
-  get currentTurn() {
-    return this._currentTurn;
+  setTurnsRemain(turn) {
+    if(turn === this._turnsRemain) return;
+    this._turnsRemain = turn;
   }
 
-  get currentTarget() {
-    return this._currentTarget;
+  setActiveSeat(seat) {
+    if(seat === this._activeSeat) return;
+    this._activeSeat = seat;
   }
 
-  get turnRemain() {
-    return this._turnRemain;
+  setActivePlayer(player) {
+    if(player === this._activePlayer) return;
+    this._activePlayer = player;
   }
 
-  updateDecisionResult(group, result, player){
-    this._kissDecision[group].result = result;
-
-    if(player) this._kissDecision[group].player = player;
+  setActiveKiss(kiss) {
+    if(kiss === this._activeKiss) return;
+    this._activeKiss = kiss;
   }
 
-  setTurnRemain(count){
-    this._turnRemain = count;
+  setTargetSeat(seat) {
+    if(seat === this._targetSeat) return;
+    this._targetSeat = seat;
   }
 
-  updateCurrentPlayer () {
+  setTargetPlayer(player) {
+    if(player === this._targetPlayer) return;
+    this._targetPlayer = player;
+  }
+
+  setTargetKiss(kiss) {
+    if(kiss === this._targetKiss) return;
+    this._targetKiss = kiss;
+  }
+
+  setKissResult(result) {
+    if(result === this._kissResult) return;
+    this._kissResult = result;
+  }
+
+  //////////////////////////////////////////////////////////////////////////
+
+  calculateKissResult() {
+    if(this.activeKiss != null && this.targetKiss != null) {
+      this.setKissResult(this.activeKiss && this.targetKiss);
+      this.setKissWindow('closed');
+    }
+  }
+
+  updateCurrentPlayer(uid) {
     const player = this._store.table.findPlayer(uid);
 
-    if(player) this.setCurrentTurn(player.seat);
+    //if(player) this.setCurrentTurn(player.seat);
   }
 
+  clickDecision(result) {
+    if(this.activePlayer === this._store.user.id) {
+      this.setActiveKiss(result);
+    } else {
+      this.setTargetKiss(result);
+    }
+  }
 
   kissQuestion(seat){
-    this.setCurrentTarget(seat);
+    this.setKissWindow('opened');
 
-    this.updateDecisionResult('target', null, this._store.table.getPlayer(seat));
+    //this.updateDecisionResult('target', null, this._store.table.getPlayer(seat));
 
-    setTimeout( () => {
-      this.setStageDecision('open');
-    }, 1000);
+    // setTimeout( () => {
+    //   this.setStageDecision('open');
+    // }, 1000);
   }
 
-  setCurrentTurn(index){
-    this._currentTurn = index;
-  }
-
-  setCurrentTarget(target){
-    this._currentTarget = target;
-  }
-
-  setStageDecision(stage){
-    this._kissDecision.stage = stage;
+  updateKiss(type, kiss) {
+    if(type === 'active') {
+      this.setActiveKiss(kiss);
+    } else {
+      this.setTargetKiss(kiss)
+    }
   }
 
   calculateTurnRemain(){
@@ -126,67 +170,88 @@ class GameStore {
       store = this._store,
       uid = store.user.id;
 
-    let index, current, my, result;
+    let seat = 0, current, my, result;
 
-
-    index = 0;
-
-    for(const player of store.players.values()) {
+    for(const player of store.table.players.values()) {
       if(player !== null){
-        if(this.currentTurn === index){
-          current = index;
+
+        if(this.activeSeat === seat){
+          current = seat;
         }
 
         if(uid === player.id){
-          my = index;
+          my = seat;
         }
-        index++;
+
+        seat++;
       }
     }
 
     result = my - current;
-    result = !isNaN(result) && result > -1 ? result : index - 1;
+    result = !isNaN(result) && result > -1 ? result : seat - 1;
 
-    //console.log('Turns!:', result);
-
-    this.setTurnRemain(result);
+    this.setTurnsRemain(result);
   }
 
+  // _startGame(current) {
+  //   if(current === null) return;
+  //   if(this.currentTurn === current) return;
+  //
+  //   const player = Collection.takeOne(this._players, current);
+  //
+  //   if(player === null) return;
+  //   if(player.id !== this._store.user.data.id) return;
+  //   if(this._isPlayersReady()) return;
+  //
+  //   this.setCurrentTurn(current);
+  //   this.updateDecisionResult('current', null, player);
+  //
+  //   setTimeout(() => {
+  //     this._rotateRoulette();
+  //   }, 1000);
+  // }
 
-
-  _startGame(current) {
-    if(current === null) return;
-    if(this.currentTurn === current) return;
-
-    const player = Collection.takeOne(this._players, current);
-
-    if(player === null) return;
-    if(player.id !== this._store.user.data.id) return;
-    if(this._isPlayersReady()) return;
-
-    this.setCurrentTurn(current);
-    this.updateDecisionResult('current', null, player);
-
-    setTimeout(() => {
-      this._rotateRoulette();
-    }, 1000);
-  }
-
-  _rotateRoulette(){
-    const data = {
-      tid: this.tid,
-      uid: this._store.user.data.id
-    };
-
-    console.log("Rotate roulette!");
-
-    this._socket.emit('rotate-roulette', data);
-  }
+  // _rotateRoulette(){
+  //   const data = {
+  //     tid: this.tid,
+  //     uid: this._store.user.data.id
+  //   };
+  //
+  //   console.log("Rotate roulette!");
+  //
+  //   this._socket.emit('rotate-roulette', data);
+  // }
 
   updateGameData(game){
+    const table = this._store.table;
 
+    this.setState(game.state);
+    this.setRound(game.round);
+
+    this._active = table.findPlayer(game.player[0]);
+
+    if(this._active) {
+      this.setActivePlayer(game.player[0]);
+      this.setActiveSeat(this._active.seat);
+      this.setActiveKiss(game.player[2]);
+    }
+
+    this._target = table.findPlayer(game.target[0]);
+
+    if(this._target) {
+      this.setTargetPlayer(game.target[0]);
+      this.setTargetSeat(this._target.seat);
+      this.setTargetKiss(game.target[2]);
+    }
+
+    this.setKissResult(game.result);
   }
 
+  // updateDecisionResult(group, result, player){
+  //   this._kissDecision[group].result = result;
+  //
+  //   if(player) this._kissDecision[group].player = player;
+  // }
 }
 
 export default GameStore

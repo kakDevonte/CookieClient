@@ -6,7 +6,7 @@ function CookieSelector({store}) {
     angle = [ 0, 45, 90, 135, 180, 225, 270, 315, 360],
 
     style = {
-      transform: `translate(-50%, -33%) rotate(${angle[store.game.currentTarget]}deg)`
+      transform: `translate(-50%, -33%) rotate(${angle[store.game.targetSeat]}deg)`
     };
 
   return (

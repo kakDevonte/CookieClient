@@ -10,8 +10,8 @@ class AppStore {
       _version: observable,
       _stage: observable,
 
-      stage: action,
-      version: action
+      setStage: action,
+      setVersion: action
     });
     this._store = store;
   }
@@ -19,20 +19,20 @@ class AppStore {
   get version() { return this._version; }
   get stage() { return this._stage; }
 
-  set version(version) { this._version = version; }
-  set stage(stage) { this._stage = stage; }
+  setVersion(version) { this._version = version; }
+  setStage(stage) { this._stage = stage; }
 
   stageLobby() {
     if(this.stage === 'lobby') return;
 
-    this.stage = 'lobby';
+    this.setStage('lobby');
     this._store.socket.emit('in-lobby');
   }
 
   stageTable(tid) {
     if(this.stage === 'table') return;
 
-    this.stage = 'table';
+    this.setStage('table');
     this._store.socket.emit('in-table', tid);
   }
 }

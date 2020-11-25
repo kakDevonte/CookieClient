@@ -4,17 +4,19 @@ import Collection from "../../helpers/Collection";
 
 class SocketStore {
   constructor (store) {
-    makeObservable(this, {
-
-    });
-
     this._socket = io(process.env.REACT_APP_SOCKET_SERVER);
     this._store = store;
+
+    makeObservable(this, {
+      _socket: observable
+    });
 
     this._sockets();
   }
 
-  get emit(){ return this._socket.emit; }
+  emit(event, data) {
+    return this._socket.emit(event, data);
+  }
 
   _sockets() {
     const
@@ -36,7 +38,7 @@ class SocketStore {
     socket.on('put-table', (response) => {
       if(response.uid !== store.user.data.id) return;
 
-      store.table.put(response.tid);
+      store.table.setId(response.tid);
       store.app.stageTable(response.tid);
 
       console.log('socket (put-table)');
@@ -65,6 +67,8 @@ class SocketStore {
     });
 
     socket.on('game-data', (data) => {
+      store.game.updateGameData(data);
+
       console.log('socket (game-data)', data);
     });
 
@@ -72,13 +76,16 @@ class SocketStore {
 
       store.game.kissQuestion();
 
-      console.log('socket (kiss-question)', this.getPlayer(seat).name);
+      console.log('socket (kiss-question)', uid, seat);
     });
 
-    socket.on('opponent-result-kiss', (kiss) => {
-      this.updateDecisionResult('target', kiss);
+    socket.on('result-kiss', (response) => {
 
-      console.log('socket (opponent-kiss-result)', kiss);
+      store.game.updateKiss(response.type, response.kiss);
+
+      //this.updateDecisionResult('target', kiss);
+
+      console.log('socket (opponent-kiss-result)', response);
     });
   }
 }

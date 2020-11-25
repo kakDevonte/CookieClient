@@ -13,7 +13,7 @@ class UserStore {
     makeObservable(this, {
       _data: observable,
 
-      data: action
+      setData: action
     });
 
     this._store = store;
@@ -27,13 +27,13 @@ class UserStore {
     common.randomiseUser(result);
     result.id = result.id + '';
 
-    this.data = result;
+    this.setData(result);
   };
 
   get data(){ return this._data; }
   get id() { return this.data.id; }
 
-  set data(data){ this._data = data; }
+  setData(data){ this._data = data; }
 
   emitUserInfo(socket) {
     socket.emit('user-info', this.data);

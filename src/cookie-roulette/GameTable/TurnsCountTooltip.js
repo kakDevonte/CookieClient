@@ -3,7 +3,7 @@ import {inject, observer} from "mobx-react";
 
 function TurnCountTooltip({store}) {
   const text = () => {
-    const turns = store.game.turnRemain;
+    const turns = store.game.turnsRemain;
 
     if(turns === 0)
       return 'Ваш ход!';

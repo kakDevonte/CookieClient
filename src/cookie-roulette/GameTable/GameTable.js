@@ -11,12 +11,7 @@ import TurnCountTooltip from "./TurnsCountTooltip";
 import { inject, observer } from "mobx-react";
 
 const GameTable = ({store}) => {
-
-  //const player = players.get('getPlayer');
-
-  const player = store.game.getPlayer;
-
-  //console.log('Render Table!');
+  const player = store.table.getPlayer;
 
   return (
       <section className="game">
@@ -37,7 +32,7 @@ const GameTable = ({store}) => {
             <Player player={player(4)} index={4} />
             <Player player={player(3)} index={3} />
           </div>
-          <span className='table-id'>{store.game.tid}</span>
+          <span className='table-id'>{store.table.id}</span>
           <CookieSelector />
           <TurnCountTooltip/>
         </article>
