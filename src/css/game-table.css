@@ -29,28 +29,46 @@
   align-items: center;
 }
 
-.table .cookie-space{
+.table .cookie-space {
   width: 16.5%;
   height: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
 }
 
-.table .cookie-selector{
-  position: absolute;
-  width: 38%;
-  height: 31.89%;
-
-  background: url("../images/lobbyCookie.svg") no-repeat 50% 23%;
-  background-size: 100%;
-
-  left: 50%;
-  top: 50%;
+.table .cookie-selector {
+  position: relative;
+  width: 229%;
+  height: 175.47%;
+  flex-shrink: 0;
   transition: all ease-in-out 0.5s;
-  /*transform: translate(-50%, -33%) rotate(0deg);*/
+}
+
+.table .cookie-selector.rotate{
+  animation: roulette linear 1s;
+  animation-iteration-count: 3;
+}
+
+@keyframes roulette {
+  0% {transform: rotate(0deg)}
+  100% {transform: rotate(360deg)}
+}
+
+.table .cookie-selector > div {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: url(../images/lobbyCookie.svg) no-repeat;
+  background-size: cover;
+  left: 3%;
+  top: -3%;
+  transform: rotate(-6deg);
 }
 
 .table .cookie-selector:hover + .cookie-tooltip{
   visibility: visible;
-  /*display: block;*/
   opacity: 1;
   transition: visibility ease-in-out 0.3s, opacity ease-in-out 0.7s;
   transition-delay: 1s;

@@ -23,17 +23,23 @@ class SocketStore {
       store = this._store,
       socket = this._socket;
 
+    //////////////////////////////////////////////////////////////
+
     socket.on('request-info', () => {
       store.user.emitUserInfo(socket);
 
       console.log('socket (request-info)');
     });
 
+    //////////////////////////////////////////////////////////////
+
     socket.on('connect-success', () => {
       store.app.stageLobby();
 
       console.log('socket (connect-success)');
     });
+
+    //////////////////////////////////////////////////////////////
 
     socket.on('put-table', (response) => {
       if(response.uid !== store.user.data.id) return;
@@ -43,6 +49,8 @@ class SocketStore {
 
       console.log('socket (put-table)');
     });
+
+    //////////////////////////////////////////////////////////////
 
     socket.on('update-players', (response) => {
 
@@ -54,11 +62,15 @@ class SocketStore {
       console.log("socket (update-players)", response.current);
     });
 
+    //////////////////////////////////////////////////////////////
+
     socket.on('current-player', (uid) => {
-      store.game.updateCurrentPlayer(uid);
+      store.game.updateActivePlayer(uid);
 
       console.log('socket (current-player)');
     });
+
+    //////////////////////////////////////////////////////////////
 
     socket.on('current-stage', (stage) => {
       store.app.stage = stage.current;
@@ -66,27 +78,52 @@ class SocketStore {
       console.log('socket (current-stage)', stage);
     });
 
+    //////////////////////////////////////////////////////////////
+
     socket.on('game-data', (data) => {
       store.game.updateGameData(data);
 
       console.log('socket (game-data)', data);
+      //console.log('socket (game-data)');
     });
 
-    socket.on('kiss-question', ({uid, seat}) => {
+    //////////////////////////////////////////////////////////////
 
-      store.game.kissQuestion();
+    socket.on('round-start', () => {
+      store.game.rotateSelector();
 
-      console.log('socket (kiss-question)', uid, seat);
+      console.log('socket (round-start)');
     });
+
+    //////////////////////////////////////////////////////////////
+
+    socket.on('kiss-request', () => {
+
+      store.game.kissRequest();
+
+      console.log('socket (kiss-question)');
+    });
+
+    //////////////////////////////////////////////////////////////
 
     socket.on('result-kiss', (response) => {
 
-      store.game.updateKiss(response.type, response.kiss);
+      store.game.updateKiss(response.active, response.kiss);
 
       //this.updateDecisionResult('target', kiss);
 
       console.log('socket (opponent-kiss-result)', response);
     });
+
+    //////////////////////////////////////////////////////////////
+
+    socket.on('round-result', (result) => {
+      store.game.doShowRoundResult(result);
+
+      console.log('socket (round-result)', result);
+    });
+
+    //////////////////////////////////////////////////////////////
   }
 }
 

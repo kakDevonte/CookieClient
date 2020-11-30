@@ -24,7 +24,10 @@ const GameTable = ({store}) => {
           </div>
           <div className="wrap-players">
             <Player player={player(6)} index={6} />
-            <div className="cookie-space" />
+            <div className="cookie-space">
+              <CookieSelector />
+              <TurnCountTooltip/>
+            </div>
             <Player player={player(2)} index={2} />
           </div>
           <div className="wrap-players">
@@ -33,8 +36,6 @@ const GameTable = ({store}) => {
             <Player player={player(3)} index={3} />
           </div>
           <span className='table-id'>{store.table.id}</span>
-          <CookieSelector />
-          <TurnCountTooltip/>
         </article>
         <KissModal />
         <Chat />

@@ -47,16 +47,16 @@ function Player ({store, player, index}) {
         // if(player){
         //   console.log("Turn", player.name, store.game.currentTurn);
         // }
-        if(store.game.currentTurn === index) {
+        if(store.game.activeSeat === index) {
           className.push('turn');
         }
       },
 
       target = () => {
-        if(store.game.currentTurn === null) return;
-        if(store.game.currentTurn === store.game.currentTarget) return;
+        if(store.game.targetSeat === null) return;
+        if(store.game.targetSeat === store.game.activeSeat) return;
 
-        if(store.game.currentTarget === index) {
+        if(store.game.targetSeat === index) {
           className.push('target-kiss');
         }
       };
@@ -79,11 +79,50 @@ function Player ({store, player, index}) {
     }
   };
 
+  const kissResult = () => {
+    let style = {};
+
+    console.log("test", store.game.kissResult);
+
+    if(store.game.kissResult) {
+
+      if(store.game.activeSeat === index) {
+        setTimeout(() => animate(true), 100);
+
+        return (<div className="round-kiss-result" style={style}/>);
+      }
+
+      if(store.game.targetSeat === index) {
+        setTimeout(() => animate(false), 100);
+
+        return (<div className="round-kiss-result" style={style}/>);
+      }
+    }
+
+    return '';
+  };
+
+  const animate = (active) => {
+    const indexC = active ? store.game.activeSeat : store.game.targetSeat;
+    const indexT = !active ? store.game.activeSeat : store.game.targetSeat;
+
+    let current = document.querySelector(`.player.p${indexT} .round-kiss-result`);
+    let target = document.querySelector(`.player.p${indexC} .round-kiss-result`);
+
+    const position = target.getBoundingClientRect();
+    const pos = current.getBoundingClientRect();
+
+    console.log(position);
+
+    current.setAttribute('style', `left: ${pos.left - position.left}px; top: ${pos.top - position.top}px;`);
+  };
+
   return (
     <article className={playerClass()} style={playerPhoto()}>
       <span className="turn-player">Крутит</span>
       {userName()}
       {userKissed()}
+      {kissResult()}
     </article>
   );
 }

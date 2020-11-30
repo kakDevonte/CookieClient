@@ -26,6 +26,7 @@
   margin: 0 9%;
   width: 19%;
   background-size: cover;
+  border: none;
 }
 
 .kiss-modal .player i{
@@ -67,6 +68,10 @@
   height: 100%;
   background-color: #913BFF;
   transition: width linear 5s;
+}
+
+.kiss-modal .time.hide{
+  display: none;
 }
 
 .kiss-modal .time.start:after{
