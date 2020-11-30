@@ -95,7 +95,7 @@ class Collection {
 
     if(key) {
       for(item of map.values()) {
-        if(item[key] === value) return item;
+        if(item && item[key] === value) return item;
       }
     } else {
       for(item of map.values()) {
