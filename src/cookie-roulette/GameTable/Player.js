@@ -80,20 +80,21 @@ function Player ({store, player, index}) {
   };
 
   const kissResult = () => {
-    let style = {};
-
-    console.log("test", store.game.kissResult);
+    let style = {
+      left: '35%',
+      top: '35%'
+    };
 
     if(store.game.kissResult) {
 
       if(store.game.activeSeat === index) {
-        setTimeout(() => animate(true), 100);
+        //setTimeout(() => animate(true), 100);
 
         return (<div className="round-kiss-result" style={style}/>);
       }
 
       if(store.game.targetSeat === index) {
-        setTimeout(() => animate(false), 100);
+        //setTimeout(() => animate(false), 100);
 
         return (<div className="round-kiss-result" style={style}/>);
       }
@@ -107,14 +108,27 @@ function Player ({store, player, index}) {
     const indexT = !active ? store.game.activeSeat : store.game.targetSeat;
 
     let current = document.querySelector(`.player.p${indexT} .round-kiss-result`);
-    let target = document.querySelector(`.player.p${indexC} .round-kiss-result`);
+    let target = document.querySelector(`.player.p${indexC}`);
 
-    const position = target.getBoundingClientRect();
-    const pos = current.getBoundingClientRect();
+    const pc = current.getBoundingClientRect();
+    const pt = target.getBoundingClientRect();
 
-    console.log(position);
+    let left, top;
 
-    current.setAttribute('style', `left: ${pos.left - position.left}px; top: ${pos.top - position.top}px;`);
+    left = pc.x - (pt.x + (pt.width * 0.65));
+    top  = pc.y - (pt.y + (pt.height * 0.65));
+
+    if(active) {
+      if(pc.x > pt.x) left = left * -1;
+      if(pc.y > pt.y) top = top * -1;
+    }else{
+      if(pc.x < pt.x) left = left * -1;
+      if(pc.y < pt.y) top = top * -1;
+    }
+
+    current.setAttribute('style', `left: ${left}px; top: ${top}px;`);
+
+    //setTimeout(() => {current.parentNode.removeChild(current)}, 3000);
   };
 
   return (

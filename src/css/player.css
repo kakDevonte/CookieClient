@@ -68,5 +68,6 @@
   height: 30px;
   background-image: url("../images/kiss.svg");
   background-size: cover;
-  transition: left, top ease-in-out 2.5s;
+  transition: all ease-in-out 2.5s;
+  z-index: 1;
 }
