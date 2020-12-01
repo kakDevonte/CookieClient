@@ -8,6 +8,7 @@
   color: white;
   border-radius: 15px;
   top: 35% !important;
+  z-index: 10;
 }
 .kiss-modal.opened{
   display: flex;
