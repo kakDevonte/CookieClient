@@ -8,6 +8,7 @@ class GameStore {
   _turnsRemain = 0;
 
   _rotateCookie = false;
+  _allowClickRotate = false;
 
   _active = null;
   _activeSeat = null;
@@ -22,7 +23,6 @@ class GameStore {
 
   _kissResult = null;
   _timerDecision = null;
-  _showRoundResult = false;
 
   constructor (store) {
     makeObservable(this, {
@@ -31,6 +31,7 @@ class GameStore {
       _kissWindow: observable,
       _turnsRemain: observable,
       _rotateCookie: observable,
+      _allowClickRotate: observable,
       _activeSeat: observable,
       _activePlayer: observable,
       _activeKiss: observable,
@@ -39,7 +40,6 @@ class GameStore {
       _targetPlayer: observable,
       _targetKiss: observable,
       _kissResult: observable,
-      _showRoundResult: observable,
 
       setState: action,
       setRound: action,
@@ -47,6 +47,7 @@ class GameStore {
       setTurnsRemain: action,
       setRotateCookie: action,
       setActiveSeat: action,
+      setAllowClickRotate: action,
       setActivePlayer: action,
       setActiveKiss: action,
       setTargetSeat: action,
@@ -54,13 +55,12 @@ class GameStore {
       setTargetPlayer: action,
       setTargetKiss: action,
       setKissResult: action,
-      setShowRoundResult: action
     });
 
     this._store = store;
 
-    reaction(() => this.activeKiss, () => this.calculateKissResult());
-    reaction(() => this.targetKiss, () => this.calculateKissResult());
+    //reaction(() => this.activeKiss, () => this.calculateKissResult());
+    //reaction(() => this.targetKiss, () => this.calculateKissResult());
     reaction(() => this.kissWindow, () => this.autoDecision());
   }
 
@@ -69,6 +69,7 @@ class GameStore {
   get kissWindow() { return this._kissWindow; }
   get turnsRemain() { return this._turnsRemain; }
   get rotateCookie() { return this._rotateCookie; }
+  get allowClickRotate() { return this._allowClickRotate; }
 
   get active() { return this._active; }
   get activeSeat() { return this._activeSeat; }
@@ -82,7 +83,6 @@ class GameStore {
   get targetKiss() { return this._targetKiss; }
 
   get kissResult() { return this._kissResult; }
-  get showRoundResult() { return this._showRoundResult; }
 
   //////////////////////////////////////////////////////////////////////////
 
@@ -109,6 +109,11 @@ class GameStore {
   setRotateCookie(state) {
     if(state === this._rotateCookie) return;
     this._rotateCookie = state;
+  }
+
+  setAllowClickRotate(allow) {
+    if(allow === this._allowClickRotate) return;
+    this._allowClickRotate = allow;
   }
 
   setActiveSeat(seat) {
@@ -151,32 +156,46 @@ class GameStore {
     this._kissResult = result;
   }
 
-  setShowRoundResult(show) {
-    if(show === this._showRoundResult) return;
-    this._showRoundResult = show;
-  }
-
   //////////////////////////////////////////////////////////////////////////
 
-  calculateKissResult() {
-    if(this.activeKiss != null && this.targetKiss != null) {
-      this.setKissResult(this.activeKiss && this.targetKiss);
-      setTimeout(() => this.setKissWindow('closed'), 2500);
-    }
+  // calculateKissResult() {
+  //   if(this.activeKiss != null && this.targetKiss != null) {
+  //     this.setKissResult(this.activeKiss && this.targetKiss);
+  //     setTimeout(() => this.setKissWindow('closed'), 2500);
+  //   }
+  // }
+
+  // updateActivePlayer(uid) {
+  //   const player = this._store.table.findPlayer(uid);
+  //
+  //   if(player) {
+  //     this._active = player;
+  //     this.setActivePlayer(player.id);
+  //     this.setActiveSeat(player.seat);
+  //   } else {
+  //     this._store.socket.emit('active-not-found', this._store.table.id);
+  //   }
+  // }
+
+  /**
+   * Позволяет пользователю запустить вращение печеньки по клику
+   */
+  enableRotateClickHandler(){
+    this.setAllowClickRotate(true);
   }
 
-  updateActivePlayer(uid) {
-    const player = this._store.table.findPlayer(uid);
+  /**
+   *  Обработчик клика по центральной печеньке
+   */
+  clickRotateCookie() {
+    if(!this.allowClickRotate) return;
 
-    if(player) {
-      this._active = player;
-      this.setActivePlayer(player.id);
-      this.setActiveSeat(player.seat);
-    } else {
-      this._store.socket.emit('active-not-found', this._store.table.id);
-    }
+    this._store.socket.emit('player-rotated-roulette', this._store.table.id);
   }
 
+  /**
+   * Эмулириует нажатие на отрицательный ответ по истечении вермени
+   */
   autoDecision(){
     this._timerDecision = setTimeout(() => {
       if(this.kissWindow === 'opened') {
@@ -185,6 +204,11 @@ class GameStore {
     }, 5100);
   }
 
+  /**
+   * Отправка результа поцелуя на сервер
+   * @param {boolean} result - результат
+   * @param {boolean} auto - автоматически или руками
+   */
   clickDecision(result, auto) {
     const
       uid = this._store.user.id,
@@ -203,16 +227,25 @@ class GameStore {
       if(this.targetKiss !== null) return;
       this.setTargetKiss(result);
 
-      data = { kiss: result, tid, uid, active: false, auto};
+      data = { kiss: result, tid, active: false, auto};
     }
 
     this._store.socket.emit('receive-kiss-result', data);
   }
 
+  /**
+   * Открытие окна для запроса поцелуя
+   */
   kissRequest(){
     this.setKissWindow('opened');
   }
 
+
+  /**
+   * Получаем ответ на поцелуй от сервера (бот ли или другой игрок)
+   * @param {boolean} active - активный икрок или цель
+   * @param {boolean} kiss - результат
+   */
   updateKiss(active, kiss) {
     if(active) {
       this.setActiveKiss(kiss);
@@ -221,14 +254,14 @@ class GameStore {
     }
   }
 
-  rotateSelector() {
-    //console.log('Start rotate cookie !!!');
+  // Тут временно поменять логику и анимацию
+  rotateSelector(seat) {
     this.setRotateCookie(true);
-    setTimeout( () => {
-      //console.log('End rotate cookie !!!');
-      this.setRotateCookie(false);
 
-      //this._store.socket.emit('next-round');
+    setTimeout( () => {
+      this.setRotateCookie(false);
+      this.setTargetSelector(seat);
+      this.setAllowClickRotate(false);
     }, 3000);
   }
 
@@ -260,6 +293,10 @@ class GameStore {
     this.setTurnsRemain(result);
   }
 
+  /**
+   * Обновляем текущее состояние игры полученное от сервера
+   * @param game - данные об игре от сервера
+   */
   updateGameData(game){
     const table = this._store.table;
 
@@ -271,13 +308,13 @@ class GameStore {
       this._active = null;
       this.setActivePlayer(game.player[0]);
       //this.setActiveSeat(null);
-      this.setActiveKiss(game.player[2]);
+      this.setActiveKiss(game.player[3]);
 
       this._target = null;
       this.setTargetPlayer(game.target[0]);
       //this.setTargetSeat(null);
       setTimeout(() => this.setTargetSeat(null), 1000);
-      this.setTargetKiss(game.target[2]);
+      this.setTargetKiss(game.target[3]);
     }else{
       if(game.player[0]) {
         this._active = table.findPlayer(game.player[0]);
@@ -286,7 +323,7 @@ class GameStore {
       if(this._active) {
         this.setActivePlayer(game.player[0]);
         this.setActiveSeat(this._active.seat);
-        this.setActiveKiss(game.player[2]);
+        this.setActiveKiss(game.player[3]);
       }
 
       if(game.target[0]) {
@@ -296,17 +333,21 @@ class GameStore {
       if(this._target) {
         this.setTargetPlayer(game.target[0]);
         this.setTargetSeat(this._target.seat);
-        this.setTargetSelector(this._target.seat);
-        this.setTargetKiss(game.target[2]);
+        //this.setTargetSelector(this._target.seat);
+        this.setTargetKiss(game.target[3]);
       }
     }
 
     this.setKissResult(game.result);
   }
 
+  /**
+   * Установка общего результата поцелуя, закрытие окна
+   * @param {boolean} result - результат от сервера
+   */
   doShowRoundResult(result) {
-    if(!result) return;
-    this.setShowRoundResult(true);
+    this.setKissResult(result);
+    setTimeout(() => this.setKissWindow('closed'), 2500);
   }
 }
 

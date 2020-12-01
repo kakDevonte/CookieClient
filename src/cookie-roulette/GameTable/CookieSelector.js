@@ -6,13 +6,21 @@ function CookieSelector({store}) {
     angle = [ 0, 45, 90, 135, 180, 225, 270, 315, 360],
 
     style = () => {
-      if(store.game.targetSelector == null)
-        return {
-          transform: `rotate(0deg)`
-        };
-      return {
-        transform: `rotate(${angle[store.game.targetSelector]}deg)`
+
+      const style = {};
+
+
+      if(store.game.targetSelector == null) {
+        style.transform = `rotate(0deg)`;
+      }else{
+        style.transform = `rotate(${angle[store.game.targetSelector]}deg)`;
       }
+
+      if(store.game.allowClickRotate){
+        style.cursor = 'pointer';
+      }
+
+      return style;
     },
 
     classname = () => {
@@ -21,7 +29,12 @@ function CookieSelector({store}) {
     };
 
   return (
-    <div className={classname()} style={style()}><div /></div>
+    <div
+      className={ classname() }
+      style={ style() }
+      onClick={ () => store.game.clickRotateCookie() }
+    ><div />
+    </div>
   )
 }
 

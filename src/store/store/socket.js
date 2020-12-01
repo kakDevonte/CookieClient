@@ -53,27 +53,15 @@ class SocketStore {
     //////////////////////////////////////////////////////////////
 
     socket.on('update-players', (response) => {
-
       store.table.update(response.tid, response.groups, response.players);
-      store.game.calculateTurnRemain();
 
-      //this._startGame(response.current);
-
-      console.log("socket (update-players)", response.current);
-    });
-
-    //////////////////////////////////////////////////////////////
-
-    socket.on('current-player', (uid) => {
-      store.game.updateActivePlayer(uid);
-
-      console.log('socket (current-player)');
+      console.log("socket (update-players)");
     });
 
     //////////////////////////////////////////////////////////////
 
     socket.on('current-stage', (stage) => {
-      store.app.stage = stage.current;
+      store.app.setStage(stage.current);
 
       console.log('socket (current-stage)', stage);
     });
@@ -89,30 +77,34 @@ class SocketStore {
 
     //////////////////////////////////////////////////////////////
 
-    socket.on('round-start', () => {
-      store.game.rotateSelector();
+    socket.on('allow-start-rotate', () => {
+      store.game.enableRotateClickHandler();
 
-      console.log('socket (round-start)');
+      console.log('socket (allow-start-rotate)');
+    });
+
+    //////////////////////////////////////////////////////////////
+
+    socket.on('start-rotate', (seat) => {
+      store.game.rotateSelector(seat);
+
+      console.log('socket (start-rotate)');
     });
 
     //////////////////////////////////////////////////////////////
 
     socket.on('kiss-request', () => {
-
       store.game.kissRequest();
 
-      console.log('socket (kiss-question)');
+      console.log('socket (kiss-request)');
     });
 
     //////////////////////////////////////////////////////////////
 
-    socket.on('result-kiss', (response) => {
-
+    socket.on('received-kiss', (response) => {
       store.game.updateKiss(response.active, response.kiss);
 
-      //this.updateDecisionResult('target', kiss);
-
-      console.log('socket (opponent-kiss-result)', response);
+      console.log('socket (received-kiss)', response);
     });
 
     //////////////////////////////////////////////////////////////
