@@ -9,9 +9,8 @@ function CookieSelector({store}) {
 
       const style = {};
 
-
       if(store.game.targetSelector == null) {
-        style.transform = `rotate(0deg)`;
+        //style.transform = `rotate(0deg)`;
       }else{
         style.transform = `rotate(${angle[store.game.targetSelector]}deg)`;
       }
