@@ -256,12 +256,12 @@ class GameStore {
 
   // Тут временно поменять логику и анимацию
   rotateSelector(seat) {
+    this.setAllowClickRotate(false);
+    this.setTargetSelector(seat);
     this.setRotateCookie(true);
 
     setTimeout( () => {
       this.setRotateCookie(false);
-      this.setTargetSelector(seat);
-      this.setAllowClickRotate(false);
     }, 3000);
   }
 
