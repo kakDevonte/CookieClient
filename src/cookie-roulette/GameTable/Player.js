@@ -1,9 +1,10 @@
 import '../../css/player.css';
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {inject, observer} from "mobx-react";
 import KissResult from "./KissResult";
 import {reaction} from "mobx";
+import common from "../../config/common";
 
 
 function Player ({store, player, index}) {
@@ -70,27 +71,27 @@ function Player ({store, player, index}) {
     }
   };
 
-  const kissResult = (index, key) => {
+  const kissResult = (index) => {
     if(store.game.kissResult){
       if(index === store.game.activeSeat || index === store.game.targetSeat){
-        return ( <KissResult index={index} key={index + key} /> );
+        return(
+          <div className="wrap-kisses center-screen">
+            <KissResult index={index} delay={0} />
+            <KissResult index={index} delay={500} />
+            <KissResult index={index} delay={1000} />
+          </div>
+          );
       }
     }
     return '';
   };
-
-  const arr = [
-    kissResult(index, 1),
-    kissResult(index, 2),
-    kissResult(index, 3)
-  ];
 
   return (
     <article className={playerClass()} style={playerPhoto()}>
       <span className="turn-player">Крутит</span>
       { userName() }
       { userKissed() }
-      <div className="wrap-kisses center-screen"> { arr.map(value => value) } </div>
+      { kissResult(index) }
     </article>
   );
 }

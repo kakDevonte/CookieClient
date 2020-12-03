@@ -2,15 +2,16 @@ import React, { useState, useEffect } from 'react';
 import {inject, observer} from "mobx-react";
 import common from "../../config/common";
 
-function KissResult({store, index}){
+function KissResult({store, index, delay}){
   const [style, setStyle] = useState({
-      left: '0',
-      top: '0'
+      left: common.randomNumber(-25, 25) + 'px',
+      top: common.randomNumber(-30, 30) + 'px',
+      animationDelay: `${delay}s, ${delay + 200}ms, ${delay + 2700}ms`
     }
   );
 
   useEffect(() => {
-    setTimeout(() => calculateMove(), common.randomNumber(100, 1000));
+    setTimeout(() => calculateMove(), 25 + delay);
   }, []);
 
   const calculateMove = () => {
@@ -36,9 +37,13 @@ function KissResult({store, index}){
       if(active.y < target.y) top = top * -1;
     }
 
+    left += common.randomNumber(-10, 10);
+    top += common.randomNumber(-10, 10);
+
     setStyle({
       left,
-      top
+      top,
+      animationDelay: `${delay}s, ${delay + 200}ms, ${delay + 2700}ms`
     });
   };
 
