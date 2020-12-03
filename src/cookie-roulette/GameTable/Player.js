@@ -5,15 +5,6 @@ import {inject, observer} from "mobx-react";
 
 
 function Player ({store, player, index}) {
-  // function foo(){
-  //   if(player) {
-  //     console.log('Render Player!', player.name, player.id);
-  //   }else{
-  //     console.log('Render Empty Seat!');
-  //   }
-  // }
-  //
-  // foo();
 
   const userName = () => {
     if(player) {
@@ -44,9 +35,6 @@ function Player ({store, player, index}) {
       },
 
       turn = () => {
-        // if(player){
-        //   console.log("Turn", player.name, store.game.currentTurn);
-        // }
         if(store.game.activeSeat === index) {
           className.push('turn');
         }
@@ -72,7 +60,8 @@ function Player ({store, player, index}) {
     if(player) {
       return {
         backgroundImage: `url("${player.photo}")`,
-        backgroundSize: 'cover'
+        backgroundSize: '150%',
+        backgroundPosition: 'center center'
       }
     } else {
       return {};
