@@ -5,28 +5,39 @@ function AnimationCookie({store}){
   const angle = [ 0, 45, 90, 135, 180, 225, 270, 315, 360];
 
   const style = () => {
-    if(store.game.targetSelector !== null){
+    const
+      seat = store.game.targetSelector,
+      oldSeat = store.game.previousTargetSelector;
 
-      const degrees = angle[store.game.targetSelector];
+    let degrees, d0, d1080, dStop;
+
+    if(seat !== null){
+      degrees = angle[seat];
+
+      d0 = angle[oldSeat];
+      d1080 = d0 + 360 + 360 + 360;
+
+      dStop = degrees - d0;
+      dStop = dStop >= 0 ? d1080 + dStop : d1080 + (360 + dStop);
 
       return `
+      .table .cookie-selector{
+        transform: rotate(${degrees}deg);
+      }
+      
       .table .cookie-selector.rotate {
-        animation-name: my-cookie-rotate, my-cookie-target;
-        animation-duration: 0.8s, 0.6s;
-        animation-timing-function: linear, linear;
-        animation-delay: 0s, 2.4s;
-        animation-iteration-count: 3, 1;
-        animation-direction: normal, normal;
-        animation-fill-mode: none, forwards;
+        animation-name: my-cookie-rotate;
+        animation-duration: 3s;
+        animation-timing-function: cubic-bezier(.65,.1,.1,.85);
+        animation-delay: 0s;
+        animation-iteration-count: 1;
+        animation-direction: normal;
+        animation-fill-mode: forwards;
       }
       
       @keyframes my-cookie-rotate {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-      }
-      @keyframes my-cookie-target{
-        0% { transform: rotate(0deg); }
-        100%{ transform: rotate(${degrees}deg); }
+        0% { transform: rotate(${d0}deg); }
+        100% { transform: rotate(${dStop}deg); }
       }
     `;
     }

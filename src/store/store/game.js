@@ -18,6 +18,7 @@ class GameStore {
   _target = null;
   _targetSeat = null;
   _targetSelector = null;
+  _previousTargetSelector = 0;
   _targetPlayer = null;
   _targetKiss = null;
 
@@ -79,6 +80,7 @@ class GameStore {
   get target() { return this._target; }
   get targetSeat() { return this._targetSeat; }
   get targetSelector() { return this._targetSelector; }
+  get previousTargetSelector() { return this._previousTargetSelector; }
   get targetPlayer() { return this._targetPlayer; }
   get targetKiss() { return this._targetKiss; }
 
@@ -138,6 +140,7 @@ class GameStore {
 
   setTargetSelector(seat) {
     if(seat === this._targetSelector) return;
+    this._previousTargetSelector = this._targetSelector ? this._targetSelector : 0;
     this._targetSelector = seat;
   }
 
@@ -262,7 +265,7 @@ class GameStore {
 
     setTimeout( () => {
       this.setRotateCookie(false);
-    }, 3000);
+    }, 4000);
   }
 
   calculateTurnRemain(){

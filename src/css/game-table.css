@@ -43,14 +43,6 @@
   width: 229%;
   height: 175.47%;
   flex-shrink: 0;
-  transition: all ease-in-out 0.5s;
-}
-
-
-
-@keyframes roulette {
-  0% {transform: rotate(0deg)}
-  100% {transform: rotate(360deg)}
 }
 
 .table .cookie-selector > div {
