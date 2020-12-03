@@ -1,7 +1,9 @@
 import '../../css/player.css';
 
-import React from "react";
+import React, { useState } from "react";
 import {inject, observer} from "mobx-react";
+import KissResult from "./KissResult";
+import {reaction} from "mobx";
 
 
 function Player ({store, player, index}) {
@@ -68,64 +70,27 @@ function Player ({store, player, index}) {
     }
   };
 
-  const kissResult = () => {
-    let style = {
-      left: '35%',
-      top: '35%'
-    };
-
-    if(store.game.kissResult) {
-
-      if(store.game.activeSeat === index) {
-        //setTimeout(() => animate(true), 100);
-
-        return (<div className="round-kiss-result" style={style}/>);
-      }
-
-      if(store.game.targetSeat === index) {
-        //setTimeout(() => animate(false), 100);
-
-        return (<div className="round-kiss-result" style={style}/>);
+  const kissResult = (index, key) => {
+    if(store.game.kissResult){
+      if(index === store.game.activeSeat || index === store.game.targetSeat){
+        return ( <KissResult index={index} key={index + key} /> );
       }
     }
-
     return '';
   };
 
-  const animate = (active) => {
-    const indexC = active ? store.game.activeSeat : store.game.targetSeat;
-    const indexT = !active ? store.game.activeSeat : store.game.targetSeat;
-
-    let current = document.querySelector(`.player.p${indexT} .round-kiss-result`);
-    let target = document.querySelector(`.player.p${indexC}`);
-
-    const pc = current.getBoundingClientRect();
-    const pt = target.getBoundingClientRect();
-
-    let left, top;
-
-    left = pc.x - (pt.x + (pt.width * 0.65));
-    top  = pc.y - (pt.y + (pt.height * 0.65));
-
-    if(active) {
-      if(pc.x > pt.x) left = left * -1;
-      if(pc.y > pt.y) top = top * -1;
-    }else{
-      if(pc.x < pt.x) left = left * -1;
-      if(pc.y < pt.y) top = top * -1;
-    }
-
-    current.setAttribute('style', `left: ${left}px; top: ${top}px;`);
-
-    //setTimeout(() => {current.parentNode.removeChild(current)}, 3000);
-  };
+  const arr = [
+    kissResult(index, 1),
+    kissResult(index, 2),
+    kissResult(index, 3)
+  ];
 
   return (
     <article className={playerClass()} style={playerPhoto()}>
       <span className="turn-player">Крутит</span>
-      {userName()}
-      {userKissed()}
-      {kissResult()}
+      { userName() }
+      { userKissed() }
+      <div className="wrap-kisses center-screen"> { arr.map(value => value) } </div>
     </article>
   );
 }
