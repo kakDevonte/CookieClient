@@ -35,6 +35,24 @@ class UserStore {
 
   setData(data){ this._data = data; }
 
+  setKissCounter(count) {
+    const data = this.data;
+
+    data.kissCounter = count;
+    this.setData(data);
+  }
+
+  updatePersonalInfo(res) {
+    const data = this.data;
+
+    if(res.kissCounter) data.kissCounter = res.kissCounter;
+    if(res.cookieCounter) data.cookieCounter = res.cookieCounter;
+    if(res.inventory) data.inventory = res.inventory;
+    if(res.messages) data.messages = res.messages;
+
+    this.setData(data);
+  }
+
   emitUserInfo(socket) {
     socket.emit('user-info', this.data);
   }

@@ -41,6 +41,14 @@ class SocketStore {
 
     //////////////////////////////////////////////////////////////
 
+    socket.on('personal-data', (data) => {
+      this._store.user.updatePersonalInfo(data);
+
+      console.log('socket (personal-data)', data);
+    });
+
+    //////////////////////////////////////////////////////////////
+
     socket.on('put-table', (response) => {
       if(response.uid !== store.user.data.id) return;
 
