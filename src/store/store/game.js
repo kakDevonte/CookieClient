@@ -320,7 +320,7 @@ class GameStore {
       this.setTargetKiss(game.target[3]);
     }else{
       if(game.player[0]) {
-        this._active = table.findPlayer(game.player[0]);
+        [this._active] = table.findPlayer(game.player[0]);
       }
 
       if(this._active) {
@@ -330,7 +330,7 @@ class GameStore {
       }
 
       if(game.target[0]) {
-        this._target = table.findPlayer(game.target[0]);
+        [this._target] = table.findPlayer(game.target[0]);
       }
 
       if(this._target) {
@@ -342,6 +342,25 @@ class GameStore {
     }
 
     this.setKissResult(game.result);
+  }
+
+  /**
+   * Обновляет данные о поцелуях
+   * @param response {{uid, kissed, counter}}
+   */
+  updateKissData({uid, kissed, counter}){
+    if(!uid) return;
+    if(!kissed) return;
+    let player, seat;
+
+    [player, seat] = this._store.table.findPlayer(uid);
+
+    player.kissed = kissed;
+    this._store.table.setPlayer(seat, player);
+
+    if(uid === this._store.user.id && counter) {
+        this._store.user.setKissCounter(counter);
+    }
   }
 
   /**

@@ -116,6 +116,14 @@ class SocketStore {
     });
 
     //////////////////////////////////////////////////////////////
+
+    socket.on('update-kiss-data', (result) => {
+      store.game.updateKissData(result);
+
+      console.log('socket (round-result)', result);
+    });
+
+    //////////////////////////////////////////////////////////////
   }
 }
 
