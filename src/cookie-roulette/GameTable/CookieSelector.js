@@ -14,6 +14,7 @@ function CookieSelector({store}) {
     },
 
     classname = () => {
+      if(store.game.state === 'pending') return 'cookie-selector hide';
       if(store.game.rotateCookie) return 'cookie-selector rotate';
       return 'cookie-selector';
     };
