@@ -88,22 +88,22 @@ class Collection {
    * @param map {Map}
    * @param value {*}
    * @param key {string}
-   * @returns {null|*}
+   * @returns {[item, index]}
    */
   static findOne(map, value, key) {
-    let item;
+    let index, item;
 
     if(key) {
-      for(item of map.values()) {
-        if(item && item[key] === value) return item;
+      for([index, item] of map.entries()) {
+        if(item && item[key] === value) return [item, index];
       }
     } else {
-      for(item of map.values()) {
-        if(item === value) return item;
+      for([index, item] of map.entries()) {
+        if(item === value) return [item, index];
       }
     }
 
-    return null;
+    return [null, null];
   }
 }
 

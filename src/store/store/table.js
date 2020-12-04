@@ -33,7 +33,7 @@ class TableStore {
 
   /**
    * @param uid {string}
-   * @returns {{id, name, photo, gender, kissed, gifted, seat, type} | null}
+   * @returns {[{id, name, photo, gender, kissed, gifted, seat, type}, number]}
    */
   findPlayer(uid) { return Collection.findOne(this.players, uid, 'id'); }
 
