@@ -11,6 +11,7 @@ import TurnCountTooltip from "./TurnsCountTooltip";
 import { inject, observer } from "mobx-react";
 import YourTurnTooltip from "./YourTurnTooltip";
 import AnimationCookie from "./AnimationCookie";
+import WaitMorePlayers from "./WaitMorePlayers";
 
 const GameTable = ({store}) => {
   const player = store.table.getPlayer;
@@ -27,6 +28,7 @@ const GameTable = ({store}) => {
           <div className="wrap-players">
             <Player player={player(6)} index={6} />
             <div className="cookie-space">
+              <WaitMorePlayers />
               <AnimationCookie/>
               <CookieSelector />
               <TurnCountTooltip/>
