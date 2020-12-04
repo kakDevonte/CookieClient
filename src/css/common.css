@@ -91,32 +91,31 @@ html, body{
 }
 
 .lobby .kiss.kiss-one{
-  width: 43.65px;
-  height: 43.65px;
-  left: 223px;
-  top: 232.06px;
+  width: 43px;
+  height: 32px;
+  left: 58%;
+  top: 27%;
   transform: rotate(-36.66deg);
 }
 .lobby .kiss.kiss-two{
-  width: 66.96px;
-  height: 66.96px;
-  left: 311.63px;
-  top: 230px;
+  width: 56px;
+  height: 41px;
+  left: 71%;
+  top: 32%;
   transform: rotate(53.22deg);
 }
-.lobby .kiss.kiss-three{
-  position: absolute;
-  left: 85.98%;
-  right: 7.27%;
-  top: 32.15%;
-  bottom: 64.06%;
-  transform: matrix(-0.99, -0.15, -0.15, 0.99, 0, 0);
+.lobby .kiss.kiss-three {
+  left: 77%;
+  top: 26%;
+  transform: rotate(10deg);
+  width: 23px;
+  height: 19px;
 }
 .lobby .kiss.kiss-four{
-  height: 40px;
-  width: 40px;
-  left: 102px;
-  top: 360px;
+  height: 26px;
+  width: 35px;
+  left: 15%;
+  top: 47%;
   transform: rotate(14deg);
 }
 
