@@ -45,6 +45,10 @@
   flex-shrink: 0;
 }
 
+.table .cookie-selector.hide {
+  display: none;
+}
+
 .table .cookie-selector > div {
   position: relative;
   width: 100%;
