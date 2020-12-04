@@ -96,9 +96,9 @@ function Player ({store, player, index}) {
   );
 }
 
-function Kissed() {
+function Kissed({count}) {
   return(
-    <span className='current-kiss'>{this.props.count}</span>
+    <span className='current-kiss'>{count}</span>
   );
 }
 
