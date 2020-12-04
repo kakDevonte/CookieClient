@@ -58,7 +58,8 @@
   left: -24%;
   top: 65%;
   transform: translateY(-50%);
-  background: url("../images/kiss-count.svg") center no-repeat;
+  background: url("../images/kiss-count.svg") no-repeat;
+  background-position-y: 60%;
   background-size: 90%;
 }
 
