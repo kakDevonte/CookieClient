@@ -18,33 +18,36 @@ function KissResult({store, index, delay}){
     const isActive = index === store.game.activeSeat;
     let target, active, left, top;
 
-    active = document.querySelector('.player.p' + store.game.activeSeat );
+    active = document.querySelector('.player.p' + store.game.activeSeat);
     target = document.querySelector('.player.p' + store.game.targetSeat);
-    active = active.getBoundingClientRect();
-    target = target.getBoundingClientRect();
 
-    left = parseInt(active.x - target.x, 10);
-    top = parseInt(active.y - target.y, 10);
+    if(active && target) {
+      active = active.getBoundingClientRect();
+      target = target.getBoundingClientRect();
 
-    if(left < 0) left = left * -1;
-    if(top < 0) top = top * -1;
+      left = parseInt(active.x - target.x, 10);
+      top = parseInt(active.y - target.y, 10);
 
-    if(isActive) {
-      if(active.x > target.x) left = left * -1;
-      if(active.y > target.y) top = top * -1;
-    } else {
-      if(active.x < target.x) left = left * -1;
-      if(active.y < target.y) top = top * -1;
+      if(left < 0) left = left * -1;
+      if(top < 0) top = top * -1;
+
+      if(isActive) {
+        if(active.x > target.x) left = left * -1;
+        if(active.y > target.y) top = top * -1;
+      }else {
+        if(active.x < target.x) left = left * -1;
+        if(active.y < target.y) top = top * -1;
+      }
+
+      left += common.randomNumber(-20, 20);
+      top += common.randomNumber(-20, 20);
+
+      setStyle({
+        left,
+        top,
+        animationDelay: `${delay}s, ${delay + 200}ms, ${delay + 2700}ms`
+      });
     }
-
-    left += common.randomNumber(-10, 10);
-    top += common.randomNumber(-10, 10);
-
-    setStyle({
-      left,
-      top,
-      animationDelay: `${delay}s, ${delay + 200}ms, ${delay + 2700}ms`
-    });
   };
 
   return (<div className="round-kiss-result" style={style}/>);
