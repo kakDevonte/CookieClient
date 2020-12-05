@@ -161,24 +161,9 @@ class GameStore {
 
   //////////////////////////////////////////////////////////////////////////
 
-  // calculateKissResult() {
-  //   if(this.activeKiss != null && this.targetKiss != null) {
-  //     this.setKissResult(this.activeKiss && this.targetKiss);
-  //     setTimeout(() => this.setKissWindow('closed'), 2500);
-  //   }
-  // }
-
-  // updateActivePlayer(uid) {
-  //   const player = this._store.table.findPlayer(uid);
-  //
-  //   if(player) {
-  //     this._active = player;
-  //     this.setActivePlayer(player.id);
-  //     this.setActiveSeat(player.seat);
-  //   } else {
-  //     this._store.socket.emit('active-not-found', this._store.table.id);
-  //   }
-  // }
+  clickChangeTable() {
+    this._store.app.stageLobby(this._store.table.id);
+  }
 
   /**
    * Позволяет пользователю запустить вращение печеньки по клику
@@ -217,22 +202,21 @@ class GameStore {
       uid = this._store.user.id,
       tid = this._store.table.id;
 
-    let data;
+    let data, active;
 
     if(this._timerDecision) clearTimeout(this._timerDecision);
 
     if(this.activePlayer === uid) {
       if(this.activeKiss !== null) return;
       this.setActiveKiss(result);
-
-      data = { kiss: result, tid, active: true, auto};
+      active = true;
     } else {
       if(this.targetKiss !== null) return;
       this.setTargetKiss(result);
-
-      data = { kiss: result, tid, active: false, auto};
+      active = false;
     }
 
+    data = { kiss: result, uid, tid, active, auto};
     this._store.socket.emit('receive-kiss-result', data);
   }
 
