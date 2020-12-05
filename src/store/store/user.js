@@ -26,6 +26,10 @@ class UserStore {
 
     common.randomiseUser(result);
     result.id = result.id + '';
+    result.kissCounter = 0;
+    result.cookieCounter = 0;
+    result.inventory = [];
+    result.messages = [];
 
     this.setData(result);
   };
