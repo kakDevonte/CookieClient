@@ -132,6 +132,14 @@ class SocketStore {
     });
 
     //////////////////////////////////////////////////////////////
+
+    socket.on('chat-message', (result) => {
+      this._store.chat.updateMessages(result);
+
+      console.log('socket (chat-message)', result);
+    });
+
+    //////////////////////////////////////////////////////////////
   }
 }
 

@@ -3,6 +3,7 @@ import UserStore from "./store/user";
 import GameStore from "./store/game";
 import SocketStore from "./store/socket";
 import TableStore from "./store/table";
+import ChatStore from "./store/chat";
 
 class Store {
     constructor() {
@@ -11,6 +12,7 @@ class Store {
         this.user = new UserStore(this);
         this.table = new TableStore(this);
         this.game = new GameStore(this);
+        this.chat = new ChatStore(this);
     }
 }
 
