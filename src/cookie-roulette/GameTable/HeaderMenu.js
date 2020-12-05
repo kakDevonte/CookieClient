@@ -10,14 +10,14 @@ function HeaderMenu({store}){
       <input type='button' className="exit-game" />
       <section className="cookie-count">
         <i />
-        <span className="center-screen">0</span>
+        <span className="center-screen">{store.user.data.cookieCounter}</span>
         <input type="button" />
       </section>
       <section className="kiss-count">
         <i />
         <span>{store.user.data.kissCounter}</span>
       </section>
-      <input type='button' className="change-table" />
+      <input type='button' className="change-table" onClick={ () => store.game.clickChangeTable() } />
       <input type='button' className="settings" />
       <section className="vk-apps-overlay">
         <input type='button' className="setup" />
