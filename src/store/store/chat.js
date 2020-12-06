@@ -6,6 +6,7 @@ const chatMessageLimit = 50;
 class ChatStore {
   _messages = new Map();
   _personal = new Map();
+  _typeChat = 'common';
   _text = '';
 
   constructor(store) {
@@ -13,27 +14,28 @@ class ChatStore {
       _messages: observable,
       _personal: observable,
       _text: observable,
+      _typeChat: observable,
 
       updateMessages: action,
-      setText: action
+      setText: action,
+      setTypeChat: action
     });
 
     this._strore = store;
   }
 
-  get messages() {
-    return this._messages;
+  get messages() { return this._messages; }
+  get personalMessages() { return this._personal; }
+  get text() { return this._text; }
+  get typeChat(){ return this._typeChat; }
+
+  setTypeChat(type) {
+    if(this._typeChat === type) return;
+    this._typeChat = type;
   }
 
-  get personalMessages() {
-    return this._personal;
-  }
-
-  get text() {
-    return this._text;
-  }
-
-  setText(value){
+  setText(value) {
+    if(this._text === value) return;
     this._text = value;
   }
 
@@ -41,7 +43,6 @@ class ChatStore {
     if( event.key === 'Enter' ) return;
     this.setText(event.target.value);
   }
-
 
   send(event, to) {
     if(event.key !== 'Enter') return;
@@ -70,6 +71,11 @@ class ChatStore {
     if(messages.size > chatMessageLimit) {
       Collection.remove(messages, 0, messages.size - chatMessageLimit);
     }
+  }
+
+  clickChaneTypeChat(type) {
+    if(type === 'common') this.setTypeChat('common');
+    if(type === 'personal') this.setTypeChat('personal');
   }
 }
 

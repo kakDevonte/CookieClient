@@ -3,13 +3,13 @@ import {inject, observer} from "mobx-react";
 
 import Message from "./Message";
 
-function Messages({store}) {
+function Messages({store, messages}) {
   const container = useRef();
 
   const content = () => {
     const m = [];
 
-    store.chat.messages.forEach((value, key) => {
+    messages.forEach((value, key) => {
       m.push(<Message message={value} key={key} container={container.current} />);
     });
 
