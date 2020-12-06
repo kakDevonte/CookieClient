@@ -29,12 +29,14 @@
   width: 25%;
   height: 82%;
   background: url("../../../../images/cookies-bg.svg") center no-repeat;
+  background-size: 90%;
 }
 
 .cookie-count i{
   width: 31%;
   height: 80%;
   background: url("../../../../images/cookie-icon.png") center no-repeat;
+  background-size: 130%;
 }
 
 .cookie-count span{
