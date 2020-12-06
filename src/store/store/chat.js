@@ -1,6 +1,9 @@
 import {action, makeObservable, observable} from "mobx";
+import Collection from "../../helpers/Collection";
 
-class Chat {
+const chatMessageLimit = 50;
+
+class ChatStore {
   _messages = new Map();
   _personal = new Map();
   _text = '';
@@ -12,7 +15,7 @@ class Chat {
       _text: observable,
 
       updateMessages: action,
-      input: action
+      setText: action
     });
 
     this._strore = store;
@@ -30,23 +33,29 @@ class Chat {
     return this._text;
   }
 
+  setText(value){
+    this._text = value;
+  }
+
   input(event){
     if( event.key === 'Enter' ) return;
-    this._text = event.target.value;
+    this.setText(event.target.value);
   }
 
 
   send(event, to) {
     if(event.key !== 'Enter') return;
 
+    const text = this._text.trim();
+    if(text === '') return;
+
     const message = {
       from: this._strore.user.id,
-      text: event.target.value,
+      text: text,
       to
     };
 
-    //console.log(message);
-
+    this.setText('');
     this._strore.socket.emit('user-message', message);
   }
 
@@ -57,7 +66,11 @@ class Chat {
       if(messages.get(message.id)) return;
       messages.set(message.id, message);
     });
+
+    if(messages.size > chatMessageLimit) {
+      Collection.remove(messages, 0, messages.size - chatMessageLimit);
+    }
   }
 }
 
-export default Chat;
+export default ChatStore;
