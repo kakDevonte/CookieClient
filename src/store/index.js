@@ -4,6 +4,7 @@ import GameStore from "./store/game";
 import SocketStore from "./store/socket";
 import TableStore from "./store/table";
 import ChatStore from "./store/chat";
+import InventoryStore from "./store/inventory";
 
 class Store {
     constructor() {
@@ -13,6 +14,7 @@ class Store {
         this.table = new TableStore(this);
         this.game = new GameStore(this);
         this.chat = new ChatStore(this);
+        this.inventory = new InventoryStore(this);
     }
 }
 

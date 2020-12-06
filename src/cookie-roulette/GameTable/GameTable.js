@@ -13,6 +13,7 @@ import WaitMorePlayers from "./WaitMorePlayers";
 
 import KissModal from "./Modal/KissModal";
 import Chat from "../Chat/Chat";
+import Inventory from "../Inventory/Inventory";
 //import UserProfile from "../Profile/UserProfile";
 
 const GameTable = ({store}) => {
@@ -47,6 +48,7 @@ const GameTable = ({store}) => {
         </article>
         <KissModal />
         <Chat />
+        <Inventory />
       </section>
   );
 };

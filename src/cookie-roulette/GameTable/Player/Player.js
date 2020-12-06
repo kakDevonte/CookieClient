@@ -90,7 +90,11 @@ function Player ({store, player, index}) {
   };
 
   return (
-    <article className={playerClass()} style={playerPhoto()}>
+    <article
+      onClick={ () => store.inventory.clickToggleInventory(index) }
+      className={playerClass()}
+      style={playerPhoto()}
+    >
       <span className="turn-player">Крутит</span>
       { userName() }
       { userKissed() }

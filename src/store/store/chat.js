@@ -8,6 +8,8 @@ class ChatStore {
   _personal = new Map();
   _typeChat = 'common';
   _text = '';
+  _talkState = '';
+  _talkPlayer = {id: null};
 
   constructor(store) {
     makeObservable(this, {
@@ -15,23 +17,39 @@ class ChatStore {
       _personal: observable,
       _text: observable,
       _typeChat: observable,
+      _talkState: observable,
+      _talkPlayer: observable,
 
       updateMessages: action,
       setText: action,
-      setTypeChat: action
+      setTypeChat: action,
+      setTalkState: action,
+      setTalkPlayer: action
     });
 
-    this._strore = store;
+    this._store = store;
   }
 
   get messages() { return this._messages; }
   get personalMessages() { return this._personal; }
   get text() { return this._text; }
   get typeChat(){ return this._typeChat; }
+  get talkState(){ return this._talkState; }
+  get talkPlayer(){ return this._talkPlayer; }
 
   setTypeChat(type) {
     if(this._typeChat === type) return;
     this._typeChat = type;
+  }
+
+  setTalkState(state){
+    if(this._talkState === state) return;
+    this._talkState = state;
+  }
+
+  setTalkPlayer(player) {
+    if(this._talkPlayer.id === player.id) return;
+    this._talkPlayer = player;
   }
 
   setText(value) {
@@ -51,13 +69,13 @@ class ChatStore {
     if(text === '') return;
 
     const message = {
-      from: this._strore.user.id,
+      from: this._store.user.id,
       text: text,
       to
     };
 
     this.setText('');
-    this._strore.socket.emit('user-message', message);
+    this._store.socket.emit('user-message', message);
   }
 
   updateMessages(list, personal) {
@@ -73,9 +91,18 @@ class ChatStore {
     }
   }
 
-  clickChaneTypeChat(type) {
+  clickChangeTypeChat(type) {
     if(type === 'common') this.setTypeChat('common');
     if(type === 'personal') this.setTypeChat('personal');
+  }
+
+  clickOpenTalk(player){
+    this.setTalkPlayer(player);
+    this.setTalkState(' opened');
+  }
+
+  clickBackToPersonalMessages() {
+    this.setTalkState('');
   }
 }
 

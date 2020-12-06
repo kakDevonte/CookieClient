@@ -7,6 +7,8 @@ import CommonChat from "./CommonChat";
 import PersonalChat from "./PersonalChat";
 
 function Chat({store}) {
+  const type = store.chat.typeChat;
+
   const className = (common, type) => {
     if(common) return type === 'common' ? 'selected' : '';
     return type === 'personal' ? 'selected' : '';
@@ -16,20 +18,20 @@ function Chat({store}) {
     <article className="chat">
       <header>
         <div
-          className={ className(true, store.chat.typeChat) }
-          onClick={ () => store.chat.clickChaneTypeChat('common') }
+          className={ className(true, type) }
+          onClick={ () => store.chat.clickChangeTypeChat('common') }
         >
           Общий чат
         </div>
         <div
-          className={ className(false, store.chat.typeChat) }
-          onClick={ () => store.chat.clickChaneTypeChat('personal') }
+          className={ className(false, type) }
+          onClick={ () => store.chat.clickChangeTypeChat('personal') }
         >
           <span>Личные сообщения <em>10</em></span>
         </div>
       </header>
-        <CommonChat active={ className(true, store.chat.typeChat) } />
-        <PersonalChat active={ className(false, store.chat.typeChat) } />
+        <CommonChat active={ className(true, type) } />
+        <PersonalChat active={ className(false, type) } />
     </article>
   );
 }
