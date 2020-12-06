@@ -1,6 +1,5 @@
 import {makeObservable, observable} from "mobx";
 import io from "socket.io-client";
-import Collection from "../../helpers/Collection";
 
 class SocketStore {
   constructor (store) {
