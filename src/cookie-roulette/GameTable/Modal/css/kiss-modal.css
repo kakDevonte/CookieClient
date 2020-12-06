@@ -42,10 +42,10 @@
 }
 
 .kiss-modal i.accepted{
-  background-image: url("../images/checkmark.svg");
+  background-image: url("../../../../images/checkmark.svg");
 }
 .kiss-modal i.declined{
-  background-image: url("../images/cross.svg");
+  background-image: url("../../../../images/cross.svg");
 }
 .kiss-modal i.current{
   left: 65%;

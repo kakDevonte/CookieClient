@@ -18,7 +18,7 @@
   width: 3%;
   height: 45%;
   margin-left: 2%;
-  background: url("../images/back-icon.png") center no-repeat;
+  background: url("../../../../images/back-icon.png") center no-repeat;
 }
 
 .header-menu .cookie-count{
@@ -28,13 +28,13 @@
   align-items: center;
   width: 25%;
   height: 82%;
-  background: url("../images/cookies-bg.svg") center no-repeat;
+  background: url("../../../../images/cookies-bg.svg") center no-repeat;
 }
 
 .cookie-count i{
   width: 31%;
   height: 80%;
-  background: url("../images/cookie-icon.png") center no-repeat;
+  background: url("../../../../images/cookie-icon.png") center no-repeat;
 }
 
 .cookie-count span{
@@ -45,7 +45,7 @@
 .cookie-count input{
   width: 35%;
   height: 83%;
-  background: url("../images/cookie-shop.svg") center no-repeat;
+  background: url("../../../../images/cookie-shop.svg") center no-repeat;
   background-size: contain;
 }
 
@@ -59,7 +59,7 @@
 .kiss-count i{
   width: 48%;
   height: 74%;
-  background: url("../images/kissed.svg") center no-repeat;
+  background: url("../../../../images/kissed.svg") center no-repeat;
   background-size: contain;
   flex-shrink: 0;
 }
@@ -82,11 +82,11 @@
 }
 
 .header-menu .change-table{
-  background-image: url("../images/change-table-button.svg");
+  background-image: url("../../../../images/change-table-button.svg");
 }
 
 .header-menu .settings{
-  background-image: url("../images/empty-gold-button.svg");
+  background-image: url("../../../../images/empty-gold-button.svg");
 }
 
 .header-menu .vk-apps-overlay {
@@ -109,7 +109,7 @@
 }
 
 .vk-apps-overlay .setup{
-  background-image: url("../images/setup-icon.png");
+  background-image: url("../../../../images/setup-icon.png");
 }
 
 .vk-apps-overlay div{
@@ -119,5 +119,5 @@
 }
 
 .vk-apps-overlay .exit-app{
-  background-image: url("../images/close-icon.png");
+  background-image: url("../../../../images/close-icon.png");
 }

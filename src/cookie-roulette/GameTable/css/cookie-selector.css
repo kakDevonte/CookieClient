@@ -1,0 +1,28 @@
+.table .cookie-selector {
+  position: relative;
+  width: 229%;
+  height: 175.47%;
+  flex-shrink: 0;
+}
+
+.table .cookie-selector.hide {
+  display: none;
+}
+
+.table .cookie-selector > div {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: url(../../../images/lobbyCookie.svg) no-repeat;
+  background-size: cover;
+  left: 3%;
+  top: -3%;
+  transform: rotate(-6deg);
+}
+
+.table .cookie-selector:hover + .cookie-tooltip{
+  visibility: visible;
+  opacity: 1;
+  transition: visibility ease-in-out 0.3s, opacity ease-in-out 0.7s;
+  transition-delay: 1s;
+}

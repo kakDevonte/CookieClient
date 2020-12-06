@@ -1,3 +1,5 @@
+import './css/turns-count-tooltip.css';
+
 import React from 'react';
 import {inject, observer} from "mobx-react";
 
@@ -14,7 +16,7 @@ function TurnCountTooltip({store}) {
 
   return (
     <div className="cookie-tooltip">
-      {text()}
+      { text() }
       <div className='arrow-down' />
     </div>
   );

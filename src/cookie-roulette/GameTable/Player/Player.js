@@ -1,10 +1,13 @@
-import '../../css/player.css';
+import './css/player.css';
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {inject, observer} from "mobx-react";
+
 import KissResult from "./KissResult";
-import {reaction} from "mobx";
-import common from "../../config/common";
+import Kissed from "./Kissed";
+
+// import {reaction} from "mobx";
+// import common from "../../config/common";
 
 
 function Player ({store, player, index}) {
@@ -93,12 +96,6 @@ function Player ({store, player, index}) {
       { userKissed() }
       { kissResult(index) }
     </article>
-  );
-}
-
-function Kissed({count}) {
-  return(
-    <span className='current-kiss'>{count}</span>
   );
 }
 

@@ -1,17 +1,19 @@
-import '../../css/game-table.css';
+import './css/game-table.css';
 
 import React from "react";
-import Player from "./Player";
-import KissModal from "./KissModal";
-import HeaderMenu from "./HeaderMenu";
-import CookieSelector from "./CookieSelector";
-import Chat from "./Chat";
-import TurnCountTooltip from "./TurnsCountTooltip";
-
 import { inject, observer } from "mobx-react";
-import YourTurnTooltip from "./YourTurnTooltip";
+
+import HeaderMenu from "./Menu/HeaderMenu";
+import Player from "./Player/Player";
 import AnimationCookie from "./AnimationCookie";
+import TurnCountTooltip from "./TurnsCountTooltip";
+import CookieSelector from "./CookieSelector";
+import YourTurnTooltip from "./YourTurnTooltip";
 import WaitMorePlayers from "./WaitMorePlayers";
+
+import KissModal from "./Modal/KissModal";
+import Chat from "../Chat/Chat";
+//import UserProfile from "../Profile/UserProfile";
 
 const GameTable = ({store}) => {
   const player = store.table.getPlayer;

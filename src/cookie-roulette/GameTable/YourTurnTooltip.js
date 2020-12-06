@@ -1,4 +1,4 @@
-import '../../css/your-turn-tooltip.css';
+import './css/your-turn-tooltip.css';
 
 import React from "react";
 import {inject, observer} from "mobx-react";
@@ -14,7 +14,9 @@ function YourTurnTooltip({store}) {
   };
 
   return (
-    <div className={className()}>Твой ход!<br/>Нажми на пченеьку,<br/>чтобы крутить!</div>
+    <div className={ className() }>
+      Твой ход!<br/>Нажми на пченеьку,<br/>чтобы крутить!
+    </div>
   );
 }
 

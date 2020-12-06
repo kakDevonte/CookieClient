@@ -1,0 +1,30 @@
+.table .cookie-tooltip{
+  position: absolute;
+  padding: 8px 12px;
+  transform: translate(-50%, -33%);
+  left: 50%;
+  top: 10%;
+  background-color: rgba(255, 255, 255, 0.7);
+  color: rgba(0, 0, 0, 0.65);
+  border-radius: 7px;
+
+  /*display: none;*/
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility ease-in-out 0.3s, opacity ease-in-out 0.7s;
+}
+
+.cookie-tooltip .arrow-down {
+  display: block;
+  margin: 0 auto;
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  border-top: 15px solid rgba(255, 255, 255, 0.7);
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+}

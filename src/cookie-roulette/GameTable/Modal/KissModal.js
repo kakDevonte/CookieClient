@@ -1,4 +1,4 @@
-import '../../css/kiss-modal.css';
+import './css/kiss-modal.css';
 
 import React, {useEffect} from "react";
 import {inject, observer} from "mobx-react";

@@ -1,0 +1,78 @@
+.lobby{
+  display: flex;
+  flex-flow: column nowrap;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(46.39% 46.39% at 50% 53.61%, #8543D9 49.15%, #7219A8 100%), #F7ECDA;
+}
+
+.lobby i{
+  display: block;
+}
+
+.lobby .cookie{
+  position: absolute;
+  width: 334px;
+  height: 387px;
+  filter: drop-shadow(0px 10px 5px rgba(0, 0, 0, 0.2));
+  /*transform: rotate(105deg);*/
+  background-image: url("../../../images/lobbyCookie.svg");
+  background-position: center;
+  z-index: 1;
+}
+
+.lobby .message{
+  display: flex;
+  flex-flow: column nowrap;
+  margin-top: 70px;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: white;
+}
+
+.lobby header{
+  font-size: 30px;
+  padding: 10px;
+}
+.lobby span{
+  font-size: 15px;
+}
+
+.lobby .kiss{
+  position: absolute;
+  background-image: url("../../../images/kiss.svg");
+  background-position: center;
+  background-size: cover;
+  z-index: 2;
+}
+
+.lobby .kiss.kiss-one{
+  width: 43px;
+  height: 32px;
+  left: 58%;
+  top: 27%;
+  transform: rotate(-36.66deg);
+}
+.lobby .kiss.kiss-two{
+  width: 56px;
+  height: 41px;
+  left: 71%;
+  top: 32%;
+  transform: rotate(53.22deg);
+}
+.lobby .kiss.kiss-three {
+  left: 77%;
+  top: 26%;
+  transform: rotate(10deg);
+  width: 23px;
+  height: 19px;
+}
+.lobby .kiss.kiss-four{
+  height: 26px;
+  width: 35px;
+  left: 15%;
+  top: 47%;
+  transform: rotate(14deg);
+}

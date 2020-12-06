@@ -1,4 +1,4 @@
-import '../../css/chat.css'
+import './css/chat.css'
 
 import React from 'react';
 import {inject, observer} from "mobx-react";

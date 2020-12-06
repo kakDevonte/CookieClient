@@ -1,4 +1,4 @@
-import '../../css/wait-players.css';
+import './css/wait-players.css';
 
 import React from 'react';
 import {inject, observer} from "mobx-react";

@@ -1,3 +1,5 @@
+import './css/cookie-selector.css';
+
 import React from "react";
 import {inject, observer} from "mobx-react";
 
