@@ -27,11 +27,11 @@
   width: 50%;
   font-weight: bold;
   justify-content: center;
-  align-items: center;
   margin: 10px;
   cursor: pointer;
   border-radius: 7px;
   color: white;
+  text-align: center;
 }
 
 .inventory header div:first-child{
