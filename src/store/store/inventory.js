@@ -6,18 +6,22 @@ class InventoryStore {
   _state = '';
   _current = null;
   _player = null;
+  _name = '';
 
   constructor(store) {
     makeObservable(this, {
       _state: observable,
+      _name: observable,
 
       setState: action,
+      setName: action
     });
 
     this._store = store;
   }
 
   get state() { return this._state; }
+  get name() { return this._name}
 
   setState(state) {
     if(state){
@@ -29,19 +33,33 @@ class InventoryStore {
     }
   }
 
+  setName(name) {
+    if(name === this._name) return;
+    this._name = name;
+  }
+
   clickToggleInventory(seat) {
     const player = this._store.table.getPlayer(seat);
 
-    console.log(player);
+    if(player && player.id === this._store.user.id) {
+      this._current = null;
+      this._player = null;
+
+      if(this._state === ' opened') {
+        this.setState(false);
+        return;
+      }
+      return;
+    }
 
     if(this._current === seat) {
       if(this._state === ' opened') {
         this.setState(false);
-      } else{
+      } else {
         if(!player) return;
         this.setState(true);
       }
-    }else{
+    } else {
       if(this._state !== ' opened') {
         this.setState(true);
       }
@@ -50,6 +68,7 @@ class InventoryStore {
     }
 
     if(player) {
+      this.setName(player.name);
       this._current = seat;
       this._player = player;
     }
