@@ -5,6 +5,7 @@ import {inject, observer} from "mobx-react";
 
 import CommonChat from "./CommonChat";
 import PersonalChat from "./PersonalChat";
+import CounterNewMessages from "./CounterNewMessages";
 
 function Chat({store}) {
   const type = store.chat.typeChat;
@@ -27,11 +28,14 @@ function Chat({store}) {
           className={ className(false, type) }
           onClick={ () => store.chat.clickChangeTypeChat('personal') }
         >
-          <span>Личные сообщения <em>10</em></span>
+          <CounterNewMessages count={ store.chat.countNewMessages } />
+          <span>Личные сообщения</span>
         </div>
       </header>
         <CommonChat active={ className(true, type) } />
-        <PersonalChat active={ className(false, type) } />
+        <PersonalChat
+          active={ className(false, type) }
+          talks={ store.chat.talks } />
     </article>
   );
 }

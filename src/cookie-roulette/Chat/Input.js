@@ -1,14 +1,14 @@
 import React from 'react';
 import {inject, observer} from "mobx-react";
 
-function Input({store}) {
+function Input({store, to}) {
   return (
     <input
       type="text"
       value={ store.chat.text }
-      placeholder="Написать в чат"
-      onKeyPress={ event => store.chat.send(event) }
-      onChange={ event => store.chat.input(event) }
+      placeholder={!to ? 'Написать в чат' : 'Личное сообщение'}
+      onKeyPress={ event => store.chat.send(event, to) }
+      onChange={ event => store.chat.input(event, to) }
     />
   );
 }
