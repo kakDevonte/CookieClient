@@ -1,0 +1,29 @@
+.chat .message{
+  position: relative;
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-weight: 400;
+  background-color: #ffffff;
+  margin: 5px 0;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+.chat .message legend{
+  display: inline-block;
+  font-weight: 700;
+  margin-right: 5px;
+}
+
+.chat .my-message{
+  color: white;
+  background-color: #913BFF;
+}
+
+.chat .message .colored-0{ color: #29d35a; }
+.chat .message .colored-1{ color: #d37140; }
+.chat .message .colored-2{ color: #1c1fd3; }
+.chat .message .colored-3{ color: #d32000; }
+.chat .message .colored-4{ color: #009123; }
+.chat .message .colored-5{ color: #cc18d3; }
+.chat .message .colored-6{ color: #ffdc00; }
+.chat .message .colored-7{ color: #00d2d3; }

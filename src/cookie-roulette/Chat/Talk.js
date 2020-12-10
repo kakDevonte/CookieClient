@@ -1,3 +1,5 @@
+import './css/talk.css';
+
 import React from 'react';
 import {inject, observer} from "mobx-react";
 import CounterNewMessages from "./CounterNewMessages";
@@ -8,7 +10,7 @@ function Talk({store, data}) {
   };
 
   return (
-    <article onClick={ () => store.chat.clickOpenTalk(data.player) }>
+    <article className="talk" onClick={ () => store.chat.clickOpenTalk(data.player) }>
       <i style={image} />
       <div className="content">
         <span>{data.player.name}</span>

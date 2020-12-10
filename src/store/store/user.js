@@ -17,19 +17,21 @@ class UserStore {
     });
 
     this._store = store;
-    this._auth();
+    //this.auth();
   }
 
   _auth = async () => {
     await bridge.send("VKWebAppInit");
     const result = await bridge.send('VKWebAppGetUserInfo');
 
-    common.randomiseUser(result);
+    //common.randomiseUser(result);
     result.id = result.id + '';
     result.kissCounter = 0;
     result.cookieCounter = 0;
     result.inventory = [];
     result.messages = [];
+
+    console.log(result);
 
     this.setData(result);
   };
@@ -58,7 +60,9 @@ class UserStore {
   }
 
   emitUserInfo(socket) {
-    socket.emit('user-info', this.data);
+    this._auth().then( () => {
+      socket.emit('user-info', this.data);
+    });
   }
 }
 

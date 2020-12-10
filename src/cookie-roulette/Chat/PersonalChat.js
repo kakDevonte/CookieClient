@@ -1,3 +1,5 @@
+import './css/personal-chat.css';
+
 import React, {useRef} from 'react';
 import {inject, observer} from "mobx-react";
 
@@ -18,6 +20,11 @@ function PersonalChat({store, active, talks}) {
     return t;
   };
 
+  const style = ()=> {
+    if(store.chat.talkClosed) return {display: 'none'};
+    return {};
+  };
+
   return (
     <section className={'personal-chat ' + active}>
       <section className="personal-chats" ref={container}>
@@ -29,7 +36,7 @@ function PersonalChat({store, active, talks}) {
           <div>{ store.chat.talkPlayer.name }</div>
         </div>
         <Messages messages={ store.chat.personalMessages } />
-        <footer>
+        <footer style={ style() }>
           <Input to={store.chat.talkPlayer.id} />
           <input
             type="button"

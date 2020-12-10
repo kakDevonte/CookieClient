@@ -40,6 +40,11 @@ class ChatStore {
   get talkState(){ return this._talkState; }
   get talkPlayer(){ return this._talkPlayer; }
   get countNewMessages () { return this._countNewMessages; }
+  get talkClosed() {
+    const talk = this._personal.get(this._talkPlayer.id);
+
+    if(talk) return talk.messages.get('talk-closed');
+  }
 
   get personalMessages() {
     const talk = this._personal.get(this._talkPlayer.id);
@@ -103,7 +108,7 @@ class ChatStore {
     let uid;
     list.forEach((message) => {
       if(message.to) {
-        uid = message.to === this._store.user.id ? message.from : message.to;
+        uid = message.to.id === this._store.user.id ? message.from.id : message.to.id;
         this._updatePersonalMessages(message, uid);
       } else {
         this._updateCommon(message);
@@ -177,6 +182,7 @@ class ChatStore {
   }
 
   clickOpenTalk(player){
+    console.log(player.id);
     this.setTalkPlayer(player);
     this._talkRead(player.id);
     this.setTalkState(' opened');

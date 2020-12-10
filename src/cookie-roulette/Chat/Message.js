@@ -1,3 +1,5 @@
+import './css/message.css';
+
 import React, {useEffect} from 'react';
 import {inject, observer} from "mobx-react";
 import common from "../../config/common";
@@ -9,7 +11,7 @@ function Message({store, message, container}) {
   }, []);
 
 
-  if(message.from === 'server-greetings') {
+  if(message.from.id === 'server-greetings') {
     return (
       <article title={common.getNormalDate(message.date, false, true)} className="message">
         <legend><span className={'colored-' + 1}>{message.text}</span></legend>
@@ -17,11 +19,7 @@ function Message({store, message, container}) {
     );
   }
 
-  let [player, seat] = store.table.findPlayer(message.from);
-
-  if(!player) return ;
-
-  if(store.user.id === message.from) {
+  if(store.user.id === message.from.id) {
     return (
       <article title={common.getNormalDate(message.date, false, true)} className="message my-message">
         <legend>Вы говорите: </legend>{message.text}
@@ -29,9 +27,17 @@ function Message({store, message, container}) {
     );
   }
 
+  if(message.to) {
+    return (
+      <article title={common.getNormalDate(message.date, false, true)} className="message">
+        <legend><span className={'colored-' + message.from.seat}>{message.from.name}</span>: </legend>{message.text}
+      </article>
+    );
+  }
+
   return (
     <article title={common.getNormalDate(message.date, false, true)} className="message">
-      <legend><span className={'colored-' + seat}>{player.name}</span> говорит: </legend>{message.text}
+      <legend><span className={'colored-' + message.from.seat}>{message.from.name}</span> говорит: </legend>{message.text}
     </article>
   );
 }

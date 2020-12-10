@@ -1,0 +1,47 @@
+.personal-chats article.talk{
+  display: flex;
+  flex-flow: row nowrap;
+  margin: 5px 0;
+  border-radius: 6px;
+  background-color: white;
+  padding: 8px 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.talk i{
+  width: 40px;
+  height: 100%;
+  border-radius: 4px;
+  background-color: #C4C4C4;
+  background-position: center;
+  background-size: cover;
+  flex-shrink: 0;
+}
+
+.talk .content{
+  display: flex;
+  flex-flow: column nowrap;
+  flex-grow: 1;
+  overflow-x: hidden;
+}
+
+.talk span{
+  font-size: 11px;
+  padding: 4px 8px;
+}
+
+.talk .content span:first-child{
+  color: #216AF7;
+  font-weight: 700;
+}
+.talk span:last-child{
+  white-space: nowrap;
+}
+.talk .counter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 100%;
+  flex-shrink: 0;
+}
