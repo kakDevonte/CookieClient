@@ -1,3 +1,5 @@
+import './css/chat-input-text.css';
+
 import React from 'react';
 import {inject, observer} from "mobx-react";
 

@@ -1,0 +1,14 @@
+.chat footer input[type="text"]{
+  background-color: transparent;
+  width: 85%;
+  border: none;
+  outline: none;
+  color: white;
+}
+
+.chat footer input[type="text"]::placeholder {
+  color: white;
+  opacity: 0.85;
+  font-size: 120%;
+  font-family: "Gotham Pro";
+}

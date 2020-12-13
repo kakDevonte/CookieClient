@@ -1,34 +1,42 @@
 html, body{
   padding: 0;
   margin: 0;
-}
-.wrapper-container{
-  font-size: 100vh;
-  height: 1em;
-}
-.wrapped-content{
-  position: relative;
+  width: 100%;
   height: 100%;
-  width: .56em;
+}
+
+.root-wrapper{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
 #root{
+  position: relative;
   width: 100%;
+  max-width: calc(100vh * 0.6016);
   height: 100%;
+  background-color: #c0c0c0;
 }
 
 .cookie-roulette{
   display: flex;
   flex-flow: column nowrap;
-  /*width: 375px;*/
-  /*height: 667px;*/
   width: 100%;
   height: 100%;
   background-color: #ebf6ff;
 
   font-family: Gotham Pro;
-  font-size: 12px;
   font-weight: 500;
+  font-size: 10px;
+}
+
+@media screen and (min-width: 320px) {
+  .cookie-roulette {
+    font-size: calc(12px + 2 * ((100vw - 320px) / 680));
+  }
 }
 
 .please-wait{

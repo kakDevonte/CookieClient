@@ -2,13 +2,22 @@
   display: flex;
   flex-flow: column nowrap;
   width: 100%;
-  height: 67%;
+  height: calc(100vw * 1.1947);
+  max-height: 72%;
   border: solid 1px black;
   justify-content: space-around;
   align-content: space-around;
   position: relative;
   background: radial-gradient(46.39% 46.39% at 50% 53.61%, #8543D9 49.15%, #7219A8 100%), #F7ECDA;
   color: white;
+}
+
+.utility-wrapper{
+  position: relative;
+  width: 100%;
+  height: calc(100vh - (100vw * 1.1947));
+  min-height: 28%;
+  overflow: hidden;
 }
 
 .table .table-id {

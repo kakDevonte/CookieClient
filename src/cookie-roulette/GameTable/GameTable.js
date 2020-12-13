@@ -46,9 +46,11 @@ const GameTable = ({store}) => {
           </div>
           <span className='table-id'>{store.table.id}</span>
         </article>
+        <article className="utility-wrapper">
+          <Chat />
+          <Inventory />
+        </article>
         <KissModal />
-        <Chat />
-        <Inventory />
       </section>
   );
 };

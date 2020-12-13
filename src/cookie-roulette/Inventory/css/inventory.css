@@ -3,13 +3,13 @@
   display: flex;
   flex-flow: column nowrap;
   background-color: #f7f6ff;
-  height: 32%;
+  height: 100%;
   transition: top ease-in-out 0.5s;
   top: 0;
 }
 
 .game .inventory.opened{
-  top: -32%;
+  top: -100%;
 }
 
 .inventory header{

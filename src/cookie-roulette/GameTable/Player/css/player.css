@@ -23,7 +23,7 @@
 .player .player-name{
   position: relative;
   align-self: flex-end;
-  top: 18px;
+  top: 25%;
   font-weight: 500;
 }
 

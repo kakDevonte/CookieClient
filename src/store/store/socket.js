@@ -3,7 +3,9 @@ import io from "socket.io-client";
 
 class SocketStore {
   constructor (store) {
-    this._socket = io(process.env.REACT_APP_SOCKET_SERVER);
+    this._socket = process.env.NODE_ENV === 'production' ?
+      io(process.env.REACT_APP_SOCKET_SERVER) :
+      io(process.env.REACT_APP_SOCKET_SERVER_DEV);
     this._store = store;
 
     makeObservable(this, {
