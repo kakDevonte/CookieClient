@@ -32,6 +32,7 @@ cp .env.example .env
 
 ```bash
 PORT = порт на котром будет находится клиент
+REACT_APP_SOCKET_SERVER_DEV = адрес сокет сервера бекенда для разарботки (localhost) : порт
 REACT_APP_SOCKET_SERVER = адрес сокет сервера бекенда : порт
 ```
 
