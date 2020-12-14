@@ -23,8 +23,18 @@ function KissModal({store}) {
 
   const question = () => {
     if(game.kissResult === null) return (<div className="question">Поцелуете?</div>);
-    if(game.kissResult) return (<div className="question">Взаимный поцелуй</div>);
-    return (<div className="question">На этот раз <br/> без поцелуев</div>);
+    if(game.kissResult) {
+      return (
+        <div className="question smooth-appear">
+          Взаимный поцелуй
+          <i className="kiss-result-counter">+1</i>
+        </div>
+      );
+    }
+    return (
+      <div className="question smooth-appear">
+        На этот раз <br/> без поцелуев
+      </div>);
   };
 
   const actions = () => {
@@ -54,10 +64,18 @@ function KissModal({store}) {
     return {};
   };
 
+  const kissSuccess = () => {
+    if(game.kissResult) {
+      return 'animate';
+    }
+  };
+
   return (
     <section className={opened()}>
-      {question()}
-      <div className='time' />
+      <header>
+        {question()}
+        <div className='time' />
+      </header>
       <div className="info">
         <article className="player" style={ photo(game.activePlayer, game._active) }>
           { icon(game.activeKiss, 'current') }
@@ -65,6 +83,7 @@ function KissModal({store}) {
         <article className="player" style={ photo(game.targetPlayer, game._target) }>
           { icon(game.targetKiss, 'target') }
         </article>
+        <i className={ 'true-kiss ' + kissSuccess() } />
       </div>
       {actions()}
     </section>

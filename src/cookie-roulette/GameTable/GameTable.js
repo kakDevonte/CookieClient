@@ -45,12 +45,12 @@ const GameTable = ({store}) => {
             <Player player={player(3)} index={3} />
           </div>
           <span className='table-id'>{store.table.id}</span>
+          <KissModal />
         </article>
         <article className="utility-wrapper">
           <Chat />
           <Inventory />
         </article>
-        <KissModal />
       </section>
   );
 };

@@ -1,13 +1,13 @@
 .kiss-modal {
   display: none;
   position: absolute;
-  width: 85%;
-  height: 41%;
+  width: 87.2%;
+  height: 57.815%;
   background-color: #000;
   flex-flow: column nowrap;
   color: white;
   border-radius: 15px;
-  top: 35% !important;
+  margin-top: 5%;
   z-index: 10;
 }
 .kiss-modal.opened{
@@ -15,7 +15,7 @@
 }
 
 .kiss-modal .info{
-  height: 49%;
+  height: 31.3%;
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
@@ -23,9 +23,68 @@
   font-weight: bold;
 }
 
+.kiss-modal header{
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  height: 29%;
+}
+
+.kiss-modal .question{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  font-size: 18px;
+  font-weight: bolder;
+  text-align: center;
+}
+
+.kiss-modal .time {
+  position: absolute;
+  display: flex;
+  width: 70%;
+  height: 4px;
+  align-self: center;
+  background-color: #392446;
+  bottom: 13%;
+}
+
+.kiss-modal .time:after{
+  content: "";
+  width: 0;
+  height: 100%;
+  background-color: #913BFF;
+  transition: width linear 5s;
+}
+
+.kiss-modal .time.hide{
+  display: none;
+}
+
+.kiss-modal .time.start:after{
+  width: 100%;
+  background-color: #913BFF;
+  transition: width linear 5s;
+}
+
+.kiss-modal .kiss-result-counter{
+  position: absolute;
+  height: 19px;
+  background: url(../../../../images/kissed.svg) no-repeat center left;
+  background-size: contain;
+  bottom: 5%;
+  padding-left: 8%;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 21px;
+}
+
 .kiss-modal .player{
   margin: 0 9%;
   width: 19%;
+  height: 100%;
   background-size: cover;
   border: none;
 }
@@ -54,40 +113,34 @@
   left: -65%;
 }
 
-.kiss-modal .time {
-  display: flex;
-  width: 70%;
-  height: 4px;
-  align-self: center;
-  margin-top: 3%;
-  background-color: #392446;
+.kiss-modal .true-kiss{
+  position: absolute;
+  width: 30%;
+  height: 32%;
+  background-image: url("../../../../images/true-kiss.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0;
 }
 
-.kiss-modal .time:after{
-  content: "";
-  width: 0;
-  height: 100%;
-  background-color: #913BFF;
-  transition: width linear 5s;
+.kiss-modal .true-kiss.animate{
+  animation: my-true-kiss 800ms cubic-bezier(1,.23,1,1) 500ms normal forwards;
 }
 
-.kiss-modal .time.hide{
-  display: none;
-}
-
-.kiss-modal .time.start:after{
-  width: 100%;
-  background-color: #913BFF;
-  transition: width linear 5s;
-}
-
-.kiss-modal .question{
-  display: flex;
-  justify-content: center;
-  font-size: 18px;
-  font-weight: bolder;
-  margin-top: 10%;
-  text-align: center;
+@keyframes my-true-kiss {
+  0%{
+    opacity: 0;
+    transform: translateY(-10px) scale(2);
+    filter: drop-shadow(1px 1px 10px rgb(0, 0, 0));
+  }
+  25%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.5));
+  }
 }
 
 .kiss-modal .actions{
@@ -103,7 +156,7 @@
   justify-content: center;
   align-items: center;
   margin: 0 2%;
-  height: 54%;
+  height: 37%;
   width: 40%;
   border-radius: 7px;
   cursor: pointer;
