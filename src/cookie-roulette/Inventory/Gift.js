@@ -4,11 +4,29 @@ import React from 'react';
 import {inject, observer} from "mobx-react";
 
 
-function Gift({store, gift, type}) {
+function Gift({store, data, type}) {
+  const id = data.id !== undefined ? data.id : data;
+  const gift = store.inventory.gifts[id];
+
+  const info = () => {
+    if(type === "owner") {
+      return <div className={'info ' + type} >{data.count} шт</div>;
+    }
+    return  <div className={'info ' + type} >{gift.cost}</div>
+  };
+
+  const image = () => {
+    return {
+      backgroundImage: `url('${gift.image}')`
+    }
+  };
+
   return (
-      <article className="gift">
-        <i />
-        <div className={'info ' + type} />
+      <article className="gift-container">
+        <div className="gift" onClick={ () => store.inventory.sendGift(type, id) }>
+          <i style={ image() } />
+          { info() }
+        </div>
       </article>
   );
 }

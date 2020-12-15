@@ -1,4 +1,3 @@
-import './css/gift-list.css';
 
 import React from 'react';
 import {inject, observer} from "mobx-react";
@@ -10,7 +9,9 @@ function Gifts({store, gifts}) {
   const m = [];
 
   gifts.forEach((value, key) => {
-    m.push(<Group group={value} key={key} type={key}/>);
+    if(value.gifts.length){
+      m.push(<Group group={value} key={key} type={key}/>);
+    }
   });
 
   return m;

@@ -12,15 +12,16 @@
   top: -100%;
 }
 
-.inventory header{
+.inventory > header{
   display: flex;
   width: 100%;
   height: 29%;
   max-height: 60px;
   flex-shrink: 0;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
 }
 
-.inventory header div{
+.inventory > header div{
   position: relative;
   display: flex;
   flex-flow: column nowrap;
@@ -34,10 +35,19 @@
   text-align: center;
 }
 
-.inventory header div:first-child{
+.inventory > header div:first-child{
   background: linear-gradient(264.23deg, #EFCB84 19.1%, #DEA943 71.97%), #F9CE7B;
 }
 
-.inventory header div:last-child{
+.inventory > header div:last-child{
   background: #913BFF;
+}
+
+.inventory .gifts-list{
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  overflow-y: scroll;
+  box-sizing: border-box;
 }

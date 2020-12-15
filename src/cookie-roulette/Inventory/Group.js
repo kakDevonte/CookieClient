@@ -11,16 +11,19 @@ function Group({store, group, type}) {
   const content = () => {
     const m = [];
 
-    group.forEach((value, key) => {
-      m.push(<Gift gift={value} key={key} type={type}/>);
+    group.gifts.forEach((value, key) => {
+      m.push(<Gift data={value} key={key} type={type}/>);
     });
 
     return m;
   };
 
   return (
-    <section className="gifts">
-      { content() }
+    <section className="gift-group">
+      <header>{group.name}</header>
+      <div className="gifts">
+        { content() }
+      </div>
     </section>
   );
 }

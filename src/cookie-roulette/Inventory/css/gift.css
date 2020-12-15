@@ -1,0 +1,48 @@
+.inventory .gift-container{
+  position: relative;
+  display: flex;
+  width: calc(100% / 5);
+  flex-flow: column nowrap;
+  padding-top: 29.1%;
+  margin: 5px 0;
+}
+
+.inventory .gift{
+  position: absolute;
+  display: flex;
+  flex-flow: column nowrap;
+  border-radius: 15px;
+  left: 12%;
+  right: 12%;
+  top: 0;
+  bottom: 0;
+  cursor: pointer;
+}
+
+.inventory .gift:hover{
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.inventory i{
+  width: 100%;
+  height: 65%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center bottom;
+}
+
+.inventory .info{
+  margin-top: 14%;
+  padding: 10% 10% 10% 50%;
+  font-weight: 700;
+  background: url("../../../images/cookie-icon.png") no-repeat left center;
+  background-size: contain;
+  margin-left: 12.5%;
+}
+
+.inventory .info.owner{
+  padding: 10% 10% 10% 10%;
+  background: transparent;
+  text-align: center;
+  margin-left: 0;
+}

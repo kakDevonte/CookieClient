@@ -1,0 +1,15 @@
+.inventory .gift-group{
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.inventory .gift-group > header {
+  padding: 5px 7px;
+}
+
+.inventory .gifts {
+  position: relative;
+  display: flex;
+  flex-flow: row wrap;
+}
