@@ -57,6 +57,7 @@ class UserStore {
     if(res.messages) data.messages = res.messages;
 
     this.setData(data);
+    this._store.inventory.updateOwnerInventory();
   }
 
   emitUserInfo(socket) {
