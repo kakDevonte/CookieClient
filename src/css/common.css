@@ -92,3 +92,20 @@ html, body{
   0%{ opacity: 0; }
   100%{ opacity: 1; }
 }
+
+.custom-scroll{
+  scrollbar-width: thin;
+  scrollbar-color: #b8b8b8 #ececec;
+  padding: 13px;
+}
+.custom-scroll::-webkit-scrollbar{
+  width: 12px;
+}
+.custom-scroll::-webkit-scrollbar-track{
+  background: #ececec;
+}
+.custom-scroll::-webkit-scrollbar-thumb{
+  background-color: #B8B8B8;
+  border-radius: 20px;
+  border: 3px solid #ececec;
+}
