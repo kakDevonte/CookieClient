@@ -17,7 +17,7 @@ function Messages({store, messages}) {
   };
 
   return (
-    <section className="messages" ref={container}>
+    <section className="messages custom-scroll" ref={container}>
       { content() }
     </section>
   );

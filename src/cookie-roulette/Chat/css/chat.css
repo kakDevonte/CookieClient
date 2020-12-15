@@ -50,27 +50,6 @@
   overflow-y: scroll;
 }
 
-.chat .messages,
-.chat .personal-chats{
-  scrollbar-width: thin;
-  scrollbar-color: #b8b8b8 #ececec;
-  padding: 13px;
-}
-.chat .messages::-webkit-scrollbar,
-.chat .personal-chats::-webkit-scrollbar{
-  width: 12px;
-}
-.chat .messages::-webkit-scrollbar-track,
-.chat .personal-chats::-webkit-scrollbar-track{
-  background: #ececec;
-}
-.chat .messages::-webkit-scrollbar-thumb,
-.chat .personal-chats::-webkit-scrollbar-thumb{
-  background-color: #B8B8B8;
-  border-radius: 20px;
-  border: 3px solid #ececec;
-}
-
 .chat footer{
   position: relative;
   display: flex;

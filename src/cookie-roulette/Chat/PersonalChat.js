@@ -27,7 +27,7 @@ function PersonalChat({store, active, talks}) {
 
   return (
     <section className={'personal-chat ' + active}>
-      <section className="personal-chats" ref={container}>
+      <section className="personal-chats custom-scroll" ref={container}>
         { content() }
       </section>
       <section className={ 'personal-content' + store.chat.talkState }>
