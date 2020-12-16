@@ -23,6 +23,7 @@ class GameStore {
   _targetKiss = null;
 
   _kissResult = null;
+  _giftReceived = false;
   _timerDecision = null;
 
   constructor (store) {
@@ -41,6 +42,7 @@ class GameStore {
       _targetPlayer: observable,
       _targetKiss: observable,
       _kissResult: observable,
+      _giftReceived: observable,
 
       setState: action,
       setRound: action,
@@ -56,6 +58,7 @@ class GameStore {
       setTargetPlayer: action,
       setTargetKiss: action,
       setKissResult: action,
+      setGiftReceived: action
     });
 
     this._store = store;
@@ -85,6 +88,7 @@ class GameStore {
   get targetKiss() { return this._targetKiss; }
 
   get kissResult() { return this._kissResult; }
+  get giftReceived() { return this._giftReceived; }
 
   //////////////////////////////////////////////////////////////////////////
 
@@ -157,6 +161,11 @@ class GameStore {
   setKissResult(result) {
     if(result === this._kissResult) return;
     this._kissResult = result;
+  }
+
+  setGiftReceived(receive) {
+    if(receive === this._giftReceived) return;
+    this._giftReceived = receive;
   }
 
   //////////////////////////////////////////////////////////////////////////
@@ -360,8 +369,12 @@ class GameStore {
   receiveGift({uid, gift}){
     if(!uid) return;
     if(!gift) return;
+    this.setGiftReceived(gift.id);
 
-    this._store.table.addGift(uid, gift);
+    setTimeout( () => {
+      //this.setGiftReceived(false);
+      this._store.table.addGift(uid, gift);
+    }, 3000);
   }
 }
 

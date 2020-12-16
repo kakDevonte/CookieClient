@@ -6,6 +6,7 @@ import {inject, observer} from "mobx-react";
 import KissResult from "./KissResult";
 import Kissed from "./Kissed";
 import Gifted from "./Gifted";
+import SendingGift from "./SendigGift";
 
 
 function Player ({store, player, index}) {
@@ -33,8 +34,6 @@ function Player ({store, player, index}) {
   const userGifted = () => {
     if(player) {
       const last = player.gifted.length;
-
-      console.log(player.gifted);
 
       if(last) {
         return <Gifted gifts={player.gifted} />
@@ -100,6 +99,15 @@ function Player ({store, player, index}) {
     return '';
   };
 
+  const sendingGift = () => {
+    if(store.game.giftReceived) {
+      if(index === store.game.activeSeat) {
+        return <SendingGift index={index}/>;
+      }
+    }
+    return '';
+  };
+
   return (
     <article
       onClick={ (event) => store.inventory.clickToggleInventory(index, event) }
@@ -110,6 +118,7 @@ function Player ({store, player, index}) {
       { userName() }
       { userKissed() }
       { kissResult(index) }
+      { sendingGift() }
       { userGifted() }
     </article>
   );
