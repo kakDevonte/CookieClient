@@ -141,6 +141,22 @@ class SocketStore {
     });
 
     //////////////////////////////////////////////////////////////
+
+    socket.on('gifts-data', (response) => {
+      this._store.inventory.receiveGiftsData(response);
+
+      console.log('socket (gifts-data)', response);
+    });
+
+    //////////////////////////////////////////////////////////////
+
+    socket.on('receive-gift', (response) => {
+      this._store.game.receiveGift(response);
+
+      console.log('socket (receive-gift)', response);
+    });
+
+    //////////////////////////////////////////////////////////////
   }
 }
 
