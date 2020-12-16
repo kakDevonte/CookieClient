@@ -24,22 +24,7 @@ function KissResult({store, index, delay}){
     target = document.querySelector('.player.p' + store.game.targetSeat);
 
     if(active && target) {
-      active = active.getBoundingClientRect();
-      target = target.getBoundingClientRect();
-
-      left = parseInt(active.x - target.x, 10);
-      top = parseInt(active.y - target.y, 10);
-
-      if(left < 0) left = left * -1;
-      if(top < 0) top = top * -1;
-
-      if(isActive) {
-        if(active.x > target.x) left = left * -1;
-        if(active.y > target.y) top = top * -1;
-      }else {
-        if(active.x < target.x) left = left * -1;
-        if(active.y < target.y) top = top * -1;
-      }
+      [left, top] = common.calculateMovePosition(active, target, isActive);
 
       left += common.randomNumber(-20, 20);
       top += common.randomNumber(-20, 20);
