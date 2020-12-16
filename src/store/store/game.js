@@ -351,6 +351,18 @@ class GameStore {
     this.setKissResult(result);
     setTimeout(() => this.setKissWindow('closed'), 2500);
   }
+
+  /**
+   * Получение подарка игроком
+   * @param uid
+   * @param gift
+   */
+  receiveGift({uid, gift}){
+    if(!uid) return;
+    if(!gift) return;
+
+    this._store.table.addGift(uid, gift);
+  }
 }
 
 export default GameStore
