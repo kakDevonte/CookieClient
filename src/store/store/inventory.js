@@ -154,8 +154,10 @@ class InventoryStore {
   sendGift(category, id) {
     if( !window.confirm('Отправить подарок?') ) return;
 
-    if(this._store.user.data.cookieCounter < this._gifts[id].cost)
-      return window.alert('Недостаточно печенек!');
+    if(category !== 'owner') {
+      if(this._store.user.data.cookieCounter < this._gifts[id].cost)
+        return window.alert('Недостаточно печенек!');
+    }
 
     const data = {
       tid: this._store.table.id,
