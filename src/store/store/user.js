@@ -7,13 +7,15 @@ const bridge = process.env.NODE_ENV === 'production' ? bridge_real : bridge_moc;
 
 class UserStore {
 
-  _data = false;
+  _data = {};
 
   constructor (store) {
     makeObservable(this, {
       _data: observable,
 
-      setData: action
+      setData: action,
+      updatePersonalInfo: action,
+      setKissCounter: action,
     });
 
     this._store = store;
@@ -28,10 +30,9 @@ class UserStore {
     result.id = result.id + '';
     result.kissCounter = 0;
     result.cookieCounter = 0;
+    result.gifts = [];
     result.inventory = [];
     result.messages = [];
-
-    console.log(result);
 
     this.setData(result);
   };
@@ -42,21 +43,18 @@ class UserStore {
   setData(data){ this._data = data; }
 
   setKissCounter(count) {
-    const data = this.data;
-
-    data.kissCounter = count;
-    this.setData(data);
+    this._data.kissCounter = count;
   }
 
   updatePersonalInfo(res) {
-    const data = this.data;
+    const data = this._data;
 
     if(res.kissCounter) data.kissCounter = res.kissCounter;
     if(res.cookieCounter) data.cookieCounter = res.cookieCounter;
     if(res.inventory) data.inventory = res.inventory;
+    if(res.gifts) data.gifts = res.gifts;
     if(res.messages) data.messages = res.messages;
 
-    this.setData(data);
     this._store.inventory.updateOwnerInventory();
   }
 

@@ -335,12 +335,8 @@ class GameStore {
   updateKissData({uid, kissed, counter}){
     if(!uid) return;
     if(!kissed) return;
-    let player, seat;
 
-    [player, seat] = this._store.table.findPlayer(uid);
-
-    player.kissed = kissed;
-    this._store.table.setPlayer(seat, player);
+    this._store.table.setKissed(uid, kissed);
 
     if(uid === this._store.user.id && counter) {
         this._store.user.setKissCounter(counter);

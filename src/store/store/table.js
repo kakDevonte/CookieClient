@@ -20,6 +20,8 @@ class TableStore {
       setId: action,
       setPlayer: action,
       updatePlayers: action,
+      setKissed: action,
+      addGift: action
     });
     this._store = store;
   }
@@ -40,8 +42,42 @@ class TableStore {
   //////////////////////////////////////////////////////////////////
 
   setId(id) { this._id = id; }
-
   setPlayer(index, object) { this._players.set(index, object); }
+
+  /**
+   * Устанавливает поцелуи игроку
+   * @param {string|number} key - index или id ирока
+   * @param {array} kissed
+   */
+  setKissed(key, kissed) {
+    const player = this.player(key);
+
+    if(!player) return;
+    player.kissed = kissed;
+  }
+
+  /**
+   * Добавляет подарок игроку
+   * @param {string|number} key - index или id ирока
+   * @param {object} gift
+   */
+  addGift(key, gift) {
+    const player = this.player(key);
+
+    if(!player || !gift) return;
+    player.gifted.push(gift);
+  }
+
+  player(key){
+    let player;
+
+    player = this._players[key];
+    if(player) return player;
+    [player] = this.findPlayer(key);
+    if(player) return player;
+
+    return null;
+  }
 
   updatePlayers(tid, players){
 
