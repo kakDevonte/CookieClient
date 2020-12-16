@@ -5,9 +5,7 @@ import {inject, observer} from "mobx-react";
 
 import KissResult from "./KissResult";
 import Kissed from "./Kissed";
-
-// import {reaction} from "mobx";
-// import common from "../../config/common";
+import Gifted from "./Gifted";
 
 
 function Player ({store, player, index}) {
@@ -30,6 +28,19 @@ function Player ({store, player, index}) {
     } else {
       return '';
     }
+  };
+
+  const userGifted = () => {
+    if(player) {
+      const last = player.gifted.length;
+
+      console.log(player.gifted);
+
+      if(last) {
+        return <Gifted gifts={player.gifted} />
+      }
+    }
+    return '';
   };
 
   const playerClass = () => {
@@ -91,7 +102,7 @@ function Player ({store, player, index}) {
 
   return (
     <article
-      onClick={ () => store.inventory.clickToggleInventory(index) }
+      onClick={ (event) => store.inventory.clickToggleInventory(index, event) }
       className={playerClass()}
       style={playerPhoto()}
     >
@@ -99,6 +110,7 @@ function Player ({store, player, index}) {
       { userName() }
       { userKissed() }
       { kissResult(index) }
+      { userGifted() }
     </article>
   );
 }
