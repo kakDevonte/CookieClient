@@ -59,6 +59,36 @@ class common {
     }
     return array ? [day, month, year] : `${day}.${month}.${year}`;
   }
+
+  /**
+   *
+   * @param {HTMLElement} active
+   * @param {HTMLElement} target
+   * @param {boolean} isActive
+   * @return {[number, number]}
+   */
+  static calculateMovePosition(active, target, isActive) {
+    let left, top;
+
+    active = active.getBoundingClientRect();
+    target = target.getBoundingClientRect();
+
+    left = parseInt(active.x - target.x, 10);
+    top = parseInt(active.y - target.y, 10);
+
+    if(left < 0) left = left * -1;
+    if(top < 0) top = top * -1;
+
+    if(isActive) {
+      if(active.x > target.x) left = left * -1;
+      if(active.y > target.y) top = top * -1;
+    }else {
+      if(active.x < target.x) left = left * -1;
+      if(active.y < target.y) top = top * -1;
+    }
+
+    return [left, top];
+  }
 }
 
 export default common;
