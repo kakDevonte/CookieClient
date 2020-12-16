@@ -6,7 +6,9 @@ import {inject, observer} from "mobx-react";
 
 function Gift({store, data, type}) {
   const id = data.id !== undefined ? data.id : data;
-  const gift = store.inventory.gifts[id];
+  let gift = store.inventory.gifts[id];
+
+  if(!gift) gift = store.inventory.emptyGift;
 
   const info = () => {
     if(type === "owner") {
