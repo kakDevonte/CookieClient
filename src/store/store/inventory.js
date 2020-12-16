@@ -9,6 +9,15 @@ class InventoryStore {
   _name = '';
 
   _gifts = {};
+  _emptyGift = {
+      id: -1,
+      name: "NotLoaded",
+      hit: 0,
+      cost: 0,
+      grade: 0,
+      image: '',
+      category: []
+  };
   _owner = [];
   _inventory = new Map();
 
@@ -24,19 +33,19 @@ class InventoryStore {
 
       setState: action,
       setName: action,
-      updateInventory: action,
       sendGift: action,
+      updateInventory: action,
       updateOwnerInventory: action
     });
 
     this._store = store;
-    this.updateInventory();
   }
 
   get state() { return this._state; }
   get name() { return this._name; }
   get gifts() { return this._gifts; }
   get list() { return this._inventory; }
+  get emptyGift() { return this._emptyGift; }
 
   setState(state) {
     if(state){
@@ -53,7 +62,9 @@ class InventoryStore {
     this._name = name;
   }
 
-  clickToggleInventory(seat) {
+  clickToggleInventory(seat, event) {
+    if(!/player/.test(event.target.className)) return;
+
     const player = this._store.table.getPlayer(seat);
 
     if(player && player.id === this._store.user.id) {
@@ -95,38 +106,11 @@ class InventoryStore {
     this.clickToggleInventory(this._current);
   }
 
-  _loadGiftList(){
-    const gifts = {
-      1: {
-        id: 1,
-        name: "Роза",
-        hit: 0,
-        cost: 2,
-        grade: 1,
-        image: 'https://cookieapp.ru/img/gifts/1_%D0%A0%D0%BE%D0%B7%D0%B0.png',
-        category: ['hot', 'woman']
-      },
-      4: {
-        id: 4,
-        name: "Виски",
-        hit: 1,
-        cost: 2,
-        grade: 1,
-        image: 'https://cookieapp.ru/img/gifts/8_%D0%92%D0%B8%D1%81%D0%BA%D0%B8.png',
-        category: ['man']
-      },
-      18: {
-        id: 18,
-        name: "Плетка",
-        hit: 1,
-        cost: 7,
-        grade: 2,
-        image: 'https://cookieapp.ru/img/gifts/16_%D0%9F%D0%BB%D1%91%D1%82%D0%BA%D0%B0.png',
-        category: ['hot', 'fun']
-      }
-    };
-
-    this._gifts = gifts;
+  receiveGiftsData(data){
+    if(data){
+      this._gifts = data;
+      this.updateInventory();
+    }
   }
 
   updateInventory() {
@@ -139,8 +123,6 @@ class InventoryStore {
     };
 
     const groups = {};
-
-    this._loadGiftList();
 
     for(const id in this._gifts) {
       const gift = this._gifts[id];
@@ -169,22 +151,22 @@ class InventoryStore {
     this._inventory.get('owner').gifts = this._store.user.data.inventory;
   }
 
-  setOwnGift(id, count) {
-    this._owner[id].count = count;
-  }
+  sendGift(category, id) {
+    if( !window.confirm('Отправить подарок?') ) return;
 
-  sendGift(type, id) {
-    if(type === "owner") {
-      let gift, index;
+    if(this._store.user.data.cookieCounter < this._gifts[id].cost)
+      return window.alert('Недостаточно печенек!');
 
-      index = this._store.user.data.inventory.findIndex((gift) => gift.id === id);
-      gift = this._store.user.data.inventory[index];
-      gift.count--;
+    const data = {
+      tid: this._store.table.id,
+      from: this._store.user.id,
+      to: this._player.id,
+      gid: id,
+      buy: category !== 'owner',
+      category
+    };
 
-      if(gift.count === 0) {
-        this._store.user.data.inventory.splice(index, 1);
-      }
-    }
+    this._store.socket.emit('send-gift', data);
   }
 }
 
