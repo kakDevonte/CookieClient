@@ -23,7 +23,7 @@ class GameStore {
   _targetKiss = null;
 
   _kissResult = null;
-  _giftReceived = false;
+  _receivedGifts = [];
   _timerDecision = null;
 
   constructor (store) {
@@ -42,7 +42,7 @@ class GameStore {
       _targetPlayer: observable,
       _targetKiss: observable,
       _kissResult: observable,
-      _giftReceived: observable,
+      _receivedGifts: observable,
 
       setState: action,
       setRound: action,
@@ -58,7 +58,8 @@ class GameStore {
       setTargetPlayer: action,
       setTargetKiss: action,
       setKissResult: action,
-      setGiftReceived: action
+      addReceivedGift: action,
+      removeReceivedGift: action
     });
 
     this._store = store;
@@ -88,7 +89,7 @@ class GameStore {
   get targetKiss() { return this._targetKiss; }
 
   get kissResult() { return this._kissResult; }
-  get giftReceived() { return this._giftReceived; }
+  get giftReceived() { return this._receivedGifts; }
 
   //////////////////////////////////////////////////////////////////////////
 
@@ -163,9 +164,24 @@ class GameStore {
     this._kissResult = result;
   }
 
-  setGiftReceived(receive) {
-    if(receive === this._giftReceived) return;
-    this._giftReceived = receive;
+  addReceivedGift(gift) {
+    let i, length, free;
+
+    for(i = 0, length = this._receivedGifts.length; i < length; i++){
+      if(this._receivedGifts[i] === null) {
+        free = i;
+        break;
+      }
+    }
+
+    if(!free) free = length;
+    this._receivedGifts[free] = gift;
+
+    return free;
+  }
+
+  removeReceivedGift(index) {
+    this._receivedGifts[index] = null;
   }
 
   //////////////////////////////////////////////////////////////////////////
@@ -369,12 +385,18 @@ class GameStore {
   receiveGift({uid, gift}){
     if(!uid) return;
     if(!gift) return;
-    this.setGiftReceived(gift.id);
+
+    const index = this.addReceivedGift({
+      active: this._store.table.findPlayer(gift.uid),
+      target: this._store.table.findPlayer(uid),
+      gift: this._store.inventory.gifts[gift.id],
+      item: gift
+    });
 
     setTimeout( () => {
-      //this.setGiftReceived(false);
+      this.removeReceivedGift(index);
       this._store.table.addGift(uid, gift);
-    }, 3000);
+    }, 2100);
   }
 }
 

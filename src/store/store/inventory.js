@@ -63,7 +63,7 @@ class InventoryStore {
   }
 
   clickToggleInventory(seat, event) {
-    if(!/player/.test(event.target.className)) return;
+    if(event && !/player/.test(event.target.className)) return;
 
     const player = this._store.table.getPlayer(seat);
 

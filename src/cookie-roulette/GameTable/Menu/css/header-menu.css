@@ -83,6 +83,10 @@
   background-repeat: no-repeat;
 }
 
+.header-menu .settings{
+  visibility: hidden;
+}
+
 .header-menu .change-table{
   background-image: url("../../../../images/change-table-button.svg");
 }
@@ -100,6 +104,7 @@
   border-radius: 9px;
   margin-right: 2%;
   align-items: center;
+  visibility: hidden;
 }
 
 .vk-apps-overlay .setup,

@@ -4,12 +4,12 @@ import React, { useState, useEffect } from 'react';
 import {inject, observer} from "mobx-react";
 import common from "../../../config/common";
 
-function SendingGift({store, index}){
-  const image = store.inventory.gifts[store.game.giftReceived].image;
+function SendingGift({data}){
+  //const image = data.gift.image;
   const [style, setStyle] = useState({
-      backgroundImage: `url(${image})`,
-      left: '50%',
-      top: '50%',
+      backgroundImage: `url(${data.gift.image})`,
+      left: '5%',
+      top: '0',
       animationDelay: `0s, 200ms, 2700ms`
     }
   );
@@ -19,17 +19,16 @@ function SendingGift({store, index}){
   }, []);
 
   const calculateMove = () => {
-    const isActive = index === store.game.activeSeat;
     let target, active, left, top;
 
-    active = document.querySelector('.player.p' + store.game.activeSeat);
-    target = document.querySelector('.player.p' + store.game.targetSeat);
+    active = document.querySelector('.player.p' + data.active[1]);
+    target = document.querySelector('.player.p' + data.target[1] + ' .receive-gift');
 
     if(active && target) {
-      [left, top] = common.calculateMovePosition(active, target, isActive);
+      [left, top] = common.calculateMovePosition(active, target, true);
 
       setStyle({
-        backgroundImage: `url(${image})`,
+        backgroundImage: `url(${data.gift.image})`,
         left,
         top,
         animationDelay: `0s, 200ms, 2700ms`

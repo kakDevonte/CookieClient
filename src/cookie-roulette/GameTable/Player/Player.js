@@ -6,7 +6,7 @@ import {inject, observer} from "mobx-react";
 import KissResult from "./KissResult";
 import Kissed from "./Kissed";
 import Gifted from "./Gifted";
-import SendingGift from "./SendigGift";
+import SendingGift from "./SendingGift";
 
 
 function Player ({store, player, index}) {
@@ -39,7 +39,7 @@ function Player ({store, player, index}) {
         return <Gifted gifts={player.gifted} />
       }
     }
-    return '';
+    return <div className="receive-gift" style={{visibility: 'hidden'}} />;
   };
 
   const playerClass = () => {
@@ -100,12 +100,15 @@ function Player ({store, player, index}) {
   };
 
   const sendingGift = () => {
-    if(store.game.giftReceived) {
-      if(index === store.game.activeSeat) {
-        return <SendingGift index={index}/>;
+    const gifts = [];
+
+    store.game.giftReceived.forEach((gift, n) => {
+      if(gift && index === gift.active[1]) {
+        gifts.push(<SendingGift data={gift} key={n + '' + index} />);
       }
-    }
-    return '';
+    });
+
+    return gifts;
   };
 
   return (

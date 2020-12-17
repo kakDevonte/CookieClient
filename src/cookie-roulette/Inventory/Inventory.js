@@ -12,7 +12,7 @@ function Inventory({store}) {
         <div onClick={ () => store.inventory.clickPersonalMessage() }>
           Личное сообщение
         </div>
-        <div className="" onClick={ () => {} }>
+        <div style={{visibility: 'hidden'}} onClick={ () => {} }>
           Профиль<br/>{store.inventory.name}
         </div>
       </header>
