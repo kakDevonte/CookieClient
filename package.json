@@ -23,6 +23,7 @@
     "@vkontakte/vk-miniapps-deploy": "0.0.17",
     "babel-eslint": "^10.1.0",
     "core-js": "^3.6.4",
+    "eruda": "^2.4.1",
     "mobx": "^6.0.4",
     "mobx-react": "^7.0.5",
     "react": "^16.9.0",

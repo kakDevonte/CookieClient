@@ -22,6 +22,16 @@ class AppStore {
   setVersion(version) { this._version = version; }
   setStage(stage) { this._stage = stage; }
 
+
+  openApp(){
+    //this._store.socket.emit('open-roulette');
+    document.querySelector('#root').setAttribute('style', 'display: none');
+  }
+
+  closeApp(){
+    this.setStage('connection');
+    this._store.socket.emit('close-roulette');
+  }
   /**
    * Переносит игрока в лобби
    * @param {=string} tid - предыдущий стол

@@ -1,4 +1,4 @@
-.table .your-turn-tooltip{
+.roulette-table .your-turn-tooltip{
   position: absolute;
   display: flex;
   visibility: hidden;
@@ -17,7 +17,7 @@
   z-index: 1;
 }
 
-.table .your-turn-tooltip.enabled{
+.roulette-table .your-turn-tooltip.enabled{
   visibility: visible;
   opacity: 1;
   transition:

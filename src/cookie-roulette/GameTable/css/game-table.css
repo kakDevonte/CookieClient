@@ -1,4 +1,4 @@
-.table{
+.roulette-table{
   position: relative;
   display: flex;
   flex-flow: column nowrap;
@@ -19,14 +19,14 @@
   overflow: hidden;
 }
 
-.table .table-id {
+.roulette-table .table-id {
   display: none;
   position: absolute;
   left: 0;
   top: 0;
 }
 
-.table .wrap-players {
+.roulette-table .wrap-players {
   position: relative;
   display: flex;
   flex-flow: row nowrap;
@@ -36,7 +36,7 @@
   align-items: center;
 }
 
-.table .cookie-space {
+.roulette-table .cookie-space {
   width: 16.5%;
   height: 60%;
   display: flex;

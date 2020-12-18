@@ -21,7 +21,7 @@ const GameTable = ({store}) => {
 
   return (
       <section className="game">
-        <article className="table">
+        <article className="roulette-table">
           <HeaderMenu />
           <div className="wrap-players">
             <Player player={player(7)} index={7} />

@@ -23,7 +23,9 @@ class UserStore {
   }
 
   _auth = async () => {
-    await bridge.send("VKWebAppInit");
+    if(process.env.REACT_APP_BOTTLE_APP) {
+      await bridge.send("VKWebAppInit");
+    }
     const result = await bridge.send('VKWebAppGetUserInfo');
 
     //common.randomiseUser(result);

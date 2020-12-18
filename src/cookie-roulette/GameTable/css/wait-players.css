@@ -1,22 +1,22 @@
-.table .wait-players{
+.roulette-table .wait-players{
   position: absolute;
   display: none;
   flex-flow: column nowrap;
   text-align: center;
 }
 
-.table .wait-players.show{
+.roulette-table .wait-players.show{
   display: flex;
 }
 
-.table .wait-players header{
+.roulette-table .wait-players header{
   font-size: 2.5vh;
   text-align: center;
   font-weight: 700;
   margin-bottom: 10%;
 }
 
-.table .wait-players span{
+.roulette-table .wait-players span{
   font-size: 1.5vh;
   font-weight: 400;
 }

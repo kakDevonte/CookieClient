@@ -1,16 +1,22 @@
-import {makeObservable, observable} from "mobx";
+import {makeObservable, observable, action} from "mobx";
 import io from "socket.io-client";
 
 class SocketStore {
   constructor (store) {
-    this._socket = process.env.NODE_ENV === 'production' ?
-      io(process.env.REACT_APP_SOCKET_SERVER) :
-      io(process.env.REACT_APP_SOCKET_SERVER_DEV);
+    this._socket = null;
     this._store = store;
 
     makeObservable(this, {
-      _socket: observable
+      _socket: observable,
+
+      connect: action
     });
+  }
+
+  connect(){
+    this._socket = process.env.NODE_ENV === 'production' ?
+      io(process.env.REACT_APP_SOCKET_SERVER) :
+      io(process.env.REACT_APP_SOCKET_SERVER_DEV);
 
     this._sockets();
   }
