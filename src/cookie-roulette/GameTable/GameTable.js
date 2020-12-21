@@ -21,7 +21,7 @@ const GameTable = ({store}) => {
 
   return (
       <section className="game">
-        <article className="roulette-table">
+        <article className="roulette-table" style={store.app.size.table}>
           <HeaderMenu />
           <div className="wrap-players">
             <Player player={player(7)} index={7} />
@@ -47,7 +47,7 @@ const GameTable = ({store}) => {
           <span className='table-id'>{store.table.id}</span>
           <KissModal />
         </article>
-        <article className="utility-wrapper">
+        <article className="utility-wrapper" style={store.app.size.utilities}>
           <Chat />
           <Inventory />
         </article>

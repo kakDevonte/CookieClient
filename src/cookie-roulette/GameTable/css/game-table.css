@@ -3,7 +3,6 @@
   display: flex;
   flex-flow: column nowrap;
   width: 100%;
-  height: calc(100vw * 1.1947);
   max-height: 72%;
   justify-content: space-around;
   align-content: space-around;
@@ -14,13 +13,11 @@
 .utility-wrapper{
   position: relative;
   width: 100%;
-  height: calc(100vh - (100vw * 1.1947));
-  min-height: 28%;
   overflow: hidden;
 }
 
 .roulette-table .table-id {
-  display: none;
+  display: block;
   position: absolute;
   left: 0;
   top: 0;

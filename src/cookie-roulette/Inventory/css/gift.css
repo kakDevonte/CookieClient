@@ -3,41 +3,33 @@
   display: flex;
   width: calc(100% / 5);
   flex-flow: column nowrap;
-  padding-top: 29.1%;
-  margin: 5px 0;
 }
 
 .inventory .gift{
-  position: absolute;
   display: flex;
   flex-flow: column nowrap;
+  align-items: center;
   border-radius: 15px;
-  left: 12%;
-  right: 12%;
-  top: 0;
-  bottom: 0;
+  height: 100%;
   cursor: pointer;
 }
 
-.inventory .gift:hover{
-  background-color: rgba(0, 0, 0, 0.03);
-}
-
-.inventory i{
-  width: 100%;
-  height: 65%;
+.inventory .gift > i{
+  width: 75%;
+  height: 70%;
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center bottom;
 }
 
-.inventory .info{
-  margin-top: 14%;
-  padding: 10% 10% 10% 50%;
+.inventory .info {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 25%;
   font-weight: 700;
-  background: url("../../../images/cookie-icon.png") no-repeat left center;
-  background-size: contain;
-  margin-left: 12.5%;
 }
 
 .inventory .info.owner{
@@ -45,4 +37,12 @@
   background: transparent;
   text-align: center;
   margin-left: 0;
+}
+
+.inventory .info > i{
+  width: 33%;
+  height: 85%;
+  margin-right: 3px;
+  background: url("../../../images/cookie-icon.png") no-repeat left center;
+  background-size: contain;
 }

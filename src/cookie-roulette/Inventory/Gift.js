@@ -14,7 +14,7 @@ function Gift({store, data, type}) {
     if(type === "owner") {
       return <div className={'info ' + type} >{data.count} шт</div>;
     }
-    return  <div className={'info ' + type} >{gift.cost}</div>
+    return  <div className={'info ' + type} ><i /><span>{gift.cost}</span></div>
   };
 
   const image = () => {
@@ -24,7 +24,7 @@ function Gift({store, data, type}) {
   };
 
   return (
-      <article className="gift-container">
+      <article className="gift-container" style={store.app.size.gift}>
         <div className="gift" onClick={ () => store.inventory.sendGift(type, id) }>
           <i style={ image() } />
           { info() }

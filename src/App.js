@@ -22,7 +22,7 @@ const CookieRoulette = ({store}) => {
   }, []);
 
   return (
-    <div className="cookie-roulette">
+    <div className="cookie-roulette" style={store.app.size.game}>
       {
         {
           connection: (<div className="please-wait" />),

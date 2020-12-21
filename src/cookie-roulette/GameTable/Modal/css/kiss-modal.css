@@ -148,7 +148,7 @@
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
-  flex-grow: 1;
+  height: 39.7%;
 }
 
 .kiss-modal .actions div {

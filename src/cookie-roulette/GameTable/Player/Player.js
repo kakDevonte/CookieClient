@@ -111,6 +111,8 @@ function Player ({store, player, index}) {
     return gifts;
   };
 
+  console.log('reRender', index);
+
   return (
     <article
       onClick={ (event) => store.inventory.clickToggleInventory(index, event) }

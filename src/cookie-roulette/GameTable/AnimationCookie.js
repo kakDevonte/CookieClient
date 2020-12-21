@@ -21,11 +21,11 @@ function AnimationCookie({store}){
       dStop = dStop >= 0 ? d1080 + dStop : d1080 + (360 + dStop);
 
       return `
-      .table .cookie-selector{
+      .roulette-table .cookie-selector{
         transform: rotate(${degrees}deg);
       }
       
-      .table .cookie-selector.rotate {
+      .roulette-table .cookie-selector.rotate {
         animation-name: my-cookie-rotate;
         animation-duration: 3s;
         animation-timing-function: cubic-bezier(.65,.1,.1,.85);

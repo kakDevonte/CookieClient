@@ -1,6 +1,4 @@
 import {action, makeObservable, observable} from "mobx";
-//import Collection from "../../helpers/Collection";
-
 
 class InventoryStore {
   _state = '';
@@ -22,6 +20,7 @@ class InventoryStore {
   _inventory = new Map();
 
   constructor(store) {
+    this._costSort = this._costSort.bind(this);
     this._inventory.set('owner', {name: 'Мой инвентарь', gifts: []});
 
     makeObservable(this, {
@@ -119,7 +118,9 @@ class InventoryStore {
       hot: 'Горячее',
       man: 'Мужчинам',
       woman: 'Женщинам',
-      fun: 'Забаные'
+      fun: 'Забавные',
+      hat: 'Шляпы',
+      cute: 'Милые'
     };
 
     const groups = {};
@@ -136,15 +137,25 @@ class InventoryStore {
     pushToList('hot');
     pushToList('man');
     pushToList('woman');
+    pushToList('cute');
     pushToList('fun');
+    pushToList('hat');
 
     /////////////////////////////
 
     function pushToList(name) {
       if(groups[name]) {
+        groups[name].gifts.sort(that._costSort);
         that._inventory.set(name, groups[name]);
       }
     }
+  }
+
+  _costSort(id, _id){
+    if(this._gifts[id] && this._gifts[_id]) {
+      return this._gifts[id].cost > this._gifts[_id].cost;
+    }
+    return false;
   }
 
   updateOwnerInventory() {

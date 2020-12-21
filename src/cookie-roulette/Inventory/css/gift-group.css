@@ -1,6 +1,6 @@
 .inventory .gift-group{
   position: relative;
-  display: flex;
+  /*display: flex;*/
   flex-flow: column nowrap;
 }
 
