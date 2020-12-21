@@ -53,7 +53,10 @@ class AppStore {
             height: height >= root.height * 0.72 ? root.height * 0.28 : root.height - height,
           },
           gift: {
-            height: ((width - 26) / 5) * 1.432
+            height: parseInt(((width - 26) / 5) * 1.432, 10),
+          },
+          talk: {
+            height: parseInt(((width - 26) / 6.232) - 16, 10)
           }
         });
       }

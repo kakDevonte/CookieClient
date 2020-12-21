@@ -1,7 +1,6 @@
 .inventory .gift-group{
   position: relative;
-  /*display: flex;*/
-  flex-flow: column nowrap;
+  width: 100%;
 }
 
 .inventory .gift-group > header {
@@ -12,4 +11,5 @@
   position: relative;
   display: flex;
   flex-flow: row wrap;
+  width: 100%;
 }

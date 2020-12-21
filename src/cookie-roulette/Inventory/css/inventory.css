@@ -46,8 +46,6 @@
 .inventory .gifts-list{
   position: relative;
   width: 100%;
-  /*display: flex;*/
-  flex-flow: column nowrap;
   overflow-y: scroll;
   box-sizing: border-box;
 }

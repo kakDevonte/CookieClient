@@ -1,16 +1,10 @@
-.inventory .gift-container{
-  position: relative;
-  display: flex;
-  width: calc(100% / 5);
-  flex-flow: column nowrap;
-}
-
 .inventory .gift{
+  position: relative;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+  width: calc(100% / 5);
   border-radius: 15px;
-  height: 100%;
   cursor: pointer;
 }
 
@@ -40,7 +34,7 @@
 }
 
 .inventory .info > i{
-  width: 33%;
+  width: 30%;
   height: 85%;
   margin-right: 3px;
   background: url("../../../images/cookie-icon.png") no-repeat left center;

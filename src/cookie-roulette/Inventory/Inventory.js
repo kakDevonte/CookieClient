@@ -7,7 +7,7 @@ import Gifts from "./Gifts";
 
 function Inventory({store}) {
   return (
-    <article className={ 'inventory opened'}>
+    <article className={ 'inventory' + store.inventory.state}>
       <header>
         <div onClick={ () => store.inventory.clickPersonalMessage() }>
           Личное сообщение
@@ -22,7 +22,5 @@ function Inventory({store}) {
     </article>
   );
 }
-
-//store.inventory.state
 
 export default inject('store')( observer(Inventory) );

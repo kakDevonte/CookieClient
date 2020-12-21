@@ -24,11 +24,9 @@ function Gift({store, data, type}) {
   };
 
   return (
-      <article className="gift-container" style={store.app.size.gift}>
-        <div className="gift" onClick={ () => store.inventory.sendGift(type, id) }>
+      <article className="gift" style={store.app.size.gift} onClick={ () => store.inventory.sendGift(type, id) }>
           <i style={ image() } />
           { info() }
-        </div>
       </article>
   );
 }

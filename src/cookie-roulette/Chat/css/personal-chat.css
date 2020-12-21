@@ -12,9 +12,6 @@
 }
 
 .chat .personal-chats {
-  display: flex;
-  flex-flow: column nowrap;
-  flex-grow: 1;
   overflow-y: scroll;
   box-sizing: border-box;
   position: relative;

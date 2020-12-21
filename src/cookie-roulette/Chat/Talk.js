@@ -10,7 +10,11 @@ function Talk({store, data}) {
   };
 
   return (
-    <article className="talk" onClick={ () => store.chat.clickOpenTalk(data.player) }>
+    <article
+      className="talk"
+      style={store.app.size.talk}
+      onClick={ () => store.chat.clickOpenTalk(data.player) }
+    >
       <i style={image} />
       <div className="content">
         <span>{data.player.name}</span>
