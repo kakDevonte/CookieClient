@@ -1,0 +1,15 @@
+.server-fail{
+  position: absolute;
+  display: none;
+  padding: 25px;
+  background-color: #8543d9f0;
+  margin-top: 6%;
+  white-space: nowrap;
+  border-radius: 20px;
+  border: solid 2px white;
+  font-size: 18px;
+}
+
+.server-fail.opened{
+  display: block;
+}
