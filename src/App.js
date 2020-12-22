@@ -15,10 +15,11 @@ import Loading from "./cookie-roulette/Loading/Loading";
 const CookieRoulette = ({store}) => {
 
   useEffect(() => {
+    store.app.keep(false);
     store.socket.connect();
 
     return () => {
-      store.app.closeApp();
+      if(store.app.keepConnect === false) store.app.closeApp();
     };
   }, []);
 
