@@ -14,6 +14,8 @@ class SocketStore {
   }
 
   connect(){
+    if(!this.serverFail) return;
+
     const options = {
       reconnectionDelay: 1000,
       reconnectionAttempts: 4,
