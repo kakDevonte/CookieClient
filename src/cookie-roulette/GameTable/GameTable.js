@@ -21,7 +21,7 @@ const GameTable = ({store}) => {
   const player = store.table.getPlayer;
 
   return (
-      <section className="game">
+      <section className="cookie-roulette-game">
         <article className="roulette-table" style={store.app.size.table}>
           <HeaderMenu />
           <div className="wrap-players">
