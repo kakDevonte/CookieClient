@@ -12,9 +12,10 @@ import YourTurnTooltip from "./YourTurnTooltip";
 import WaitMorePlayers from "./WaitMorePlayers";
 
 import KissModal from "./Modal/KissModal";
+import ServerFail from "./Modal/ServerFail";
+
 import Chat from "../Chat/Chat";
 import Inventory from "../Inventory/Inventory";
-//import UserProfile from "../Profile/UserProfile";
 
 const GameTable = ({store}) => {
   const player = store.table.getPlayer;
@@ -46,6 +47,7 @@ const GameTable = ({store}) => {
           </div>
           <span className='table-id'>{store.table.id}</span>
           <KissModal />
+          <ServerFail />
         </article>
         <article className="utility-wrapper" style={store.app.size.utilities}>
           <Chat />

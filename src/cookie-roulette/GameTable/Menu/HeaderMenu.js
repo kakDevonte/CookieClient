@@ -1,17 +1,18 @@
 import './css/header-menu.css';
 
 import React from 'react';
+import {Link} from "react-router-dom";
 import {inject, observer} from "mobx-react";
 
 function HeaderMenu({store}){
 
   return (
     <header className="header-menu">
-      <input type='button' className="exit-game" />
-      <section className="cookie-count">
+      <Link className="exit-game" to="/" />
+      <section className="counter-cookie-count">
         <i />
         <span className="center-screen">{store.user.data.cookieCounter}</span>
-        <input type="button" />
+        <Link to="/Shop/" className='shop-cookies' />
       </section>
       <section className="kiss-count">
         <i />

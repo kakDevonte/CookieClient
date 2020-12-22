@@ -1,6 +1,7 @@
 import './css/inventory.css';
 
 import React from 'react';
+import {Link} from "react-router-dom";
 import {inject, observer} from "mobx-react";
 import Gifts from "./Gifts";
 
@@ -12,9 +13,7 @@ function Inventory({store}) {
         <div onClick={ () => store.inventory.clickPersonalMessage() }>
           Личное сообщение
         </div>
-        <div style={{visibility: 'hidden'}} onClick={ () => {} }>
-          Профиль<br/>{store.inventory.name}
-        </div>
+        <Link to="/Profile">Профиль<br/>{store.inventory.name}</Link>
       </header>
       <div className="gifts-list custom-scroll">
         <Gifts gifts={ store.inventory.list }/>
