@@ -13,7 +13,7 @@ function Inventory({store}) {
         <div onClick={ () => store.inventory.clickPersonalMessage() }>
           Личное сообщение
         </div>
-        <Link to="/Profile">Профиль<br/>{store.inventory.name}</Link>
+        <Link to="/Profile" onClick={ () => store.app.keep(true) }>Профиль<br/>{store.inventory.name}</Link>
       </header>
       <div className="gifts-list custom-scroll">
         <Gifts gifts={ store.inventory.list }/>
