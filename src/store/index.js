@@ -7,7 +7,8 @@ import ChatStore from "./store/chat";
 import InventoryStore from "./store/inventory";
 
 class Store {
-    constructor() {
+    constructor(os) {
+        this.os = os;
         this.app = new AppStore(this);
         this.socket = new SocketStore(this);
         this.user = new UserStore(this);
