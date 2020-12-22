@@ -17,7 +17,7 @@
 }
 
 .roulette-table .table-id {
-  display: block;
+  display: none;
   position: absolute;
   left: 0;
   top: 0;

@@ -14,14 +14,14 @@
   background: none;
 }
 
-.header-menu .exit-game{
+.header-menu > .exit-game{
   width: 3%;
   height: 45%;
   margin-left: 2%;
   background: url("../../../../images/back-icon.png") center no-repeat;
 }
 
-.header-menu .cookie-count{
+.header-menu > .counter-cookie-count{
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -32,33 +32,33 @@
   background-size: 90%;
 }
 
-.cookie-count i{
+.counter-cookie-count > i{
   width: 31%;
   height: 80%;
   background: url("../../../../images/cookie-icon.png") center no-repeat;
   background-size: 130%;
 }
 
-.cookie-count span{
+.counter-cookie-count > span{
   position: absolute;
   font-weight: bold;
 }
 
-.cookie-count input{
+.counter-cookie-count > a{
   width: 35%;
   height: 83%;
   background: url("../../../../images/cookie-shop.svg") center no-repeat;
   background-size: contain;
 }
 
-.kiss-count{
+.header-menu > .kiss-count{
   display: flex;
   width: 15%;
   height: 82%;
   align-items: center;
 }
 
-.kiss-count i{
+.header-menu > .kiss-count i{
   width: 48%;
   height: 74%;
   background: url("../../../../images/kissed.svg") center no-repeat;
@@ -66,7 +66,7 @@
   flex-shrink: 0;
 }
 
-.kiss-count span{
+.header-menu > .kiss-count span{
   flex-grow: 1;
   margin: 0 5px;
   font-weight: bold;
@@ -74,8 +74,8 @@
 }
 
 
-.header-menu .change-table,
-.header-menu .settings{
+.header-menu > .change-table,
+.header-menu > .settings{
   width: 8.5%;
   height: 64%;
   background-size: contain;
@@ -83,19 +83,16 @@
   background-repeat: no-repeat;
 }
 
-.header-menu .settings{
-  visibility: hidden;
-}
-
-.header-menu .change-table{
+.header-menu > .change-table{
   background-image: url("../../../../images/change-table-button.svg");
 }
 
-.header-menu .settings{
+.header-menu > .settings{
+  visibility: hidden;
   background-image: url("../../../../images/empty-gold-button.svg");
 }
 
-.header-menu .vk-apps-overlay {
+.header-menu > .vk-apps-overlay {
   display: flex;
   flex-flow: row nowrap;
   width: 23.5%;
@@ -107,8 +104,8 @@
   visibility: hidden;
 }
 
-.vk-apps-overlay .setup,
-.vk-apps-overlay .exit-app{
+.vk-apps-overlay > .setup,
+.vk-apps-overlay > .exit-app{
   width: 49%;
   height: 100%;
   background-repeat: no-repeat;
