@@ -5,9 +5,10 @@ class AppStore {
   _version = 1;
   _stage = 'connection';
   _size = null;
+  _keepConnect = false;
 
   constructor (store) {
-    this._calculateSizes();
+    this._calculateSizes(store.os);
 
     makeObservable(this, {
       _version: observable,
@@ -27,30 +28,37 @@ class AppStore {
   setStage(stage) { this._stage = stage; }
   setSize(size) { this._size = size; }
 
-  _calculateSizes () {
-    let root, width, height;
+  _calculateSizes(os) {
+    let body, width, height, maxHeight;
 
     if(document) {
-      root = document.querySelector('body');
+      body = document.querySelector('body');
 
-      if(root) {
-        root = root.getBoundingClientRect();
-        width = root.height * 0.616;
-        width = root.width >= width ?  width : root.width;
-        height = root.width * 1.1947;
+      if(body) {
+        body = body.getBoundingClientRect();
+
+        maxHeight = body.height;
+        if(os === 'iOS' || os === 'Android') {
+          maxHeight = maxHeight - (maxHeight * 0.05);
+        }
+
+        width = maxHeight * 0.616;
+        width = body.width >= width ?  width : body.width;
+        height = body.width * 1.1947;
+
 
         this.setSize({
           game: {
             width: width,
-            height: root.height,
+            height: maxHeight,
           },
           table: {
             width: width,
-            height: height >= root.height * 0.72 ? root.height * 0.72 : height,
+            height: height >= maxHeight * 0.72 ? maxHeight * 0.72 : height,
           },
           utilities: {
             width: width,
-            height: height >= root.height * 0.72 ? root.height * 0.28 : root.height - height,
+            height: height >= maxHeight * 0.72 ? maxHeight * 0.28 : maxHeight - height,
           },
           gift: {
             height: parseInt(((width - 26) / 5) * 1.432, 10),
@@ -63,10 +71,16 @@ class AppStore {
     }
   }
 
+  get keepConnect(){
+    return this._keepConnect;
+  }
 
-  openApp(){
-    //this._store.socket.emit('open-roulette');
-    document.querySelector('#root').setAttribute('style', 'display: none');
+  /**
+   * Метод для ужержания соединения с сокетами и продолжения игры
+   * @param {boolean} keep - удерживать или рвать
+   */
+  keep(keep) {
+    this._keepConnect = keep;
   }
 
   closeApp(){
