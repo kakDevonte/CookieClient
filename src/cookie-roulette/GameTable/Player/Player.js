@@ -111,7 +111,7 @@ function Player ({store, player, index}) {
     return gifts;
   };
 
-  console.log('reRender', index);
+  //console.log('reRender', index);
 
   return (
     <article
