@@ -9,26 +9,56 @@ class SocketStore {
     makeObservable(this, {
       _socket: observable,
 
-      connect: action
+      connect: action,
     });
   }
 
   connect(){
+    const options = {
+      reconnectionDelay: 1000,
+      reconnectionAttempts: 4,
+    };
+
     this._socket = process.env.NODE_ENV === 'production' ?
-      io(process.env.REACT_APP_SOCKET_SERVER) :
-      io(process.env.REACT_APP_SOCKET_SERVER_DEV);
+      io(process.env.REACT_APP_SOCKET_SERVER, options) :
+      io(process.env.REACT_APP_SOCKET_SERVER_DEV, options);
 
     this._sockets();
   }
 
+  get serverFail() {
+    if(this._socket) return !this._socket.connected;
+    return true;
+  };
+
   emit(event, data) {
     return this._socket.emit(event, data);
+  }
+
+  _serverDown(type){
+    console.log(type);
+
+    setTimeout(() => {
+      if(this.serverFail) {
+        this._store.app.setStage('connection');
+      }
+    }, 2500);
   }
 
   _sockets() {
     const
       store = this._store,
       socket = this._socket;
+
+    //////////////////////////////////////////////////////////////
+
+    socket.on( 'connect_error', () => {
+      this._serverDown('connect');
+    });
+
+    socket.on( 'disconnect', () => {
+      this._serverDown('game');
+    });
 
     //////////////////////////////////////////////////////////////
 

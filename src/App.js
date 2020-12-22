@@ -9,6 +9,7 @@ import {inject, observer} from "mobx-react";
 
 import GameLobby from "./cookie-roulette/Lobby/GameLobby";
 import GameTable from "./cookie-roulette/GameTable/GameTable";
+import Loading from "./cookie-roulette/Loading/Loading";
 
 
 const CookieRoulette = ({store}) => {
@@ -25,7 +26,7 @@ const CookieRoulette = ({store}) => {
     <div className="cookie-roulette" style={store.app.size.game}>
       {
         {
-          connection: (<div className="please-wait" />),
+          connection: (<Loading />),
           lobby: (<GameLobby />),
           table: (<GameTable />),
         }[store.app.stage]
