@@ -18,7 +18,7 @@ function HeaderMenu({store}){
         <i />
         <span>{store.user.data.kissCounter}</span>
       </section>
-      <input type='button' className="change-table" onClick={ () => store.game.clickChangeTable() } />
+      <input type='button' className="change-table" onClick={ () => store.game.clickConfirmChangeTable() } />
       <input type='button' className="settings" />
       <section className="vk-apps-overlay">
         <input type='button' className="setup" />

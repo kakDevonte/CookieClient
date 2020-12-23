@@ -16,6 +16,8 @@ import ServerFail from "./Modal/ServerFail";
 
 import Chat from "../Chat/Chat";
 import Inventory from "../Inventory/Inventory";
+import ChangeTable from "./Modal/changeTable";
+import BackLayer from "./BackLayer";
 
 const GameTable = ({store}) => {
   const player = store.table.getPlayer;
@@ -46,6 +48,7 @@ const GameTable = ({store}) => {
             <Player player={player(3)} index={3} />
           </div>
           <span className='table-id'>{store.table.id}</span>
+          <ChangeTable />
           <KissModal />
           <ServerFail />
         </article>
@@ -53,6 +56,7 @@ const GameTable = ({store}) => {
           <Chat />
           <Inventory />
         </article>
+        <BackLayer />
       </section>
   );
 };

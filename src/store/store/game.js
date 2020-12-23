@@ -5,6 +5,7 @@ class GameStore {
   _state = null;
   _round = null;
   _kissWindow = 'closed';
+  _changeTableWindow = '';
   _turnsRemain = 0;
 
   _rotateCookie = false;
@@ -31,6 +32,7 @@ class GameStore {
       _state: observable,
       _round: observable,
       _kissWindow: observable,
+      _changeTableWindow: observable,
       _turnsRemain: observable,
       _rotateCookie: observable,
       _allowClickRotate: observable,
@@ -47,6 +49,7 @@ class GameStore {
       setState: action,
       setRound: action,
       setKissWindow: action,
+      setChangeTableWindow: action,
       setTurnsRemain: action,
       setRotateCookie: action,
       setActiveSeat: action,
@@ -72,6 +75,7 @@ class GameStore {
   get state() { return this._state; }
   get round() { return this._round; }
   get kissWindow() { return this._kissWindow; }
+  get changeTableWindow() { return this._changeTableWindow; }
   get turnsRemain() { return this._turnsRemain; }
   get rotateCookie() { return this._rotateCookie; }
   get allowClickRotate() { return this._allowClickRotate; }
@@ -106,6 +110,11 @@ class GameStore {
   setKissWindow(state) {
     if(state === this._kissWindow) return;
     this._kissWindow = state;
+  }
+
+  setChangeTableWindow(state) {
+    if(state === this._changeTableWindow) return;
+    this._changeTableWindow = state;
   }
 
   setTurnsRemain(turn) {
@@ -186,8 +195,18 @@ class GameStore {
 
   //////////////////////////////////////////////////////////////////////////
 
-  clickChangeTable() {
-    this._store.app.stageLobby(this._store.table.id);
+  clickConfirmChangeTable() {
+    this._store.app.openBackLayer();
+    this.setChangeTableWindow(' opened');
+  }
+
+  clickChangeTable(decision) {
+    this.setChangeTableWindow('');
+    this._store.app.closeBackLayer();
+
+    if(decision) {
+      this._store.app.stageLobby(this._store.table.id);
+    }
   }
 
   /**
