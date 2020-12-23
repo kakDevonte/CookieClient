@@ -6,6 +6,7 @@ class AppStore {
   _stage = 'connection';
   _size = null;
   _keepConnect = false;
+  _backLayer = '';
 
   constructor (store) {
     this._calculateSizes(store.os);
@@ -13,9 +14,11 @@ class AppStore {
     makeObservable(this, {
       _version: observable,
       _stage: observable,
+      _backLayer: observable,
 
       setStage: action,
       setVersion: action,
+      setBackLayer: action,
     });
     this._store = store;
   }
@@ -23,10 +26,12 @@ class AppStore {
   get version() { return this._version; }
   get stage() { return this._stage; }
   get size() { return this._size; }
+  get backLayer() { return this._backLayer; }
 
   setVersion(version) { this._version = version; }
   setStage(stage) { this._stage = stage; }
   setSize(size) { this._size = size; }
+  setBackLayer(state) { this._backLayer = state; }
 
   _calculateSizes(os) {
     let body, width, height, maxHeight;
@@ -107,6 +112,14 @@ class AppStore {
 
     this.setStage('table');
     this._store.socket.emit('in-table', tid);
+  }
+
+  openBackLayer(){
+    if(this._backLayer === '') this.setBackLayer(' opened');
+  }
+
+  closeBackLayer(){
+    if(this._backLayer === ' opened') this.setBackLayer('');
   }
 }
 
