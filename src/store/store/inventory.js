@@ -5,6 +5,7 @@ class InventoryStore {
   _current = null;
   _player = null;
   _name = '';
+  _sendGift = null;
 
   _gifts = {};
   _emptyGift = {
@@ -29,12 +30,14 @@ class InventoryStore {
       _gifts: observable,
       _owner: observable,
       _inventory: observable,
+      _sendGift: observable,
 
       setState: action,
       setName: action,
       sendGift: action,
       updateInventory: action,
-      updateOwnerInventory: action
+      updateOwnerInventory: action,
+      setSendGift: action
     });
 
     this._store = store;
@@ -45,6 +48,7 @@ class InventoryStore {
   get gifts() { return this._gifts; }
   get list() { return this._inventory; }
   get emptyGift() { return this._emptyGift; }
+  get windowSendGift() { return this._sendGift; }
 
   setState(state) {
     if(state){
@@ -59,6 +63,10 @@ class InventoryStore {
   setName(name) {
     if(name === this._name) return;
     this._name = name;
+  }
+
+  setSendGift(data) {
+    this._sendGift = data;
   }
 
   clickToggleInventory(seat, event) {
@@ -162,9 +170,7 @@ class InventoryStore {
     this._inventory.get('owner').gifts = this._store.user.data.inventory;
   }
 
-  sendGift(category, id) {
-    if( !window.confirm('Отправить подарок?') ) return;
-
+  openConfirmSendGift(category, id) {
     if(category !== 'owner') {
       if(this._store.user.data.cookieCounter < this._gifts[id].cost)
         return window.alert('Недостаточно печенек!');
@@ -179,7 +185,17 @@ class InventoryStore {
       category
     };
 
-    this._store.socket.emit('send-gift', data);
+    this._store.app.openBackLayer();
+    this.setSendGift(data);
+  }
+
+  sendGift(decision) {
+    if(decision) {
+      this._store.socket.emit('send-gift', this._sendGift);
+    }
+
+    this.setSendGift(null);
+    this._store.app.closeBackLayer();
   }
 }
 

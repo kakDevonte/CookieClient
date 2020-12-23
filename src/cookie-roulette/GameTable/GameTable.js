@@ -18,12 +18,14 @@ import Chat from "../Chat/Chat";
 import Inventory from "../Inventory/Inventory";
 import ChangeTable from "./Modal/changeTable";
 import BackLayer from "./BackLayer";
+import GiveGift from "./Modal/GiveGift";
 
 const GameTable = ({store}) => {
   const player = store.table.getPlayer;
 
   return (
       <section className="cookie-roulette-game">
+        <BackLayer />
         <article className="roulette-table" style={store.app.size.table}>
           <HeaderMenu />
           <div className="wrap-players">
@@ -56,7 +58,7 @@ const GameTable = ({store}) => {
           <Chat />
           <Inventory />
         </article>
-        <BackLayer />
+        <GiveGift />
       </section>
   );
 };
