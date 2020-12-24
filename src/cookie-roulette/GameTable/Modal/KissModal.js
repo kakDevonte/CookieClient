@@ -55,7 +55,7 @@ function KissModal({store}) {
   };
 
   const photo = (id, player) => {
-    if(id) {
+    if(id && player) {
       return {
         backgroundImage: `url("${player.photo}")`
       }

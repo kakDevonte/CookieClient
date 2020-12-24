@@ -379,38 +379,37 @@ class GameStore {
     if(game.state === 'next-round'){
       this._active = null;
       this.setActivePlayer(game.player[0]);
-      //this.setActiveSeat(null);
       this.setActiveKiss(game.player[3]);
 
       this._target = null;
       this.setTargetPlayer(game.target[0]);
-      //this.setTargetSeat(null);
-      setTimeout(() => this.setTargetSeat(null), 1000);
       this.setTargetKiss(game.target[3]);
+
+      setTimeout(() => this.setTargetSeat(null), 1000);
     }else{
-      if(game.player[0]) {
-        [this._active] = table.findPlayer(game.player[0]);
-      }
+      this.setActiveUser(game.player[0]);
+      this.setTargetUser(game.target[0]);
 
-      if(this._active) {
-        this.setActivePlayer(game.player[0]);
-        this.setActiveSeat(this._active.seat);
-        this.setActiveKiss(game.player[3]);
-      }
+      this.setActivePlayer(game.player[0]);
+      this.setActiveSeat(game.player[2]);
+      this.setActiveKiss(game.player[3]);
 
-      if(game.target[0]) {
-        [this._target] = table.findPlayer(game.target[0]);
-      }
+      this.setTargetPlayer(game.target[0]);
+      this.setTargetSeat(game.target[2]);
+      this.setTargetKiss(game.target[3]);
 
-      if(this._target) {
-        this.setTargetPlayer(game.target[0]);
-        this.setTargetSeat(this._target.seat);
-        //this.setTargetSelector(this._target.seat);
-        this.setTargetKiss(game.target[3]);
-      }
+      //this.setTargetSelector(game.target[2]);
     }
 
     this.setKissResult(game.result);
+  }
+
+  setActiveUser(uid) {
+    [this._active] = this._store.table.findPlayer(uid);
+  }
+
+  setTargetUser(uid) {
+    [this._target] = this._store.table.findPlayer(uid);
   }
 
   /**
