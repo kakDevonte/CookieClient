@@ -7,7 +7,7 @@
   padding: 4%;
   border-radius: 15px;
   background-color: #000000;
-  border: dotted 3px #edbb2c;
+  box-shadow: 0 0 30px 3px rgba(183, 127, 255, 0.7);
   z-index: 11;
 }
 

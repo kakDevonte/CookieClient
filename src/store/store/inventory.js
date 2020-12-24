@@ -31,13 +31,15 @@ class InventoryStore {
       _owner: observable,
       _inventory: observable,
       _sendGift: observable,
+      _current: observable,
 
       setState: action,
       setName: action,
       sendGift: action,
       updateInventory: action,
       updateOwnerInventory: action,
-      setSendGift: action
+      setSendGift: action,
+      clickToggleInventory: action
     });
 
     this._store = store;
@@ -49,6 +51,7 @@ class InventoryStore {
   get list() { return this._inventory; }
   get emptyGift() { return this._emptyGift; }
   get windowSendGift() { return this._sendGift; }
+  get current() { return this._current };
 
   setState(state) {
     if(state){

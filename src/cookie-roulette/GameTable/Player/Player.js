@@ -63,11 +63,18 @@ function Player ({store, player, index}) {
         if(store.game.targetSeat === index) {
           className.push('target-kiss');
         }
+      },
+
+      selected = () => {
+        if(store.inventory.state === ' opened' && store.inventory.current === index) {
+          className.push('selected');
+        }
       };
 
     playerIndex();
     turn();
     target();
+    selected();
 
     return className.join(' ');
   };

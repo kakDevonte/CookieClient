@@ -23,6 +23,11 @@ import GiveGift from "./Modal/GiveGift";
 const GameTable = ({store}) => {
   const player = store.table.getPlayer;
 
+  const tid = () => {
+    //document.title = store.table.id;
+    return store.table.id;
+  };
+
   return (
       <section className="cookie-roulette-game">
         <BackLayer />
@@ -49,7 +54,7 @@ const GameTable = ({store}) => {
             <Player player={player(4)} index={4} />
             <Player player={player(3)} index={3} />
           </div>
-          <span className='table-id'>{store.table.id}</span>
+          <span className='table-id'>{ tid() }</span>
           <ChangeTable />
           <KissModal />
           <ServerFail />

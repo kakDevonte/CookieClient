@@ -55,3 +55,7 @@
   height: 30px;
   z-index: 1;
 }
+
+.player.selected{
+  box-shadow: 0 0 15px 5px #fff;
+}
