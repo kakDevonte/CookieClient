@@ -106,14 +106,20 @@ class ChatStore {
 
   updateMessages(list) {
     let uid;
-    list.forEach((message) => {
-      if(message.to) {
-        uid = message.to.id === this._store.user.id ? message.from.id : message.to.id;
-        this._updatePersonalMessages(message, uid);
-      } else {
-        this._updateCommon(message);
-      }
-    });
+
+    if(list === 'clear') {
+      this._personal.clear();
+      this._messages.clear();
+    } else {
+      list.forEach((message) => {
+        if(message.to) {
+          uid = message.to.id === this._store.user.id ? message.from.id : message.to.id;
+          this._updatePersonalMessages(message, uid);
+        } else {
+          this._updateCommon(message);
+        }
+      });
+    }
   }
 
   _updateCommon(message) {

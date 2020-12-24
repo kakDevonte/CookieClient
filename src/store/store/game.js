@@ -67,8 +67,6 @@ class GameStore {
 
     this._store = store;
 
-    //reaction(() => this.activeKiss, () => this.calculateKissResult());
-    //reaction(() => this.targetKiss, () => this.calculateKissResult());
     reaction(() => this.kissWindow, () => this.autoDecision());
   }
 
@@ -322,6 +320,49 @@ class GameStore {
     result = !isNaN(result) && result > -1 ? result : seat - 1;
 
     this.setTurnsRemain(result);
+  }
+
+  /**
+   * Приводит данные игры к начальному состоянию
+   */
+  clearGameState() {
+    this.setState('game-cleared');
+    this.setRound(0);
+    this.setTurnsRemain('');
+
+    this._store.table.update(
+      this._store.table.id,
+      {male: 0, female: 0},
+      [null, null, null, null, null, null, null, null]
+    );
+
+    this._active = null;
+    this.setActivePlayer(null);
+    this.setActiveSeat(null);
+    this.setActiveKiss(null);
+
+    this._target = null;
+    this.setTargetPlayer(null);
+    this.setTargetSeat(null);
+    this.setTargetKiss(null);
+
+    this.setKissResult(null);
+    this.setKissWindow('closed');
+    this.setChangeTableWindow('');
+    this.setTargetSelector(0);
+    this.setAllowClickRotate(false);
+    this.setRotateCookie(false);
+
+    this._store.inventory.setState('');
+    this._store.inventory.setSendGift(null);
+
+    this._store.chat.setTalkPlayer({id: null});
+    this._store.chat.setTalkState('');
+    this._store.chat.setTypeChat('common');
+    this._store.chat.updateMessages('clear');
+    this._store.chat.setText('');
+
+    console.log('Game cleared!');
   }
 
   /**

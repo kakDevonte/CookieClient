@@ -102,6 +102,7 @@ class AppStore {
   stageLobby(tid) {
     if(this.stage === 'lobby') return;
 
+    this._store.game.clearGameState();
     this.setStage('lobby');
     this._store.socket.emit('in-lobby', tid);
   }
