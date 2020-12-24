@@ -7,7 +7,7 @@ class common {
     ];
 
     user.sex = this.randomNumber(1, 2);
-    user.id = Date.now() + '';
+    user.id = 'random_' + Date.now();
     user.first_name = this.randomFromArray( names[user.sex] );
   }
 
