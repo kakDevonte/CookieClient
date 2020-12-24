@@ -28,7 +28,8 @@ class UserStore {
     }
     const result = await bridge.send('VKWebAppGetUserInfo');
 
-    common.randomiseUser(result);
+    //common.randomiseUser(result);
+
     result.id = result.id + '';
     result.kissCounter = 0;
     result.cookieCounter = 0;

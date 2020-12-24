@@ -3,6 +3,8 @@ import './css/game-table.css';
 import React from "react";
 import { inject, observer } from "mobx-react";
 
+import BackLayer from "./BackLayer";
+
 import HeaderMenu from "./Menu/HeaderMenu";
 import Player from "./Player/Player";
 import AnimationCookie from "./AnimationCookie";
@@ -13,12 +15,11 @@ import WaitMorePlayers from "./WaitMorePlayers";
 
 import KissModal from "./Modal/KissModal";
 import ServerFail from "./Modal/ServerFail";
+import ChangeTable from "./Modal/changeTable";
+import GiveGift from "./Modal/GiveGift";
 
 import Chat from "../Chat/Chat";
 import Inventory from "../Inventory/Inventory";
-import ChangeTable from "./Modal/changeTable";
-import BackLayer from "./BackLayer";
-import GiveGift from "./Modal/GiveGift";
 
 const GameTable = ({store}) => {
   const player = store.table.getPlayer;
