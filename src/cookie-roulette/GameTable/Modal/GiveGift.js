@@ -42,7 +42,7 @@ function GiveGift({store}){
   };
 
   return (
-    <article className={ 'confirm-give-gift center-screen' + info.window }>
+    <article style={store.app.size.giftConfirm} className={ 'confirm-give-gift center-screen' + info.window }>
       <header>Дарим подарок</header>
       <section className="content">
         <article className="send-gift" style={ info.giftImage } >

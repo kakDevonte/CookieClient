@@ -34,7 +34,7 @@ class AppStore {
   setBackLayer(state) { this._backLayer = state; }
 
   _calculateSizes(os) {
-    let body, width, height, maxHeight;
+    let body, width, height, maxHeight, talkHeight;
 
     if(document) {
       body = document.querySelector('body');
@@ -50,7 +50,7 @@ class AppStore {
         width = maxHeight * 0.616;
         width = body.width >= width ?  width : body.width;
         height = body.width * 1.1947;
-
+        talkHeight = parseInt(((width - 26) / 6.232) - 16, 10);
 
         this.setSize({
           game: {
@@ -69,7 +69,10 @@ class AppStore {
             height: parseInt(((width - 26) / 5) * 1.432, 10),
           },
           talk: {
-            height: parseInt(((width - 26) / 6.232) - 16, 10)
+            height: talkHeight > 40 ? 40 : talkHeight
+          },
+          giftConfirm: {
+            height: parseInt(width * 0.765, 10)
           }
         });
       }
