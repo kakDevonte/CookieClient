@@ -15,7 +15,7 @@ function TurnCountTooltip({store}) {
   };
 
   return (
-    <div className="cookie-tooltip">
+    <div className={ 'cookie-tooltip' + store.game.turnTooltip }>
       { text() }
       <div className='arrow-down' />
     </div>

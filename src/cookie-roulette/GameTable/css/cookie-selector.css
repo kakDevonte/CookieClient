@@ -18,11 +18,5 @@
   left: 3%;
   top: -3%;
   transform: rotate(-6deg);
-}
-
-.roulette-table .cookie-selector:hover + .cookie-tooltip{
-  visibility: visible;
-  opacity: 1;
-  transition: visibility ease-in-out 0.3s, opacity ease-in-out 0.7s;
-  transition-delay: 1s;
+  cursor: help;
 }

@@ -6,6 +6,7 @@ class GameStore {
   _round = null;
   _kissWindow = 'closed';
   _changeTableWindow = '';
+  _turnTooltip = '';
   _turnsRemain = 0;
 
   _rotateCookie = false;
@@ -33,6 +34,7 @@ class GameStore {
       _round: observable,
       _kissWindow: observable,
       _changeTableWindow: observable,
+      _turnTooltip: observable,
       _turnsRemain: observable,
       _rotateCookie: observable,
       _allowClickRotate: observable,
@@ -50,6 +52,7 @@ class GameStore {
       setRound: action,
       setKissWindow: action,
       setChangeTableWindow: action,
+      setTurnTooltip: action,
       setTurnsRemain: action,
       setRotateCookie: action,
       setActiveSeat: action,
@@ -74,6 +77,7 @@ class GameStore {
   get round() { return this._round; }
   get kissWindow() { return this._kissWindow; }
   get changeTableWindow() { return this._changeTableWindow; }
+  get turnTooltip() { return this._turnTooltip; }
   get turnsRemain() { return this._turnsRemain; }
   get rotateCookie() { return this._rotateCookie; }
   get allowClickRotate() { return this._allowClickRotate; }
@@ -113,6 +117,11 @@ class GameStore {
   setChangeTableWindow(state) {
     if(state === this._changeTableWindow) return;
     this._changeTableWindow = state;
+  }
+
+  setTurnTooltip(state) {
+    if(state === this._turnTooltip) return;
+    this._turnTooltip = state;
   }
 
   setTurnsRemain(turn) {
@@ -218,9 +227,12 @@ class GameStore {
    *  Обработчик клика по центральной печеньке
    */
   clickRotateCookie() {
-    if(!this.allowClickRotate) return;
-
-    this._store.socket.emit('player-rotated-roulette', this._store.table.id);
+    if(this.allowClickRotate) {
+      this._store.socket.emit('player-rotated-roulette', this._store.table.id);
+    } else{
+      this.setTurnTooltip(' opened');
+      setTimeout(() => this.setTurnTooltip(''), 2000);
+    }
   }
 
   /**
@@ -295,30 +307,18 @@ class GameStore {
   }
 
   calculateTurnRemain(){
-    const
-      store = this._store,
-      uid = store.user.id;
-
     let seat = 0, current, my, result;
 
-    for(const player of store.table.players.values()) {
+    for(const player of this._store.table.players.values()) {
       if(player !== null){
-
-        if(this.activeSeat === seat){
-          current = seat;
-        }
-
-        if(uid === player.id){
-          my = seat;
-        }
-
+        if(this.activeSeat === seat) current = seat;
+        if(player.itsMe) my = seat;
         seat++;
       }
     }
 
     result = my - current;
-    result = !isNaN(result) && result > -1 ? result : seat - 1;
-
+    result = !isNaN(result) && result > -1 ? result : seat - current + my;
     this.setTurnsRemain(result);
   }
 
@@ -370,11 +370,8 @@ class GameStore {
    * @param game - данные об игре от сервера
    */
   updateGameData(game){
-    const table = this._store.table;
-
     this.setState(game.state);
     this.setRound(game.round);
-    this.calculateTurnRemain();
 
     if(game.state === 'next-round'){
       this._active = null;
@@ -399,6 +396,10 @@ class GameStore {
       this.setTargetKiss(game.target[3]);
 
       //this.setTargetSelector(game.target[2]);
+    }
+
+    if(game.state === 'active-selected') {
+      this.calculateTurnRemain();
     }
 
     this.setKissResult(game.result);
