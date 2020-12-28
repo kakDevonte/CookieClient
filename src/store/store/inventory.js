@@ -175,8 +175,10 @@ class InventoryStore {
 
   openConfirmSendGift(category, id) {
     if(category !== 'owner') {
-      if(this._store.user.data.cookieCounter < this._gifts[id].cost)
-        return window.alert('Недостаточно печенек!');
+      if(this._store.user.data.cookieCounter < this._gifts[id].cost) {
+        document.querySelector('.shop-cookies').click();
+        return;
+      }
     }
 
     const data = {
