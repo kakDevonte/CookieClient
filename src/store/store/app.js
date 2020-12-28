@@ -40,17 +40,18 @@ class AppStore {
   }
 
   _calculateSizes(os) {
-    let body, width, height, maxHeight, talkHeight;
+    let body, width, height, maxHeight, talkHeight, margin;
 
     if(document) {
       body = document.querySelector('body');
 
       if(body) {
         body = body.getBoundingClientRect();
+        margin = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--sat"), 10);
 
         maxHeight = body.height;
         if(os === 'iOS' || os === 'Android') {
-          maxHeight = maxHeight - (maxHeight * 0.05);
+          maxHeight = maxHeight - margin;
         }
 
         width = maxHeight * 0.616;
@@ -62,6 +63,7 @@ class AppStore {
           game: {
             width: width,
             height: maxHeight,
+            marginTop: margin
           },
           table: {
             width: width,
