@@ -10,6 +10,7 @@ import {inject, observer} from "mobx-react";
 import GameLobby from "./cookie-roulette/Lobby/GameLobby";
 import GameTable from "./cookie-roulette/GameTable/GameTable";
 import Loading from "./cookie-roulette/Loading/Loading";
+import ErrorScreen from "./cookie-roulette/Errors/ErrorScreen";
 
 
 const CookieRoulette = ({store}) => {
@@ -30,6 +31,7 @@ const CookieRoulette = ({store}) => {
           connection: (<Loading />),
           lobby: (<GameLobby />),
           table: (<GameTable />),
+          error: (<ErrorScreen />),
         }[store.app.stage]
       }
     </div>

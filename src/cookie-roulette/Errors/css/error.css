@@ -1,0 +1,41 @@
+.error-screen{
+  display: flex;
+  flex-flow: column nowrap;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(46.39% 46.39% at 50% 53.61%, #8543D9 49.15%, #7219A8 100%), #F7ECDA;
+  text-align: center;
+  color: white;
+}
+
+.error-screen > span{
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.error-screen > div{
+  display: flex;
+  flex-flow: column nowrap;
+  margin-bottom: 15px;
+}
+
+.error-screen > div > span{
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.error-screen > a {
+  position: absolute;
+  bottom: 25px;
+  text-decoration: none;
+  font-size: 16px;
+  color: white;
+  font-weight: 900;
+  border: solid 2px white;
+  padding: 10px 15px;
+  border-radius: 10px;
+}
