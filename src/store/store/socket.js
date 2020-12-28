@@ -38,7 +38,7 @@ class SocketStore {
   }
 
   _serverDown(type){
-    console.log(type);
+    //console.log(type);
 
     setTimeout(() => {
       if(this.serverFail) {
@@ -67,7 +67,7 @@ class SocketStore {
     socket.on('request-info', () => {
       store.user.emitUserInfo(socket);
 
-      console.log('socket (request-info)');
+      //console.log('socket (request-info)');
     });
 
     //////////////////////////////////////////////////////////////
@@ -75,7 +75,7 @@ class SocketStore {
     socket.on('wrong-user-info', (errors) => {
       store.app.stageError(errors);
 
-      console.log('socket (wrong-user-info)');
+      // console.log('socket (wrong-user-info)');
     });
 
     //////////////////////////////////////////////////////////////
@@ -83,7 +83,7 @@ class SocketStore {
     socket.on('connect-success', () => {
       store.app.stageLobby();
 
-      console.log('socket (connect-success)');
+      // console.log('socket (connect-success)');
     });
 
     //////////////////////////////////////////////////////////////
@@ -91,7 +91,7 @@ class SocketStore {
     socket.on('personal-data', (data) => {
       this._store.user.updatePersonalInfo(data);
 
-      console.log('socket (personal-data)', data);
+      // console.log('socket (personal-data)', data);
     });
 
     //////////////////////////////////////////////////////////////
@@ -102,7 +102,7 @@ class SocketStore {
       store.table.setId(response.tid);
       store.app.stageTable(response.tid);
 
-      console.log('socket (put-table)');
+      // console.log('socket (put-table)');
     });
 
     //////////////////////////////////////////////////////////////
@@ -110,7 +110,7 @@ class SocketStore {
     socket.on('update-players', (response) => {
       store.table.update(response.tid, response.groups, response.players);
 
-      console.log("socket (update-players)");
+      // console.log("socket (update-players)");
     });
 
     //////////////////////////////////////////////////////////////
@@ -118,7 +118,7 @@ class SocketStore {
     socket.on('current-stage', (stage) => {
       store.app.setStage(stage.current);
 
-      console.log('socket (current-stage)', stage);
+      // console.log('socket (current-stage)', stage);
     });
 
     //////////////////////////////////////////////////////////////
@@ -126,7 +126,7 @@ class SocketStore {
     socket.on('game-data', (data) => {
       store.game.updateGameData(data);
 
-      console.log('socket (game-data)', data);
+      // console.log('socket (game-data)', data);
       //console.log('socket (game-data)');
     });
 
@@ -135,7 +135,7 @@ class SocketStore {
     socket.on('allow-start-rotate', () => {
       store.game.enableRotateClickHandler();
 
-      console.log('socket (allow-start-rotate)');
+      // console.log('socket (allow-start-rotate)');
     });
 
     //////////////////////////////////////////////////////////////
@@ -143,7 +143,7 @@ class SocketStore {
     socket.on('start-rotate', (seat) => {
       store.game.rotateSelector(seat);
 
-      console.log('socket (start-rotate)');
+      // console.log('socket (start-rotate)');
     });
 
     //////////////////////////////////////////////////////////////
@@ -151,7 +151,7 @@ class SocketStore {
     socket.on('kiss-request', () => {
       store.game.kissRequest();
 
-      console.log('socket (kiss-request)');
+      // console.log('socket (kiss-request)');
     });
 
     //////////////////////////////////////////////////////////////
@@ -159,7 +159,7 @@ class SocketStore {
     socket.on('received-kiss', (response) => {
       store.game.updateKiss(response.active, response.kiss);
 
-      console.log('socket (received-kiss)', response);
+      // console.log('socket (received-kiss)', response);
     });
 
     //////////////////////////////////////////////////////////////
@@ -167,7 +167,7 @@ class SocketStore {
     socket.on('round-result', (result) => {
       store.game.doShowRoundResult(result);
 
-      console.log('socket (round-result)', result);
+      // console.log('socket (round-result)', result);
     });
 
     //////////////////////////////////////////////////////////////
@@ -175,7 +175,7 @@ class SocketStore {
     socket.on('update-kiss-data', (result) => {
       store.game.updateKissData(result);
 
-      console.log('socket (round-result)', result);
+      // console.log('socket (round-result)', result);
     });
 
     //////////////////////////////////////////////////////////////
@@ -183,7 +183,7 @@ class SocketStore {
     socket.on('chat-message', (result) => {
       this._store.chat.updateMessages(result);
 
-      console.log('socket (chat-message)', result);
+      // console.log('socket (chat-message)', result);
     });
 
     //////////////////////////////////////////////////////////////
@@ -191,7 +191,7 @@ class SocketStore {
     socket.on('gifts-data', (response) => {
       this._store.inventory.receiveGiftsData(response);
 
-      console.log('socket (gifts-data)', response);
+      // console.log('socket (gifts-data)', response);
     });
 
     //////////////////////////////////////////////////////////////
@@ -199,7 +199,7 @@ class SocketStore {
     socket.on('receive-gift', (response) => {
       this._store.game.receiveGift(response);
 
-      console.log('socket (receive-gift)', response);
+      // console.log('socket (receive-gift)', response);
     });
 
     //////////////////////////////////////////////////////////////

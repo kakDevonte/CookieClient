@@ -362,7 +362,7 @@ class GameStore {
     this._store.chat.updateMessages('clear');
     this._store.chat.setText('');
 
-    console.log('Game cleared!');
+    // console.log('Game cleared!');
   }
 
   /**

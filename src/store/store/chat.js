@@ -98,8 +98,6 @@ class ChatStore {
       to: to
     };
 
-    console.log('send', message);
-
     this.setText('');
     this._store.socket.emit('user-message', message);
   }
@@ -188,7 +186,6 @@ class ChatStore {
   }
 
   clickOpenTalk(player){
-    console.log(player.id);
     this.setTalkPlayer(player);
     this._talkRead(player.id);
     this.setTalkState(' opened');
