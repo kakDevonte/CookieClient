@@ -72,10 +72,10 @@ class SocketStore {
 
     //////////////////////////////////////////////////////////////
 
-    socket.on('wrong-user-info', (errors) => {
+    socket.on('error-occurred', (errors) => {
       store.app.stageError(errors);
 
-      // console.log('socket (wrong-user-info)');
+      // console.log('socket (error-occurred)');
     });
 
     //////////////////////////////////////////////////////////////
