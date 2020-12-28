@@ -12,7 +12,7 @@ function HeaderMenu({store}){
       <section className="counter-cookie-count">
         <i />
         <span className="center-screen">{store.user.data.cookieCounter}</span>
-        <Link to="/Shop/" onClick={ () => store.app.keep(true) } className='shop-cookies' />
+        <Link to="/Shop/Profile/0" onClick={ () => store.app.keep(true) } className='shop-cookies' />
       </section>
       <section className="kiss-count">
         <i />

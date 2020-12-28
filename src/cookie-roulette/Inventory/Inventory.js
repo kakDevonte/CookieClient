@@ -7,13 +7,22 @@ import Gifts from "./Gifts";
 
 
 function Inventory({store}) {
+
+  const toProfile = {
+    pathname: "/Profile",
+    propsSearch: {
+      id: store.inventory._player === null ? null : store.inventory._player.id,
+      myProfile: false
+    }
+  };
+
   return (
     <article className={ 'inventory' + store.inventory.state}>
       <header>
         <div onClick={ () => store.inventory.clickPersonalMessage() }>
           Личное сообщение
         </div>
-        <Link to="/Profile" onClick={ () => store.app.keep(true) }>Профиль<br/>{store.inventory.name}</Link>
+        <Link to={toProfile} onClick={ () => store.app.keep(true) }>Профиль<br/>{store.inventory.name}</Link>
       </header>
       <div className="gifts-list custom-scroll">
         <Gifts gifts={ store.inventory.list }/>
