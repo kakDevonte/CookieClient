@@ -176,6 +176,8 @@ class InventoryStore {
   openConfirmSendGift(category, id) {
     if(category !== 'owner') {
       if(this._store.user.data.cookieCounter < this._gifts[id].cost) {
+        if(this._store.os === 'iOS') return;
+
         document.querySelector('.shop-cookies').click();
         return;
       }
