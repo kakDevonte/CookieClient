@@ -5,25 +5,30 @@ import {inject, observer} from "mobx-react";
 
 function GiveGift({store}){
   const data = store.inventory.windowSendGift;
-  let info = {};
+  let info;
+
+  info = {
+    window: '',
+    giftName: 0,
+    giftImage: {},
+    giftCost: 0,
+    userName: '',
+    userImage: {}
+  };
 
   if(data) {
     const gift = store.inventory.gifts[data.gid];
     const [user] = store.table.findPlayer(data.to);
 
-    info.window = ' opened';
     info.giftName = gift.name;
     info.giftImage = { backgroundImage: `url("${gift.image}")` };
     info.giftCost = gift.cost;
-    info.userName = user.name;
-    info.userImage = {backgroundImage: `url("${user.photo}")`};
-  } else {
-    info.window = '';
-    info.giftName = 0;
-    info.giftImage = {};
-    info.giftCost = 0;
-    info.userName = 'user.name';
-    info.userImage = {};
+
+    if(user) {
+      info.window = ' opened';
+      info.userName = user.name;
+      info.userImage = { backgroundImage: `url("${user.photo}")`};
+    }
   }
 
   const additionalInfo = () => {
