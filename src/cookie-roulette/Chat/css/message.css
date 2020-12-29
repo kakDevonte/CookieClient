@@ -19,6 +19,7 @@
   background-color: #913BFF;
 }
 
+.chat .message .colored-greetings{ color: #6537ca; }
 .chat .message .colored-0{ color: #29d35a; }
 .chat .message .colored-1{ color: #d37140; }
 .chat .message .colored-2{ color: #1c1fd3; }

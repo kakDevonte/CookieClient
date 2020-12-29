@@ -14,7 +14,7 @@ function Message({store, message, container}) {
   if(message.from.id === 'server-greetings') {
     return (
       <article title={common.getNormalDate(message.date, false, true)} className="message">
-        <legend><span className={'colored-' + 1}>{message.text}</span></legend>
+        <legend><span className="colored-greetings">{message.text}</span></legend>
       </article>
     );
   }
