@@ -136,7 +136,7 @@ class ChatStore {
     talk.date = message.date;
     talk.lastMessage = message.text;
 
-    if(this._needCounted(uid)) {
+    if(this._needCounted(uid) && message.notice) {
       talk.count++;
       this._countNewMessages++;
     }
