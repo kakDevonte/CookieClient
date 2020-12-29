@@ -44,11 +44,15 @@
   font-weight: bold;
 }
 
-.counter-cookie-count > a{
+.counter-cookie-count > .shop-cookies{
   width: 35%;
   height: 83%;
   background: url("../../../../images/cookie-shop.svg") center no-repeat;
   background-size: contain;
+}
+
+.counter-cookie-count > .shop-cookies.hidden{
+  visibility: hidden;
 }
 
 .header-menu > .kiss-count{

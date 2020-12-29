@@ -4,7 +4,12 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import {inject, observer} from "mobx-react";
 
-function HeaderMenu({store}){
+function HeaderMenu({store}) {
+
+  const shopButton = () => {
+    if(store.os === 'iOS') return (<i className="shop-cookies hidden" />);
+    return (<Link to="/Shop/Profile/0" onClick={ () => store.app.keep(true) } className='shop-cookies' />);
+  };
 
   return (
     <header className="header-menu">
@@ -12,7 +17,7 @@ function HeaderMenu({store}){
       <section className="counter-cookie-count">
         <i />
         <span className="center-screen">{store.user.data.cookieCounter}</span>
-        <Link to="/Shop/Profile/0" onClick={ () => store.app.keep(true) } className='shop-cookies' />
+        { shopButton() }
       </section>
       <section className="kiss-count">
         <i />
