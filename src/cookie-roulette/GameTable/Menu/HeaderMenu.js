@@ -3,8 +3,10 @@ import './css/header-menu.css';
 import React from 'react';
 import {Link} from "react-router-dom";
 import {inject, observer} from "mobx-react";
+import {useHistory} from 'react-router-dom';
 
 function HeaderMenu({store}) {
+  const history = useHistory();
 
   const shopButton = () => {
     if(store.os === 'iOS') return (<i className="shop-cookies hidden" />);
@@ -13,7 +15,7 @@ function HeaderMenu({store}) {
 
   return (
     <header className="header-menu">
-      <Link className="exit-game" to="/" />
+      <i className="exit-game" onClick={ () => { history.goBack() } } />
       <section className="counter-cookie-count">
         <i />
         <span className="center-screen">{store.user.data.cookieCounter}</span>
