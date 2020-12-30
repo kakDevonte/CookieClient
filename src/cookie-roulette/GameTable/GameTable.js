@@ -62,7 +62,7 @@ const GameTable = ({store}) => {
         </article>
         <article className="utility-wrapper" style={store.app.size.utilities}>
           <Chat />
-          <Inventory />
+          <Inventory search={store.app.search} />
         </article>
         <GiveGift />
       </section>

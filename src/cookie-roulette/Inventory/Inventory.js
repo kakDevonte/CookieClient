@@ -6,15 +6,18 @@ import {inject, observer} from "mobx-react";
 import Gifts from "./Gifts";
 
 
-function Inventory({store}) {
+function Inventory({store, search}) {
 
   const toProfile = {
     pathname: "/Profile",
     propsSearch: {
       id: store.inventory._player === null ? null : store.inventory._player.id,
-      myProfile: false
+      myProfile: false,
+      search: store.app.search
     }
   };
+
+  console.log('Inventory', search);
 
   return (
     <article className={ 'inventory' + store.inventory.state}>

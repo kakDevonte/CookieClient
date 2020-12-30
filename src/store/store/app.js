@@ -8,6 +8,7 @@ class AppStore {
   _keepConnect = false;
   _backLayer = '';
   _errors = [];
+  _search = '';
 
   constructor (store) {
     this._calculateSizes(store.os);
@@ -16,11 +17,12 @@ class AppStore {
       _version: observable,
       _stage: observable,
       _backLayer: observable,
-      _errors: observable,
+      _search: observable,
 
       setStage: action,
       setVersion: action,
       setBackLayer: action,
+      setSearch: action,
     });
     this._store = store;
   }
@@ -30,7 +32,9 @@ class AppStore {
   get errors() { return this._errors; }
   get size() { return this._size; }
   get backLayer() { return this._backLayer; }
+  get search() {return this._search; }
 
+  setSearch(search) { this._search = search; }
   setVersion(version) { this._version = version; }
   setSize(size) { this._size = size; }
   setBackLayer(state) { this._backLayer = state; }
