@@ -23,21 +23,29 @@ class UserStore {
   }
 
   _auth = async () => {
+    let info, data;
+
     if(process.env.REACT_APP_BOTTLE_APP) {
       await bridge.send("VKWebAppInit");
     }
-    const result = await bridge.send('VKWebAppGetUserInfo');
 
-    //common.randomiseUser(result);
+    if(this._store.info) {
+      info = this._store.info;
+    } else {
+      info = await bridge.send('VKWebAppGetUserInfo', {});
+    }
+    data = Object.assign({}, info);
 
-    result.id = result.id + '';
-    result.kissCounter = 0;
-    result.cookieCounter = 0;
-    result.gifts = [];
-    result.inventory = [];
-    result.messages = [];
+    common.randomiseUser(data);
 
-    this.setData(result);
+    data.id = info.id + '';
+    data.kissCounter = 0;
+    data.cookieCounter = 0;
+    data.gifts = [];
+    data.inventory = [];
+    data.messages = [];
+
+    this.setData(data);
   };
 
   get data(){ return this._data; }
