@@ -13,11 +13,8 @@ function Inventory({store, search}) {
     propsSearch: {
       id: store.inventory._player === null ? null : store.inventory._player.id,
       myProfile: false,
-      search: store.app.search
     }
   };
-
-  console.log('Inventory', search);
 
   return (
     <article className={ 'inventory' + store.inventory.state}>
