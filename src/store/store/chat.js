@@ -27,7 +27,8 @@ class ChatStore {
       setTypeChat: action,
       setTalkState: action,
       setTalkPlayer: action,
-      _talkRead: action
+      _talkRead: action,
+      reopenTalk: action
     });
 
     this._store = store;
@@ -74,6 +75,21 @@ class ChatStore {
   setText(value) {
     if(this._text === value) return;
     this._text = value;
+  }
+
+  reopenTalk(player) {
+    if(!player) return;
+
+    const talk = this._personal.get(player.id);
+    let message;
+
+    if(talk && talk.messages.get('talk-closed')) {
+      talk.messages.delete('talk-closed');
+      message = Collection.takeLast(talk.messages);
+
+      talk.date = message.date;
+      talk.lastMessage = message.text;
+    }
   }
 
   // setCountNewMessages(count) {
