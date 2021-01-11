@@ -103,8 +103,30 @@ class TableStore {
           if(current) update = true;
         }
 
-        if(update) this._players.set(index, player);
+        if(update) {
+          this._players.set(index, player);
+          this._store.chat.reopenTalk(player);
+          this._checkInventory(index);
+          this._checkTarget(index);
+        }
       });
+    }
+  }
+
+  _checkInventory(index) {
+    const inv = this._store.inventory;
+
+    if(inv.current === index && inv.state === ' opened') {
+      inv.clickToggleInventory(index, {target: {className: 'player '}} );
+      this._store.app.closeBackLayer();
+    }
+  }
+
+  _checkTarget(index) {
+    const game = this._store.game;
+
+    if(game.targetSeat === index && game.kissWindow === 'opened') {
+      game.setKissWindow('closed');
     }
   }
 
