@@ -73,6 +73,16 @@ class Collection {
   }
 
   /**
+   * Получает последний элемент из коллекции
+   * @param map
+   * @returns {*}
+   */
+  static takeLast(map) {
+    const index = map.size - 1;
+    return Collection.take(map, index, 1)[0];
+  }
+
+  /**
    * Извлекает элементы из коллекции по индексу, изменяя коллекцию
    * @param map {Map} - словарь Map
    * @param start {number} - начальный индекс
