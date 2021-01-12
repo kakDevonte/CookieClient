@@ -36,7 +36,7 @@ class UserStore {
     }
     data = Object.assign({}, info);
 
-    common.randomiseUser(data);
+    //common.randomiseUser(data);
 
     data.id = info.id + '';
     data.kissCounter = 0;
