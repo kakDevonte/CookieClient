@@ -19,6 +19,14 @@ function Message({store, message, container}) {
     );
   }
 
+  if(message.from.id === 'server-gift') {
+    return (
+      <article title={common.getNormalDate(message.date, false, true)} className="message gift">
+        <legend><i className="center-Y" /><span>{message.text}</span></legend>
+      </article>
+    );
+  }
+
   if(store.user.id === message.from.id) {
     return (
       <article title={common.getNormalDate(message.date, false, true)} className="message my-message">

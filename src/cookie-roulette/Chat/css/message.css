@@ -4,7 +4,7 @@
   border-radius: 6px;
   font-weight: 400;
   background-color: #ffffff;
-  margin: 5px 0;
+  margin: 10px 0;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
 }
 
@@ -12,6 +12,26 @@
   display: inline-block;
   font-weight: 700;
   margin-right: 5px;
+}
+
+.chat .message.gift legend {
+  font-weight: 500;
+}
+
+.chat .message.gift {
+  background: linear-gradient(264.23deg, #DEA943 30%, #EFCB84 70%), #DEA943;
+  padding-left: 7.5%;
+}
+
+.chat .message.gift i {
+  position: absolute;
+  width: 4%;
+  height: 62.85%;
+  left: 10px;
+  background-image: url("../../../images/animate-gift-icon.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .chat .my-message{
