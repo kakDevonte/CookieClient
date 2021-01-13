@@ -40,6 +40,16 @@ html, body{
   transform: translate(-50%, -50%);
 }
 
+.center-X{
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.center-Y{
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 .cookie-roulette-game{
   position: relative;
   overflow: hidden;
