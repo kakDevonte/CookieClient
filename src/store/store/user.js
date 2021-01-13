@@ -36,14 +36,14 @@ class UserStore {
     }
     data = Object.assign({}, info);
 
-    //common.randomiseUser(data);
-
     data.id = info.id + '';
     data.kissCounter = 0;
     data.cookieCounter = 0;
     data.gifts = [];
     data.inventory = [];
     data.messages = [];
+
+    //common.randomiseUser(data);
 
     this.setData(data);
   };
