@@ -64,6 +64,12 @@ function KissModal({store}) {
     return {};
   };
 
+  const name = (player) => {
+    if(!player) return '';
+    if(player.itsMe) return 'Вы';
+    return player.name;
+  };
+
   const kissSuccess = () => {
     if(game.kissResult) {
       return 'animate';
@@ -79,9 +85,11 @@ function KissModal({store}) {
       <div className="info">
         <article className="player" style={ photo(game.activePlayer, game._active) }>
           { icon(game.activeKiss, 'current') }
+          <span>{ name(game._active) }</span>
         </article>
         <article className="player" style={ photo(game.targetPlayer, game._target) }>
           { icon(game.targetKiss, 'target') }
+          <span>{ name(game._target) }</span>
         </article>
         <i className={ 'true-kiss ' + kissSuccess() } />
       </div>
