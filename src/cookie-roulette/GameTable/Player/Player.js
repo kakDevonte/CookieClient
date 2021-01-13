@@ -83,8 +83,7 @@ function Player ({store, player, index}) {
     if(player) {
       return {
         backgroundImage: `url("${player.photo}")`,
-        backgroundSize: '150%',
-        backgroundPosition: 'center center'
+        backgroundSize: '140%',
       }
     } else {
       return {};
