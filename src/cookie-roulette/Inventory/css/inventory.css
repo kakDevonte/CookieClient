@@ -21,8 +21,7 @@
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
 }
 
-.inventory > header > div,
-.inventory > header > a{
+.inventory > header > div{
   position: relative;
   display: flex;
   flex-flow: column nowrap;
@@ -36,11 +35,11 @@
   text-align: center;
 }
 
-.inventory > header > div{
+.inventory > header > div:first-child{
   background: linear-gradient(264.23deg, #EFCB84 19.1%, #DEA943 71.97%), #F9CE7B;
 }
 
-.inventory > header > a{
+.inventory > header > div:last-child{
   text-decoration: none;
   background: #913BFF;
 }

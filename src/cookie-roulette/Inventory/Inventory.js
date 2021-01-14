@@ -1,19 +1,36 @@
 import './css/inventory.css';
 
 import React from 'react';
-import {Link} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {inject, observer} from "mobx-react";
 import Gifts from "./Gifts";
 
 
-function Inventory({store, search}) {
+function Inventory({store}) {
+  const history = useHistory();
+  const id = () => {
+    if(store.inventory._player) {
+      if(store.inventory._player.template) {
+        return store.inventory._player.template;
+      } else {
+        return store.inventory._player.id;
+      }
+    } else {
+      return '1';
+    }
+  };
 
   const toProfile = {
     pathname: "/Profile",
     propsSearch: {
-      id: store.inventory._player === null ? null : store.inventory._player.id,
+      id: id(),
       myProfile: false,
     }
+  };
+
+  const openProfile = () => {
+    store.app.keep(true);
+    history.push(toProfile);
   };
 
   return (
@@ -22,7 +39,7 @@ function Inventory({store, search}) {
         <div onClick={ () => store.inventory.clickPersonalMessage() }>
           Личное сообщение
         </div>
-        <Link to={toProfile} onClick={ () => store.app.keep(true) }>Профиль<br/>{store.inventory.name}</Link>
+        <div onClick={ () => openProfile() }>Профиль<br/>{store.inventory.name}</div>
       </header>
       <div className="gifts-list custom-scroll">
         <Gifts gifts={ store.inventory.list }/>
