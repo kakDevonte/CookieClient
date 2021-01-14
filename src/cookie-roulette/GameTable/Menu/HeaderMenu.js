@@ -1,16 +1,22 @@
 import './css/header-menu.css';
 
 import React from 'react';
-import {Link} from "react-router-dom";
 import {inject, observer} from "mobx-react";
 import {useHistory} from 'react-router-dom';
 
 function HeaderMenu({store}) {
   const history = useHistory();
 
+  const goShop = () => {
+    store.app.keep(true);
+    history.push({
+      pathname: '/Shop/Profile/0'
+    });
+  };
+
   const shopButton = () => {
     if(store.os === 'iOS') return (<i className="shop-cookies hidden" />);
-    return (<Link to="/Shop/Profile/0" onClick={ () => store.app.keep(true) } className='shop-cookies' />);
+    return (<i onClick={ () => goShop() } className='shop-cookies' />);
   };
 
   return (
