@@ -13,12 +13,13 @@
 
 .lobby .cookie{
   position: absolute;
-  width: 334px;
-  height: 387px;
-  filter: drop-shadow(0px 10px 5px rgba(0, 0, 0, 0.2));
-  /*transform: rotate(105deg);*/
-  background-image: url("../../../images/lobbyCookie.svg");
+  width: 40%;
+  height: 56.5%;
+  filter: drop-shadow(0px 5px 15px rgba(0, 0, 0, 0.5));
+  transform: rotate(5deg) translate(-65%, -50%);
+  background-image: url("../../../images/bottle.png");
   background-position: center;
+  background-repeat: no-repeat;
   z-index: 1;
 }
 
@@ -51,19 +52,19 @@
 .lobby .kiss.kiss-one{
   width: 43px;
   height: 32px;
-  left: 58%;
+  left: 63%;
   top: 27%;
   transform: rotate(-36.66deg);
 }
 .lobby .kiss.kiss-two{
   width: 56px;
   height: 41px;
-  left: 71%;
+  left: 76%;
   top: 32%;
   transform: rotate(53.22deg);
 }
 .lobby .kiss.kiss-three {
-  left: 77%;
+  left: 82%;
   top: 26%;
   transform: rotate(10deg);
   width: 23px;
