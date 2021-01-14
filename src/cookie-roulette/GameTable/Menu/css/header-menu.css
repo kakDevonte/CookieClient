@@ -49,6 +49,7 @@
   height: 83%;
   background: url("../../../../images/cookie-shop.svg") center no-repeat;
   background-size: contain;
+  cursor: pointer;
 }
 
 .counter-cookie-count > .shop-cookies.hidden{
