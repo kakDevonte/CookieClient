@@ -11,14 +11,14 @@ import GameLobby from "./cookie-roulette/Lobby/GameLobby";
 import GameTable from "./cookie-roulette/GameTable/GameTable";
 import Loading from "./cookie-roulette/Loading/Loading";
 import ErrorScreen from "./cookie-roulette/Errors/ErrorScreen";
-//import Tutorial from "./cookie-roulette/Tutorial/Tutorial";
+import Tutorial from "./cookie-roulette/Tutorial/Tutorial";
 
 
 const CookieRoulette = ({store}) => {
 
   useEffect(() => {
     store.app.keep(false);
-    store.socket.connect();
+    //store.socket.connect();
 
     return () => {
       if(store.app.keepConnect === false) store.app.closeApp();
@@ -29,7 +29,7 @@ const CookieRoulette = ({store}) => {
     <div className="cookie-roulette" style={store.app.size.game}>
       {
         {
-          connection: (<Loading />),
+          connection: (<Tutorial />),
           lobby: (<GameLobby />),
           table: (<GameTable />),
           error: (<ErrorScreen />),

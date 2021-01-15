@@ -37,7 +37,12 @@
 }
 
 .tutorial-window .content{
-  height: 1000px;
+  /*height: 1000px;*/
+}
+
+.tutorial-window .content .part-header{
+  text-align: center;
+  font-size: 14px;
 }
 
 .tutorial-window .content > header{
