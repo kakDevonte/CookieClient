@@ -43,6 +43,7 @@ class GameStore {
       _activeKiss: observable,
       _targetSeat: observable,
       _targetSelector: observable,
+      _previousTargetSelector: observable,
       _targetPlayer: observable,
       _targetKiss: observable,
       _kissResult: observable,
@@ -160,7 +161,6 @@ class GameStore {
   }
 
   setTargetSelector(seat) {
-    if(seat === this._targetSelector) return;
     this._previousTargetSelector = this._targetSelector ? this._targetSelector : 0;
     this._targetSelector = seat;
   }
@@ -295,7 +295,6 @@ class GameStore {
     }
   }
 
-  // Тут временно поменять логику и анимацию
   rotateSelector(seat) {
     this.setAllowClickRotate(false);
     this.setTargetSelector(seat);
