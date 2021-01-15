@@ -11,6 +11,7 @@ import GameLobby from "./cookie-roulette/Lobby/GameLobby";
 import GameTable from "./cookie-roulette/GameTable/GameTable";
 import Loading from "./cookie-roulette/Loading/Loading";
 import ErrorScreen from "./cookie-roulette/Errors/ErrorScreen";
+//import Tutorial from "./cookie-roulette/Tutorial/Tutorial";
 
 
 const CookieRoulette = ({store}) => {
