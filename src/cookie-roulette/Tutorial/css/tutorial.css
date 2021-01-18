@@ -37,28 +37,60 @@
 }
 
 .tutorial-window .content{
+  padding: 0 10px;
   /*height: 1000px;*/
 }
 
 .tutorial-window .content .part-header{
   text-align: center;
-  font-size: 14px;
+  font-size: 120%;
 }
 
 .tutorial-window .content > header{
   text-align: center;
-  font-size: 18px;
+  font-size: 140%;
   font-weight: 700;
 }
 
-.tutorial-window .content .sample-1{
+.tutorial-window .content .sample{
   position: relative;
   width: 90%;
-  height: 250px;
   background-size: contain;
-  background-image: url("../../../images/tutorial/sample.png");
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.tutorial-window p{
+  text-align: justify;
+}
+
+.content .sample-menu{
+  height: 40px;
+  background-image: url("../../../images/tutorial/menu.jpg");
+}
+.content .sample-game-table{
+  height: 250px;
+  background-image: url("../../../images/tutorial/game-table.png");
+}
+
+.content .sample-chat{
+  height: 120px;
+  background-image: url("../../../images/tutorial/chat.png");
+}
+
+.content .sample-personal-chats{
+  height: 120px;
+  background-image: url("../../../images/tutorial/personal-chats.png");
+}
+
+.content .sample-inventory{
+  height: 120px;
+  background-image: url("../../../images/tutorial/inventory.png");
+}
+
+.content .sample-change-table{
+  height: 140px;
+  background-image: url("../../../images/tutorial/change-table.png");
 }
 
 .tutorial-window > footer{

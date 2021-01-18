@@ -107,6 +107,16 @@ class AppStore {
     this.setStage('connection');
     this._store.socket.emit('close-roulette');
   }
+
+  /**
+   * Переносит игрока к туториалу
+   */
+  stageTutorial() {
+    if(this.stage === 'tutorial') return;
+
+    this.setStage('tutorial');
+  }
+
   /**
    * Переносит игрока в лобби
    * @param {=string} tid - предыдущий стол

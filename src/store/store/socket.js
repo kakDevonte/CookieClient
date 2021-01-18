@@ -80,9 +80,12 @@ class SocketStore {
 
     //////////////////////////////////////////////////////////////
 
-    socket.on('connect-success', () => {
-      store.app.stageLobby();
-
+    socket.on('connect-success', (enters) => {
+      if(enters) {
+        store.app.stageLobby();
+      } else {
+        store.app.stageTutorial();
+      }
       // console.log('socket (connect-success)');
     });
 

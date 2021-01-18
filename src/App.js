@@ -18,7 +18,7 @@ const CookieRoulette = ({store}) => {
 
   useEffect(() => {
     store.app.keep(false);
-    //store.socket.connect();
+    store.socket.connect();
 
     return () => {
       if(store.app.keepConnect === false) store.app.closeApp();
@@ -29,7 +29,8 @@ const CookieRoulette = ({store}) => {
     <div className="cookie-roulette" style={store.app.size.game}>
       {
         {
-          connection: (<Tutorial />),
+          connection: (<Loading />),
+          tutorial: (<Tutorial />),
           lobby: (<GameLobby />),
           table: (<GameTable />),
           error: (<ErrorScreen />),
