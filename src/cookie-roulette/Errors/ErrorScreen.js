@@ -1,10 +1,11 @@
 import './css/error.css';
 
 import React from 'react';
-import {Link} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {inject, observer} from "mobx-react";
 
 function ErrorScreen({store}) {
+  const history = useHistory();
 
   const errors = () => {
     const e = [];
@@ -20,7 +21,7 @@ function ErrorScreen({store}) {
     <section className="error-screen">
       <span>К сожалению,<br/>произошла ошибка...</span>
       <div>{ errors() }</div>
-      <Link to={'/'}>Вернуться назад</Link>
+      <div onClick={ () => history.goBack() } className="goBackButton" >Вернуться назад</div>
     </section>
   );
 }

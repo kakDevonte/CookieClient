@@ -28,7 +28,7 @@
   font-weight: 600;
 }
 
-.error-screen > a {
+.error-screen > .goBackButton{
   position: absolute;
   bottom: 25px;
   text-decoration: none;
