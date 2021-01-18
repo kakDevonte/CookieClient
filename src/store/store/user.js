@@ -37,6 +37,7 @@ class UserStore {
     data = Object.assign({}, info);
 
     data.id = info.id + '';
+    data.enterCounter = 0;
     data.kissCounter = 0;
     data.cookieCounter = 0;
     data.gifts = [];
@@ -60,6 +61,7 @@ class UserStore {
   updatePersonalInfo(res) {
     const data = this._data;
 
+    if(res.enterCounter) data.enterCounter = res.enterCounter;
     if(res.kissCounter) data.kissCounter = res.kissCounter;
     if(res.cookieCounter) data.cookieCounter = res.cookieCounter;
     if(res.inventory) data.inventory = res.inventory;
