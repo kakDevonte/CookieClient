@@ -81,7 +81,7 @@ class SocketStore {
     //////////////////////////////////////////////////////////////
 
     socket.on('connect-success', (enters) => {
-      if(enters) {
+      if(enters && enters !== 0) {
         store.app.stageLobby();
       } else {
         store.app.stageTutorial();
