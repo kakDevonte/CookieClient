@@ -3,6 +3,7 @@ import './css/talk.css';
 import React from 'react';
 import {inject, observer} from "mobx-react";
 import CounterNewMessages from "./CounterNewMessages";
+import TalkTimeMessage from "./TalkTimeMessage";
 
 function Talk({store, data}) {
   const image = {
@@ -22,6 +23,7 @@ function Talk({store, data}) {
       </div>
       <div className="counter">
         <CounterNewMessages count={data.count} />
+        <TalkTimeMessage count={data.count} date={data.date} />
       </div>
     </article>
   );

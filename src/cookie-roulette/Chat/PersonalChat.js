@@ -13,6 +13,12 @@ function PersonalChat({store, active, talks}) {
   const content = () => {
     const t = [];
 
+    if(talks.size === 0) {
+      return (
+        <span className="no-chats">Здесь будут ваши личные чаты</span>
+      );
+    }
+
     talks.forEach((value, key) => {
       t.push(<Talk data={value} key={key} container={container.current} />);
     });

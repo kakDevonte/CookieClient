@@ -19,6 +19,15 @@
   flex-shrink: 0;
 }
 
+.chat .no-chats{
+  display: block;
+  width: 100%;
+  padding: 20px 0;
+  text-align: center;
+  opacity: 0.5;
+  font-style: italic;
+}
+
 .chat .personal-content{
   box-sizing: border-box;
   position: relative;
