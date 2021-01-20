@@ -58,6 +58,10 @@ class SocketStore {
       this._serverDown('connect');
     });
 
+    socket.on('error', () => {
+      this._serverDown('error');
+    });
+
     socket.on( 'disconnect', () => {
       this._serverDown('game');
     });
@@ -81,7 +85,7 @@ class SocketStore {
     //////////////////////////////////////////////////////////////
 
     socket.on('connect-success', (enters) => {
-      if(enters && enters !== 0) {
+      if(enters && enters > 2) {
         store.app.stageLobby();
       } else {
         store.app.stageTutorial();
