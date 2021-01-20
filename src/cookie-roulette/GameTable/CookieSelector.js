@@ -22,11 +22,11 @@ function CookieSelector({store}) {
     };
 
   return (
-    <div
-      className={ classname() }
-      style={ style() }
-      onClick={ () => store.game.clickRotateCookie() }
-    ><div />
+    <div className={ classname() } style={ style() }>
+      <div
+        className="image-selector-bottle center-X"
+        onClick={ () => store.game.clickRotateCookie() }
+      />
     </div>
   )
 }

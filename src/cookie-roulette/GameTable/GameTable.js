@@ -34,12 +34,12 @@ const GameTable = ({store}) => {
         <BackLayer />
         <article className="roulette-table" style={store.app.size.table}>
           <HeaderMenu />
-          <div className="wrap-players">
+          <div className="wrap-players" onClick={ (event) => store.inventory.clickToggleInventory(null, event) }>
             <Player player={player(7)} index={7} />
             <Player player={player(0)} index={0} />
             <Player player={player(1)} index={1} />
           </div>
-          <div className="wrap-players">
+          <div className="wrap-players" onClick={ (event) => store.inventory.clickToggleInventory(null, event) }>
             <Player player={player(6)} index={6} />
             <div className="cookie-space">
               <WaitMorePlayers />
@@ -50,7 +50,7 @@ const GameTable = ({store}) => {
             </div>
             <Player player={player(2)} index={2} />
           </div>
-          <div className="wrap-players">
+          <div className="wrap-players" onClick={ (event) => store.inventory.clickToggleInventory(null, event) }>
             <Player player={player(5)} index={5} />
             <Player player={player(4)} index={4} />
             <Player player={player(3)} index={3} />

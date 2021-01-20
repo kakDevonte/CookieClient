@@ -121,7 +121,7 @@ function Player ({store, player, index}) {
 
   return (
     <article
-      onClick={ (event) => store.inventory.clickToggleInventory(index, event) }
+      data-index={index}
       className={playerClass()}
       style={playerPhoto()}
     >
