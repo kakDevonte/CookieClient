@@ -73,7 +73,21 @@ class InventoryStore {
   }
 
   clickToggleInventory(seat, event) {
-    if(event && !/player/.test(event.target.className)) return;
+    if(!event && event.target) return;
+
+    if(/cookie-selector|wrap-players/.test(event.target.className)) {
+      if(this._state === ' opened') {
+        this._current = null;
+        this._player = null;
+
+        this.setState(false);
+        return;
+      }
+      return;
+    }
+
+    if(!/player/.test(event.target.className)) return;
+    if(!seat) seat = Number(event.target.getAttribute('data-index'));
 
     const player = this._store.table.getPlayer(seat);
 
@@ -199,6 +213,7 @@ class InventoryStore {
   sendGift(decision) {
     if(decision) {
       this._store.socket.emit('send-gift', this._sendGift);
+      this.clickToggleInventory(null, {target: {className: "wrap-players"}});
     }
 
     this.setSendGift(null);
