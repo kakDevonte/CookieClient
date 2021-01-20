@@ -115,6 +115,7 @@ class AppStore {
     if(this.stage === 'tutorial') return;
 
     this.setStage('tutorial');
+    this._store.socket.emit('in-tutorial');
   }
 
   /**
