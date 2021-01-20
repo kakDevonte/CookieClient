@@ -36,7 +36,7 @@ function Player ({store, player, index}) {
       const last = player.gifted.length;
 
       if(last) {
-        return <Gifted gifts={player.gifted} />
+        return <Gifted gifts={player.gifted} index={index} />
       }
     }
     return <div className="receive-gift" style={{visibility: 'hidden'}} />;
