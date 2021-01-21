@@ -15,7 +15,7 @@ function YourTurnTooltip({store}) {
 
   return (
     <div className={ className() }>
-      Твой ход!<br/>Нажми на печеньку,<br/>чтобы крутить!
+      Твой ход!<br/>Нажми на бутылочку,<br/>чтобы крутить!
     </div>
   );
 }
