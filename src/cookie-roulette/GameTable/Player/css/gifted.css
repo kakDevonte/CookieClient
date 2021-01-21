@@ -12,6 +12,8 @@
   position: absolute;
   width: 100%;
   height: 100%;
+  visibility: hidden;
+  opacity: 0;
 }
 
 .player .receive-gift > article.hided {

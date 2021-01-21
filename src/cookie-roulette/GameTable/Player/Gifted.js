@@ -9,40 +9,42 @@ function Gifted({store, gifts, index}) {
   const showTooltip = (n) => {
     const tooltip = elements.current[n - 1].querySelector('.tooltip-from');
 
-    tooltip.classList.toggle('opened');
+    if(tooltip) tooltip.classList.add('opened');
 
     setTimeout( () => {
-      tooltip.classList.toggle('opened');
+      if(tooltip) tooltip.classList.remove('opened');
     }, 2000);
   };
 
   useEffect(() => {
     const nodes = document.querySelectorAll(`.player.p${index} .receive-gift article`);
     const count = nodes.length;
-    let timeout;
+    let timeout, length = nodes.length;
 
     elements.current = nodes;
 
-    const show = (index, count, restart) => {
-      if(count > 1) {
-        nodes[index].setAttribute('class', 'hided');
+    while(length--) {
+      if(length === 0) {
+        nodes[length].setAttribute('class', 'show');
+      } else {
+        if(nodes[length]) nodes[length].setAttribute('class', '');
+      }
+    }
+
+    const show = (index, count) => {
+        if(nodes[index]) nodes[index].setAttribute('class', 'hided');
+
         index++;
         if(index === count) index = 0;
-        nodes[index].setAttribute('class', 'showed');
-      } else {
-        if(nodes[0].className !== 'show') {
-          nodes[0].setAttribute('class', 'show');
-        }
-      }
 
-      if(restart) timeout = setTimeout(() => show(index, count, restart), 7500);
+        if(nodes[index]) nodes[index].setAttribute('class', 'showed');
+
+        timeout = setTimeout(() => show(index, count), 7500);
     };
 
     if(count > 1) {
       if(timeout) clearTimeout(timeout);
-      show(count - 1, count, true);
-    } else {
-      show(count - 1, count, false);
+      timeout = setTimeout(() => show(0, count), 7500);
     }
 
     return () => {
