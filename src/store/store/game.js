@@ -239,6 +239,7 @@ class GameStore {
    * Эмулириует нажатие на отрицательный ответ по истечении вермени
    */
   autoDecision(){
+    if(this.kissWindow === 'closed') return;
     this._timerDecision = setTimeout(() => {
       if(this.kissWindow === 'opened') {
         this.clickDecision(false, true);
@@ -369,8 +370,14 @@ class GameStore {
    * @param game - данные об игре от сервера
    */
   updateGameData(game){
+    if(this.state === "pending" && game.state === 'target-selected') return;
     this.setState(game.state);
     this.setRound(game.round);
+
+    if(game.state === "pending" || game.state === 'next-round') {
+      this.setKissWindow('closed');
+      this.setTurnTooltip('');
+    }
 
     if(game.state === 'next-round'){
       this._active = null;
