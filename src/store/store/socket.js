@@ -155,8 +155,8 @@ class SocketStore {
 
     //////////////////////////////////////////////////////////////
 
-    socket.on('kiss-request', () => {
-      store.game.kissRequest();
+    socket.on('kiss-request', (round) => {
+      store.game.kissRequest(round);
 
       // console.log('socket (kiss-request)');
     });

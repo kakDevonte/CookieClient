@@ -27,6 +27,7 @@ class GameStore {
   _kissResult = null;
   _receivedGifts = [];
   _timerDecision = null;
+  _kissRequestRound = -1;
 
   constructor (store) {
     makeObservable(this, {
@@ -271,14 +272,24 @@ class GameStore {
       active = false;
     }
 
-    data = { kiss: result, uid, tid, active, auto};
+    data = {
+      kiss: result,
+      uid,
+      tid,
+      round: this._kissRequestRound,
+      active,
+      auto
+    };
+
     this._store.socket.emit('receive-kiss-result', data);
   }
 
   /**
    * Открытие окна для запроса поцелуя
+   * @param {number} round - раунд в котором был запрос
    */
-  kissRequest(){
+  kissRequest(round){
+    this._kissRequestRound = round;
     this.setKissWindow('opened');
   }
 
