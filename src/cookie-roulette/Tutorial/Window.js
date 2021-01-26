@@ -16,7 +16,7 @@ function TutorialWindow({store}) {
   };
 
   return (
-    <div className="tutorial-window">
+    <div className="tutorial-window center-screen">
       <header>Об игре</header>
       <section className="content-wrapper custom-scroll">
         <div className="content">

@@ -1,6 +1,4 @@
 .lobby{
-  display: flex;
-  flex-flow: column nowrap;
   position: relative;
   width: 100%;
   height: 100%;
