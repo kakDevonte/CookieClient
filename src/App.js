@@ -30,7 +30,7 @@ const CookieRoulette = ({store}) => {
       {
         {
           connection: (<Loading />),
-          tutorial: (<GameLobby />),
+          tutorial: (<Tutorial />),
           lobby: (<GameLobby />),
           table: (<GameTable />),
           error: (<ErrorScreen />),

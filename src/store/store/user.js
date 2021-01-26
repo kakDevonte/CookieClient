@@ -44,7 +44,7 @@ class UserStore {
     data.inventory = [];
     data.messages = [];
 
-    common.randomiseUser(data);
+    //common.randomiseUser(data);
 
     this.setData(data);
   };
