@@ -8,6 +8,7 @@ class GameStore {
   _changeTableWindow = '';
   _turnTooltip = '';
   _turnsRemain = 0;
+  _turnsBeforeChangeTable = 5;
 
   _rotateCookie = false;
   _allowClickRotate = false;
@@ -37,6 +38,7 @@ class GameStore {
       _changeTableWindow: observable,
       _turnTooltip: observable,
       _turnsRemain: observable,
+      _turnsBeforeChangeTable: observable,
       _rotateCookie: observable,
       _allowClickRotate: observable,
       _activeSeat: observable,
@@ -67,7 +69,8 @@ class GameStore {
       setTargetKiss: action,
       setKissResult: action,
       addReceivedGift: action,
-      removeReceivedGift: action
+      removeReceivedGift: action,
+      allowChangeTable: action
     });
 
     this._store = store;
@@ -81,6 +84,7 @@ class GameStore {
   get changeTableWindow() { return this._changeTableWindow; }
   get turnTooltip() { return this._turnTooltip; }
   get turnsRemain() { return this._turnsRemain; }
+  get turnsBeforeChangeTable() { return this._turnsBeforeChangeTable; }
   get rotateCookie() { return this._rotateCookie; }
   get allowClickRotate() { return this._allowClickRotate; }
 
@@ -201,6 +205,11 @@ class GameStore {
     this._receivedGifts[index] = null;
   }
 
+  allowChangeTable() {
+    if(!this._turnsBeforeChangeTable) return;
+    this._turnsBeforeChangeTable--;
+  }
+
   //////////////////////////////////////////////////////////////////////////
 
   clickConfirmChangeTable() {
@@ -239,7 +248,7 @@ class GameStore {
   /**
    * Эмулириует нажатие на отрицательный ответ по истечении вермени
    */
-  autoDecision(){
+  autoDecision() {
     if(this.kissWindow === 'closed') return;
     this._timerDecision = setTimeout(() => {
       if(this.kissWindow === 'opened') {
@@ -398,6 +407,9 @@ class GameStore {
       this._target = null;
       this.setTargetPlayer(game.target[0]);
       this.setTargetKiss(game.target[3]);
+
+      //if(this._round !== game.round)
+        this.allowChangeTable();
 
       setTimeout(() => this.setTargetSeat(null), 1000);
     }else{
