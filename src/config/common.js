@@ -89,6 +89,20 @@ class common {
 
     return [left, top];
   }
+
+  /**
+   * @param number {number} количество
+   * @param titles {[string, ...]} - ['час', 'часа', 'часов']
+   * @returns {string}
+   */
+  static wordEnding(number, titles){
+    const cases = [2, 0, 1, 1, 1, 2];
+    return number + ' ' + titles[
+      (number % 100 > 4 && number % 100 < 20) ?
+        2 :
+        cases[(number % 10 < 5) ? number % 10 : 5]
+      ];
+  }
 }
 
 export default common;
