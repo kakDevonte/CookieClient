@@ -5,7 +5,7 @@ import {inject, observer} from "mobx-react";
 
 function GameLobby({store}) {
   return (
-    <section className="lobby">
+    <section className="lobby sbg-bottle">
       <div className="message">
         <header>Ищем стол</header>
         <span>подождите немного</span>

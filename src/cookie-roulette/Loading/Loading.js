@@ -18,7 +18,7 @@ function Loading({store}) {
   }, []);
 
   return (
-    <section className="loading-screen">
+    <section className="loading-screen sbg-bottle">
       <span>Подключаемся</span>
       <i className="center-screen" />
     </section>

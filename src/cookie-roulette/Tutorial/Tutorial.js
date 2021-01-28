@@ -6,7 +6,7 @@ import TutorialWindow from "./Window";
 
 function Tutorial() {
   return (
-    <section className="tutorial-screen">
+    <section className="tutorial-screen sbg-bottle">
       <TutorialWindow />
     </section>
   );

@@ -34,7 +34,23 @@ html, body{
   }
 }
 
-.center-screen{
+.sbg-bottle{
+  background:
+          url('../images/bg-image.png') no-repeat center,
+          radial-gradient(46.39% 46.39% at 50% 53.61%, #8543D9 49.15%, #7219A8 100%),
+          #F7ECDA;
+  background-size: cover;
+}
+
+.sbg-bottle-light{
+  background:
+          url('../images/bg-image.png') no-repeat center,
+          radial-gradient(46.39% 46.39% at 50% 53.61%, #913AFF 49.15%, #A315F9 100%);
+  background-size: cover;
+}
+
+.center-screen,
+.center-XY{
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
