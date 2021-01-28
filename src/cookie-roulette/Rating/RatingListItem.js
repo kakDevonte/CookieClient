@@ -1,0 +1,57 @@
+import './css/rating-list-item.css';
+
+import React from 'react';
+import {inject, observer} from "mobx-react";
+import {useHistory} from "react-router-dom";
+
+function RatingListItem({store, position, data}) {
+  const history = useHistory();
+
+  const toProfile = {
+    pathname: "/Profile",
+    propsSearch: {
+      id: data.id,
+      myProfile: data.id === store.user.id,
+    }
+  };
+
+  const openProfile = () => {
+    store.app.keep(true);
+    history.push(toProfile);
+  };
+
+  const positionContent = () => {
+    switch(position) {
+      case 1:
+        return <i className="gold center-XY" />;
+
+      case 2:
+        return <i className="silver center-XY" />;
+
+      case 3:
+        return <i className="bronze center-XY" />;
+
+      default:
+        return <span className="center-XY">{position}</span>;
+    }
+  };
+
+  const style = { width: store.app.size.ratingListItem.height };
+  const photo = { backgroundImage: `url('${data.photo}')` };
+
+  return (
+    <article className="rating-list-item" onClick={ () => openProfile() } style={store.app.size.ratingListItem} >
+      <div className="r-position" style={style}> { positionContent() }</div>
+      <div className="r-photo" style={style} >
+        <i className="center-XY" style={photo} />
+      </div>
+      <span className="r-name center-Y">{data.first_name} {data.last_name}</span>
+      <i className="r-kiss-icon" style={style} />
+      <span className="r-kisses center-Y">{data.kisses}</span>
+      <div className="r-separator" />
+    </article>
+  );
+}
+
+
+export default inject('store')( observer(RatingListItem) );

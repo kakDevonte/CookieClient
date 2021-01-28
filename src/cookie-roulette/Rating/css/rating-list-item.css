@@ -1,0 +1,86 @@
+.rating-list-item{
+  position: relative;
+  width: 100%;
+  height: 44px;
+  cursor: pointer;
+}
+.rating-list-item span,
+.rating-list-item i{
+  display: block;
+}
+
+.rating-list-item > .r-position{
+  position: relative;
+  height: 100%;
+  width: 44px;
+  float: left;
+}
+
+.r-position span {
+  position: absolute;
+  font-size: 150%;
+}
+
+.r-position i{
+  position: absolute;
+  width: 42%;
+  height: 57%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.r-position i.gold{
+  background-image: url('../../../images/gold-medal.png');
+}
+.r-position i.silver{
+  background-image: url('../../../images/silver-medal.png');
+}
+.r-position i.bronze{
+  background-image: url('../../../images/bronze-medal.png');
+}
+
+
+.rating-list-item > .r-photo{
+  position: relative;
+  margin-right: 5px;
+  width: 38px;
+  height: 100%;
+  float: left;
+}
+
+.rating-list-item > .r-photo i{
+  position: relative;
+  width: 75%;
+  height: 75%;
+  border-radius: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.rating-list-item > .r-name{
+  position: relative;
+  float: left;
+  font-size: 120%;
+}
+
+.rating-list-item > .r-kisses{
+  position: relative;
+  font-size: 120%;
+  float: right;
+}
+.rating-list-item > .r-kiss-icon{
+  position: relative;
+  float: right;
+  width: 44px;
+  height: 100%;
+  margin: 0 10px;
+  background: url('../../../images/kissed.svg') no-repeat center;
+  background-size: 60%;
+}
+
+.rating-list-item > .r-separator{
+  height: 1px;
+  background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(2,0,27,0.22) 15%, rgba(0,0,5,0.22) 85%, rgba(0,0,0,0) 100%);
+}

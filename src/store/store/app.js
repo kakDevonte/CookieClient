@@ -85,6 +85,9 @@ class AppStore {
           },
           giftConfirm: {
             height: parseInt(width * 0.765, 10)
+          },
+          ratingListItem: {
+            height: parseInt(width * 0.118, 10)
           }
         });
       }

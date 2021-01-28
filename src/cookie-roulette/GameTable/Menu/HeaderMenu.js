@@ -30,6 +30,9 @@ function HeaderMenu({store}) {
       </section>
       <KissCounter kisses={store.user.data.kissCounter} />
       <ChangeButton store={store} remain={store.game.turnsBeforeChangeTable} />
+      <div className="rating-button" onClick={ () => store.rating.toggleRatingPanel() }>
+        <i className="center-XY" />
+      </div>
       <input type='button' className="settings" />
       <section className="vk-apps-overlay">
         <input type='button' className="setup" />
@@ -79,7 +82,7 @@ function ChangeButton({store, remain}) {
       <div className="change-table" onClick={ () => showTooltip() }>
         <span className="center-screen">{ remain }</span>
         <div className={classTooltip}>
-          До мены стола: { common.wordEnding(remain, ['ход', 'хода', 'ходов']) }
+          До смены стола: { common.wordEnding(remain, ['ход', 'хода', 'ходов']) }
           <div className="arrow-up center-X" />
         </div>
       </div>

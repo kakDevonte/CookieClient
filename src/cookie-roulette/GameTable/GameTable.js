@@ -20,6 +20,7 @@ import GiveGift from "./Modal/GiveGift";
 
 import Chat from "../Chat/Chat";
 import Inventory from "../Inventory/Inventory";
+import RatingPanel from "../Rating/Rating";
 
 const GameTable = ({store}) => {
   const player = store.table.getPlayer;
@@ -32,7 +33,7 @@ const GameTable = ({store}) => {
   return (
       <section className="cookie-roulette-game">
         <BackLayer />
-        <article className="roulette-table" style={store.app.size.table}>
+        <article className="roulette-table sbg-bottle" style={store.app.size.table}>
           <HeaderMenu />
           <div className="wrap-players" onClick={ (event) => store.inventory.clickToggleInventory(null, event) }>
             <Player player={player(7)} index={7} />
@@ -65,6 +66,7 @@ const GameTable = ({store}) => {
           <Inventory search={store.app.search} />
         </article>
         <GiveGift />
+        <RatingPanel />
       </section>
   );
 };

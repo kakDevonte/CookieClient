@@ -1,0 +1,95 @@
+.rating-panel{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 100%;
+  top: 0;
+  z-index: 20;
+  color: white;
+  overflow: hidden;
+  transition: left ease-in-out 500ms;
+  background-size: 400%;
+  background-position: center top;
+}
+
+.rating-panel.opened{
+  left: 0;
+  transition: left ease-in-out 500ms;
+}
+
+.rating-panel > header{
+  position: relative;
+  width: 100%;
+  height: 6.224%;
+  background-color: #8932da;
+}
+
+.rating-panel > header > span{
+  position: absolute;
+  display: block;
+  font-size: 120%;
+}
+
+.rating-panel .close-rating{
+  position: relative;
+  display: block;
+  float: left;
+  width: 3%;
+  height: 45%;
+  margin-left: 2%;
+  background: url("../../../images/back-icon.png") center no-repeat;
+  cursor: pointer;
+}
+
+.rating-panel > .rating-period{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  height: 6.65%;
+  background-color: #8932da;
+}
+
+.rating-period > span{
+  display: block;
+  width: 31%;
+  padding: 8px 0;
+  border-radius: 16px;
+  text-align: center;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.rating-period > span.active{
+  background: linear-gradient(268.17deg, #EFCB84 23.68%, #BC894C 87.03%);
+  color: white;
+}
+
+.rating-panel > .rating-list{
+  width: 100%;
+  height: 80.902%;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  scrollbar-color: #8932da #9549f6;
+  padding: 0;
+}
+
+.rating-panel > .rating-list > .loading{
+  position: absolute;
+  width: 10vh;
+  height: 10vh;
+  background-image: url("../../../images/loading.svg");
+  background-position: center center;
+  background-size: contain;
+}
+
+.rating-panel > .rating-list::-webkit-scrollbar { width: 12px; }
+.rating-panel > .rating-list::-webkit-scrollbar-track { background:  #9549f6; }
+.rating-panel > .rating-list::-webkit-scrollbar-thumb { background-color: #8932da; }
+
+.rating-panel > .your-rating-position{
+  width: 100%;
+  height: 6.224%;
+  background-color: #EFCB84;
+}

@@ -210,6 +210,14 @@ class SocketStore {
     });
 
     //////////////////////////////////////////////////////////////
+
+    socket.on('receive-rating-data', (response) => {
+      this._store.rating.receiveData(response);
+
+      // console.log('socket (receive-rating-data)', response);
+    });
+
+    //////////////////////////////////////////////////////////////
   }
 }
 

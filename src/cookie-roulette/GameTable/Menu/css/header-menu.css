@@ -114,6 +114,7 @@
 }
 
 .header-menu > .change-table,
+.header-menu > .rating-button,
 .header-menu > .settings{
   position: relative;
   width: 8.5%;
@@ -125,7 +126,8 @@
   cursor: pointer;
 }
 
-.header-menu > .change-table.active i{
+.header-menu > .change-table.active i,
+.header-menu > .rating-button i{
   position: absolute;
   display: block;
   width: 60%;
@@ -133,6 +135,15 @@
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+.header-menu > .rating-button i{
+  width: 50%;
+  height: 50%;
+  background-image: url("../../../../images/rating-button.png");
+}
+
+.header-menu > .change-table.active i{
   background-image: url("../../../../images/change-table-icon.svg");
 }
 
