@@ -9,9 +9,11 @@ import RatingStore from "./store/rating";
 import AmplitudeStore from "./store/amplitudeStore";
 
 class Store {
-  constructor(os,info) {
+  constructor(os,info, platform) {
     this.os = os;
     this.info = info;
+    this.platform = platform;
+
     this.app = new AppStore(this);
     this.socket = new SocketStore(this);
     this.user = new UserStore(this);

@@ -24,7 +24,8 @@ class AmplitudeStore{
 
     this._amplitude.track({
       event_type: 'free_gift',
-      user_id: this._store.user.id
+      user_id: this._store.user.id,
+      platform: this._store.platform
     });
   }
 
@@ -33,7 +34,8 @@ class AmplitudeStore{
 
     this._amplitude.track({
       event_type: 'hard_gift',
-      user_id: this._store.user.id
+      user_id: this._store.user.id,
+      platform: this._store.platform
     });
   }
 
@@ -42,7 +44,8 @@ class AmplitudeStore{
 
     this._amplitude.track({
       event_type: 'rotation',
-      user_id: this._store.user.id
+      user_id: this._store.user.id,
+      platform: this._store.platform
     });
   }
 }
