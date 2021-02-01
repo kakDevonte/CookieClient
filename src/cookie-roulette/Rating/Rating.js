@@ -28,7 +28,7 @@ function Rating({store}) {
   return (
     <section className={'rating-panel sbg-bottle-light' + store.rating.state}>
       <header className="header-menu-rating">
-        <i className="close-rating center-Y" onClick={ () => store.rating.toggleRatingPanel() } />
+        <i className="close-rating-bottle center-Y" onClick={ () => store.rating.toggleRatingPanel() } />
         <span className="center-XY">Самые зацелованные</span>
       </header>
       { buttons() }
