@@ -214,6 +214,7 @@ class InventoryStore {
     if(decision) {
       this._store.socket.emit('send-gift', this._sendGift);
       this.clickToggleInventory(null, {target: {className: "wrap-players"}});
+      this._store.amplitude.sendGift(this._sendGift.buy);
     }
 
     this.setSendGift(null);

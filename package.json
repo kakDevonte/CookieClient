@@ -21,6 +21,7 @@
   "dependencies": {
     "@vkontakte/vk-bridge": "^2.3.0",
     "@vkontakte/vk-miniapps-deploy": "0.0.17",
+    "amplitude": "^5.1.4",
     "babel-eslint": "^10.1.0",
     "core-js": "^3.6.4",
     "mobx": "^6.0.4",

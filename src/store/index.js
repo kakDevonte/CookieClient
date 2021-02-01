@@ -6,6 +6,7 @@ import TableStore from "./store/table";
 import ChatStore from "./store/chat";
 import InventoryStore from "./store/inventory";
 import RatingStore from "./store/rating";
+import AmplitudeStore from "./store/amplitudeStore";
 
 class Store {
   constructor(os,info) {
@@ -19,6 +20,7 @@ class Store {
     this.chat = new ChatStore(this);
     this.inventory = new InventoryStore(this);
     this.rating = new RatingStore(this);
+    this.amplitude = new AmplitudeStore(this);
   }
 }
 
