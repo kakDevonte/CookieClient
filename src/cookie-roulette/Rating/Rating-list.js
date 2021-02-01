@@ -12,7 +12,7 @@ function RatingList({store, list}) {
         m.push(<RatingListItem position={index + 1} data={value} key={index} />);
       });
     } else {
-      m.push(<div className="loading center-XY"  key={0}/>)
+      m.push(<div className="loading-rating-list center-XY"  key={0}/>)
     }
 
     return m;

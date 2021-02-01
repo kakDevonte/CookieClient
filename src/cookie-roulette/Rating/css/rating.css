@@ -75,7 +75,7 @@
   padding: 0;
 }
 
-.rating-panel > .rating-list > .loading{
+.rating-panel > .rating-list > .loading-rating-list{
   position: absolute;
   width: 10vh;
   height: 10vh;
