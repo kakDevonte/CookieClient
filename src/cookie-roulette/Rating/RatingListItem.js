@@ -31,6 +31,9 @@ function RatingListItem({store, position, data}) {
       case 3:
         return <i className="bronze center-XY" />;
 
+      case '>1000':
+        return <span className="max-position center-XY">{position}</span>;
+
       default:
         return <span className="center-XY">{position}</span>;
     }
@@ -38,6 +41,8 @@ function RatingListItem({store, position, data}) {
 
   const style = { width: store.app.size.ratingListItem.height };
   const photo = { backgroundImage: `url('${data.photo}')` };
+
+  if(!data.id) return <article className="rating-list-item" style={store.app.size.ratingListItem} />;
 
   return (
     <article className="rating-list-item" onClick={ () => openProfile() } style={store.app.size.ratingListItem} >

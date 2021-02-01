@@ -84,6 +84,17 @@
   background-size: contain;
 }
 
+.rating-panel > .rating-list > .error{
+  position: absolute;
+  text-align: center;
+  font-size: 120%;
+}
+
+.rating-list > .error span:first-child{
+  font-size: 150%;
+  white-space: nowrap;
+}
+
 .rating-panel > .rating-list::-webkit-scrollbar { width: 12px; }
 .rating-panel > .rating-list::-webkit-scrollbar-track { background:  #9549f6; }
 .rating-panel > .rating-list::-webkit-scrollbar-thumb { background-color: #8932da; }

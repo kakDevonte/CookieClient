@@ -2,7 +2,7 @@ import React from 'react';
 import {inject, observer} from "mobx-react";
 import RatingListItem from "./RatingListItem";
 
-function RatingList({list}) {
+function RatingList({store, list}) {
 
   const content = () => {
     const m = [];
@@ -17,6 +17,19 @@ function RatingList({list}) {
 
     return m;
   };
+
+  if(store.rating.error) {
+    return (
+      <div className="rating-list custom-scroll">
+        <div className="error center-XY" >
+          <span>Произошла ошибка</span>
+          <br/>
+          <br/>
+          <span>данные не получены, попробуйте позже</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="rating-list custom-scroll">

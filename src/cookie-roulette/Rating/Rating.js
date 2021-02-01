@@ -18,7 +18,7 @@ function Rating({store}) {
 
     return (
       <div className="rating-period">
-        <span className={name.today} onClick={ () => store.rating.requestRatingData('today') }>Сегодня</span>
+        <span className={name.day} onClick={ () => store.rating.requestRatingData('day') }>Сегодня</span>
         <span className={name.week} onClick={ () => store.rating.requestRatingData('week') }>За неделю</span>
         <span className={name.month} onClick={ () => store.rating.requestRatingData('month') }>За месяц</span>
       </div>

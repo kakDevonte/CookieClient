@@ -3,17 +3,22 @@ import {action, makeObservable, observable} from "mobx";
 class RatingStore {
 
   _state = '';
-  _period = 'today';
+  _error = false;
+  _period = 'day';
   _ratingList = {
-    today: [],
+    day: [],
     week: [],
     month: []
   };
-  _myRatingData = {};
+  _myRatingData = {
+    position: '>1000',
+    id: null,
+  };
 
   constructor(store){
     makeObservable(this, {
       _state: observable,
+      _error: observable,
       _period: observable,
       _ratingList: observable,
       _myRatingData: observable,
@@ -27,6 +32,7 @@ class RatingStore {
   }
 
   get state() { return this._state; }
+  get error() { return this._error; }
   get period() { return this._period; }
   get ratingList() { return this._ratingList[this._period]; }
   get myRating() { return this._myRatingData; }
@@ -36,6 +42,11 @@ class RatingStore {
     this._state = state;
   }
 
+  setError(error) {
+    if(error === this._error) return;
+    this._error = error;
+  }
+
   setPeriod(period) {
     if(period === this._period) return;
     this._period = period;
@@ -43,11 +54,11 @@ class RatingStore {
 
   updateRatingList(data, period) {
     if(!period) {
-      this._ratingList = { today: [], week: [], month: [] };
+      this._ratingList = { day: [], week: [], month: [] };
       return;
     }
 
-    if(period === 'today' || period === 'week' || period === 'month') {
+    if(period === 'day' || period === 'week' || period === 'month') {
       this._ratingList[period] = data;
     }
   }
@@ -59,9 +70,10 @@ class RatingStore {
   toggleRatingPanel() {
     if(this._state === '') {
       this.setState(' opened');
-      this.requestRatingData('today');
+      this.requestRatingData('day');
     }else if(this._state === ' opened') {
       this.setState('');
+      this.setError(false);
 
       setTimeout(() => {
         this.updateRatingList();
@@ -70,6 +82,7 @@ class RatingStore {
   }
 
   requestRatingData(period) {
+    this.setError(false);
     this.setPeriod(period);
 
     if(this._ratingList[period].length > 0) return;
@@ -77,6 +90,10 @@ class RatingStore {
   }
 
   receiveData(data) {
+    if(data === 'error') {
+      this.setError(true);
+      return;
+    }
     this.updateRatingList(data.items, data.period);
     this.updateMyRatingData(data.my);
   }
