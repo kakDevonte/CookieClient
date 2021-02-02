@@ -127,7 +127,7 @@ class InventoryStore {
   clickPersonalMessage(){
     this._store.chat.clickChangeTypeChat('personal');
     this._store.chat.clickOpenTalk(this._player);
-    this.clickToggleInventory(this._current);
+    this.clickToggleInventory(this._current, {target: {className: 'wrap-players'}});
   }
 
   receiveGiftsData(data){
