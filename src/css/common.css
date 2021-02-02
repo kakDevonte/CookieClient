@@ -14,8 +14,8 @@ html, body{
 }
 
 .cookie-roulette{
-  display: flex;
-  flex-flow: column nowrap;
+  /*display: flex;*/
+  /*flex-flow: column nowrap;*/
   background-color: #ebf6ff;
 
   font-family: Gotham Pro;

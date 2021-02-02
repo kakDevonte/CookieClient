@@ -28,6 +28,8 @@
   position: absolute;
   display: block;
   font-size: 120%;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .rating-panel .close-rating-bottle{

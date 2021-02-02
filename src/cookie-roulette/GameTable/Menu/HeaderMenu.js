@@ -33,7 +33,7 @@ function HeaderMenu({store}) {
       <div className="rating-button" onClick={ () => store.rating.toggleRatingPanel() }>
         <i className="center-XY" />
       </div>
-      <input type='button' className="settings" />
+      {/*<input type='button' className="settings" />*/}
       <section className="vk-apps-overlay">
         <input type='button' className="setup" />
         <div />

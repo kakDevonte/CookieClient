@@ -66,13 +66,13 @@
 .rating-list-item > .r-name{
   position: relative;
   float: left;
-  font-size: 120%;
-  max-width: 50%;
+  font-size: 115%;
+  max-width: 45%;
 }
 
 .rating-list-item > .r-kisses{
   position: relative;
-  font-size: 120%;
+  font-size: 115%;
   float: right;
 }
 .rating-list-item > .r-kiss-icon{
@@ -80,7 +80,7 @@
   float: right;
   width: 44px;
   height: 100%;
-  margin: 0 10px;
+  margin-right: 5px;
   background: url('../../../images/kissed.svg') no-repeat center;
   background-size: 60%;
 }
