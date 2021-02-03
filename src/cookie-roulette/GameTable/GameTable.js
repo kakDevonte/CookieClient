@@ -43,9 +43,14 @@ const GameTable = ({store}) => {
           <div className="wrap-players" onClick={ (event) => store.inventory.clickToggleInventory(null, event) }>
             <Player player={player(6)} index={6} />
             <div className="cookie-space">
-              <WaitMorePlayers />
+              <WaitMorePlayers state={store.game.state} />
               <AnimationCookie/>
-              <CookieSelector />
+              <CookieSelector
+                state={store.game.state}
+                allow={store.game.allowClickRotate}
+                rotate={store.game.rotateCookie}
+                click={ () => store.game.clickRotateCookie() }
+              />
               <TurnCountTooltip/>
               <YourTurnTooltip />
             </div>

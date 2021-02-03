@@ -2,12 +2,16 @@ import './css/tutorial.css';
 
 import React from 'react';
 import {inject, observer} from "mobx-react";
-import TutorialWindow from "./Window";
 
-function Tutorial() {
+import Step_1 from './Step_1/Step';
+import Step_2 from './Step_2/Step';
+import TutorialRoom from "./TutorialRoom";
+
+function Tutorial({store}) {
   return (
     <section className="tutorial-screen sbg-bottle">
-      <TutorialWindow />
+      <TutorialRoom />
+      { [<Step_1 />, <Step_2 />][store.tutorial.step] }
     </section>
   );
 }

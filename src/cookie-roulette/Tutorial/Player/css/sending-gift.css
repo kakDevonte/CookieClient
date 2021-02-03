@@ -1,0 +1,44 @@
+.player .sending-gift{
+  position: absolute;
+  width: 70%;
+  height: 60%;
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.9));
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  transition: all ease-in 2000ms;
+  transform: scale(0.5);
+  z-index: 3;
+  animation:
+          my-sending-gift-opacity linear,
+          my-sending-gift ease-in,
+          my-sending-gift-opacity linear;
+
+  animation-fill-mode: forwards, forwards, forwards;
+  animation-iteration-count: 1, 1, 1;
+  animation-duration: 200ms, 1800ms, 400ms;
+  animation-direction: normal, normal, reverse;
+  animation-delay: 0s, 200ms, 1800ms;
+}
+
+@keyframes my-sending-gift-opacity {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes my-sending-gift {
+  0% {
+    filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.9));
+    transform: scale(0.5);
+  }
+
+  50% {
+    filter: drop-shadow(3px 3px 8px rgba(0, 0, 0, 0.5));
+    transform: scale(1.8);
+  }
+
+  100%{
+    filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.7));
+    transform: scale(1);
+  }
+}

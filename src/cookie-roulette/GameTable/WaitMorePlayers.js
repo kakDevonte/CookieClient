@@ -3,9 +3,9 @@ import './css/wait-players.css';
 import React from 'react';
 import {inject, observer} from "mobx-react";
 
-function WaitMorePlayers({store}) {
+function WaitMorePlayers({state}) {
   const className = () => {
-    if(store.game.state === 'pending') return 'wait-players show';
+    if(state === 'pending') return 'wait-players show';
     return 'wait-players';
   };
 

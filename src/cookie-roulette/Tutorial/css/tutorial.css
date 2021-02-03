@@ -106,3 +106,39 @@
   border-radius: 10px;
   cursor: pointer;
 }
+
+.step-1.info{
+  color: #fff;
+  position: absolute;
+  background-color: #0009;
+  padding: 25px;
+  z-index: 11;
+  font-weight: 700;
+  border-radius: 15px;
+}
+
+.step-1.info .info-header{
+  display: block;
+  margin-bottom: 30px;
+  font-size: 140%;
+  white-space: nowrap;
+}
+
+.step-1.info p{
+  text-align: justify;
+}
+
+.step-1 .button-proceed-tutorial{
+  position: relative;
+  margin-top: 30px;
+  padding: 10px;
+  width: 50%;
+  background: linear-gradient(180deg, #448715 0%, #249147 100%);
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.tutorial-screen .accent-item{
+  z-index: 11;
+}
