@@ -1,4 +1,5 @@
 import {action, makeObservable, observable} from "mobx";
+import Collection from "../../helpers/Collection";
 
 class TutorialStore {
   _step = 0;
@@ -7,12 +8,20 @@ class TutorialStore {
   _inventoryState = '';
   _inventoryCurrent = null;
   _targetSeat = null;
+
+  _targetSelector = {
+    current: null,
+    previous: 0
+  };
+
   _activeSeat = null;
   _receivedGifts = [];
 
   _gameState = 'pending';
   _rotateCookie = null;
   _allowClickRotate = false;
+
+  _kissResult = false;
 
   constructor(store) {
     this.getPlayer = this.getPlayer.bind(this);
@@ -21,6 +30,7 @@ class TutorialStore {
       _step: observable,
       _players: observable,
       _targetSeat: observable,
+      _targetSelector: observable,
       _activeSeat: observable,
       _inventoryState: observable,
       _inventoryCurrent: observable,
@@ -28,6 +38,7 @@ class TutorialStore {
       _gameState: observable,
       _rotateCookie: observable,
       _allowClickRotate: observable,
+      _kissResult: observable,
 
       setStep: action,
       updatePlayers: action,
@@ -45,12 +56,18 @@ class TutorialStore {
   get inventoryCurrent() { return this._inventoryCurrent; }
 
   get targetSeat() { return this._targetSeat; }
+
+  get targetSelector() { return this._targetSelector.current }
+  get previousTargetSelector() { return this._targetSelector.previous; }
+
   get activeSeat() { return this._activeSeat; }
   get giftReceived() { return this._receivedGifts; }
 
   get gameState() { return this._gameState; }
   get rotateCookie() { return this._rotateCookie; }
   get allowClickRotate() { return this._allowClickRotate; }
+
+  get kissResult() { return this._kissResult; }
 
   getPlayer(index) {
     return this._players.get(index);
@@ -60,6 +77,14 @@ class TutorialStore {
 
   setActiveSeat(seat) { this._activeSeat = seat; }
   setTargetSeat(seat) { this._targetSeat = seat; }
+  setKissResult(result) { this._kissResult = result; }
+
+  setTargetSelector(seat) {
+    this._targetSelector.previous = this._targetSelector.current ? this._targetSelector.current : 0;
+    this._targetSelector.current = seat;
+  }
+
+  setRotateCookie(rotate){ this._rotateCookie = rotate; }
 
   setGameState(state) { this._gameState = state; }
 
@@ -76,12 +101,28 @@ class TutorialStore {
 
 
   nextStepOne() {
+    this._store.chat.setMode('local');
     this._store.app.closeBackLayer();
     this.setStep(1);
   }
 
 
+  fromInfo(uid) {
+    const [user] = this.findPlayer(uid);
 
+    return {
+      id: user.id,
+      name: user.name,
+      fullName: user.fullName,
+      photo: user.photo,
+      gender: user.gender,
+      seat: user.seat
+    }
+  }
+
+  findPlayer(uid) {
+    return Collection.findOne(this._players, uid, 'id');
+  }
 
   crateUser() {
     const info = this._store.user.data;
@@ -116,7 +157,7 @@ class TutorialStore {
     };
 
     const bot = {
-      id: '1',
+      id: id,
       name: name,
       fullName: fullname,
       photo: photo[fullname],
@@ -166,15 +207,30 @@ class TutorialStore {
 
     setTimeout(() => {
       this._crateBot(4, '8', 'Александр', 'Александр Домогаров', 'male');
-      this._store.app.openBackLayer();
+      //this._store.app.openBackLayer();
 
       const player = document.querySelector('.player.p4');
 
       setTimeout(() => {
         player.classList.toggle('accent-item');
+
+        this._rotateSelector(2);
+        this._store.chat.sendLocalMessage('6', 'Привет!');
+        this._store.chat.sendLocalMessage('6', 'Привет!', this._store.user.id);
       }, 1000);
 
     }, 7000);
+  }
+
+  _rotateSelector(seat) {
+    this.setTargetSeat(null);
+    this.setTargetSelector(seat);
+    this.setRotateCookie(true);
+
+    setTimeout( () => {
+      this.setRotateCookie(false);
+      this.setTargetSeat(seat);
+    }, 4000);
   }
 }
 

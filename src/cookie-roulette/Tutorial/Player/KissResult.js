@@ -17,11 +17,11 @@ function KissResult({store, index, delay}){
   }, []);
 
   const calculateMove = () => {
-    const isActive = index === store.game.activeSeat;
+    const isActive = index === store.tutorial.activeSeat;
     let target, active, left, top;
 
-    active = document.querySelector('.player.p' + store.game.activeSeat);
-    target = document.querySelector('.player.p' + store.game.targetSeat);
+    active = document.querySelector('.player.p' + store.tutorial.activeSeat);
+    target = document.querySelector('.player.p' + store.tutorial.targetSeat);
 
     if(active && target) {
       [left, top] = common.calculateMovePosition(active, target, isActive);
