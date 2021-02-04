@@ -25,6 +25,10 @@ import RatingPanel from "../Rating/Rating";
 const GameTable = ({store}) => {
   const player = store.table.getPlayer;
 
+  const app = store.app;
+  const game = store.game;
+  const inventory = store.inventory;
+
   const tid = () => {
     //document.title = store.table.id;
     return store.table.id;
@@ -33,30 +37,33 @@ const GameTable = ({store}) => {
   return (
       <section className="cookie-roulette-game">
         <BackLayer />
-        <article className="roulette-table sbg-bottle" style={store.app.size.table}>
+        <article className="roulette-table sbg-bottle" style={app.size.table}>
           <HeaderMenu />
-          <div className="wrap-players" onClick={ (event) => store.inventory.clickToggleInventory(null, event) }>
+          <div className="wrap-players" onClick={ (event) => inventory.clickToggleInventory(null, event) }>
             <Player player={player(7)} index={7} />
             <Player player={player(0)} index={0} />
             <Player player={player(1)} index={1} />
           </div>
-          <div className="wrap-players" onClick={ (event) => store.inventory.clickToggleInventory(null, event) }>
+          <div className="wrap-players" onClick={ (event) => inventory.clickToggleInventory(null, event) }>
             <Player player={player(6)} index={6} />
             <div className="cookie-space">
-              <WaitMorePlayers state={store.game.state} />
-              <AnimationCookie/>
+              <WaitMorePlayers state={game.state} />
+              <AnimationCookie
+                seat={game.targetSelector}
+                oldSeat={game.previousTargetSelector}
+              />
               <CookieSelector
-                state={store.game.state}
-                allow={store.game.allowClickRotate}
-                rotate={store.game.rotateCookie}
-                click={ () => store.game.clickRotateCookie() }
+                state={game.state}
+                allow={game.allowClickRotate}
+                rotate={game.rotateCookie}
+                click={ () => game.clickRotateCookie() }
               />
               <TurnCountTooltip/>
               <YourTurnTooltip />
             </div>
             <Player player={player(2)} index={2} />
           </div>
-          <div className="wrap-players" onClick={ (event) => store.inventory.clickToggleInventory(null, event) }>
+          <div className="wrap-players" onClick={ (event) => inventory.clickToggleInventory(null, event) }>
             <Player player={player(5)} index={5} />
             <Player player={player(4)} index={4} />
             <Player player={player(3)} index={3} />
@@ -66,9 +73,9 @@ const GameTable = ({store}) => {
           <KissModal />
           <ServerFail />
         </article>
-        <article className="utility-wrapper" style={store.app.size.utilities}>
+        <article className="utility-wrapper" style={app.size.utilities}>
           <Chat />
-          <Inventory search={store.app.search} />
+          <Inventory search={app.search} />
         </article>
         <GiveGift />
         <RatingPanel />
