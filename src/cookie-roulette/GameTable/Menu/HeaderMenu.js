@@ -1,9 +1,11 @@
 import './css/header-menu.css';
 
-import React, {useState} from 'react';
+import React from 'react';
 import {inject, observer} from "mobx-react";
 import {useHistory} from 'react-router-dom';
-import common from "../../../config/common";
+
+import KissCounter from "./KissCounter";
+import ChangeButton from "./ChangeButton";
 
 function HeaderMenu({store}) {
   const history = useHistory();
@@ -25,11 +27,14 @@ function HeaderMenu({store}) {
       <i className="exit-game" onClick={ () => { history.goBack() } } />
       <section className="counter-cookie-count">
         <i />
-        <span className="center-screen">{store.user.data.cookieCounter}</span>
+        <span className="center-screen">{ store.user.data.cookieCounter }</span>
         { shopButton() }
       </section>
-      <KissCounter kisses={store.user.data.kissCounter} />
-      <ChangeButton store={store} remain={store.game.turnsBeforeChangeTable} />
+      <KissCounter kisses={ store.user.data.kissCounter } />
+      <ChangeButton
+        remain={ store.game.turnsBeforeChangeTable }
+        click={ () => store.game.clickConfirmChangeTable() }
+      />
       <div className="rating-button" onClick={ () => store.rating.toggleRatingPanel() }>
         <i className="center-XY" />
       </div>
@@ -42,59 +47,5 @@ function HeaderMenu({store}) {
     </header>
   );
 }
-
-function KissCounter({kisses}) {
-  const [classTooltip, setClassTooltip] = useState('tooltip center-X');
-
-  const showTooltip = () => {
-    setClassTooltip('tooltip center-X opened');
-
-    setTimeout(() => {
-      setClassTooltip('tooltip center-X');
-    }, 2000);
-  };
-
-  return (
-    <section className="kiss-count" onClick={ () => showTooltip() }>
-      <i />
-      <span>{kisses}</span>
-      <div className={ classTooltip }>
-        Вас поцеловали: { common.wordEnding(kisses, ['раз', 'раза', 'раз']) }
-        <div className="arrow-up center-X" />
-      </div>
-    </section>
-  );
-}
-
-function ChangeButton({store, remain}) {
-  const [classTooltip, setClassTooltip] = useState('tooltip center-X');
-
-  const showTooltip = () => {
-    setClassTooltip('tooltip center-X opened');
-
-    setTimeout(() => {
-      setClassTooltip('tooltip center-X');
-    }, 2000);
-  };
-
-  if(remain) {
-    return (
-      <div className="change-table" onClick={ () => showTooltip() }>
-        <span className="center-screen">{ remain }</span>
-        <div className={classTooltip}>
-          До смены стола: { common.wordEnding(remain, ['ход', 'хода', 'ходов']) }
-          <div className="arrow-up center-X" />
-        </div>
-      </div>
-    );
-  } else {
-    return (
-      <div className="change-table active" onClick={ () => store.game.clickConfirmChangeTable() }>
-        <i className="center-screen" />
-      </div>
-    );
-  }
-}
-
 
 export default inject('store')( observer(HeaderMenu) );
