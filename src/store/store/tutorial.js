@@ -124,6 +124,31 @@ class TutorialStore {
     return Collection.findOne(this._players, uid, 'id');
   }
 
+  receiveGift(uid, gid, from){
+    const target = this.findPlayer(uid);
+    from = this.findPlayer(from);
+
+    const gift = {
+      id: gid,
+      uid: from.id,
+      name: from.name,
+      photo: from.photo,
+      date: Date.now()
+    };
+
+    const index = this._store.game.addReceivedGift({
+      active: from,
+      target: target,
+      gift: this._store.inventory.gifts[gift.id],
+      item: gift
+    }, this._receivedGifts);
+
+    setTimeout( () => {
+      this._store.game.removeReceivedGift(index, this._receivedGifts);
+      target[0].gifted.push(gift);
+    }, 2100);
+  }
+
   crateUser() {
     const info = this._store.user.data;
 
@@ -217,6 +242,9 @@ class TutorialStore {
         this._rotateSelector(2);
         this._store.chat.sendLocalMessage('6', 'Привет!');
         this._store.chat.sendLocalMessage('6', 'Привет!', this._store.user.id);
+
+        this.receiveGift(this._store.user.id, '5', '6');
+        this.receiveGift('6', '8', '8');
       }, 1000);
 
     }, 7000);

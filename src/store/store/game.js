@@ -185,24 +185,24 @@ class GameStore {
     this._kissResult = result;
   }
 
-  addReceivedGift(gift) {
+  addReceivedGift(gift, storage) {
     let i, length, free;
 
-    for(i = 0, length = this._receivedGifts.length; i < length; i++){
-      if(this._receivedGifts[i] === null) {
+    for(i = 0, length = storage.length; i < length; i++){
+      if(storage[i] === null) {
         free = i;
         break;
       }
     }
 
     if(!free) free = length;
-    this._receivedGifts[free] = gift;
+    storage[free] = gift;
 
     return free;
   }
 
-  removeReceivedGift(index) {
-    this._receivedGifts[index] = null;
+  removeReceivedGift(index, storage) {
+    storage[index] = null;
   }
 
   allowChangeTable() {
@@ -481,10 +481,10 @@ class GameStore {
       target: this._store.table.findPlayer(uid),
       gift: this._store.inventory.gifts[gift.id],
       item: gift
-    });
+    }, this._receivedGifts);
 
     setTimeout( () => {
-      this.removeReceivedGift(index);
+      this.removeReceivedGift(index, this._receivedGifts);
       this._store.table.addGift(uid, gift);
     }, 2100);
   }

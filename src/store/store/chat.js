@@ -137,8 +137,6 @@ class ChatStore {
       notice: !!to
     };
 
-    console.log(message);
-
     this.updateMessages([message]);
   }
 
