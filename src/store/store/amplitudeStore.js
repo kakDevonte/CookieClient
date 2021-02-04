@@ -2,7 +2,7 @@ import Amplitude from 'amplitude';
 
 class AmplitudeStore{
   constructor(store) {
-    this._dev = process.env.NODE_ENV !== 'production';
+    this._dev = !!process.env.REACT_APP_BOTTLE_APP;
     this._store = store;
     this._amplitude = new Amplitude({
       'url': 'https://cookieapp.ru',
