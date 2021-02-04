@@ -130,9 +130,9 @@ class TutorialStore {
 
     const gift = {
       id: gid,
-      uid: from.id,
-      name: from.name,
-      photo: from.photo,
+      uid: from[0].id,
+      name: from[0].name,
+      photo: from[0].photo,
       date: Date.now()
     };
 
@@ -258,7 +258,19 @@ class TutorialStore {
     setTimeout( () => {
       this.setRotateCookie(false);
       this.setTargetSeat(seat);
+
+      setTimeout( () => this._kissing(), 3000);
     }, 4000);
+  }
+
+  _kissing() {
+    this.setKissResult(true);
+    setTimeout(() => {
+      this._players.get(this._activeSeat).kissed.push(1);
+      this._players.get(this._targetSeat).kissed.push(1);
+    }, 1250);
+
+    setTimeout(() => this.setKissResult(false), 6000);
   }
 }
 
