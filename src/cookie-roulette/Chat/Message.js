@@ -45,7 +45,7 @@ function Message({store, message, container}) {
 
   return (
     <article title={common.getNormalDate(message.date, false, true)} className="message">
-      <legend><span className={'colored-' + message.from.seat}>{message.from.name}</span> говорит: </legend>{message.text}
+      <legend><span className={'colored-' + message.from.seat}>{message.from.fullName}</span> говорит: </legend>{message.text}
     </article>
   );
 }
