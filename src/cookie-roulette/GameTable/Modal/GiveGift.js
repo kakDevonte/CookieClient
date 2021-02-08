@@ -18,7 +18,7 @@ function GiveGift({store}){
 
   if(data) {
     const gift = store.inventory.gifts[data.gid];
-    const [user] = store.table.findPlayer(data.to);
+    const [user] = store.inventory.mode === 'global' ? store.table.findPlayer(data.to) : store.tutorial.findPlayer(data.to);
 
     info.giftName = gift.name;
     info.giftImage = { backgroundImage: `url("${gift.image}")` };
@@ -32,6 +32,9 @@ function GiveGift({store}){
   }
 
   const additionalInfo = () => {
+    if(store.inventory.mode === 'local') {
+      return <section className="send-gift-info" />;
+    }
     if(data && data.buy) {
       return (
         <section className="send-gift-info">

@@ -101,7 +101,6 @@ class TutorialStore {
 
 
   nextStepOne() {
-    this._store.chat.setMode('local');
     this._store.app.closeBackLayer();
     this.setStep(1);
   }

@@ -6,6 +6,7 @@ class InventoryStore {
   _player = null;
   _name = '';
   _sendGift = null;
+  _mode = 'global';
 
   _gifts = {};
   _emptyGift = {
@@ -52,6 +53,7 @@ class InventoryStore {
   get emptyGift() { return this._emptyGift; }
   get windowSendGift() { return this._sendGift; }
   get current() { return this._current };
+  get mode() { return this._mode; }
 
   setState(state) {
     if(state){
@@ -61,6 +63,10 @@ class InventoryStore {
       if(this._state === '') return;
       this._state = '';
     }
+  }
+
+  setMode(mode) {
+    this._mode = mode;
   }
 
   setName(name) {
@@ -89,7 +95,13 @@ class InventoryStore {
     if(!/player/.test(event.target.className)) return;
     if(!seat) seat = Number(event.target.getAttribute('data-index'));
 
-    const player = this._store.table.getPlayer(seat);
+    let player;
+
+    if(this._mode === 'global') {
+      player = this._store.table.getPlayer(seat);
+    } else {
+      player = this._store.tutorial.getPlayer(seat);
+    }
 
     if(player && player.id === this._store.user.id) {
       this._current = null;
@@ -188,12 +200,14 @@ class InventoryStore {
   }
 
   openConfirmSendGift(category, id) {
-    if(category !== 'owner') {
-      if(this._store.user.data.cookieCounter < this._gifts[id].cost) {
-        if(this._store.os === 'iOS') return;
+    if(this._mode === 'global') {
+      if(category !== 'owner') {
+        if(this._store.user.data.cookieCounter < this._gifts[id].cost) {
+          if(this._store.os === 'iOS') return;
 
-        document.querySelector('.shop-cookies').click();
-        return;
+          document.querySelector('.shop-cookies').click();
+          return;
+        }
       }
     }
 
@@ -212,9 +226,14 @@ class InventoryStore {
 
   sendGift(decision) {
     if(decision) {
-      this._store.socket.emit('send-gift', this._sendGift);
-      this.clickToggleInventory(null, {target: {className: "wrap-players"}});
-      this._store.amplitude.sendGift(this._sendGift.buy);
+      if(this._mode === 'global') {
+        this._store.socket.emit('send-gift', this._sendGift);
+        this.clickToggleInventory(null, {target: {className: "wrap-players"}});
+        this._store.amplitude.sendGift(this._sendGift.buy);
+      } else {
+        this.clickToggleInventory(null, {target: {className: "wrap-players"}});
+        this._store.tutorial.receiveGift(this._sendGift.to, this._sendGift.gid, this._sendGift.from);
+      }
     }
 
     this.setSendGift(null);

@@ -15,11 +15,14 @@ import CookieSelector from "../GameTable/CookieSelector";
 
 import Player from "./Player/Player";
 import Chat from "../Chat/Chat";
+import Inventory from "../Inventory/Inventory";
+import GiveGift from "../GameTable/Modal/GiveGift";
 
 
 function TutorialRoom({store}) {
   const history = useHistory();
   const player = store.tutorial.getPlayer;
+  const clickInventory = (event) => { store.inventory.clickToggleInventory(null, event) };
 
   return (
     <section className="cookie-roulette-game">
@@ -43,12 +46,12 @@ function TutorialRoom({store}) {
             <input type='button' className="exit-app" />
           </section>
         </header>
-        <div className="wrap-players" onClick={ (event) => store.tutorial.closeInventory(event) }>
+        <div className="wrap-players" onClick={ clickInventory }>
           <Player player={player(7)} index={7} />
           <Player player={player(0)} index={0} />
           <Player player={player(1)} index={1} />
         </div>
-        <div className="wrap-players" onClick={ (event) => store.tutorial.closeInventory(event) }>
+        <div className="wrap-players" onClick={ clickInventory }>
           <Player player={player(6)} index={6} />
           <div className="cookie-space">
             <WaitMorePlayers state={store.tutorial.gameState} />
@@ -65,7 +68,7 @@ function TutorialRoom({store}) {
           </div>
           <Player player={player(2)} index={2} />
         </div>
-        <div className="wrap-players" onClick={ (event) => store.tutorial.closeInventory(event) }>
+        <div className="wrap-players" onClick={ clickInventory }>
           <Player player={player(5)} index={5} />
           <Player player={player(4)} index={4} />
           <Player player={player(3)} index={3} />
@@ -73,7 +76,9 @@ function TutorialRoom({store}) {
       </article>
       <article className="utility-wrapper" style={store.app.size.utilities}>
         <Chat />
+        <Inventory />
       </article>
+      <GiveGift />
     </section>
   );
 }

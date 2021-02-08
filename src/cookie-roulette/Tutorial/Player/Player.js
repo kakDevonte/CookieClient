@@ -66,7 +66,7 @@ function Player ({store, player, index}) {
       },
 
       selected = () => {
-        if(store.tutorial.inventoryState === ' opened' && store.tutorial.inventoryCurrent === index) {
+        if(store.inventory.inventoryState === ' opened' && store.inventory.inventoryCurrent === index) {
           className.push('selected');
         }
       };
