@@ -43,6 +43,7 @@ class UserStore {
     data.gifts = [];
     data.inventory = [];
     data.messages = [];
+    data.platform = this._store.platform;
 
     //common.randomiseUser(data);
 
