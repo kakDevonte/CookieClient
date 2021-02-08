@@ -18,7 +18,7 @@ function Talk({store, data}) {
     >
       <i style={image} />
       <div className="content">
-        <span>{data.player.name}</span>
+        <span>{data.player.fullName}</span>
         <span>{data.lastMessage}</span>
       </div>
       <div className="counter">

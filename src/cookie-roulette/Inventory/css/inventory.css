@@ -25,7 +25,6 @@
   position: relative;
   display: flex;
   flex-flow: column nowrap;
-  width: 50%;
   font-weight: bold;
   justify-content: center;
   margin: 10px;
@@ -35,13 +34,26 @@
   text-align: center;
 }
 
-.inventory > header > div:first-child{
+.inventory > header > .personal-message-button{
+  width: 45%;
   background: linear-gradient(264.23deg, #EFCB84 19.1%, #DEA943 71.97%), #F9CE7B;
 }
 
-.inventory > header > div:last-child{
+.inventory > header > .open-profile-button{
+  width: 45%;
   text-decoration: none;
   background: #913BFF;
+}
+
+.inventory > header > .close-inventory-button{
+  margin-left: 0;
+  background-color: #913bff;
+  background-image: url("../../../images/close-inventory.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 90%;
+  width: 10%;
+  max-width: 33px;
 }
 
 .inventory .gifts-list{

@@ -36,10 +36,13 @@ function Inventory({store}) {
   return (
     <article className={ 'inventory' + store.inventory.state}>
       <header>
-        <div onClick={ () => store.inventory.clickPersonalMessage() }>
+        <div className="personal-message-button" onClick={ () => store.inventory.clickPersonalMessage() }>
           Личное сообщение
         </div>
-        <div onClick={ () => openProfile() }>Профиль<br/>{store.inventory.name}</div>
+        <div className="open-profile-button" onClick={ () => openProfile() }>Профиль<br/>{store.inventory.name}</div>
+        <div className="close-inventory-button"
+             onClick={ () => store.inventory.clickToggleInventory(null, {target:{className: 'wrap-players'}}) }
+        />
       </header>
       <div className="gifts-list custom-scroll">
         <Gifts gifts={ store.inventory.list }/>

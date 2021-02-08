@@ -8,7 +8,7 @@ import Store from "./store";
 
 ReactDOM.render((
   <BrowserRouter>
-    <Provider store={new Store()}>
+    <Provider store={new Store('windows', null, 'vk')}>
         <CookieRoulette />
     </Provider>
   </BrowserRouter>

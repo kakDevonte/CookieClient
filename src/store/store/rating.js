@@ -11,8 +11,18 @@ class RatingStore {
     month: []
   };
   _myRatingData = {
-    position: '>1000',
-    id: null,
+    day: {
+      position: '>1000',
+      id: null,
+    },
+    week: {
+      position: '>1000',
+      id: null,
+    },
+    month: {
+      position: '>1000',
+      id: null,
+    }
   };
 
   constructor(store){
@@ -35,7 +45,7 @@ class RatingStore {
   get error() { return this._error; }
   get period() { return this._period; }
   get ratingList() { return this._ratingList[this._period]; }
-  get myRating() { return this._myRatingData; }
+  get myRating() { return this._myRatingData[this._period]; }
 
   setState(state) {
     if(state === this._state) return;
@@ -63,8 +73,8 @@ class RatingStore {
     }
   }
 
-  updateMyRatingData(data) {
-    this._myRatingData = data;
+  updateMyRatingData(data, period) {
+    this._myRatingData[period] = data;
   }
 
   toggleRatingPanel() {
@@ -95,7 +105,7 @@ class RatingStore {
       return;
     }
     this.updateRatingList(data.items, data.period);
-    this.updateMyRatingData(data.my);
+    this.updateMyRatingData(data.my, data.period);
   }
 }
 

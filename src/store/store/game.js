@@ -320,7 +320,7 @@ class GameStore {
     this.setAllowClickRotate(false);
     this.setTargetSelector(seat);
     this.setRotateCookie(true);
-    this._store.amplitude.rotation();
+    //this._store.amplitude.rotation();
 
     setTimeout( () => {
       this.setRotateCookie(false);
