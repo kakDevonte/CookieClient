@@ -11,6 +11,7 @@ function RatingListItem({store, position, data}) {
     pathname: "/Profile",
     propsSearch: {
       id: data.id,
+      platform: data.platform,
       myProfile: data.id === store.user.id,
     }
   };
@@ -50,7 +51,7 @@ function RatingListItem({store, position, data}) {
       <div className="r-photo" style={style} >
         <i className="center-XY" style={photo} />
       </div>
-      <span className="r-name center-Y">{data.first_name} {data.last_name}</span>
+      <span className="r-name center-Y">{ data.fullName }</span>
       <i className="r-kiss-icon" style={style} />
       <span className="r-kisses center-Y">{data.kisses}</span>
       <div className="r-separator" />
