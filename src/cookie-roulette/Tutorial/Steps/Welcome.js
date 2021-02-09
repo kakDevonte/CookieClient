@@ -1,14 +1,14 @@
 import React, {useEffect} from 'react';
 import {inject, observer} from "mobx-react";
 
-function Step({store}) {
+function Welcome({store}) {
 
   useEffect(() => {
     store.tutorial.crateUser();
   }, []);
 
   return (
-    <div className="step-1 info center-XY">
+    <div className="welcome-step info center-XY">
       <span className="info-header">Добро пожаловать в бутылочку</span>
       <p>
         Здесь вы можете крутить бутылочку, знакомиться,
@@ -22,12 +22,12 @@ function Step({store}) {
         Наши гости уже готовы к нам присоедениться, так что давай начнем обучение
       </p>
       <div
-        className="step-1 button-proceed-tutorial center-X"
-        onClick={ () => store.tutorial.nextStepOne() }>
+        className="welcome-step button-proceed-tutorial center-X"
+        onClick={ () => store.tutorial.nextStep('gameStart') }>
         Вперед, начинаем!
       </div>
     </div>
   );
 }
 
-export default inject('store')( observer(Step) );
+export default inject('store')( observer(Welcome) );

@@ -6,6 +6,20 @@
   align-items: center;
 }
 
+.tutorial-screen .shadow-layer{
+  position: absolute;
+  display: none;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.50);
+  z-index: 10;
+}
+.tutorial-screen .shadow-layer.opened{
+  display: block;
+}
+
 .tutorial-window{
   position: absolute;
   background-color: #282F2E;
@@ -107,7 +121,7 @@
   cursor: pointer;
 }
 
-.step-1.info{
+.welcome-step.info{
   color: #fff;
   position: absolute;
   background-color: #0009;
@@ -117,18 +131,18 @@
   border-radius: 15px;
 }
 
-.step-1.info .info-header{
+.welcome-step.info .info-header{
   display: block;
   margin-bottom: 30px;
   font-size: 140%;
   white-space: nowrap;
 }
 
-.step-1.info p{
+.welcome-step.info p{
   text-align: justify;
 }
 
-.step-1 .button-proceed-tutorial{
+.welcome-step .button-proceed-tutorial{
   position: relative;
   margin-top: 30px;
   padding: 10px;

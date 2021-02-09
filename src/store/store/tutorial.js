@@ -2,11 +2,10 @@ import {action, makeObservable, observable} from "mobx";
 import Collection from "../../helpers/Collection";
 
 class TutorialStore {
-  _step = 0;
+  _step = 'welcome';
   _players = new Map();
 
-  _inventoryState = '';
-  _inventoryCurrent = null;
+  _shadowLayer = '';
   _targetSeat = null;
 
   _targetSelector = {
@@ -29,11 +28,10 @@ class TutorialStore {
     makeObservable(this, {
       _step: observable,
       _players: observable,
+      _shadowLayer: observable,
       _targetSeat: observable,
       _targetSelector: observable,
       _activeSeat: observable,
-      _inventoryState: observable,
-      _inventoryCurrent: observable,
       _receivedGifts: observable,
       _gameState: observable,
       _rotateCookie: observable,
@@ -41,6 +39,7 @@ class TutorialStore {
       _kissResult: observable,
 
       setStep: action,
+      setShadowLayer: action,
       updatePlayers: action,
       setActiveSeat: action,
       setTargetSeat: action
@@ -73,7 +72,16 @@ class TutorialStore {
     return this._players.get(index);
   }
 
+  openShadowLayer(){
+    if(this._shadowLayer === '') this.setShadowLayer(' opened');
+  }
+
+  closeShadowLayer(){
+    if(this._shadowLayer === ' opened') this.setShadowLayer('');
+  }
+
   setStep(step) { this._step = step; }
+  setShadowLayer(state) { this._shadowLayer = state; }
 
   setActiveSeat(seat) { this._activeSeat = seat; }
   setTargetSeat(seat) { this._targetSeat = seat; }
@@ -99,12 +107,10 @@ class TutorialStore {
     console.log('click rotate');
   }
 
-
-  nextStepOne() {
+  nextStep(step) {
     this._store.app.closeBackLayer();
-    this.setStep(1);
+    this.setStep(step);
   }
-
 
   fromInfo(uid) {
     const [user] = this.findPlayer(uid);

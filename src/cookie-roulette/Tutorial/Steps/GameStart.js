@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {inject, observer} from "mobx-react";
 
-function Step({store}) {
+function GameStart({store}) {
 
   useEffect(() => {
     if(store.user.data.sex === 1) {
@@ -14,10 +14,8 @@ function Step({store}) {
   }, []);
 
   return (
-    <div className="step-2 info center-XY">
-
-    </div>
+    <div className="game-start-step info center-XY" />
   );
 }
 
-export default inject('store')( observer(Step) );
+export default inject('store')( observer(GameStart) );
