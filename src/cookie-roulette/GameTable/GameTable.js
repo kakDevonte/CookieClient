@@ -59,7 +59,7 @@ const GameTable = ({store}) => {
                 click={ () => game.clickRotateCookie() }
               />
               <TurnCountTooltip/>
-              <YourTurnTooltip />
+              <YourTurnTooltip allow={ game.allowClickRotate } state={game.state}  />
             </div>
             <Player player={player(2)} index={2} />
           </div>
@@ -70,7 +70,7 @@ const GameTable = ({store}) => {
           </div>
           <span className='table-id'>{ tid() }</span>
           <ChangeTable />
-          <KissModal />
+          <KissModal game={ game } />
           <ServerFail />
         </article>
         <article className="utility-wrapper" style={app.size.utilities}>

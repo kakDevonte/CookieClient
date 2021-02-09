@@ -3,10 +3,10 @@ import './css/your-turn-tooltip.css';
 import React from "react";
 import {inject, observer} from "mobx-react";
 
-function YourTurnTooltip({store}) {
+function YourTurnTooltip({allow, state}) {
 
   const className = () => {
-    if(store.game.allowClickRotate && store.game.state !== 'pending') {
+    if(allow && state !== 'pending') {
       return 'your-turn-tooltip enabled';
     } else {
       return 'your-turn-tooltip';

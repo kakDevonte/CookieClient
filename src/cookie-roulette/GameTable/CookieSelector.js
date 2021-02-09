@@ -20,8 +20,12 @@ function CookieSelector({state, allow, rotate, click}) {
     };
 
   return (
-    <div className={ classname() } style={ style() }>
-      <div  className="image-selector-bottle center-X" onClick={ click } />
+    <div className={ classname() }>
+      <div
+        className="image-selector-bottle center-X"
+        onClick={ click }
+        style={ style() }
+      />
     </div>
   )
 }

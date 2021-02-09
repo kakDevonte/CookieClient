@@ -17,6 +17,8 @@ import Player from "./Player/Player";
 import Chat from "../Chat/Chat";
 import Inventory from "../Inventory/Inventory";
 import GiveGift from "../GameTable/Modal/GiveGift";
+import YourTurnTooltip from "../GameTable/YourTurnTooltip";
+import KissModal from "../GameTable/Modal/KissModal";
 
 
 function TutorialRoom({store}) {
@@ -54,16 +56,20 @@ function TutorialRoom({store}) {
         <div className="wrap-players" onClick={ clickInventory }>
           <Player player={player(6)} index={6} />
           <div className="cookie-space">
-            <WaitMorePlayers state={store.tutorial.gameState} />
+            <WaitMorePlayers state={ store.tutorial.gameState } />
             <AnimationCookie
-              seat={store.tutorial.targetSelector}
-              oldSeat={store.tutorial.previousTargetSelector}
+              seat={ store.tutorial.targetSelector }
+              oldSeat={ store.tutorial.previousTargetSelector }
             />
             <CookieSelector
-              state={store.tutorial.gameState}
-              allow={store.tutorial.allowClickRotate}
-              rotate={store.tutorial.rotateCookie}
+              state={ store.tutorial.gameState }
+              allow={ store.tutorial.allowClickRotate }
+              rotate={ store.tutorial.rotateCookie }
               click={ () => store.tutorial.clickRotateCookie() }
+            />
+            <YourTurnTooltip
+              allow={ store.tutorial.allowClickRotate }
+              state={ store.tutorial.gameState }
             />
           </div>
           <Player player={player(2)} index={2} />
@@ -73,6 +79,7 @@ function TutorialRoom({store}) {
           <Player player={player(4)} index={4} />
           <Player player={player(3)} index={3} />
         </div>
+        <KissModal game={ store.tutorial.kissData } />
       </article>
       <article className="utility-wrapper" style={store.app.size.utilities}>
         <Chat />

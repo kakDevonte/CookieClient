@@ -121,32 +121,38 @@
   cursor: pointer;
 }
 
-.welcome-step.info{
+div[class*="-step"].info{
   color: #fff;
   position: absolute;
-  background-color: #0009;
+  background-color: rgba(0, 0, 0, 0.76);
   padding: 25px;
   z-index: 11;
   font-weight: 700;
   border-radius: 15px;
 }
 
-.welcome-step.info .info-header{
+div[class*="-step"].info .info-header{
   display: block;
-  margin-bottom: 30px;
+  margin-bottom: 18px;
   font-size: 140%;
   white-space: nowrap;
+  text-align: center;
 }
 
-.welcome-step.info p{
+div[class*="-step"].info p{
+  margin: 0 0 10px 0;
   text-align: justify;
 }
 
-.welcome-step .button-proceed-tutorial{
+div[class*="-step"].info p:last-child{
+  margin: 0;
+}
+
+div[class*="-step"] .button-proceed-tutorial{
   position: relative;
   margin-top: 30px;
   padding: 10px;
-  width: 50%;
+  width: 60%;
   background: linear-gradient(180deg, #448715 0%, #249147 100%);
   border-radius: 5px;
   text-align: center;
@@ -155,4 +161,23 @@
 
 .tutorial-screen .accent-item{
   z-index: 11;
+}
+
+.player-turn-ready-step {
+  width: 75%;
+}
+
+.player-turn-step{
+  top: 48%;
+  width: 75%;
+}
+
+.player-target-selected-step{
+  width: 75%;
+  top: 10%;
+}
+
+.player-kiss-step{
+  width: 75%;
+  top: 60%;
 }

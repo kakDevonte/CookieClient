@@ -1,5 +1,6 @@
 import {action, makeObservable, observable} from "mobx";
 import Collection from "../../helpers/Collection";
+import common from "../../config/common";
 
 class TutorialStore {
   _step = 'welcome';
@@ -22,8 +23,25 @@ class TutorialStore {
 
   _kissResult = false;
 
+  _kissData = {
+    _active: null,
+    activeSeat: null,
+    activePlayer: null,
+    activeKiss: null,
+
+    _target: null,
+    targetSeat: null,
+    targetPlayer: null,
+    targetKiss: null,
+
+    kissResult: null,
+    kissWindow: 'closed',
+    clickDecision: this._clickDecision,
+  };
+
   constructor(store) {
     this.getPlayer = this.getPlayer.bind(this);
+    this._kissData.clickDecision = this._kissData.clickDecision.bind(this);
 
     makeObservable(this, {
       _step: observable,
@@ -37,23 +55,22 @@ class TutorialStore {
       _rotateCookie: observable,
       _allowClickRotate: observable,
       _kissResult: observable,
+      _kissData: observable,
 
       setStep: action,
       setShadowLayer: action,
       updatePlayers: action,
+      updateKissData: action,
       setActiveSeat: action,
-      setTargetSeat: action
+      setTargetSeat: action,
+      setAllowClickRotate: action
     });
 
     this._store = store;
-    this._store.app.openBackLayer();
   }
 
   get step() { return this._step; }
-
-  get inventoryState() { return this._inventoryState; }
-  get inventoryCurrent() { return this._inventoryCurrent; }
-
+  get shadowLayer() { return this._shadowLayer; }
   get targetSeat() { return this._targetSeat; }
 
   get targetSelector() { return this._targetSelector.current }
@@ -67,6 +84,8 @@ class TutorialStore {
   get allowClickRotate() { return this._allowClickRotate; }
 
   get kissResult() { return this._kissResult; }
+
+  get kissData() { return this._kissData; }
 
   getPlayer(index) {
     return this._players.get(index);
@@ -83,8 +102,31 @@ class TutorialStore {
   setStep(step) { this._step = step; }
   setShadowLayer(state) { this._shadowLayer = state; }
 
-  setActiveSeat(seat) { this._activeSeat = seat; }
-  setTargetSeat(seat) { this._targetSeat = seat; }
+  setActiveSeat(seat) {
+    this._activeSeat = seat;
+    this._kissData.activeSeat = seat;
+
+    if(seat !== null) {
+      this._kissData._active = this.getPlayer(seat);
+      this._kissData.activePlayer = this._kissData._active.id;
+    } else {
+      this._kissData._active = null;
+      this._kissData.activePlayer = null;
+    }
+  }
+  setTargetSeat(seat) {
+    this._targetSeat = seat;
+    this._kissData.targetSeat = seat;
+
+    if(seat !== null) {
+      this._kissData._target = this.getPlayer(seat);
+      this._kissData.targetPlayer = this._kissData._target.id;
+    } else {
+      this._kissData._target = null;
+      this._kissData.targetPlayer = null;
+    }
+  }
+
   setKissResult(result) { this._kissResult = result; }
 
   setTargetSelector(seat) {
@@ -92,24 +134,27 @@ class TutorialStore {
     this._targetSelector.current = seat;
   }
 
+  setAllowClickRotate(allow) { this._allowClickRotate = allow; }
   setRotateCookie(rotate){ this._rotateCookie = rotate; }
 
   setGameState(state) { this._gameState = state; }
-
-  setInventoryState(state) { this._inventoryState = state; }
   updatePlayers(index, player) { this._players.set(index, player); }
 
-  closeInventory(event) {
-    this.setInventoryState('');
+  updateKissData() {
+    this._kissData.kissWindow = 'opened accent-item';
   }
 
-  clickRotateCookie(){
-    console.log('click rotate');
+  _clickDecision(result, auto) {
+    console.log(this, result, auto);
   }
 
-  nextStep(step) {
-    this._store.app.closeBackLayer();
-    this.setStep(step);
+  clickRotateCookie() {
+    this.setAllowClickRotate(false);
+    this.closeShadowLayer();
+    this._disAccentAll();
+
+    this.setStep('rotate');
+    this._roundThree('rotate');
   }
 
   fromInfo(uid) {
@@ -237,22 +282,54 @@ class TutorialStore {
 
     setTimeout(() => {
       this._crateBot(4, '8', 'Александр', 'Александр Домогаров', 'male');
-      //this._store.app.openBackLayer();
+      this._roundOne();
 
-      const player = document.querySelector('.player.p4');
 
-      setTimeout(() => {
-        player.classList.toggle('accent-item');
-
-        this._rotateSelector(2);
-        this._store.chat.sendLocalMessage('6', 'Привет!');
-        this._store.chat.sendLocalMessage('6', 'Привет!', this._store.user.id);
-
-        this.receiveGift(this._store.user.id, '5', '6');
-        this.receiveGift('6', '8', '8');
-      }, 1000);
+      // setTimeout(() => {
+      //   this._accentItem('.player.p4');
+      //
+      //   this._rotateSelector(2);
+      //   this._store.chat.sendLocalMessage('6', 'Привет!');
+      //   this._store.chat.sendLocalMessage('6', 'Привет!', this._store.user.id);
+      //
+      //   this.receiveGift(this._store.user.id, '5', '6');
+      //   this.receiveGift('6', '8', '8');
+      // }, 1000);
 
     }, 7000);
+  }
+
+  _roundOne() {
+    this.setActiveSeat(3);
+
+    setTimeout(() => this._rotateSelector(2), 1000);
+    setTimeout(() => this._kissing(), 6000);
+    setTimeout(() => {
+      this.setTargetSeat(null);
+      this._roundTwo();
+    }, 12000);
+  }
+
+  _roundTwo() {
+    this.setActiveSeat(4);
+
+    setTimeout(() => this._rotateSelector(2), 1000);
+    setTimeout(() => {
+      this.setTargetSeat(null);
+      this._roundThree();
+    }, 12000);
+  }
+
+  _roundThree(action) {
+    if(!action) {
+      this.setActiveSeat(0);
+      this.setStep('playerTurnReady');
+    }
+
+    if(action === 'rotate') {
+      setTimeout(() => this._rotateSelector(3), 100);
+      setTimeout(() => this.setStep('playerTargetSelected'), 4500);
+    }
   }
 
   _rotateSelector(seat) {
@@ -263,8 +340,6 @@ class TutorialStore {
     setTimeout( () => {
       this.setRotateCookie(false);
       this.setTargetSeat(seat);
-
-      setTimeout( () => this._kissing(), 3000);
     }, 4000);
   }
 
@@ -276,6 +351,20 @@ class TutorialStore {
     }, 1250);
 
     setTimeout(() => this.setKissResult(false), 6000);
+  }
+
+  _accentItem(selector, ) {
+    const item = document.querySelector(selector);
+    if(item) item.classList.add('accent-item');
+  }
+
+  _disAccentAll() {
+    const items = document.querySelectorAll('.accent-item');
+    let count = items.length;
+
+    while(count--) {
+      items[count].classList.remove('accent-item');
+    }
   }
 }
 

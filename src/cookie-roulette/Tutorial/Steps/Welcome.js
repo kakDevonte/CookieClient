@@ -5,6 +5,7 @@ function Welcome({store}) {
 
   useEffect(() => {
     store.tutorial.crateUser();
+    store.tutorial.openShadowLayer();
   }, []);
 
   return (
@@ -23,7 +24,7 @@ function Welcome({store}) {
       </p>
       <div
         className="welcome-step button-proceed-tutorial center-X"
-        onClick={ () => store.tutorial.nextStep('gameStart') }>
+        onClick={ () => store.tutorial.setStep('gameStart') }>
         Вперед, начинаем!
       </div>
     </div>
