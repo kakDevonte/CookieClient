@@ -48,6 +48,20 @@ class AmplitudeStore{
       platform: this._store.platform
     });
   }
+
+  startGame(enters) {
+    if(this._dev) return;
+
+    const data = {
+      event_type: 'bottle_started',
+      user_id: this._store.user.id,
+      platform: this._store.platform
+    };
+
+    if(!enters || enters === 0) data.first_try = true;
+
+    this._amplitude.track(data);
+  }
 }
 
 export default AmplitudeStore;
