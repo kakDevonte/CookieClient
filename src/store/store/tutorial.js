@@ -14,6 +14,7 @@ class TutorialStore {
     previous: 0
   };
 
+  _rounds = 5;
   _activeSeat = null;
   _receivedGifts = [];
 
@@ -45,6 +46,7 @@ class TutorialStore {
 
     makeObservable(this, {
       _step: observable,
+      _rounds: observable,
       _players: observable,
       _shadowLayer: observable,
       _targetSeat: observable,
@@ -58,6 +60,7 @@ class TutorialStore {
       _kissData: observable,
 
       setStep: action,
+      setRounds: action,
       setShadowLayer: action,
       updatePlayers: action,
       updateKissData: action,
@@ -70,6 +73,7 @@ class TutorialStore {
   }
 
   get step() { return this._step; }
+  get rounds() { return this._rounds; }
   get shadowLayer() { return this._shadowLayer; }
   get targetSeat() { return this._targetSeat; }
 
@@ -91,15 +95,11 @@ class TutorialStore {
     return this._players.get(index);
   }
 
-  openShadowLayer(){
-    if(this._shadowLayer === '') this.setShadowLayer(' opened');
-  }
-
-  closeShadowLayer(){
-    if(this._shadowLayer === ' opened') this.setShadowLayer('');
-  }
+  openShadowLayer(){ if(this._shadowLayer === '') this.setShadowLayer(' opened'); }
+  closeShadowLayer(){ if(this._shadowLayer === ' opened') this.setShadowLayer(''); }
 
   setStep(step) { this._step = step; }
+  setRounds(round) { this._rounds = round; }
   setShadowLayer(state) { this._shadowLayer = state; }
 
   setActiveSeat(seat) {
@@ -140,12 +140,66 @@ class TutorialStore {
   setGameState(state) { this._gameState = state; }
   updatePlayers(index, player) { this._players.set(index, player); }
 
-  updateKissData() {
-    this._kissData.kissWindow = 'opened accent-item';
+  updateKissData(action, active) {
+    if(action === 'open') {
+      this._kissData.kissWindow = 'opened accent-item';
+    }
+
+    if(action === 'close') {
+      this._kissData.kissWindow = 'closed';
+      this._kissData.activeKiss = null;
+      this._kissData.targetKiss = null;
+    }
+
+    if(action === 'kiss'){
+      if(active === true) {
+        this._kissData.activeKiss = true;
+      } else {
+        this._kissData.targetKiss = true;
+      }
+    }
+
+    if(this._kissData.activeKiss && this._kissData.targetKiss) {
+      this._kissData.kissResult = true;
+      this._kissing();
+
+      setTimeout(() => this.updateKissData('close'), 2500);
+      setTimeout(() => this._roundFour(), 8000);
+    }
   }
 
-  _clickDecision(result, auto) {
-    console.log(this, result, auto);
+  clickToggleInventory(seat, event) {
+    if(this._step === 'openInventory') {
+      this._store.inventory.clickToggleInventory(seat, event);
+      this.setStep('giveGift');
+    }
+  }
+
+  clickPersonalMessage() {
+
+  }
+
+  clickOpenTalk(player) {
+    if(this._step === 'openTalk') {
+      this._store.chat.clickOpenTalk(player);
+      this.setStep('readMessage');
+
+      setTimeout(() => this.setStep('writeMessage'), 2000);
+    }
+  }
+
+  _clickDecision(result) {
+    if(this._kissData.activeKiss === null) {
+      if(result === false) {
+        this.setStep('declineKiss');
+      } else {
+        this.setStep('acceptKss');
+        this.closeShadowLayer();
+        this._disAccentAll();
+        this.updateKissData('kiss', true);
+        setTimeout(() => this.updateKissData('kiss', false), 1500);
+      }
+    }
   }
 
   clickRotateCookie() {
@@ -254,6 +308,7 @@ class TutorialStore {
 
     setTimeout(() => {
       this._crateBot(2, '2', 'Киану', 'Киану Ривз', 'male');
+      this._store.chat.sendLocalMessage('2', 'Вы все восхитительны!');
     }, 4000);
 
     setTimeout(() => {
@@ -263,6 +318,7 @@ class TutorialStore {
 
     setTimeout(() => {
       this._crateBot(4, '4', 'Джессика', 'Джессика Альба', 'female');
+      this._store.chat.sendLocalMessage('4', 'Всем привет!');
     }, 7000);
   }
 
@@ -273,6 +329,7 @@ class TutorialStore {
 
     setTimeout(() => {
       this._crateBot(2, '6', 'Камерон', 'Камерон Диаз', 'female');
+      this._store.chat.sendLocalMessage('6', 'Алоха!');
     }, 4000);
 
     setTimeout(() => {
@@ -282,6 +339,7 @@ class TutorialStore {
 
     setTimeout(() => {
       this._crateBot(4, '8', 'Александр', 'Александр Домогаров', 'male');
+      this._store.chat.sendLocalMessage('8', 'Здравствуйте все! Рад вас видеть.');
       this._roundOne();
 
 
@@ -312,6 +370,8 @@ class TutorialStore {
 
   _roundTwo() {
     this.setActiveSeat(4);
+    this.setRounds(4);
+    //return this.setStep('successGift');
 
     setTimeout(() => this._rotateSelector(2), 1000);
     setTimeout(() => {
@@ -323,6 +383,7 @@ class TutorialStore {
   _roundThree(action) {
     if(!action) {
       this.setActiveSeat(0);
+      this.setRounds(3);
       this.setStep('playerTurnReady');
     }
 
@@ -331,6 +392,37 @@ class TutorialStore {
       setTimeout(() => this.setStep('playerTargetSelected'), 4500);
     }
   }
+
+  _roundFour() {
+    this.setActiveSeat(1);
+    this.setRounds(2);
+
+    setTimeout(() => this._rotateSelector(2), 1000);
+    setTimeout(() => {
+      this.receiveGift(this._store.user.id, '3', '5');
+      this._kissing();
+    }, 6000);
+    setTimeout(() => {
+      this.setTargetSeat(null);
+      this._roundFive();
+    }, 12000);
+  }
+
+  _roundFive() {
+    this.setActiveSeat(2);
+    this.setRounds(1);
+    this.setStep('acceptGift');
+
+    setTimeout(() => this._rotateSelector(4), 1000);
+    setTimeout(() => this._kissing(), 6000);
+    setTimeout(() => {
+      this.setTargetSeat(null);
+      this.receiveGift('6', '28', '8');
+      this.setRounds(0);
+    }, 12000);
+  }
+
+
 
   _rotateSelector(seat) {
     this.setTargetSeat(null);
@@ -351,6 +443,10 @@ class TutorialStore {
     }, 1250);
 
     setTimeout(() => this.setKissResult(false), 6000);
+  }
+
+  exit() {
+    if(this._step === 'endTutorial') this._store.app.stageLobby();
   }
 
   _accentItem(selector, ) {

@@ -124,6 +124,12 @@ class ChatStore {
       this._store.socket.emit('user-message', message);
     } else {
       this.sendLocalMessage(this._store.user.id, text, to);
+      
+      if(this._store.tutorial.step === 'writeMessage') {
+        setTimeout(() => {
+          this._store.tutorial.setStep('endTutorial');
+        }, 250);
+      }
     }
   }
 

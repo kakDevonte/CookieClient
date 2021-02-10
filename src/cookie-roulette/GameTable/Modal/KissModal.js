@@ -77,6 +77,7 @@ function KissModal({game}) {
 
   return (
     <section className={opened()}>
+      <div className="kiss-modal-shadow" />
       <header>
         {question()}
         <div className='time' />

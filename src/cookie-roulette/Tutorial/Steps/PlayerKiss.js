@@ -6,7 +6,7 @@ function PlayerKiss({store}) {
 
   useEffect(() => {
     tutorial._disAccentAll();
-    tutorial.updateKissData();
+    tutorial.updateKissData('open');
   }, []);
 
   return (

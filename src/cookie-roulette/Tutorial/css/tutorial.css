@@ -124,10 +124,9 @@
 div[class*="-step"].info{
   color: #fff;
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.76);
+  background-color: rgba(0, 0, 0, 0.8);
   padding: 25px;
   z-index: 11;
-  font-weight: 700;
   border-radius: 15px;
 }
 
@@ -137,6 +136,7 @@ div[class*="-step"].info .info-header{
   font-size: 140%;
   white-space: nowrap;
   text-align: center;
+  font-weight: 700;
 }
 
 div[class*="-step"].info p{
@@ -180,4 +180,45 @@ div[class*="-step"] .button-proceed-tutorial{
 .player-kiss-step{
   width: 75%;
   top: 60%;
+}
+
+.decline-kiss-step{
+  width: 50%;
+  top: 60%
+}
+
+.accept-gift-step{
+  width: 55%;
+  top: 28%
+}
+
+.open-inventory-step{
+  width: 40%;
+  left: 15%;
+  top: 12%;
+}
+
+.give-gift-step{
+  width: 75%;
+  bottom: 30%;
+}
+
+.gift-selected-step{
+  width: 75%;
+  bottom: 5%;
+}
+
+.open-talk-step{
+  width: 75%;
+  bottom: 30%;
+}
+
+.write-message-step{
+  width: 55%;
+  bottom: 7%;
+}
+
+.end-tutorial-step{
+  width: 55%;
+  top: 15%
 }

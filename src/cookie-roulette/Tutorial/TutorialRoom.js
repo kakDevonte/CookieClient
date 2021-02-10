@@ -14,8 +14,8 @@ import AnimationCookie from "../GameTable/AnimationCookie";
 import CookieSelector from "../GameTable/CookieSelector";
 
 import Player from "./Player/Player";
+import Inventory from "./Inventory";
 import Chat from "../Chat/Chat";
-import Inventory from "../Inventory/Inventory";
 import GiveGift from "../GameTable/Modal/GiveGift";
 import YourTurnTooltip from "../GameTable/YourTurnTooltip";
 import KissModal from "../GameTable/Modal/KissModal";
@@ -24,7 +24,7 @@ import KissModal from "../GameTable/Modal/KissModal";
 function TutorialRoom({store}) {
   const history = useHistory();
   const player = store.tutorial.getPlayer;
-  const clickInventory = (event) => { store.inventory.clickToggleInventory(null, event) };
+  const clickInventory = (event) => { store.tutorial.clickToggleInventory(null, event) };
 
   return (
     <section className="cookie-roulette-game">
@@ -38,7 +38,7 @@ function TutorialRoom({store}) {
             <i className="shop-cookies hidden" />
           </section>
           <KissCounter kisses={ store.user.data.kissCounter } />
-          <ChangeButton remain={5} click={ () => {} } />
+          <ChangeButton remain={store.tutorial.rounds} click={ () => { store.tutorial.exit() } } />
           <div className="rating-button" onClick={ () => {} }>
             <i className="center-XY" />
           </div>

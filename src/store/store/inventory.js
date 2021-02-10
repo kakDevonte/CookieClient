@@ -209,6 +209,8 @@ class InventoryStore {
           return;
         }
       }
+    } else {
+      this._store.tutorial.setStep('giftSelected');
     }
 
     const data = {
@@ -231,9 +233,12 @@ class InventoryStore {
         this.clickToggleInventory(null, {target: {className: "wrap-players"}});
         this._store.amplitude.sendGift(this._sendGift.buy);
       } else {
+        this._store.tutorial.setStep('successGift');
         this.clickToggleInventory(null, {target: {className: "wrap-players"}});
         this._store.tutorial.receiveGift(this._sendGift.to, this._sendGift.gid, this._sendGift.from);
       }
+    } else {
+      if(this._mode === 'local') this._store.tutorial.setStep('giveGift');
     }
 
     this.setSendGift(null);
