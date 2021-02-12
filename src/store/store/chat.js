@@ -11,6 +11,7 @@ class ChatStore {
   _talkState = '';
   _talkPlayer = {id: null};
   _countNewMessages = 0;
+  _mode = 'global';
 
   constructor(store) {
     makeObservable(this, {
@@ -34,6 +35,7 @@ class ChatStore {
     this._store = store;
   }
 
+  get mode() { return this._mode; }
   get messages() { return this._messages; }
   get talks() { return this._personal; }
   get text() { return this._text; }
@@ -56,6 +58,8 @@ class ChatStore {
       return [];
     }
   }
+
+  setMode(mode) { this._mode = mode;}
 
   setTypeChat(type) {
     if(this._typeChat === type) return;
@@ -115,7 +119,31 @@ class ChatStore {
     };
 
     this.setText('');
-    this._store.socket.emit('user-message', message);
+
+    if(this._mode === 'global') {
+      this._store.socket.emit('user-message', message);
+    } else {
+      this.sendLocalMessage(this._store.user.id, text, to);
+      
+      if(this._store.tutorial.step === 'writeMessage') {
+        setTimeout(() => {
+          this._store.tutorial.setStep('endTutorial');
+        }, 250);
+      }
+    }
+  }
+
+  sendLocalMessage(from, text, to) {
+    const message = {
+      id: new Date().getTime() + '',
+      from: this._store.tutorial.fromInfo(from),
+      text,
+      date: Date.now(),
+      to: to ? this._store.tutorial.fromInfo(to) : null,
+      notice: !!to
+    };
+
+    this.updateMessages([message]);
   }
 
   updateMessages(list) {
@@ -178,10 +206,15 @@ class ChatStore {
 
   _getTalk(uid) {
     let talk = this._personal.get(uid);
+    let player, seat;
 
     if(talk) return talk;
 
-    const [player, seat] = this._store.table.findPlayer(uid);
+    if(this._mode === 'global') {
+      [player, seat] = this._store.table.findPlayer(uid);
+    } else {
+      [player, seat] = this._store.tutorial.findPlayer(uid);
+    }
 
     talk = {
       player,

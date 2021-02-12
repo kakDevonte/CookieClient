@@ -7,6 +7,7 @@ import ChatStore from "./store/chat";
 import InventoryStore from "./store/inventory";
 import RatingStore from "./store/rating";
 import AmplitudeStore from "./store/amplitudeStore";
+import TutorialStore from "./store/tutorial";
 
 class Store {
   constructor(os,info, platform) {
@@ -17,6 +18,7 @@ class Store {
     this.app = new AppStore(this);
     this.socket = new SocketStore(this);
     this.user = new UserStore(this);
+    this.tutorial = new TutorialStore(this);
     this.table = new TableStore(this);
     this.game = new GameStore(this);
     this.chat = new ChatStore(this);

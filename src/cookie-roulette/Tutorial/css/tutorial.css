@@ -6,6 +6,20 @@
   align-items: center;
 }
 
+.tutorial-screen .shadow-layer{
+  position: absolute;
+  display: none;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.50);
+  z-index: 10;
+}
+.tutorial-screen .shadow-layer.opened{
+  display: block;
+}
+
 .tutorial-window{
   position: absolute;
   background-color: #282F2E;
@@ -106,3 +120,77 @@
   border-radius: 10px;
   cursor: pointer;
 }
+
+div[class*="-step"].info{
+  color: #fff;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.78);
+  padding: 25px;
+  z-index: 11;
+  border-radius: 15px;
+}
+
+div[class*="-step"].info .info-header{
+  display: block;
+  margin-bottom: 18px;
+  font-size: 140%;
+  white-space: nowrap;
+  text-align: center;
+  font-weight: 700;
+}
+
+div[class*="-step"].info p{
+  margin: 0 0 10px 0;
+  text-align: justify;
+}
+
+div[class*="-step"].info p:last-child{
+  margin: 0;
+}
+
+div[class*="-step"] .button-proceed-tutorial{
+  position: relative;
+  margin-top: 30px;
+  padding: 15px;
+  background: linear-gradient(180deg, #448715 0%, #249147 100%);
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.tutorial-screen .accent-item{
+  z-index: 11;
+}
+
+.welcome-step{ width: 60%; }
+.welcome-step > .button-proceed-tutorial{ width: 30%; }
+
+.player-turn-ready-step{ top: 28%; width: 50%; }
+.player-turn-ready-step > .button-proceed-tutorial{ width: 60%; }
+
+.player-turn-step{ top: 55%; width: 58%; }
+
+.player-target-selected-step{ width: 75%; top: 10%; }
+.player-target-selected-step > .button-proceed-tutorial{ width: 44%;}
+
+.player-kiss-step{ width: 75%; top: 60%; }
+
+.decline-kiss-step{ width: 55%; top: 62% }
+
+.accept-gift-step{ width: 55%; top: 28% }
+.accept-gift-step > .button-proceed-tutorial{ width: 57%; }
+
+.open-inventory-step{ width: 44%; left: 10%; top: 12%; }
+
+.give-gift-step{ width: 75%; bottom: 30%; }
+
+.gift-selected-step{ width: 75%; bottom: 5%; }
+
+.personal-message-step{ width: 66%; bottom: 30%;}
+.open-talk-step{ width: 51%; bottom: 30%;}
+
+.write-message-step{ width: 47%; bottom: 7%; }
+
+.end-tutorial-step{ width: 55%; top: 15% }
+
+.tutorial-empty-step{ width: 0; height: 0; display: none; }

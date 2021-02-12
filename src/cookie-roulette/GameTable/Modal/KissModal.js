@@ -3,8 +3,7 @@ import './css/kiss-modal.css';
 import React, {useEffect} from "react";
 import {inject, observer} from "mobx-react";
 
-function KissModal({store}) {
-  const game = store.game;
+function KissModal({game}) {
 
   useEffect(() => {
     setTimeout(() => {
@@ -78,6 +77,7 @@ function KissModal({store}) {
 
   return (
     <section className={opened()}>
+      <div className="kiss-modal-shadow" />
       <header>
         {question()}
         <div className='time' />

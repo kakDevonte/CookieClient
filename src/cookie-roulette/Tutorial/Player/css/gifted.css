@@ -1,0 +1,78 @@
+.player .receive-gift {
+  position: absolute;
+  height: 60%;
+  width: 70%;
+  left: 65%;
+  bottom: 0;
+}
+
+.player .receive-gift > article {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.player .receive-gift > article.hided {
+  visibility: hidden;
+  opacity: 0;
+  transition:
+          opacity linear 500ms,
+          visibility linear 500ms;
+}
+
+.player .receive-gift > article.showed {
+  visibility: visible;
+  opacity: 1;
+  transition:
+          opacity linear 500ms 500ms,
+          visibility linear 500ms 500ms;
+}
+
+.player .receive-gift > article.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.player .receive-gift > article > i{
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+}
+
+.player .tooltip-from {
+  position: absolute;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  /* background-color: white; */
+  /* color: black; */
+  white-space: nowrap;
+  padding: 3px 5px;
+  border-radius: 5px;
+  background: linear-gradient(264.23deg, #EFCB84 19.1%, #DEA943 71.97%), #F9CE7B;
+  top: 105%;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 500ms ease-in-out;
+}
+
+.player .tooltip-from.opened{
+  visibility: visible;
+  opacity: 1;
+}
+
+.player .tooltip-from > i {
+  width: 25px;
+  height: 25px;
+  margin-right: 5px;
+  background-size: contain;
+  border-radius: 5px;
+  background-position: center center;
+}

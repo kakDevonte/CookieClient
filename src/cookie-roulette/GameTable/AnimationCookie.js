@@ -1,14 +1,10 @@
 import React from 'react';
 import {inject, observer} from "mobx-react";
 
-function AnimationCookie({store}){
+function AnimationCookie({seat, oldSeat}){
   const angle = [ 0, 45, 90, 135, 180, 225, 270, 315, 360];
 
   const style = () => {
-    const
-      seat = store.game.targetSelector,
-      oldSeat = store.game.previousTargetSelector;
-
     let degrees, d0, d1080, dStop;
 
     if(seat !== null){

@@ -10,11 +10,19 @@ function Talk({store, data}) {
     backgroundImage: `url("${data.player.photo}")`
   };
 
+  const openTalk = () => {
+    if(store.chat.mode === 'global') {
+      store.chat.clickOpenTalk(data.player);
+    } else {
+      store.tutorial.clickOpenTalk(data.player);
+    }
+  };
+
   return (
     <article
       className="talk"
       style={store.app.size.talk}
-      onClick={ () => store.chat.clickOpenTalk(data.player) }
+      onClick={ openTalk }
     >
       <i style={image} />
       <div className="content">

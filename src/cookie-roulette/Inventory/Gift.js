@@ -14,6 +14,9 @@ function Gift({store, data, type}) {
     if(type === "owner") {
       return <div className={'info ' + type} >{data.count} шт</div>;
     }
+    if(store.inventory.mode === 'local') {
+      return <div className={'info ' + type} />;
+    }
     return  <div className={'info ' + type} ><i /><span>{gift.cost}</span></div>
   };
 

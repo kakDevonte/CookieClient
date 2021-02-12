@@ -14,6 +14,20 @@
   display: flex;
 }
 
+.kiss-modal > .kiss-modal-shadow{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+}
+
+.kiss-modal > .kiss-modal-shadow.accent-item{
+  display: block;
+  z-index: 5 !important;
+}
+
 .kiss-modal .info{
   height: 31.3%;
   display: flex;

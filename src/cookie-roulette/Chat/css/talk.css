@@ -1,4 +1,5 @@
 .personal-chats article.talk{
+  position: relative;
   display: flex;
   flex-flow: row nowrap;
   margin: 5px 0;

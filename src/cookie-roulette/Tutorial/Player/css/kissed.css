@@ -1,0 +1,14 @@
+.player .current-kiss{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 49%;
+  height: 38%;
+  left: -24%;
+  top: 65%;
+  transform: translateY(-50%);
+  background: url("../../../../images/kiss-count.svg") no-repeat;
+  background-position-y: 60%;
+  background-size: 90%;
+}

@@ -7,7 +7,7 @@ import CommonChat from "./CommonChat";
 import PersonalChat from "./PersonalChat";
 import CounterNewMessages from "./CounterNewMessages";
 
-function Chat({store}) {
+function Chat({store, clickCommon, clickPersonal}) {
   const type = store.chat.typeChat;
 
   const className = (common, type) => {
@@ -20,13 +20,13 @@ function Chat({store}) {
       <header>
         <div
           className={ className(true, type) }
-          onClick={ () => store.chat.clickChangeTypeChat('common') }
+          onClick={ clickCommon }
         >
           Общий чат
         </div>
         <div
           className={ className(false, type) }
-          onClick={ () => store.chat.clickChangeTypeChat('personal') }
+          onClick={ clickPersonal }
         >
           <CounterNewMessages count={ store.chat.countNewMessages } />
           <span>Личные сообщения</span>
