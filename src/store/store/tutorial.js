@@ -1,6 +1,5 @@
 import {action, makeObservable, observable} from "mobx";
 import Collection from "../../helpers/Collection";
-import common from "../../config/common";
 
 class TutorialStore {
   _step = 'welcome';
@@ -175,12 +174,18 @@ class TutorialStore {
     }
   }
 
-  clickPersonalMessage() {
+  clickPersonalMessage() { return null; }
 
+  clickChangeTypeChat(type) {
+    if(this._step !== 'personalMessage') return;
+    if(type === 'personal') this.setStep('openTalk');
+    this._store.chat.clickChangeTypeChat(type);
   }
 
   clickOpenTalk(player) {
     if(this._step === 'openTalk') {
+      this._disAccentAll();
+      this._accentItem('.personal-chat .messages');
       this._store.chat.clickOpenTalk(player);
       this.setStep('readMessage');
 
@@ -203,6 +208,8 @@ class TutorialStore {
   }
 
   clickRotateCookie() {
+    if(this._step !== "playerTurn") return;
+
     this.setAllowClickRotate(false);
     this.closeShadowLayer();
     this._disAccentAll();
@@ -319,6 +326,7 @@ class TutorialStore {
     setTimeout(() => {
       this._crateBot(4, '4', 'Джессика', 'Джессика Альба', 'female');
       this._store.chat.sendLocalMessage('4', 'Всем привет!');
+      this._roundOne();
     }, 7000);
   }
 
@@ -341,19 +349,7 @@ class TutorialStore {
       this._crateBot(4, '8', 'Александр', 'Александр Домогаров', 'male');
       this._store.chat.sendLocalMessage('8', 'Здравствуйте все! Рад вас видеть.');
       this._roundOne();
-
-
-      // setTimeout(() => {
-      //   this._accentItem('.player.p4');
-      //
-      //   this._rotateSelector(2);
-      //   this._store.chat.sendLocalMessage('6', 'Привет!');
-      //   this._store.chat.sendLocalMessage('6', 'Привет!', this._store.user.id);
-      //
-      //   this.receiveGift(this._store.user.id, '5', '6');
-      //   this.receiveGift('6', '8', '8');
-      // }, 1000);
-
+      //this.setStep('acceptGift');
     }, 7000);
   }
 
@@ -371,7 +367,7 @@ class TutorialStore {
   _roundTwo() {
     this.setActiveSeat(4);
     this.setRounds(4);
-    //return this.setStep('successGift');
+    //return this.setStep('acceptGift');
 
     setTimeout(() => this._rotateSelector(2), 1000);
     setTimeout(() => {
@@ -446,7 +442,11 @@ class TutorialStore {
   }
 
   exit() {
-    if(this._step === 'endTutorial') this._store.app.stageLobby();
+    if(this._step === 'endTutorial') {
+      this._store.chat.setMode('global');
+      this._store.inventory.setMode('global');
+      this._store.app.stageLobby();
+    }
   }
 
   _accentItem(selector, ) {

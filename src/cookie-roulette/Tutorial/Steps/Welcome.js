@@ -10,22 +10,17 @@ function Welcome({store}) {
 
   return (
     <div className="welcome-step info center-XY">
-      <span className="info-header">Добро пожаловать в бутылочку</span>
+      <span className="info-header">Добро пожаловать!</span>
       <p>
         Здесь вы можете крутить бутылочку, знакомиться,
         общаться в чате, дарить подарки и найти свою вторую
-        половинку
+        половинку.
       </p>
-      <p>
-        Это специальный обучающий стол, здесь мы научим тебя играть в нашу бутылочку
-      </p>
-      <p>
-        Наши гости уже готовы к нам присоедениться, так что давай начнем обучение
-      </p>
+      <p>Давай посмотрим как это работает.</p>
       <div
-        className="welcome-step button-proceed-tutorial center-X"
+        className="button-proceed-tutorial center-X"
         onClick={ () => store.tutorial.setStep('gameStart') }>
-        Вперед, начинаем!
+        Начать!
       </div>
     </div>
   );

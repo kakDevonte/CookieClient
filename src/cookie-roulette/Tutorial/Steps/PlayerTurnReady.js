@@ -10,13 +10,14 @@ function PlayerTurnReady({store}) {
   }, []);
 
   return (
-    <div className="player-turn-ready-step info center-XY" >
+    <div className="player-turn-ready-step info center-X" >
+      <span className="info-header">Твой ход</span>
       <p>
-        Эй, гляди, у твоего портрета появилась плашка "Крутит".
+        У твоего портрета появилась плашка "Крутит".
         Ей помечается тот игрок, чья очередь сейчас крутить бутылочку.
       </p>
       <p>
-        А раз плашка у тебя, то и крутить - тебе!
+        А раз плашка у тебя, то и ходить тебе!
       </p>
       <div
         className="button-proceed-tutorial center-X"

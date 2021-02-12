@@ -10,6 +10,7 @@ function Gifts({store, gifts}) {
 
   gifts.forEach((value, key) => {
     if(value.gifts.length){
+      if(key === "owner" && store.inventory.mode === 'local') return;
       m.push(<Group group={value} key={key} type={key}/>);
     }
   });

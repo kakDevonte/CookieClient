@@ -82,7 +82,10 @@ function TutorialRoom({store}) {
         <KissModal game={ store.tutorial.kissData } />
       </article>
       <article className="utility-wrapper" style={store.app.size.utilities}>
-        <Chat />
+        <Chat
+          clickCommon={ () => store.tutorial.clickChangeTypeChat('common') }
+          clickPersonal={ () => store.tutorial.clickChangeTypeChat('personal') }
+        />
         <Inventory />
       </article>
       <GiveGift />

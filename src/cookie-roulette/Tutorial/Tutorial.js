@@ -20,6 +20,7 @@ import SuccessGift from "./Steps/SuccessGift";
 import OpenTalk from "./Steps/OpenTalk";
 import WriteMessage from "./Steps/WriteMessage";
 import EndTutorial from "./Steps/EndTutorial";
+import PersonalMessage from "./Steps/PersonalMessage";
 
 function Tutorial({store}) {
   const tutorial = store.tutorial;
@@ -34,18 +35,19 @@ function Tutorial({store}) {
           gameStart: <GameStart tutorial={tutorial} />,
           playerTurnReady: <PlayerTurnReady tutorial={tutorial} />,
           playerTurn: <PlayerTurn tutorial={tutorial} />,
-          rotate: <div />,
+          rotate: <div className="tutorial-empty-step" />,
           playerTargetSelected: <PlayerTargetSelected tutorial={tutorial} />,
           playerKiss: <PlayerKiss tutorial={tutorial} />,
           declineKiss: <DeclineKiss tutorial={tutorial} />,
-          acceptKiss: <div />,
+          acceptKiss: <div className="tutorial-empty-step" />,
           acceptGift: <AcceptGift tutorial={tutorial} />,
           openInventory: <OpenInventory tutorial={tutorial} />,
           giveGift: <GiveGift tutorial={tutorial} />,
           giftSelected: <GiftSelected tutorial={tutorial} />,
           successGift: <SuccessGift tutorial={tutorial} store={store} />,
+          personalMessage: <PersonalMessage tutorial={tutorial} />,
           openTalk: <OpenTalk tutorial={tutorial} />,
-          readMessage: <div />,
+          readMessage: <div className="tutorial-empty-step" />,
           writeMessage: <WriteMessage tutorial={tutorial} />,
           endTutorial: <EndTutorial tutorial={tutorial} />
         }[store.tutorial.step]

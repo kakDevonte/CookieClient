@@ -74,7 +74,10 @@ const GameTable = ({store}) => {
           <ServerFail />
         </article>
         <article className="utility-wrapper" style={app.size.utilities}>
-          <Chat />
+          <Chat
+            clickCommon={ () => store.chat.clickChangeTypeChat('common') }
+            clickPersonal={ () => store.chat.clickChangeTypeChat('personal') }
+          />
           <Inventory search={app.search} />
         </article>
         <GiveGift />

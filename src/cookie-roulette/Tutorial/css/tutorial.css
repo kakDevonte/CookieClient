@@ -124,7 +124,7 @@
 div[class*="-step"].info{
   color: #fff;
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.78);
   padding: 25px;
   z-index: 11;
   border-radius: 15px;
@@ -151,8 +151,7 @@ div[class*="-step"].info p:last-child{
 div[class*="-step"] .button-proceed-tutorial{
   position: relative;
   margin-top: 30px;
-  padding: 10px;
-  width: 60%;
+  padding: 15px;
   background: linear-gradient(180deg, #448715 0%, #249147 100%);
   border-radius: 5px;
   text-align: center;
@@ -163,62 +162,35 @@ div[class*="-step"] .button-proceed-tutorial{
   z-index: 11;
 }
 
-.player-turn-ready-step {
-  width: 75%;
-}
+.welcome-step{ width: 60%; }
+.welcome-step > .button-proceed-tutorial{ width: 30%; }
 
-.player-turn-step{
-  top: 48%;
-  width: 75%;
-}
+.player-turn-ready-step{ top: 28%; width: 50%; }
+.player-turn-ready-step > .button-proceed-tutorial{ width: 60%; }
 
-.player-target-selected-step{
-  width: 75%;
-  top: 10%;
-}
+.player-turn-step{ top: 55%; width: 58%; }
 
-.player-kiss-step{
-  width: 75%;
-  top: 60%;
-}
+.player-target-selected-step{ width: 75%; top: 10%; }
+.player-target-selected-step > .button-proceed-tutorial{ width: 44%;}
 
-.decline-kiss-step{
-  width: 50%;
-  top: 60%
-}
+.player-kiss-step{ width: 75%; top: 60%; }
 
-.accept-gift-step{
-  width: 55%;
-  top: 28%
-}
+.decline-kiss-step{ width: 55%; top: 62% }
 
-.open-inventory-step{
-  width: 40%;
-  left: 15%;
-  top: 12%;
-}
+.accept-gift-step{ width: 55%; top: 28% }
+.accept-gift-step > .button-proceed-tutorial{ width: 57%; }
 
-.give-gift-step{
-  width: 75%;
-  bottom: 30%;
-}
+.open-inventory-step{ width: 44%; left: 10%; top: 12%; }
 
-.gift-selected-step{
-  width: 75%;
-  bottom: 5%;
-}
+.give-gift-step{ width: 75%; bottom: 30%; }
 
-.open-talk-step{
-  width: 75%;
-  bottom: 30%;
-}
+.gift-selected-step{ width: 75%; bottom: 5%; }
 
-.write-message-step{
-  width: 55%;
-  bottom: 7%;
-}
+.personal-message-step{ width: 66%; bottom: 30%;}
+.open-talk-step{ width: 51%; bottom: 30%;}
 
-.end-tutorial-step{
-  width: 55%;
-  top: 15%
-}
+.write-message-step{ width: 47%; bottom: 7%; }
+
+.end-tutorial-step{ width: 55%; top: 15% }
+
+.tutorial-empty-step{ width: 0; height: 0; display: none; }

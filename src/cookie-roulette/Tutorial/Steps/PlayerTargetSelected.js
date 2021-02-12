@@ -14,10 +14,10 @@ function PlayerTargetSelected({store}) {
   return (
     <div className="player-target-selected-step info center-X" >
       <p>
-        Смотри! Бутылочка остановиалсь и указала на другого случайного игрока.
-        Тот на кого она указывает, будет подсвечен оранжевой рамкой!
-        Это {player.fullName}! Неплохо, да?
+        Смотри, бутылочка остановиалсь и указала на другого случайного игрока.
+        Тот, на кого она указывает, будет подсвечен оранжевой рамкой.
       </p>
+      <p>Это {player.fullName}! Неплохо, да?</p>
       <div
         className="button-proceed-tutorial center-X"
         onClick={ () => store.tutorial.setStep('playerKiss') }>

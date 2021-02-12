@@ -9,9 +9,7 @@ function WriteMessage({tutorial}) {
   return (
     <div className="write-message-step info center-X" >
       <span className="info-header">Отправь личное сообщение</span>
-      <p>
-        Скорей, напиши ответное сообщение игроку.
-      </p>
+      <p style={{textAlign: 'center'}}>Напиши ответное сообщение игроку.</p>
     </div>
   );
 }

@@ -8,7 +8,7 @@ function SuccessGift({tutorial, store}) {
     store.chat.sendLocalMessage(from, 'Привет! Спасибо за подарок, очень приятно :)', store.user.id);
 
     setTimeout(() => {
-      tutorial.setStep('openTalk');
+      tutorial.setStep('personalMessage');
     }, 3000);
   }, []);
 

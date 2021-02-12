@@ -12,11 +12,12 @@ function DeclineKiss({store}) {
 
   return (
     <div className="decline-kiss-step info center-X" >
-      <span className="info-header">Не делай так.</span>
       <p>
-        { player.name } огорчится, не надо огорчать нашего гостя!
+        Не делай так, { player.name } огорчится. Не стоит огорчать нашего гостя!
       </p>
-      <p>Нажми, пожалуйста, «Поцеловать».</p>
+      <p style={ {fontSize: '125%'} }>
+        Нажми, пожалуйста, «Поцеловать».
+      </p>
     </div>
   );
 }

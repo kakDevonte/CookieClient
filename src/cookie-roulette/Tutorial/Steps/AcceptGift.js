@@ -14,7 +14,7 @@ function AcceptGift({store}) {
     <div className="accept-gift-step info center-X" >
       <span className="info-header">Подарок!</span>
       <p>
-        Смотри, { player.name }, угостил тебя коктейлем! Кажется ты ему нравишься.
+        Смотри, { player.name } угостил тебя коктейлем! Кажется, ты ему нравишься.
       </p>
       <p>Давай сделаем ему ответный подарок.</p>
       <div
