@@ -40,7 +40,6 @@ class UserStore {
     data.enterCounter = 0;
     data.kissCounter = 0;
     data.cookieCounter = 0;
-    //data.sex = 2;
     data.gifts = [];
     data.inventory = [];
     data.messages = [];

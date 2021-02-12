@@ -395,7 +395,11 @@ class TutorialStore {
 
     setTimeout(() => this._rotateSelector(2), 1000);
     setTimeout(() => {
-      this.receiveGift(this._store.user.id, '3', '5');
+      if(this._store.user.sex === 1) {
+        this.receiveGift(this._store.user.id, '3', '5');
+      } else {
+        this.receiveGift(this._store.user.id, '3', '1');
+      }
       this._kissing();
     }, 6000);
     setTimeout(() => {
@@ -413,7 +417,12 @@ class TutorialStore {
     setTimeout(() => this._kissing(), 6000);
     setTimeout(() => {
       this.setTargetSeat(null);
-      this.receiveGift('6', '28', '8');
+
+      if(this._store.user.sex === 1) {
+        this.receiveGift('6', '28', '8');
+      } else {
+        this.receiveGift('4', '28', '2');
+      }
       this.setRounds(0);
     }, 12000);
   }
