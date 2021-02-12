@@ -395,7 +395,8 @@ class TutorialStore {
 
     setTimeout(() => this._rotateSelector(2), 1000);
     setTimeout(() => {
-      if(this._store.user.sex === 1) {
+
+      if(this._store.user.data.sex === 1) {
         this.receiveGift(this._store.user.id, '3', '5');
       } else {
         this.receiveGift(this._store.user.id, '3', '1');
@@ -418,7 +419,7 @@ class TutorialStore {
     setTimeout(() => {
       this.setTargetSeat(null);
 
-      if(this._store.user.sex === 1) {
+      if(this._store.user.data.sex === 1) {
         this.receiveGift('6', '28', '8');
       } else {
         this.receiveGift('4', '28', '2');

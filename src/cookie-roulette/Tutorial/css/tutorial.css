@@ -162,35 +162,35 @@ div[class*="-step"] .button-proceed-tutorial{
   z-index: 11;
 }
 
-.welcome-step{ width: 60%; }
+.welcome-step{ width: 68%; }
 .welcome-step > .button-proceed-tutorial{ width: 30%; }
 
-.player-turn-ready-step{ top: 28%; width: 50%; }
-.player-turn-ready-step > .button-proceed-tutorial{ width: 60%; }
+.player-turn-ready-step{ top: 28%; width: 70%; }
+.player-turn-ready-step > .button-proceed-tutorial{ width: 65%; }
 
 .player-turn-step{ top: 55%; width: 58%; }
 
 .player-target-selected-step{ width: 75%; top: 10%; }
-.player-target-selected-step > .button-proceed-tutorial{ width: 44%;}
+.player-target-selected-step > .button-proceed-tutorial{ width: 65%;}
 
 .player-kiss-step{ width: 75%; top: 60%; }
 
-.decline-kiss-step{ width: 55%; top: 62% }
+.decline-kiss-step{ width: 75%; top: 62% }
 
-.accept-gift-step{ width: 55%; top: 28% }
-.accept-gift-step > .button-proceed-tutorial{ width: 57%; }
+.accept-gift-step{ width: 75%; top: 28% }
+.accept-gift-step > .button-proceed-tutorial{ width: 65%; }
 
-.open-inventory-step{ width: 44%; left: 10%; top: 12%; }
+.open-inventory-step{ width: 50%; left: 4%; top: 12%; }
 
 .give-gift-step{ width: 75%; bottom: 30%; }
 
-.gift-selected-step{ width: 75%; bottom: 5%; }
+.gift-selected-step{ width: 75%; bottom: 2%; }
 
-.personal-message-step{ width: 66%; bottom: 30%;}
+.personal-message-step{ width: 75%; bottom: 30%;}
 .open-talk-step{ width: 51%; bottom: 30%;}
 
-.write-message-step{ width: 47%; bottom: 7%; }
+.write-message-step{ width: 75%; bottom: 8%; }
 
-.end-tutorial-step{ width: 55%; top: 15% }
+.end-tutorial-step{ width: 80%; top: 12% }
 
 .tutorial-empty-step{ width: 0; height: 0; display: none; }

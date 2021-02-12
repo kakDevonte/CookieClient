@@ -15,7 +15,7 @@ function DeclineKiss({store}) {
       <p>
         Не делай так, { player.name } огорчится. Не стоит огорчать нашего гостя!
       </p>
-      <p style={ {fontSize: '125%'} }>
+      <p style={ {fontSize: '120%'} }>
         Нажми, пожалуйста, «Поцеловать».
       </p>
     </div>
