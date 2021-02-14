@@ -31,6 +31,10 @@ function Rating({store}) {
         <i className="close-rating-bottle center-Y" onClick={ () => store.rating.toggleRatingPanel() } />
         <span className="center-XY">Самые зацелованные</span>
       </header>
+      <div className="rating-type">
+        <span onClick={ () => store.rating.setType('kisses') }>Поцелуи</span>
+        <span onClick={ () => store.rating.setType('gifts') }>Подарки</span>
+      </div>
       { buttons() }
       <RatingList list={store.rating.ratingList} />
       <div className="your-rating-position" style={store.app.size.ratingListItem}>

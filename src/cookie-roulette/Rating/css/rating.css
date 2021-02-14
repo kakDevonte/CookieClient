@@ -43,6 +43,16 @@
   cursor: pointer;
 }
 
+.rating-panel > .rating-type{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  height: 6.65%;
+  background-color: #8932da;
+}
+
 .rating-panel > .rating-period{
   display: flex;
   flex-flow: row nowrap;
@@ -70,7 +80,7 @@
 
 .rating-panel > .rating-list{
   width: 100%;
-  height: 80.902%;
+  height: 74.252%;
   box-sizing: border-box;
   overflow-y: scroll;
   scrollbar-color: #8932da #9549f6;

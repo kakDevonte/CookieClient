@@ -5,6 +5,7 @@ class RatingStore {
   _state = '';
   _error = false;
   _period = 'day';
+  _type = 'kisses';
   _ratingList = {
     day: [],
     week: [],
@@ -28,12 +29,14 @@ class RatingStore {
   constructor(store){
     makeObservable(this, {
       _state: observable,
+      _type: observable,
       _error: observable,
       _period: observable,
       _ratingList: observable,
       _myRatingData: observable,
 
       setState: action,
+      setType: action,
       setPeriod: action,
       updateRatingList: action,
       updateMyRatingData: action
@@ -42,6 +45,7 @@ class RatingStore {
   }
 
   get state() { return this._state; }
+  get type() { return this._type; }
   get error() { return this._error; }
   get period() { return this._period; }
   get ratingList() { return this._ratingList[this._period]; }
@@ -50,6 +54,11 @@ class RatingStore {
   setState(state) {
     if(state === this._state) return;
     this._state = state;
+  }
+
+  setType(type) {
+    if(type === this._type) return;
+    this._type = type;
   }
 
   setError(error) {
@@ -74,6 +83,23 @@ class RatingStore {
   }
 
   updateMyRatingData(data, period) {
+    if(!data) {
+      this._myRatingData = {
+        day: {
+          position: '>1000',
+          id: null,
+        },
+        week: {
+          position: '>1000',
+          id: null,
+        },
+        month: {
+          position: '>1000',
+          id: null,
+        }
+      };
+      return;
+    }
     this._myRatingData[period] = data;
   }
 
