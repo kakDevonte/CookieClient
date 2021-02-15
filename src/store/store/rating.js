@@ -5,7 +5,7 @@ class RatingStore {
   _state = '';
   _error = false;
   _period = 'day';
-  _type = 'kisses';
+  _type = 'gifts';
   _ratingList = {
     day: [],
     week: [],

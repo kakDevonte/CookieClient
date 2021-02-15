@@ -35,8 +35,8 @@ function Rating({store}) {
 
     return (
       <div className="rating-type">
-        <span className={type.kisses} onClick={ () => store.rating.setType('kisses') }>Поцелуи</span>
         <span className={type.gifts} onClick={ () => store.rating.setType('gifts') }>Подарки</span>
+        <span className={type.kisses} onClick={ () => store.rating.setType('kisses') }>Поцелуи</span>
       </div>
     );
   };
