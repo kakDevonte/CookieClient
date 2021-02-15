@@ -6,7 +6,8 @@ function DeclineKiss({store}) {
   const player = store.tutorial._players.get(3);
   const style = {};
 
-  if(store.app.size.game.height > 600) style.top = 390;
+  if(store.app.size.game.height > 600)
+    style.top = store.app.size.table.height - 70;
 
   useEffect(() => {
     tutorial._accentItem('.kiss-modal .kiss-modal-shadow');

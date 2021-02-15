@@ -2,7 +2,10 @@ import React, {useEffect} from 'react';
 
 function OpenTalk({store, tutorial}) {
   const player = tutorial._players.get(1);
-  const style = {}; if(store.app.size.game.height > 600) style.top = 390;
+  const style = {};
+
+  if(store.app.size.game.height > 600)
+    style.top = store.app.size.table.height - 75;
 
   useEffect(() => {
     tutorial._disAccentAll();

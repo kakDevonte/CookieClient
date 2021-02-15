@@ -5,7 +5,8 @@ function PlayerKiss({store}) {
   const tutorial = store.tutorial;
   const style = {};
 
-  if(store.app.size.game.height > 600) style.top = 390;
+  if(store.app.size.game.height > 600)
+    style.top = store.app.size.table.height - 70;
 
   useEffect(() => {
     tutorial.openShadowLayer();

@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 
 function GiftSelected({store, tutorial}) {
-  const style = {}; if(store.app.size.game.height > 600) style.top = 570;
+  const style = {display: 'none'}; // if(store.app.size.game.height > 600) style.top = 570;
 
   useEffect(() => {
     tutorial._disAccentAll();

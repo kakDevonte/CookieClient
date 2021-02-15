@@ -1,7 +1,10 @@
 import React, {useEffect} from 'react';
 
 function PersonalMessage({store, tutorial}) {
-  const style = {}; if(store.app.size.game.height > 600) style.top = 325;
+  const style = {};
+
+  if(store.app.size.game.height > 600)
+    style.top = store.app.size.table.height - 115;
 
   useEffect(() => {
     tutorial._accentItem('.chat header div:last-child');

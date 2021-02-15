@@ -3,7 +3,8 @@ import React, {useEffect} from 'react';
 function GiveGift({store, tutorial}) {
   const style = {};
 
-  if(store.app.size.game.height > 600) style.top = 325;
+  if(store.app.size.game.height > 600)
+    style.top = store.app.size.table.height - 120;
 
   useEffect(() => {
     tutorial._disAccentAll();
