@@ -8,6 +8,7 @@ function GiveGift({tutorial}) {
 
   return (
     <div className="give-gift-step info center-X" >
+      <div className="arrow-target-gift" />
       <span className="info-header">Нажми на подарок!</span>
       <p>
         Посмотри весь список и

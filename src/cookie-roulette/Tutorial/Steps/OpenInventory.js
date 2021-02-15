@@ -8,7 +8,8 @@ function OpenInventory({tutorial}) {
   }, []);
 
   return (
-    <div className="open-inventory-step info" >
+    <div className="open-inventory-step info center-XY" >
+      <div className="arrow-target-photo" />
       <span className="info-header">Нажми на фото!</span>
       <p>
         Смотри, Дмитрий угостил тебя коктейлем!

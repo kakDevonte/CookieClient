@@ -124,7 +124,7 @@
 div[class*="-step"].info{
   color: #fff;
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.78);
+  background-color: rgba(0, 0, 0, 0.70);
   padding: 25px;
   z-index: 11;
   border-radius: 15px;
@@ -177,24 +177,60 @@ div[class*="-step"] .button-proceed-tutorial{
 .player-target-selected-step{ width: 75%; top: 10%; }
 .player-target-selected-step > .button-proceed-tutorial{ width: 65%;}
 
-.player-kiss-step{ width: 75%; top: 60%; }
+.player-kiss-step{ width: 75%; top: 62%; }
 
 .decline-kiss-step{ width: 75%; top: 62% }
 
 .accept-gift-step{ width: 75%; top: 28% }
 .accept-gift-step > .button-proceed-tutorial{ width: 65%; }
 
-.open-inventory-step{ width: 50%; left: 4%; top: 12%; }
+.open-inventory-step{ width: 50%; }
+.open-inventory-step .arrow-target-photo{
+  position: absolute;
+  width: 80px;
+  height: 100px;
+  left: 40%;
+  top: -80%;
+  background: url("../../../images/tutorial_arrow_photo.png") no-repeat center;
+  background-size: contain;
+}
 
 .give-gift-step{ width: 75%; bottom: 30%; }
+.give-gift-step .arrow-target-gift{
+  position: absolute;
+  width: 40px;
+  height: 80px;
+  left: 30%;
+  top: 110%;
+  background: url("../../../images/tutorial-arrow-select-gift.png") no-repeat center;
+  background-size: contain;
+}
 
 .gift-selected-step{ width: 75%; bottom: 12%; }
 
 .personal-message-step{ width: 75%; bottom: 30%;}
 .open-talk-step{ width: 51%; bottom: 30%;}
 
-.write-message-step{ width: 75%; bottom: 8%; }
+.write-message-step{ width: 75%; bottom: 25%; }
+.write-message-step .arrow-write-message{
+  position: absolute;
+  width: 50px;
+  height: 100px;
+  left: 40%;
+  top: 100%;
+  background: url("../../../images/tutorial-arrow-message.png") no-repeat center;
+  background-size: contain;
+}
 
-.end-tutorial-step{ width: 45%; top: 12% }
+.end-tutorial-step{ width: 45%; top: 25% }
+.end-tutorial-step .arrow-end-tutorial{
+  position: absolute;
+  width: 50px;
+  height: 100px;
+  left: 30%;
+  top: -95%;
+  background: url("../../../images/tutorial-arrow-end.png") no-repeat center;
+  background-size: contain;
+}
 
 .tutorial-empty-step{ width: 0; height: 0; display: none; }
