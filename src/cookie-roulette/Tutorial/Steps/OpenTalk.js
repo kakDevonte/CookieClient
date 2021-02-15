@@ -1,7 +1,8 @@
 import React, {useEffect} from 'react';
 
-function OpenTalk({tutorial}) {
+function OpenTalk({store, tutorial}) {
   const player = tutorial._players.get(1);
+  const style = {}; if(store.app.size.game.height > 600) style.top = 390;
 
   useEffect(() => {
     tutorial._disAccentAll();
@@ -9,7 +10,7 @@ function OpenTalk({tutorial}) {
   }, []);
 
   return (
-    <div className="open-talk-step info center-X" >
+    <div className="open-talk-step info center-X" style={style}>
       <span className="info-header">Выбери беседу</span>
       <p>
         Это {player.name}. Думаю, тебе стоит ответить.

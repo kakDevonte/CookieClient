@@ -184,7 +184,7 @@ div[class*="-step"] .button-proceed-tutorial{
 .accept-gift-step{ width: 75%; top: 28% }
 .accept-gift-step > .button-proceed-tutorial{ width: 65%; }
 
-.open-inventory-step{ width: 50%; }
+.open-inventory-step{ width: 50%; top: 39%;}
 .open-inventory-step .arrow-target-photo{
   position: absolute;
   width: 80px;
@@ -195,7 +195,7 @@ div[class*="-step"] .button-proceed-tutorial{
   background-size: contain;
 }
 
-.give-gift-step{ width: 75%; bottom: 30%; }
+.give-gift-step{ width: 75%; top: 50%; }
 .give-gift-step .arrow-target-gift{
   position: absolute;
   width: 40px;
@@ -206,10 +206,10 @@ div[class*="-step"] .button-proceed-tutorial{
   background-size: contain;
 }
 
-.gift-selected-step{ width: 75%; bottom: 12%; }
+.gift-selected-step{ width: 75%; top: 77%; }
 
-.personal-message-step{ width: 75%; bottom: 30%;}
-.open-talk-step{ width: 51%; bottom: 30%;}
+.personal-message-step{ width: 75%; top: 51%;}
+.open-talk-step{ width: 51%; top: 59%;}
 
 .write-message-step{ width: 75%; bottom: 25%; }
 .write-message-step .arrow-write-message{
@@ -228,7 +228,7 @@ div[class*="-step"] .button-proceed-tutorial{
   width: 50px;
   height: 100px;
   left: 30%;
-  top: -95%;
+  top: -90%;
   background: url("../../../images/tutorial-arrow-end.png") no-repeat center;
   background-size: contain;
 }

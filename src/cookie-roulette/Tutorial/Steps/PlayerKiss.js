@@ -3,6 +3,9 @@ import {inject, observer} from "mobx-react";
 
 function PlayerKiss({store}) {
   const tutorial = store.tutorial;
+  const style = {};
+
+  if(store.app.size.game.height > 600) style.top = 390;
 
   useEffect(() => {
     tutorial.openShadowLayer();
@@ -11,7 +14,7 @@ function PlayerKiss({store}) {
   }, []);
 
   return (
-    <div className="player-kiss-step info center-X" >
+    <div className="player-kiss-step info center-X" style={style}>
       <span className="info-header">Нажми «Поцеловать»</span>
     </div>
   );

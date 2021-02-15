@@ -41,15 +41,15 @@ function Tutorial({store}) {
           declineKiss: <DeclineKiss tutorial={tutorial} />,
           acceptKiss: <div className="tutorial-empty-step" />,
           acceptGift: <AcceptGift tutorial={tutorial} />,
-          openInventory: <OpenInventory tutorial={tutorial} />,
-          giveGift: <GiveGift tutorial={tutorial} />,
-          giftSelected: <GiftSelected tutorial={tutorial} />,
+          openInventory: <OpenInventory store={store} tutorial={tutorial} />,
+          giveGift: <GiveGift store={store} tutorial={tutorial} />,
+          giftSelected: <GiftSelected store={store} tutorial={tutorial} />,
           successGift: <SuccessGift tutorial={tutorial} store={store} />,
-          personalMessage: <PersonalMessage tutorial={tutorial} />,
-          openTalk: <OpenTalk tutorial={tutorial} />,
+          personalMessage: <PersonalMessage store={store} tutorial={tutorial} />,
+          openTalk: <OpenTalk store={store} tutorial={tutorial} />,
           readMessage: <div className="tutorial-empty-step" />,
-          writeMessage: <WriteMessage tutorial={tutorial} />,
-          endTutorial: <EndTutorial tutorial={tutorial} />
+          writeMessage: <WriteMessage store={store} tutorial={tutorial} />,
+          endTutorial: <EndTutorial store={store} tutorial={tutorial} />
         }[store.tutorial.step]
       }
     </section>

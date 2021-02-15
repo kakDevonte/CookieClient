@@ -3,6 +3,10 @@ import {inject, observer} from "mobx-react";
 
 function PlayerTurn({store}) {
   const tutorial = store.tutorial;
+  const bottle = document.querySelector('.cookie-selector');
+  const style = {};
+
+  if(bottle) { style.top = bottle.getBoundingClientRect().bottom + 40; }
 
   useEffect(() => {
     tutorial._disAccentAll();
@@ -11,7 +15,7 @@ function PlayerTurn({store}) {
   }, []);
 
   return (
-    <div className="player-turn-step info center-X" >
+    <div className="player-turn-step info center-X" style={ style }>
       <span className="info-header">Нажми на бутылочку</span>
       <p>
         Твой ход! Кликни на бутылочку!
