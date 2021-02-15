@@ -81,8 +81,17 @@
   width: 44px;
   height: 100%;
   margin-right: 5px;
-  background: url('../../../images/kissed.svg') no-repeat center;
   background-size: 60%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.rating-list-item > .r-kiss-icon.rating-icon-kisses{
+  background-image: url('../../../images/kissed.svg');
+}
+
+.rating-list-item > .r-kiss-icon.rating-icon-gifts{
+  background-image: url('../../../images/animate-gift-icon.png');
 }
 
 .rating-list-item > .r-separator{

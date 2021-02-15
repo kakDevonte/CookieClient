@@ -7,7 +7,7 @@ import RatingList from "./Rating-list";
 
 function Rating({store}) {
 
-  const buttons = () => {
+  const buttonsPeriod = () => {
     const name = {
       today: '',
       week: '',
@@ -25,17 +25,39 @@ function Rating({store}) {
     );
   };
 
+  const buttonsType = () => {
+    const type = {
+      kisses: '',
+      gifts: ''
+    };
+
+    type[store.rating.type] = 'active';
+
+    return (
+      <div className="rating-type">
+        <span className={type.kisses} onClick={ () => store.rating.setType('kisses') }>Поцелуи</span>
+        <span className={type.gifts} onClick={ () => store.rating.setType('gifts') }>Подарки</span>
+      </div>
+    );
+  };
+
+  const header = () => {
+    const text = {
+      kisses: 'Самые зацелованные',
+      gifts: 'Самые щедрые'
+    };
+
+    return text[store.rating.type];
+  };
+
   return (
     <section className={'rating-panel sbg-bottle-light' + store.rating.state}>
       <header className="header-menu-rating">
         <i className="close-rating-bottle center-Y" onClick={ () => store.rating.toggleRatingPanel() } />
-        <span className="center-XY">Самые зацелованные</span>
+        <span className="center-XY">{ header() }</span>
       </header>
-      <div className="rating-type">
-        <span onClick={ () => store.rating.setType('kisses') }>Поцелуи</span>
-        <span onClick={ () => store.rating.setType('gifts') }>Подарки</span>
-      </div>
-      { buttons() }
+      { buttonsType() }
+      { buttonsPeriod() }
       <RatingList list={store.rating.ratingList} />
       <div className="your-rating-position" style={store.app.size.ratingListItem}>
         <RatingListItem position={store.rating.myRating.position} data={store.rating.myRating} />

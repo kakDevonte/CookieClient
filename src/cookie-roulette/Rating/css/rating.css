@@ -53,7 +53,8 @@
   background-color: #8932da;
 }
 
-.rating-panel > .rating-period{
+.rating-panel > .rating-period,
+.rating-panel > .rating-type{
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-evenly;
@@ -63,7 +64,8 @@
   background-color: #8932da;
 }
 
-.rating-period > span{
+.rating-period > span,
+.rating-type > span{
   display: block;
   width: 31%;
   padding: 8px 0;
@@ -73,7 +75,12 @@
   color: rgba(255, 255, 255, 0.8);
 }
 
-.rating-period > span.active{
+.rating-type > span{
+  width: 48%;
+}
+
+.rating-period > span.active,
+.rating-type > span.active{
   background: linear-gradient(268.17deg, #EFCB84 23.68%, #BC894C 87.03%);
   color: white;
 }

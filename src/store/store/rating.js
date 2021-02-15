@@ -58,7 +58,12 @@ class RatingStore {
 
   setType(type) {
     if(type === this._type) return;
+
+    this.updateRatingList();
+    this.updateMyRatingData();
     this._type = type;
+
+    this.requestRatingData(this._period);
   }
 
   setError(error) {
@@ -122,7 +127,7 @@ class RatingStore {
     this.setPeriod(period);
 
     if(this._ratingList[period].length > 0) return;
-    this._store.socket.emit('request-ratings', period);
+    this._store.socket.emit('request-ratings', {period, type: this._type});
   }
 
   receiveData(data) {

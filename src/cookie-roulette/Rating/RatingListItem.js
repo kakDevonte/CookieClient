@@ -45,6 +45,10 @@ function RatingListItem({store, position, data}) {
 
   if(!data.id) return <article className="rating-list-item" style={store.app.size.ratingListItem} />;
 
+  const countOnType = () => {
+    return data[store.rating.type];
+  };
+
   return (
     <article className="rating-list-item" onClick={ () => openProfile() } style={store.app.size.ratingListItem} >
       <div className="r-position" style={style}> { positionContent() }</div>
@@ -52,8 +56,8 @@ function RatingListItem({store, position, data}) {
         <i className="center-XY" style={photo} />
       </div>
       <span className="r-name center-Y">{ data.fullName }</span>
-      <i className="r-kiss-icon" style={style} />
-      <span className="r-kisses center-Y">{data.kisses}</span>
+      <i className={ "r-kiss-icon rating-icon-" + store.rating.type } style={style} />
+      <span className="r-kisses center-Y">{ countOnType() }</span>
       <div className="r-separator" />
     </article>
   );
