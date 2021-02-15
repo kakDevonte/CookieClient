@@ -14,7 +14,7 @@ function PlayerTurn({store}) {
     <div className="player-turn-step info center-X" >
       <span className="info-header">Нажми на бутылочку</span>
       <p>
-        Нажимай скорей, чтобы начать свой раунд! Не заставляй ждать наших гостей.
+        Твой ход! Кликни на бутылочку!
       </p>
     </div>
   );

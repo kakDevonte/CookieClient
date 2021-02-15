@@ -4,7 +4,8 @@ function SuccessGift({tutorial, store}) {
   useEffect(() => {
     const from = store.user.data.sex === 1 ? '5' : '1';
 
-    tutorial.closeShadowLayer();
+    //tutorial.closeShadowLayer();
+    tutorial._accentItem('.roulette-table');
     store.chat.sendLocalMessage(from, 'Привет! Спасибо за подарок, очень приятно :)', store.user.id);
 
     setTimeout(() => {

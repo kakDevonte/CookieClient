@@ -8,12 +8,8 @@ function EndTutorial({tutorial}) {
 
   return (
     <div className="end-tutorial-step info center-X" >
-      <span className="info-header">Поздравляем!</span>
-      <p>
-        Теперь ты умеешь, целоваться, общаться, дарить подарки!
-        Давай закончим обучение и перейдем к столу с реальными людьми.
-      </p>
-      <span className="info-header">Нажми на кнопку «Смены стола»</span>
+      <span className="info-header">Смени стол</span>
+      <p>Давай подберем комнату где больше игроков.</p>
     </div>
   );
 }

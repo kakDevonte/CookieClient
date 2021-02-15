@@ -199,8 +199,8 @@ class TutorialStore {
         this.setStep('declineKiss');
       } else {
         this.setStep('acceptKss');
-        this.closeShadowLayer();
         this._disAccentAll();
+        this._accentItem('.roulette-table');
         this.updateKissData('kiss', true);
         setTimeout(() => this.updateKissData('kiss', false), 1500);
       }
@@ -211,8 +211,9 @@ class TutorialStore {
     if(this._step !== "playerTurn") return;
 
     this.setAllowClickRotate(false);
-    this.closeShadowLayer();
+    //this.closeShadowLayer();
     this._disAccentAll();
+    this._accentItem('.roulette-table');
 
     this.setStep('rotate');
     this._roundThree('rotate');
@@ -326,7 +327,7 @@ class TutorialStore {
     setTimeout(() => {
       this._crateBot(4, '4', 'Джессика', 'Джессика Альба', 'female');
       this._store.chat.sendLocalMessage('4', 'Всем привет!');
-      this._roundOne();
+      this._roundTwo();
     }, 7000);
   }
 
@@ -348,21 +349,20 @@ class TutorialStore {
     setTimeout(() => {
       this._crateBot(4, '8', 'Александр', 'Александр Домогаров', 'male');
       this._store.chat.sendLocalMessage('8', 'Здравствуйте все! Рад вас видеть.');
-      this._roundOne();
-      //this.setStep('acceptGift');
+      this._roundTwo();
     }, 7000);
   }
 
-  _roundOne() {
-    this.setActiveSeat(3);
-
-    setTimeout(() => this._rotateSelector(2), 1000);
-    setTimeout(() => this._kissing(), 6000);
-    setTimeout(() => {
-      this.setTargetSeat(null);
-      this._roundTwo();
-    }, 12000);
-  }
+  // _roundOne() {
+  //   this.setActiveSeat(3);
+  //
+  //   setTimeout(() => this._rotateSelector(2), 1000);
+  //   setTimeout(() => this._kissing(), 6000);
+  //   setTimeout(() => {
+  //     this.setTargetSeat(null);
+  //     this._roundTwo();
+  //   }, 12000);
+  // }
 
   _roundTwo() {
     this.setActiveSeat(4);
@@ -370,6 +370,7 @@ class TutorialStore {
     //return this.setStep('acceptGift');
 
     setTimeout(() => this._rotateSelector(2), 1000);
+    setTimeout(() => this._kissing(), 6000);
     setTimeout(() => {
       this.setTargetSeat(null);
       this._roundThree();
@@ -380,12 +381,13 @@ class TutorialStore {
     if(!action) {
       this.setActiveSeat(0);
       this.setRounds(3);
-      this.setStep('playerTurnReady');
+      this.openShadowLayer();
+      this.setStep('playerTurn');
     }
 
     if(action === 'rotate') {
       setTimeout(() => this._rotateSelector(3), 100);
-      setTimeout(() => this.setStep('playerTargetSelected'), 4500);
+      setTimeout(() => this.setStep('playerKiss'), 4500);
     }
   }
 
@@ -412,7 +414,7 @@ class TutorialStore {
   _roundFive() {
     this.setActiveSeat(2);
     this.setRounds(1);
-    this.setStep('acceptGift');
+    this.setStep('openInventory');
 
     setTimeout(() => this._rotateSelector(4), 1000);
     setTimeout(() => this._kissing(), 6000);

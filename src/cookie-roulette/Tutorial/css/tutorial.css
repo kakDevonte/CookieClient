@@ -139,9 +139,13 @@ div[class*="-step"].info .info-header{
   font-weight: 700;
 }
 
+div[class*="-step"].info .info-header:last-child{
+  margin-bottom: 0;
+}
+
 div[class*="-step"].info p{
   margin: 0 0 10px 0;
-  text-align: justify;
+  text-align: center;
 }
 
 div[class*="-step"].info p:last-child{
@@ -184,13 +188,13 @@ div[class*="-step"] .button-proceed-tutorial{
 
 .give-gift-step{ width: 75%; bottom: 30%; }
 
-.gift-selected-step{ width: 75%; bottom: 2%; }
+.gift-selected-step{ width: 75%; bottom: 12%; }
 
 .personal-message-step{ width: 75%; bottom: 30%;}
 .open-talk-step{ width: 51%; bottom: 30%;}
 
 .write-message-step{ width: 75%; bottom: 8%; }
 
-.end-tutorial-step{ width: 80%; top: 12% }
+.end-tutorial-step{ width: 45%; top: 12% }
 
 .tutorial-empty-step{ width: 0; height: 0; display: none; }
