@@ -5,6 +5,7 @@ function OpenInventory({store, tutorial}) {
   const photo = document.querySelector('.player.p1');
   const style = {};
   const end = store.user.data.sex === 1 ? '' : 'а';
+  const target = store.user.data.sex === 1 ? 'ему' : 'ей';
 
   if(store.app.size.game.height > 600) {
     if(photo) {
@@ -26,7 +27,7 @@ function OpenInventory({store, tutorial}) {
       <span className="info-header">Нажми на фото!</span>
       <p>
         Смотри, { player.name } угостил{ end } тебя коктейлем!
-        Давай сделаем ему ответный подарок.
+        Давай сделаем {target} ответный подарок.
       </p>
     </div>
   );

@@ -5,7 +5,7 @@ function GameStart({store}) {
 
   useEffect(() => {
     //store.tutorial.closeShadowLayer();
-    console.log('start');
+
     store.tutorial._accentItem('.roulette-table');
 
     if(store.user.data.sex === 1) {

@@ -283,14 +283,14 @@ class TutorialStore {
 
   _crateBot(seat, id, name, fullname, gender) {
     const photo = {
-      'Александр Домогаров': 'https://sun9-39.userapi.com/impg/JlSozSp6CpUwbnAZJVXPYhJ7_Pwud0Aif-3nxQ/EEl0BtEmKaw.jpg?size=200x200&quality=96&proxy=1&sign=482edd226a04337eef872ec76bb897cb&type=album',
-      'Бенедикт Камбербэтч': 'https://sun9-46.userapi.com/impg/sW7QlhDus11-XD07FDUCJPXczy6ttg8zTBf6tA/1pIPdRdjDmg.jpg?size=200x200&quality=96&proxy=1&sign=bc123029a9923329746cfaeafb5598d8&type=album',
-      'Джессика Альба': 'https://sun9-22.userapi.com/impg/GauGugjatPLMsaRb-1lnFMCV1-KYKJM8JH0TRA/M4Y5vEnBfL8.jpg?size=200x200&quality=96&proxy=1&sign=9228d83fd2f21b5eaa646bfad78d0530&type=album',
-      'Дмитрий Певцов': 'https://sun9-56.userapi.com/impg/mdTRsa1FR-HTmT6jkPCvuaN4y_Fv5lHvB0azng/MBPA4K2v1zw.jpg?size=200x200&quality=96&proxy=1&sign=7b9a35660a07038b5149296df74531de&type=album',
-      'Инна Гомес': 'https://sun9-52.userapi.com/impg/JtxqdUEHH-ZvjveJDedBVkLYOUh3dZUOxT1MRw/hUnODdKycg4.jpg?size=200x200&quality=96&proxy=1&sign=0efd983d0d558118abc6839cd6b0b149&type=album',
-      'Камерон Диаз': 'https://sun9-18.userapi.com/impg/pbIcJfUEYntqMXHDfh1RXERMdoJCOSnIF90AGg/QWKfyKACwAY.jpg?size=200x200&quality=96&proxy=1&sign=1c60a299bd7cdedac7efd7096c1d23f1&type=album',
-      'Киану Ривз': 'https://sun9-45.userapi.com/impg/rPz6rpA1o1vyGCIo23NwjqHvRi6GA2ld2daCfQ/a5CNuxsxhIo.jpg?size=200x200&quality=96&proxy=1&sign=5ddf3953bbbfbaa7aed97f629b33ae7c&type=album',
-      'Милла Йовович': 'https://sun9-10.userapi.com/impg/4JcqqDhOE_InPbpXU8rThlejBn-cR1-nuAIYrQ/tdmPgn-lL80.jpg?size=200x200&quality=96&proxy=1&sign=431d027100b6418131a9d8bfeb17da04&type=album',
+      'Александр Дмитриев': 'https://sun9-58.userapi.com/impg/2Tw6BkwXuFf0WlBEDbQlz14ZGWMYg2UE5V6REg/qnlOx7LUA6o.jpg?size=200x200&quality=96&proxy=1&sign=a6a7cc3b761e2f55d45ea552543c2f5f',
+      'Максим Куролесов': 'https://sun9-30.userapi.com/impg/n3w7oUzN_yJ6JCzRi4wGoyhHTqo-q1GEiWywuw/xssioUp4JuI.jpg?size=200x200&quality=96&proxy=1&sign=455cb3b2e3486f86451985942d28ab2f',
+      'Дарина Ломова': 'https://sun9-65.userapi.com/impg/A6RKpFX8JKkQk-ZxX0Bgr1a2H6uvTVtwxdruzg/1kebdGyRy3w.jpg?size=200x200&quality=96&proxy=1&sign=35dc509add705a3454186a0ed78f06d0',
+      'Дмитрий Волков': 'https://sun9-56.userapi.com/impg/gBp-BQCV121doZdH5oQmDjjsPLQSibfvqvkmgg/EUHUy_d_kQI.jpg?size=200x200&quality=96&proxy=1&sign=82de5baf5dcc19d4c66524880610d0ed',
+      'Инна Шилова': 'https://sun9-33.userapi.com/impg/CZpsljJolgTgT7kkqbYXOZHrdxCHENE6cNskmw/Vew6VNuvWTU.jpg?size=200x200&quality=96&proxy=1&sign=b2eb305b3cf7c863553b9a81013e4e99',
+      'Елизавета Дворцова': 'https://sun9-5.userapi.com/impg/iiiAEtIBHgCqy17F3ha7gvpneuO_Tl6FRLSFrw/FSGEssylv0Q.jpg?size=200x200&quality=96&proxy=1&sign=68cadaa7b10b40c846a6d0feb3059c26',
+      'Михаил Суров': 'https://sun9-55.userapi.com/impg/AL4_hDXmbVbV9oK8hyyjGLlnBjbr8Pjyv0JCRQ/Ayhu0IgvMjA.jpg?size=200x200&quality=96&proxy=1&sign=b587348d71c2f28a60a943996b12ee75',
+      'Мария Кудряшова': 'https://sun9-76.userapi.com/impg/hhHCG8ZvXyfATRe7ftjfPmItkwVHcllIr7dAkA/wEtf-yJiyNE.jpg?size=200x200&quality=96&proxy=1&sign=dbd39f5608726c3c2b8034934e7b609d',
     };
 
     const bot = {
@@ -311,21 +311,21 @@ class TutorialStore {
 
   _createBotsFromMale() {
     setTimeout(() => {
-      this._crateBot(1, '1', 'Милла', 'Милла Йовович', 'female');
+      this._crateBot(1, '1', 'Мария', 'Мария Кудряшова', 'female');
     }, 2500);
 
     setTimeout(() => {
-      this._crateBot(2, '2', 'Киану', 'Киану Ривз', 'male');
-      this._store.chat.sendLocalMessage('2', 'Вы все восхитительны!');
+      this._crateBot(2, '2', 'Михаил', 'Михаил Суров', 'male');
+      this._store.chat.sendLocalMessage('2', 'Доброго времени суток.');
     }, 4000);
 
     setTimeout(() => {
-      this._crateBot(3, '3', 'Инна', 'Инна Гомес', 'female');
+      this._crateBot(3, '3', 'Инна', 'Инна Шилова', 'female');
       this.setGameState('new-round');
     }, 6000);
 
     setTimeout(() => {
-      this._crateBot(4, '4', 'Джессика', 'Джессика Альба', 'female');
+      this._crateBot(4, '4', 'Дарина', 'Дарина Ломова', 'female');
       this._store.chat.sendLocalMessage('4', 'Всем привет!');
       this._roundTwo();
     }, 7000);
@@ -333,21 +333,21 @@ class TutorialStore {
 
   _createBotsFromFemale() {
     setTimeout(() => {
-      this._crateBot(1, '5', 'Дмитрий', 'Дмитрий Певцов', 'male');
+      this._crateBot(1, '5', 'Дмитрий', 'Дмитрий Волков', 'male');
     }, 2500);
 
     setTimeout(() => {
-      this._crateBot(2, '6', 'Камерон', 'Камерон Диаз', 'female');
+      this._crateBot(2, '6', 'Елизавета', 'Елизавета Дворцова', 'female');
       this._store.chat.sendLocalMessage('6', 'Алоха!');
     }, 4000);
 
     setTimeout(() => {
-      this._crateBot(3, '7', 'Бенедикт', 'Бенедикт Камбербэтч', 'male');
+      this._crateBot(3, '7', 'Максим', 'Максим Куролесов', 'male');
       this.setGameState('new-round');
     }, 6000);
 
     setTimeout(() => {
-      this._crateBot(4, '8', 'Александр', 'Александр Домогаров', 'male');
+      this._crateBot(4, '8', 'Александр', 'Александр Дмитриев', 'male');
       this._store.chat.sendLocalMessage('8', 'Здравствуйте все! Рад вас видеть.');
       this._roundTwo();
     }, 7000);

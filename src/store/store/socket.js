@@ -85,13 +85,13 @@ class SocketStore {
     //////////////////////////////////////////////////////////////
 
     socket.on('connect-success', (enters) => {
-      // if(enters && enters > 0) {
-      //   store.app.stageLobby();
-      // } else {
-      //   store.app.stageTutorial();
-      // }
-      store.app.stageTutorial();
-      // console.log('socket (connect-success)');
+      if(enters && enters > 0) {
+        store.app.stageLobby();
+      } else {
+        store.app.stageTutorial();
+      }
+      //store.app.stageTutorial();
+      //console.log('socket (connect-success)');
     });
 
     //////////////////////////////////////////////////////////////
