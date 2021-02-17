@@ -135,6 +135,12 @@ class RatingStore {
       this.setError(true);
       return;
     }
+
+    if(data.items.length === 0) {
+      this.setError('empty');
+      return;
+    }
+
     this.updateRatingList(data.items, data.period);
     this.updateMyRatingData(data.my, data.period);
   }

@@ -19,6 +19,18 @@ function RatingList({store, list}) {
   };
 
   if(store.rating.error) {
+    if(store.rating.error === 'empty') {
+      return (
+        <div className="rating-list custom-scroll">
+          <div className="error center-XY" >
+            <span>Никого еще нет</span>
+            <br/>
+            <br/>
+            <span>станьте первым</span>
+          </div>
+        </div>
+      );
+    }
     return (
       <div className="rating-list custom-scroll">
         <div className="error center-XY" >

@@ -43,6 +43,7 @@
   cursor: pointer;
 }
 
+.rating-panel > .rating-period,
 .rating-panel > .rating-type{
   display: flex;
   flex-flow: row nowrap;
@@ -53,15 +54,8 @@
   background-color: #8932da;
 }
 
-.rating-panel > .rating-period,
-.rating-panel > .rating-type{
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 100%;
-  height: 6.65%;
-  background-color: #8932da;
+.rating-panel > .rating-period{
+  box-shadow: 0 10px 5px rgba(0, 0, 0, 0.15);
 }
 
 .rating-period > span,
