@@ -13,3 +13,9 @@ ReactDOM.render((
     </Provider>
   </BrowserRouter>
 ), document.querySelector("#root"));
+
+// import VKTest from "./cookie-modules/VKTest";
+//
+// ReactDOM.render((
+//   <VKTest />
+// ), document.querySelector("#root"));
