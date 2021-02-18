@@ -20,14 +20,16 @@ function VKTest({}) {
     //message = "Придется приложить усилия, чтобы сохранить мир в родном доме. Умения слушать и слышать других вам в ближайшем будущем очень пригодится.";
     message = "Переоценка ценностей болезненна, но иногда необходима. Будьте благодарны тому, кто подтолкнет вас в нужном направлении — это друг.";
 
-    VideoStories.openPredictStoryBox(message);
+    VideoStories.openPredictStoryBox(message).then((res) => {
+      console.log(res);
+    });
   };
 
   const test = async () => {
     await bridge.send("VKWebAppInit");
     const data = await bridge.send('VKWebAppGetUserInfo', {});
 
-    VideoStories.init(7694274, bridge, data.id, 'android');
+    VideoStories.init(7694274, bridge, data.id, 'windows');
   };
 
   return (

@@ -16,14 +16,19 @@ CanvasRenderingContext2D.prototype.roundRect = function (x, y, width, height, ra
 class VideoStories {
   constructor() {
     this._app_id = null;
-    this._width = window.screen.width;
-    this._height = window.screen.height;
+    this._width = null;
+    this._height = null;
     this._btidge = null;
     this._uid = null;
     this._os = null;
     this._scale = null;
 
-    this._fontSize = 12;
+    this._translateButton = 0;
+    this._bagckgroundType = '';
+    this._fileType = '';
+
+    this._baseFontSize = 0;
+    this._fontSize = 0;
 
     this._canvas = document.createElement('canvas');
     this._ctx = this._canvas.getContext("2d");
@@ -44,7 +49,24 @@ class VideoStories {
     this._btidge = bridge;
     this._uid = uid;
     this._os = os;
-    this._scale = os === 'iOs' ? 1 : window.devicePixelRatio;
+
+    if(os === 'iOS' || os === 'Android') {
+      this._scale = os === 'iOS' ? 1 : window.devicePixelRatio;
+      this._width = window.screen.width;
+      this._height = window.screen.height;
+      this._translateButton = -0.125;
+      this._baseFontSize = 12;
+      this._bagckgroundType = 'video';
+      this._fileType = '.mp4';
+    } else {
+      this._scale = 1;
+      this._width = 1080;
+      this._height = 1920;
+      this._translateButton = -0.138;
+      this._baseFontSize = 36;
+      this._bagckgroundType = 'image';
+      this._fileType = '.jpg';
+    }
 
     this._init = true;
   }
@@ -54,6 +76,7 @@ class VideoStories {
    * @param {string} predict - текст предсказния
    * @param {=string} type - тип прдесказания ( blue | dark-purple | light-blue | light-green | light-purple | orange ),
    * без типа - случайное
+   * @return {Promise< {success: boolean, response: object } >} Promise - результат работы с редатором историй
    */
   openPredictStoryBox(predict, type) {
     if(!this._init) return;
@@ -61,24 +84,25 @@ class VideoStories {
 
     const array = ['blue', 'dark-purple', 'light-blue', 'light-green', 'light-purple', 'orange'];
     const types = {
-      'blue': 'https://bottle.cookieapp.ru:4444/public/stories/blue.mp4',
-      'dark-purple': 'https://bottle.cookieapp.ru:4444/public/stories/dark-purple.mp4',
-      'light-blue': 'https://bottle.cookieapp.ru:4444/public/stories/light-blue.mp4',
-      'light-green': 'https://bottle.cookieapp.ru:4444/public/stories/light-green.mp4',
-      'light-purple': 'https://bottle.cookieapp.ru:4444/public/stories/light-purple.mp4',
-      'orange': 'https://bottle.cookieapp.ru:4444/public/stories/orange.mp4',
-      'default': 'https://bottle.cookieapp.ru:4444/public/stories/stories-1.mp4'
+      'blue': 'https://bottle.cookieapp.ru:4444/public/stories/blue',
+      'dark-purple': 'https://bottle.cookieapp.ru:4444/public/stories/dark-purple',
+      'light-blue': 'https://bottle.cookieapp.ru:4444/public/stories/light-blue',
+      'light-green': 'https://bottle.cookieapp.ru:4444/public/stories/light-green',
+      'light-purple': 'https://bottle.cookieapp.ru:4444/public/stories/light-purple',
+      'orange': 'https://bottle.cookieapp.ru:4444/public/stories/orange',
+      'default': 'https://bottle.cookieapp.ru:4444/public/stories/default'
     };
 
     url = types[type];
-    if(!url) url = common.randomFromArray(array);
+    if(!url) url = types[common.randomFromArray(array)];
+    url += this._fileType;
 
-    this._processing(url, predict);
+    return this._processing(url, predict);
   }
 
   _processing(url, predict) {
-    this._fontSize = 12 + 2 * ((this._width - 320) / 680);
-    this._openStoryBox(url, this._createButton(), this._createPredict(predict));
+    this._fontSize = this._baseFontSize + 2 * ((this._width - 320) / 680);
+    return this._openStoryBox(url, this._createButton(), this._createPredict(predict));
   }
 
   /**
@@ -155,59 +179,69 @@ class VideoStories {
    * @param { {width, height, blob} } predict
    * @private
    */
-  _openStoryBox(url, button, predict) {
-    this._btidge.send("VKWebAppShowStoryBox", {
-      background_type : "video",
-      url : url,
-      locked: true,
-      stickers: [
-        {
-          sticker_type: "renderable",
-          sticker: {
-            content_type: "image",
-            blob: button.blob,
-            transform: {
-              gravity: "center_bottom",
-              translation_y: -0.125
-            },
-            can_delete: false,
-            clickable_zones: [
-              {
-                action_type: "app",
-                action: {
-                  app_id: this._app_id,
-                  app_context: "sp=" + this._uid
-                },
-                // action_type: 'link',
-                // action: {
-                //   link: "https://vk.com/cookiesapp#sp=" + this._uid
-                // },
-                clickable_area: [
-                  {x: 0, y: 0},
-                  {x: button.width, y: 0},
-                  {x: button.width, y: button.height},
-                  {x: 0, y: button.height},
-                ]
-              }
-            ]
+  async _openStoryBox(url, button, predict) {
+    const result = {success: false, response: null};
+
+    try {
+      result.response = await this._btidge.send("VKWebAppShowStoryBox", {
+        background_type : this._bagckgroundType,
+        url : url,
+        locked: true,
+        stickers: [
+          {
+            sticker_type: "renderable",
+            sticker: {
+              content_type: "image",
+              blob: button.blob,
+              transform: {
+                gravity: "center_bottom",
+                translation_y: this._translateButton
+              },
+              can_delete: false,
+              clickable_zones: [
+                {
+                  action_type: "app",
+                  action: {
+                    app_id: this._app_id,
+                    app_context: "sp=" + this._uid
+                  },
+                  // action_type: 'link',
+                  // action: {
+                  //   link: "https://vk.com/cookiesapp#sp=" + this._uid
+                  // },
+                  clickable_area: [
+                    {x: 0, y: 0},
+                    {x: button.width, y: 0},
+                    {x: button.width, y: button.height},
+                    {x: 0, y: button.height},
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            sticker_type: "renderable",
+            sticker: {
+              content_type: "image",
+              blob: predict.blob,
+              transform: {
+                rotation: 1,
+                gravity: "center",
+                translation_y: -0.118,
+                translation_x: 0.1
+              },
+              can_delete: false
+            }
           }
-        },
-        {
-          sticker_type: "renderable",
-          sticker: {
-            content_type: "image",
-            blob: predict.blob,
-            transform: {
-              rotation: 1,
-              gravity: "center",
-              translation_y: -0.118,
-              translation_x: 0.1
-            },
-            can_delete: false
-          }
-        }
-      ]
-    });
+        ]
+      });
+      result.success = true;
+
+      return  result;
+    } catch(e) {
+      result.response = e;
+      return  result;
+    }
   }
 
   /**
