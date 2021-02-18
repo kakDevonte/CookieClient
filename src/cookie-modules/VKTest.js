@@ -20,7 +20,7 @@ function VKTest({}) {
     //message = "Придется приложить усилия, чтобы сохранить мир в родном доме. Умения слушать и слышать других вам в ближайшем будущем очень пригодится.";
     message = "Переоценка ценностей болезненна, но иногда необходима. Будьте благодарны тому, кто подтолкнет вас в нужном направлении — это друг.";
 
-    VideoStories.openPredictStoryBox(message, 'main');
+    VideoStories.openPredictStoryBox(message);
   };
 
   const test = async () => {

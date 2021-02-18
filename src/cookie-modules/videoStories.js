@@ -1,3 +1,5 @@
+import common from "../config/common";
+
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, width, height, radius) {
   if (width < 2 * radius) radius = width / 2;
   if (height < 2 * radius) radius = height / 2;
@@ -50,41 +52,26 @@ class VideoStories {
   /**
    * Открывает редактор историй для предсказаний
    * @param {string} predict - текст предсказния
-   * @param {=string} type - тип прдесказания (фонового видео)
+   * @param {=string} type - тип прдесказания ( blue | dark-purple | light-blue | light-green | light-purple | orange ),
+   * без типа - случайное
    */
   openPredictStoryBox(predict, type) {
     if(!this._init) return;
-
     let url;
 
-    switch(type) {
-      case "main":
-        url = "https://bottle.cookieapp.ru:4444/public/stories/blue.mp4";
-        break;
+    const array = ['blue', 'dark-purple', 'light-blue', 'light-green', 'light-purple', 'orange'];
+    const types = {
+      'blue': 'https://bottle.cookieapp.ru:4444/public/stories/blue.mp4',
+      'dark-purple': 'https://bottle.cookieapp.ru:4444/public/stories/dark-purple.mp4',
+      'light-blue': 'https://bottle.cookieapp.ru:4444/public/stories/light-blue.mp4',
+      'light-green': 'https://bottle.cookieapp.ru:4444/public/stories/light-green.mp4',
+      'light-purple': 'https://bottle.cookieapp.ru:4444/public/stories/light-purple.mp4',
+      'orange': 'https://bottle.cookieapp.ru:4444/public/stories/orange.mp4',
+      'default': 'https://bottle.cookieapp.ru:4444/public/stories/stories-1.mp4'
+    };
 
-      case "love":
-        url = "https://bottle.cookieapp.ru:4444/public/stories/blue.mp4";
-        break;
-
-      case "what_to_do":
-        url = "https://bottle.cookieapp.ru:4444/public/stories/blue.mp4";
-        break;
-
-      case "money":
-        url = "https://bottle.cookieapp.ru:4444/public/stories/blue.mp4";
-        break;
-
-      case "work":
-        url = "https://bottle.cookieapp.ru:4444/public/stories/blue.mp4";
-        break;
-
-      case "future":
-        url = "https://bottle.cookieapp.ru:4444/public/stories/blue.mp4";
-        break;
-
-      default:
-        url = "https://bottle.cookieapp.ru:4444/public/stories/stories-1.mp4";
-    }
+    url = types[type];
+    if(!url) url = common.randomFromArray(array);
 
     this._processing(url, predict);
   }
