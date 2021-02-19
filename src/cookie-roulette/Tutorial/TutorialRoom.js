@@ -39,7 +39,7 @@ function TutorialRoom({store}) {
           </section>
           <KissCounter kisses={ store.user.data.kissCounter } />
           <ChangeButton remain={store.tutorial.rounds} click={ () => { store.tutorial.exit() } } />
-          <div className="rating-button" onClick={ () => {} }>
+          <div className="rating-button" style={{visibility: "hidden"}}>
             <i className="center-XY" />
           </div>
           <section className="vk-apps-overlay">
