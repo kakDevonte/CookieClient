@@ -19,11 +19,12 @@ class SocketStore {
     const options = {
       reconnectionDelay: 1000,
       reconnectionAttempts: 4,
+      query: {type: 'bottle-game'}
     };
 
     this._socket = process.env.NODE_ENV === 'production' ?
-      io(process.env.REACT_APP_SOCKET_SERVER, options) :
-      io(process.env.REACT_APP_SOCKET_SERVER_DEV, options);
+      io(process.env.REACT_APP_SOCKET_SERVER + 'bottle/', options) :
+      io(process.env.REACT_APP_SOCKET_SERVER_DEV + 'bottle/', options);
 
     this._sockets();
   }
