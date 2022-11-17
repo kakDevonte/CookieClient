@@ -200,15 +200,15 @@ class VideoStories {
               can_delete: false,
               clickable_zones: [
                 {
-                  action_type: "app",
-                  action: {
-                    app_id: this._app_id,
-                    app_context: "sp=" + this._uid
-                  },
-                  // action_type: 'link',
+                  // action_type: "app",
                   // action: {
-                  //   link: "https://vk.com/cookiesapp#sp=" + this._uid
+                  //   app_id: this._app_id,
+                  //   app_context: "sp=" + this._uid
                   // },
+                  action_type: 'link',
+                  action: {
+                    link: "https://vk.com/cookiesapp#sp=" + this._uid
+                  },
                   clickable_area: [
                     {x: 0, y: 0},
                     {x: button.width, y: 0},
