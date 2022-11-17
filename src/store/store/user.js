@@ -36,7 +36,7 @@ class UserStore {
     }
     data = Object.assign({}, info);
 
-    data.id = info.id + '';
+    data.id = 'random_' + info.id;
     data.enterCounter = 0;
     data.kissCounter = 0;
     data.cookieCounter = 0;
