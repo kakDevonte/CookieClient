@@ -40,9 +40,11 @@ class UserStore {
     data.enterCounter = 0;
     data.kissCounter = 0;
     data.cookieCounter = 0;
+    data.giftsCounter = 0;
     data.gifts = [];
     data.inventory = [];
     data.messages = [];
+
     data.platform = this._store.platform;
 
     //common.randomiseUser(data);
@@ -65,6 +67,7 @@ class UserStore {
     if(res.enterCounter) data.enterCounter = res.enterCounter;
     if(res.kissCounter) data.kissCounter = res.kissCounter;
     if(res.cookieCounter) data.cookieCounter = res.cookieCounter;
+    if(res.giftsCounter) data.giftsCounter = res.giftsCounter.receive;
     if(res.inventory) data.inventory = res.inventory;
     if(res.gifts) data.gifts = res.gifts;
     if(res.messages) data.messages = res.messages;

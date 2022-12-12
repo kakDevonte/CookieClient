@@ -7,18 +7,25 @@ import {useHistory} from "react-router-dom";
 function RatingListItem({store, position, data}) {
   const history = useHistory();
 
-  const toProfile = {
-    pathname: "/Profile",
-    propsSearch: {
-      id: data.id,
-      platform: data.platform,
-      myProfile: data.id === store.user.id,
-    }
-  };
+  // const toProfile = {
+  //   pathname: "/Profile",
+  //   propsSearch: {
+  //     id: data.id,
+  //     platform: data.platform,
+  //     myProfile: data.id === store.user.id,
+  //   }
+  // };
 
   const openProfile = () => {
+    console.log(store.table.findPlayer(data.id));
+    console.log(data);
+    console.log(data.id);
+    console.log('rating list = ', store.rating.ratingList);
+
+    store.profile.toggleMyProfile(data.id === store.user.id);
     store.app.keep(true);
-    history.push(toProfile);
+    store.profile.toggleProfile();
+    //history.push(toProfile);
   };
 
   const positionContent = () => {

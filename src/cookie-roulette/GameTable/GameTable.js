@@ -21,6 +21,8 @@ import GiveGift from "./Modal/GiveGift";
 import Chat from "../Chat/Chat";
 import Inventory from "../Inventory/Inventory";
 import RatingPanel from "../Rating/Rating";
+import Shop from "../Shop/Shop";
+import Profile from "../Profile/Profile";
 
 const GameTable = ({store}) => {
   const player = store.table.getPlayer;
@@ -81,6 +83,8 @@ const GameTable = ({store}) => {
           <Inventory search={app.search} />
         </article>
         <GiveGift />
+          <Shop />
+          <Profile />
         <RatingPanel />
       </section>
   );

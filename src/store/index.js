@@ -8,6 +8,8 @@ import InventoryStore from "./store/inventory";
 import RatingStore from "./store/rating";
 import AmplitudeStore from "./store/amplitudeStore";
 import TutorialStore from "./store/tutorial";
+import ShopStore from "./store/shop";
+import ProfileStore from "./store/profile";
 
 class Store {
   constructor(os,info, platform) {
@@ -24,6 +26,8 @@ class Store {
     this.chat = new ChatStore(this);
     this.inventory = new InventoryStore(this);
     this.rating = new RatingStore(this);
+    this.shop = new ShopStore(this);
+    this.profile = new ProfileStore(this);
     this.amplitude = new AmplitudeStore(this);
   }
 }

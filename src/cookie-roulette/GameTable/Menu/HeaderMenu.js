@@ -17,14 +17,18 @@ function HeaderMenu({store}) {
     });
   };
 
+  const toProfile = () => {
+      store.profile.toggleMyProfile(true);
+      store.profile.toggleProfile();
+  }
   const shopButton = () => {
     if(store.os === 'iOS') return (<i className="shop-cookies hidden" />);
-    return (<i onClick={ () => goShop() } className='shop-cookies' />);
+    return (<i onClick={ () => store.shop.toggleShopPanel() } className='shop-cookies' />); //() => goShop()
   };
 
   return (
     <header className="header-menu">
-      <i className="exit-game" onClick={ () => { history.goBack() } } />
+      <i className="profile-btn" onClick={ toProfile } />
       <section className="counter-cookie-count">
         <i />
         <span className="center-screen">{ store.user.data.cookieCounter }</span>

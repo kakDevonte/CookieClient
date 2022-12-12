@@ -47,11 +47,12 @@
   background: none;
 }
 
-.header-menu > .exit-game{
-  width: 3%;
-  height: 45%;
+.header-menu > .profile-btn{
+  width: 2em;
+  height: 2em;
   margin-left: 2%;
-  background: url("../../../../images/back-icon.png") center no-repeat;
+  background: url("../../../../images/profile-icon.png") center no-repeat;
+  cursor: pointer;
 }
 
 .header-menu > .counter-cookie-count{

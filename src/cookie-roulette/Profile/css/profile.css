@@ -1,0 +1,217 @@
+.profile {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 100%;
+    top: 0;
+    z-index: 25;
+    color: white;
+    overflow: hidden;
+    transition: left ease-in-out 500ms;
+}
+
+.profile.opened{
+    left: 0;
+    transition: left ease-in-out 500ms;
+}
+
+.profile-page {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.profile-page > header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 6.224%;
+    max-height: 57px;
+    background-color: #8932da;
+}
+
+.profile-page > header> .title {
+    position: absolute;
+    font-size: 140%;
+    font-weight: 600;
+}
+
+.profile-page > header> .back-btn{
+    cursor: pointer;
+    width: 3%;
+    height: 45%;
+    margin-left: 2%;
+    background: url("../../../images/back-icon.png") center no-repeat;
+}
+
+.custom-scroll-profile {
+    width: 100%;
+    height: calc(100% - 57px);
+    min-height: 93.76%;
+    overflow-y: scroll;
+    box-sizing: border-box;
+}
+
+/*--vw = 630px*/
+.photo-container {
+    position: relative;
+    width: 100%;
+    height: 262.5px;
+    height: calc(630px*0.7);
+    background-color: #fae4d9;
+    background-size: cover;
+    background-position: center 20%;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.photo-low {
+    position: absolute;
+    width: 100%;
+    /*bottom: -10%;*/
+}
+
+.photo-normal {
+    position: absolute;
+    width: 100%;
+    /*bottom: -10%;*/
+}
+
+.bottom-black-bg {
+    position: absolute;
+    width: 100%;
+    height: 28%;
+    bottom: 0;
+    background: linear-gradient(0deg,#000,transparent);
+}
+
+.name {
+    position: absolute;
+    left: 1.2em;
+    bottom: 1.2em;
+    font-size: 125%;
+}
+
+.content-container {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    width: 100%;
+    background: url('../../../images/bg-image.png'),radial-gradient(46.39% 46.39% at 50% 53.61%,#913aff 49.15%,#a315f9 100%);
+}
+
+.content-container > * {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1em;
+    width: 90%;
+    height: 3em;
+    border-radius: .5em;
+    box-sizing: border-box;
+}
+
+.cookies-counter {
+    margin-top: 1em;
+    position: relative;
+    padding-left: 1em;
+    background: linear-gradient(4.51deg,#ff7152 3.66%,#ff180a 129.95%);
+}
+
+.cookies-counter > img {
+    width: 1.8em;
+    height: 1.8em;
+    vertical-align: middle;
+}
+
+.shop-button {
+    position: absolute;
+    width: 4.5em;
+    height: 4.5em;
+    top: -.8em;
+    right: -1em;
+    background: url('../../../images/cookie-shop.svg') no-repeat 50%;
+    background-size: contain;
+    cursor: pointer;
+}
+
+/*--vw = 630px*/
+.user-counters {
+    justify-content: space-between;
+    height: 162px;
+    height: calc(630px * 0.9 * 0.48);
+}
+
+.user-counters > article {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 48%;
+    height: 100%;
+    background-color: #8932da;
+    border-radius: 1em;
+}
+
+.user-counters > article > img {
+    width: 8em;
+    height: 8em;
+}
+
+.user-counters > article > * {
+    margin: 1.5% 0;
+}
+
+.user-counters > article > .title {
+    font-weight: 400;
+    padding: 0 7%;
+}
+
+/*--vw = 630px*/
+.user-gifts {
+   height: 162px;
+   height: calc(630px * 0.9 * 0.48);
+   background-color: #8932da;
+}
+
+.gift-icon {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+}
+
+.gift-info {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+}
+
+.gift-info * {
+    text-align: center;
+    margin: 1.5% 0;
+}
+
+.gift-info .title {
+    font-weight: 400;
+    padding: 0 3%;
+}
+
+.view-received {
+    position: relative;
+    background-color: #9c33f4;
+    width: 80%;
+    font-size: 90%;
+    padding: 6% 0;
+    border-radius: .6em;
+    margin: .45em 0;
+    box-shadow: 0 3px 7px rgb(0 0 0 / 30%);
+    cursor: pointer;
+}
