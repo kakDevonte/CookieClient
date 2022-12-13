@@ -3,6 +3,7 @@ import {action, makeObservable, observable} from "mobx";
 class ProfileStore {
 
     _state = '';
+    _data = {};
     _myProfile = true;
     _error = false;
 
@@ -10,6 +11,7 @@ class ProfileStore {
         makeObservable(this, {
             _state: observable,
             _error: observable,
+            _data: observable,
 
             setState: action,
             setMyProfile: action,
@@ -19,6 +21,7 @@ class ProfileStore {
 
     get state() { return this._state; }
     get myProfile() { return this._myProfile; }
+    get data() { return this._data; }
     get error() { return this._error; }
 
 
@@ -29,6 +32,10 @@ class ProfileStore {
 
     setMyProfile(myProfile) {
         this._myProfile = myProfile;
+    }
+
+    setData(data) {
+        this._data = data;
     }
 
     setError(error) {

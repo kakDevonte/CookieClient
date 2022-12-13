@@ -2,20 +2,11 @@ import './css/header-menu.css';
 
 import React from 'react';
 import {inject, observer} from "mobx-react";
-import {useHistory} from 'react-router-dom';
 
 import KissCounter from "./KissCounter";
 import ChangeButton from "./ChangeButton";
 
 function HeaderMenu({store}) {
-  const history = useHistory();
-
-  const goShop = () => {
-    store.app.keep(true);
-    history.push({
-      pathname: '/Shop/Profile/0'
-    });
-  };
 
   const toProfile = () => {
       store.profile.toggleMyProfile(true);

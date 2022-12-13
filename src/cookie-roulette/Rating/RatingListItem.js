@@ -17,12 +17,9 @@ function RatingListItem({store, position, data}) {
   // };
 
   const openProfile = () => {
-    console.log(store.table.findPlayer(data.id));
-    console.log(data);
-    console.log(data.id);
-    console.log('rating list = ', store.rating.ratingList);
-
     store.profile.toggleMyProfile(data.id === store.user.id);
+    store.profile.setData(data);
+    console.log('RATING PLAYER = ', data);
     store.app.keep(true);
     store.profile.toggleProfile();
     //history.push(toProfile);

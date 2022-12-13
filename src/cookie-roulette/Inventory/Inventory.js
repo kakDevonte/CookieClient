@@ -1,13 +1,11 @@
 import './css/inventory.css';
 
 import React from 'react';
-import {useHistory} from "react-router-dom";
 import {inject, observer} from "mobx-react";
 import Gifts from "./Gifts";
 
 
 function Inventory({store}) {
-  const history = useHistory();
   const id = () => {
     if(store.inventory._player) {
       if(store.inventory._player.template) {
@@ -20,17 +18,11 @@ function Inventory({store}) {
     }
   };
 
-  const toProfile = {
-    pathname: "/Profile",
-    propsSearch: {
-      id: id(),
-      myProfile: false,
-    }
-  };
-
   const openProfile = () => {
+    store.profile.toggleMyProfile(store.user.id === id());
+    store.profile.setData(store.table.findPlayerById(id())[0]);
     store.app.keep(true);
-    history.push(toProfile);
+    store.profile.toggleProfile();
   };
 
   return (

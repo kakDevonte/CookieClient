@@ -37,10 +37,12 @@ class TableStore {
    * @param uid {string}
    * @returns {[{id, name, photo, gender, kissed, gifted, seat, type}, number]}
    */
-  findPlayer(uid) { return Collection.findOne(this.players, uid, 'id'); }
+  findPlayer(uid) {return Collection.findOne(this.players, uid, 'id'); }
 
   //////////////////////////////////////////////////////////////////
 
+  findPlayerById(uid) {return Collection.findOne(this.players, uid, 'template'); }
+  /////////////////////////////////////////////////////////////////////////
   setId(id) { this._id = id; }
   setPlayer(index, object) { this._players.set(index, object); }
 

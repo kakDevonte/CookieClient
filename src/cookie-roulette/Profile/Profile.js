@@ -11,14 +11,14 @@ const avatar = 'https://sun4-17.userapi.com/s/v1/ig2/dkJHbnaU6Z2Io248sz3j7nlBG6T
 const cookieCount = 102;
 
 const Profile = ({store}) => {
-    console.log(store.user.data);
-    console.log(store.user.data.first_name);
-    //store.user.data.giftsCounter.receive
-    //console.log(store.user.data.gifts);
-    //store.user.updatePersonalInfo();
-     //console.log('ЧЕЛОВЕК 1 = ', store.table.getPlayer(0));
-    // console.log('ЧЕЛОВЕК 2 = ', store.table.getPlayer(1));
-    // console.log('ЧЕЛОВЕК 3 = ', store.table.getPlayer(2));
+    console.log(store.profile.data);
+
+    const profile = {
+        photo: store.profile.myProfile ? store.user.data.photo_200 : store.profile.data.photo,
+        fullName: store.profile.myProfile ? store.user.data.first_name + ' ' + store.user.data.last_name : store.profile.data.fullName,
+        kisses: store.profile.myProfile ? store.user.data.kissCounter : store.profile.data.kissCounter,
+        gifts: store.profile.myProfile ? store.user.data.giftsCounter : store.profile.data.giftsCounter,
+    }
 
     return (
         <div className={"profile" + store.profile.state}>
@@ -29,27 +29,27 @@ const Profile = ({store}) => {
                 </header>
                     <div className="custom-scroll-profile">
                         <div className="photo-container">
-                          <img className="photo-low" src={store.user.data.photo_200} />
-                          <img className="photo-normal" src={store.user.data.photo_200} />
+                          <img className="photo-low" src={profile.photo} />
+                          <img className="photo-normal" src={profile.photo} />
                           <div className="bottom-black-bg"></div>
-                          <span className="name">{store.user.data.first_name + ' ' + store.user.data.last_name}</span>
+                          <span className="name">{profile.fullName}</span>
                         </div>
                         <div className="content-container">
-                            <div className="cookies-counter">
+                            {store.profile.myProfile ? <div className="cookies-counter">
                                 {store.user.data.cookieCounter}
                                 <img src={cookieIcon}/>
-                                <div className="shop-button" onClick={() => store.shop.toggleShopPanel() }></div>
-                            </div>
+                                <div className="shop-button" onClick={() => store.shop.toggleShopPanel()}></div>
+                            </div> : <div></div>}
                             <div className="user-counters">
                                 <article>
                                     <img src={kiss}/>
                                     <span className="title">Кол-во поцелуев:</span>
-                                    <span className="gold-text">{store.user.data.kissCounter}</span>
+                                    <span className="gold-text">{profile.kisses}</span>
                                 </article>
                                 <article>
                                     <img src={giftIcon}/>
                                     <span className="title">Кол-во полученных подарков:</span>
-                                    <span className="gold-text">{store.user.data.giftsCounter}</span>
+                                    <span className="gold-text">{profile.gifts}</span>
                                 </article>
                             </div>
                         </div>
