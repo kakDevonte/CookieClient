@@ -11,8 +11,7 @@ const avatar = 'https://sun4-17.userapi.com/s/v1/ig2/dkJHbnaU6Z2Io248sz3j7nlBG6T
 const cookieCount = 102;
 
 const Profile = ({store}) => {
-    console.log(store.profile.data);
-
+    console.log(store.user.data);
     const profile = {
         photo: store.profile.myProfile ? store.user.data.photo_200 : store.profile.data.photo,
         fullName: store.profile.myProfile ? store.user.data.first_name + ' ' + store.user.data.last_name : store.profile.data.fullName,

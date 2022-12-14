@@ -2,27 +2,14 @@ import './css/rating-list-item.css';
 
 import React from 'react';
 import {inject, observer} from "mobx-react";
-import {useHistory} from "react-router-dom";
 
 function RatingListItem({store, position, data}) {
-  const history = useHistory();
-
-  // const toProfile = {
-  //   pathname: "/Profile",
-  //   propsSearch: {
-  //     id: data.id,
-  //     platform: data.platform,
-  //     myProfile: data.id === store.user.id,
-  //   }
-  // };
 
   const openProfile = () => {
     store.profile.toggleMyProfile(data.id === store.user.id);
     store.profile.setData(data);
-    console.log('RATING PLAYER = ', data);
     store.app.keep(true);
     store.profile.toggleProfile();
-    //history.push(toProfile);
   };
 
   const positionContent = () => {
