@@ -52,6 +52,7 @@
     min-height: 93.76%;
     overflow-y: scroll;
     box-sizing: border-box;
+    background: radial-gradient(46.39% 46.39% at 50% 53.61%,#913aff 49.15%,#a315f9 100%);
 }
 
 /*--vw = 630px*/
@@ -69,13 +70,13 @@
 
 .photo-low {
     position: absolute;
-    width: 100%;
+    width: 120%;
     /*bottom: -10%;*/
 }
 
 .photo-normal {
     position: absolute;
-    width: 100%;
+    width: 120%;
     /*bottom: -10%;*/
 }
 

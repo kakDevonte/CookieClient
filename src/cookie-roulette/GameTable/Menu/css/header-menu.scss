@@ -70,7 +70,12 @@
   width: 31%;
   height: 80%;
   background: url("../../../../images/cookie-icon.png") center no-repeat;
-  background-size: 130%;
+  background-size: 90%;
+
+  @media (max-width: 530px) {
+    background-size: 130%;
+  }
+
 }
 
 .counter-cookie-count > span{

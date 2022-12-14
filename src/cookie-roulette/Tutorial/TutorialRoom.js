@@ -1,4 +1,4 @@
-import '../GameTable/Menu/css/header-menu.css';
+import '../GameTable/Menu/css/header-menu.scss';
 import '../GameTable/css/game-table.css';
 import '../GameTable/css/wait-players.css';
 

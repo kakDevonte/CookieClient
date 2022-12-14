@@ -2,8 +2,10 @@ import {action, makeObservable, observable} from "mobx"
 import bridge_moc from "@vkontakte/vk-bridge-mock"
 import bridge_real from "@vkontakte/vk-bridge"
 import common from "../../config/common"
-
-const bridge = process.env.NODE_ENV === 'production' ? bridge_real : bridge_moc;
+//'production'
+//const bridge = process.env.NODE_ENV === true ? bridge_real : bridge_moc;
+const bridge = bridge_moc;
+console.log(bridge);
 
 class UserStore {
 
@@ -33,6 +35,7 @@ class UserStore {
       info = this._store.info;
     } else {
       info = await bridge.send('VKWebAppGetUserInfo', {});
+      console.log(info);
     }
     data = Object.assign({}, info);
 

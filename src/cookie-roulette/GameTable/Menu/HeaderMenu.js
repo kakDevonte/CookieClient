@@ -1,4 +1,4 @@
-import './css/header-menu.css';
+import './css/header-menu.scss';
 
 import React from 'react';
 import {inject, observer} from "mobx-react";

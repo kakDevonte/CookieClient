@@ -7,14 +7,15 @@
     "start": "cross-env react-scripts start",
     "build": "react-scripts build",
     "predeploy": "npm run build",
-    "deploy": "vk-miniapps-deploy"
+    "deploy": "vk-miniapps-deploy",
+    "tunnel": "vk-tunnel --insecure=1 --http-protocol=https --ws-protocol=wss --host=0.0.0.0 --port=10888"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "@vkontakte/vk-bridge-mock": "^2.0.3",
-    "@vkontakte/vk-tunnel": "0.0.16",
+    "@vkontakte/vk-tunnel": "^0.0.16",
     "cross-env": "^5.2.0",
     "react-hot-loader": "^4.9.0",
     "react-scripts": "^3.4.1"
@@ -30,6 +31,7 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.2.0",
+    "sass": "^1.57.1",
     "socket.io-client": "^2.3.1"
   },
   "browserslist": {

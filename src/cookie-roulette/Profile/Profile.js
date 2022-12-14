@@ -11,7 +11,7 @@ const avatar = 'https://sun4-17.userapi.com/s/v1/ig2/dkJHbnaU6Z2Io248sz3j7nlBG6T
 const cookieCount = 102;
 
 const Profile = ({store}) => {
-    console.log(store.profile.data);
+    console.log(store.user.data);
 
     const profile = {
         photo: store.profile.myProfile ? store.user.data.photo_200 : store.profile.data.photo,
@@ -27,10 +27,10 @@ const Profile = ({store}) => {
                     <i className="back-btn" onClick={() => store.profile.toggleProfile()}/>
                     <div className="title center-X">Профиль</div>
                 </header>
-                    <div className="custom-scroll-profile">
-                        <div className="photo-container">
-                          <img className="photo-low" src={profile.photo} />
-                          <img className="photo-normal" src={profile.photo} />
+                <div className="custom-scroll-profile">
+                    <div className="photo-container">
+                          <img className="photo-low center-XY" src={profile.photo} />
+                          <img className="photo-normal center-XY" src={profile.photo} />
                           <div className="bottom-black-bg"></div>
                           <span className="name">{profile.fullName}</span>
                         </div>
@@ -53,7 +53,7 @@ const Profile = ({store}) => {
                                 </article>
                             </div>
                         </div>
-                    </div>
+                </div>
             </div>
         </div>
     )
