@@ -59,7 +59,7 @@ class AppStore {
         }
 
         width = maxHeight * 0.616;
-        width = body.width// >= width ?  width : body.width;
+        width = body.width >= width ?  width : body.width;
         height = body.width * 1.1947;
         talkHeight = parseInt(((width - 26) / 6.232) - 16, 10);
 

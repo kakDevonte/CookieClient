@@ -39,8 +39,9 @@ class UserStore {
     }
     data = Object.assign({}, info);
 
-    data.id = 'random_' + info.id;
-    data.enterCounter = 0;
+    //убрать тень у поцелуев
+    data.id = 'random_'+common.randomNumber(1,4)+ info.id;
+    data.enterCounter = 2;
     data.kissCounter = 0;
     data.cookieCounter = 0;
     data.giftsCounter = 0;
