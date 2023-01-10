@@ -55,6 +55,10 @@
     background: radial-gradient(46.39% 46.39% at 50% 53.61%,#913aff 49.15%,#a315f9 100%);
 }
 
+.custom-scroll-profile::-webkit-scrollbar { width: 12px; }
+.custom-scroll-profile::-webkit-scrollbar-track { background:  #9549f6; }
+.custom-scroll-profile::-webkit-scrollbar-thumb { background-color: #8932da; }
+
 /*--vw = 630px*/
 .photo-container {
     position: relative;

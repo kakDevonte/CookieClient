@@ -63,6 +63,7 @@ class AppStore {
         height = body.width * 1.1947;
         talkHeight = parseInt(((width - 26) / 6.232) - 16, 10);
 
+        console.log(os === "desktop_web" ? "DES" : width * 0.118)
         this.setSize({
           game: {
             width: width,
@@ -87,7 +88,7 @@ class AppStore {
             height: parseInt(width * 0.765, 10)
           },
           ratingListItem: {
-            height: parseInt(width * 0.118, 10)
+            height: parseInt(os === "desktop_web" ? width * 0.076 : width * 0.118, 10)
           }
         });
       }

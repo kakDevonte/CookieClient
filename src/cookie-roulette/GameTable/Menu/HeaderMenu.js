@@ -22,7 +22,7 @@ function HeaderMenu({store}) {
       <i className="profile-btn" onClick={ toProfile } />
       <section className="counter-cookie-count">
         <i />
-        <span className="center-screen">{ store.user.data.cookieCounter }</span>
+        <span className="center-screen counter-cookie-count-span">{ store.user.data.cookieCounter }</span>
         { shopButton() }
       </section>
       <KissCounter kisses={ store.user.data.kissCounter } />

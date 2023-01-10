@@ -60,6 +60,11 @@ class UserStore {
 
   setData(data){ this._data = data; }
 
+  buyCookies(count) {
+    console.log({ uid: this.data.id, count: count });
+   this._store.socket.emit('buy-cookie', { uid: this.data.id, count: count });
+  }
+
   setKissCounter(count) {
     this._data.kissCounter = count;
   }
