@@ -3,16 +3,31 @@
   display: flex;
   flex-flow: column nowrap;
   width: 100%;
-  max-height: 72%;
+  max-height: 100%;
   justify-content: space-around;
   align-content: space-around;
   /*background: radial-gradient(46.39% 46.39% at 50% 53.61%, #8543D9 49.15%, #7219A8 100%), #F7ECDA;*/
   color: white;
+  /*padding-bottom: 0 !important;*/
+}
+
+.game-table {
+  padding-top: env(safe-area-inset-top);
+  display: grid;
+  grid-template-rows: 0.75fr 0.6fr;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 .utility-wrapper{
+  /*padding-bottom: 0 !important;*/
   position: relative;
+  /*bottom: 0;*/
   width: 100%;
+  height: 100%;
+  /*display: flex;*/
+  /*flex-direction: column;*/
   overflow: hidden;
 }
 

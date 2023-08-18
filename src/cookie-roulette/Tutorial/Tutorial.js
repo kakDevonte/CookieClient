@@ -40,7 +40,7 @@ function Tutorial({store}) {
           playerKiss: <PlayerKiss tutorial={tutorial} />,
           declineKiss: <DeclineKiss tutorial={tutorial} />,
           acceptKiss: <div className="tutorial-empty-step" />,
-          acceptGift: <AcceptGift tutorial={tutorial} />,
+          // acceptGift: <AcceptGift tutorial={tutorial} />,
           openInventory: <OpenInventory store={store} tutorial={tutorial} />,
           giveGift: <GiveGift store={store} tutorial={tutorial} />,
           giftSelected: <GiftSelected store={store} tutorial={tutorial} />,

@@ -1,0 +1,129 @@
+.cookie-main {
+    background: radial-gradient(53.56% 53.56% at 50% 46.44%,rgba(133,71,44,.9) 0,rgba(66,37,24,.9) 100%);
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 30;
+    font-size: 1.2em;
+}
+
+.cookie-main.opened{
+    display: block;
+}
+
+.cookie-root {
+    position: absolute;
+    width: 95%;
+    height: 25%;
+    top: 10%;
+    margin-top: 25%;
+    max-width: 25em;
+    max-height: 40em;
+    background: radial-gradient(48.38% 70.24% at 50.8% 99.18%,#572982 0,#8533db 100%);
+    border-radius: 17px;
+    box-shadow: 0 0 30px rgb(0 0 0 / 70%);
+    font-family: Gotham Pro;
+}
+
+.cookie-container {
+    color: white;
+    text-align: center;
+    position: relative;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    width: 100%;
+    height: calc(100% - 7px);
+    background: linear-gradient(0deg,#8932da,#913aff 99.99%);
+    border-radius: 17px;
+}
+
+.cookie-container > header {
+    text-align: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 12%;
+    width: 90%;
+    /*margin-top: -10%;*/
+    max-height: 60px;
+    max-width: 180px;
+    color: white;
+    background-size: 100% 100%;
+}
+
+.cookie-container > header span {
+    font-size: 100%;
+    font-weight: 700;
+}
+
+.color-name {
+    text-align: center;
+    color: #292398;
+}
+
+.complain-container > header .close-button {
+    margin-top: -20%;
+    position: absolute;
+    width: 30%;
+    height: 80%;
+    right: -55%;
+    background: url("../../../images/close-button.svg") no-repeat 50%;
+    background-size: contain;
+    cursor: pointer;
+}
+
+.radio {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    color: white;
+}
+.header {
+    color: white;
+}
+
+.text-center {
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+.btn-delete{
+    border-radius: 5px;
+    background-color: #e7e7e7;
+    font-family: Gotham Pro;
+    font-weight: 500;
+    color: black;
+    border: none;
+    padding: 1em 2em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+
+    cursor: pointer;
+}
+
+.icon {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 5em;
+}
+
+.btns {
+    position: absolute;
+    bottom: 5%;
+    display: flex;
+    gap: 10px;
+}
+
+.text-cookie {
+    position: absolute;
+    top: 30%;
+    font-size: 1.2em;
+    width: 80%;
+}

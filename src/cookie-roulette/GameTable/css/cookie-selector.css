@@ -16,5 +16,5 @@
   background: url(../../../images/bottle.png) no-repeat center center;
   background-size: contain;
   filter: drop-shadow(2px 2px 10px rgba(0, 0, 0, 0.5));
-  cursor: help;
+  cursor: pointer;
 }

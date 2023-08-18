@@ -1,11 +1,13 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from "react";
 
-function EndTutorial({store, tutorial}) {
-  const style = {}; if(store.app.size.game.height > 600) style.top = 145;
+function EndTutorial({ store, tutorial }) {
+  const style = {};
+  if (store.app.size.game.height > 600) style.top = 145;
 
   useEffect(() => {
+    store.amplitude.trackTutorialStep("Changed Table");
     tutorial._disAccentAll();
-    tutorial._accentItem('.change-table');
+    tutorial._accentItem(".change-table");
   }, []);
 
   return (

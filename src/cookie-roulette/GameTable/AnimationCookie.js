@@ -1,13 +1,13 @@
-import React from 'react';
-import {inject, observer} from "mobx-react";
+import React from "react";
+import { inject, observer } from "mobx-react";
 
-function AnimationCookie({seat, oldSeat}){
-  const angle = [ 0, 45, 90, 135, 180, 225, 270, 315, 360];
+function AnimationCookie({ seat, oldSeat }) {
+  const angle = [0, 45, 90, 135, 180, 225, 270, 315, 360];
 
   const style = () => {
     let degrees, d0, d1080, dStop;
 
-    if(seat !== null){
+    if (seat !== null) {
       degrees = angle[seat];
 
       d0 = angle[oldSeat];
@@ -38,12 +38,10 @@ function AnimationCookie({seat, oldSeat}){
     `;
     }
 
-    return '';
+    return "";
   };
 
-  return (
-    <style type="text/css">{ style() }</style>
-  );
+  return <style type="text/css">{style()}</style>;
 }
 
-export default inject('store') ( observer(AnimationCookie) );
+export default inject("store")(observer(AnimationCookie));

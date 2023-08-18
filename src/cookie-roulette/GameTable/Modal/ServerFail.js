@@ -1,17 +1,15 @@
-import './css/server-fail.css';
+import "./css/server-fail.css";
 
-import React from 'react';
-import {inject, observer} from "mobx-react";
+import React from "react";
+import { inject, observer } from "mobx-react";
 
-function ServerFail({store}){
+function ServerFail({ store }) {
   const className = () => {
-    if(store.socket.serverFail) return 'server-fail center-screen opened';
-    return 'server-fail center-screen';
+    if (store.socket.serverFail) return "server-fail center-screen opened";
+    return "server-fail center-screen";
   };
 
-  return (
-    <div className={ className() }>Игровой сервер не отвечает</div>
-  );
+  return <div className={className()}>Игровой сервер не отвечает</div>;
 }
 
-export default inject('store')( observer(ServerFail) );
+export default inject("store")(observer(ServerFail));

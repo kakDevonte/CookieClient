@@ -9,10 +9,11 @@ function AcceptGift({store}) {
     tutorial.openShadowLayer();
     tutorial._accentItem('.player.p0');
   }, []);
+    console.log("получаем подарок 1")
 
   return (
     <div className="accept-gift-step info center-X" >
-      <span className="info-header">Подарок!</span>
+      <span className="info-header">Бла бла Подарок!</span>
       <p>
         Смотри, { player.name } угостил тебя коктейлем! Кажется, ты ему нравишься.
       </p>

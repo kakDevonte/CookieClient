@@ -14,6 +14,7 @@ function OpenInventory({store, tutorial}) {
       style.top = 230;
     }
   }
+  console.log("получаем подарок 2")
 
   useEffect(() => {
     tutorial.openShadowLayer();

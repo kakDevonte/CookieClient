@@ -1,32 +1,31 @@
-import {action, makeObservable, observable} from "mobx";
+import { action, makeObservable, observable } from "mobx";
 
 class RatingStore {
-
-  _state = '';
+  _state = "";
   _error = false;
-  _period = 'day';
-  _type = 'gifts';
+  _period = "day";
+  _type = "gifts";
   _ratingList = {
     day: [],
     week: [],
-    month: []
+    month: [],
   };
   _myRatingData = {
     day: {
-      position: '>1000',
+      position: ">1000",
       id: null,
     },
     week: {
-      position: '>1000',
+      position: ">1000",
       id: null,
     },
     month: {
-      position: '>1000',
+      position: ">1000",
       id: null,
-    }
+    },
   };
 
-  constructor(store){
+  constructor(store) {
     makeObservable(this, {
       _state: observable,
       _type: observable,
@@ -39,25 +38,37 @@ class RatingStore {
       setType: action,
       setPeriod: action,
       updateRatingList: action,
-      updateMyRatingData: action
+      updateMyRatingData: action,
     });
     this._store = store;
   }
 
-  get state() { return this._state; }
-  get type() { return this._type; }
-  get error() { return this._error; }
-  get period() { return this._period; }
-  get ratingList() { return this._ratingList[this._period]; }
-  get myRating() { return this._myRatingData[this._period]; }
+  get state() {
+    return this._state;
+  }
+  get type() {
+    return this._type;
+  }
+  get error() {
+    return this._error;
+  }
+  get period() {
+    return this._period;
+  }
+  get ratingList() {
+    return this._ratingList[this._period];
+  }
+  get myRating() {
+    return this._myRatingData[this._period];
+  }
 
   setState(state) {
-    if(state === this._state) return;
+    if (state === this._state) return;
     this._state = state;
   }
 
   setType(type) {
-    if(type === this._type) return;
+    if (type === this._type) return;
 
     this.updateRatingList();
     this.updateMyRatingData();
@@ -67,58 +78,58 @@ class RatingStore {
   }
 
   setError(error) {
-    if(error === this._error) return;
+    if (error === this._error) return;
     this._error = error;
   }
 
   setPeriod(period) {
-    if(period === this._period) return;
+    if (period === this._period) return;
     this._period = period;
   }
 
   updateRatingList(data, period) {
-    if(!period) {
+    if (!period) {
       this._ratingList = { day: [], week: [], month: [] };
       return;
     }
 
-    if(period === 'day' || period === 'week' || period === 'month') {
+    if (period === "day" || period === "week" || period === "month") {
       this._ratingList[period] = data;
     }
   }
 
   updateMyRatingData(data, period) {
-    if(!data) {
+    if (!data) {
       this._myRatingData = {
         day: {
-          position: '>1000',
+          position: ">1000",
           id: null,
         },
         week: {
-          position: '>1000',
+          position: ">1000",
           id: null,
         },
         month: {
-          position: '>1000',
+          position: ">1000",
           id: null,
-        }
+        },
       };
       return;
     }
     this._myRatingData[period] = data;
   }
 
-  toggleRatingPanel() {
-    if(this._state === '') {
-      this.setState(' opened');
-      this.requestRatingData('day');
-    }else if(this._state === ' opened') {
-      this.setState('');
+  toggleRatingPanel(period = "day") {
+    if (this._state === "") {
+      this.setState(" opened");
+      this.requestRatingData(period);
+    } else if (this._state === " opened") {
+      this.setState("");
       this.setError(false);
-
-      setTimeout(() => {
-        this.updateRatingList();
-      }, 1000);
+      this.requestRatingData(period);
+      // setTimeout(() => {
+      //   this.updateRatingList();
+      // }, 1000);
     }
   }
 
@@ -126,18 +137,22 @@ class RatingStore {
     this.setError(false);
     this.setPeriod(period);
 
-    if(this._ratingList[period].length > 0) return;
-    this._store.socket.emit('request-ratings', {period, type: this._type});
+    if (this._ratingList[period].length > 0) return;
+    this._store.socket.emit("request-ratings", {
+      uid: this._store.user.id,
+      period,
+      type: this._type,
+    });
   }
 
   receiveData(data) {
-    if(data === 'error') {
+    if (data === "error") {
       this.setError(true);
       return;
     }
 
-    if(data.items.length === 0) {
-      this.setError('empty');
+    if (data.items.length === 0) {
+      this.setError("empty");
       return;
     }
 

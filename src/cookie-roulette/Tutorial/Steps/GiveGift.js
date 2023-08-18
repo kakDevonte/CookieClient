@@ -1,14 +1,14 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from "react";
 
-function GiveGift({store, tutorial}) {
+function GiveGift({ store, tutorial }) {
   const style = {};
 
-  if(store.app.size.game.height > 600)
+  if (store.app.size.game.height > 600)
     style.top = store.app.size.table.height - 120;
 
   useEffect(() => {
     tutorial._disAccentAll();
-    tutorial._accentItem('.utility-wrapper');
+    tutorial._accentItem(".utility-wrapper");
   }, []);
 
   return (
@@ -16,8 +16,11 @@ function GiveGift({store, tutorial}) {
       <div className="arrow-target-gift" />
       <span className="info-header">Нажми на подарок!</span>
       <p>
-        Посмотри весь список и
-        выбери любой <b><i>бесплатный</i></b> подарок и нажми на него.
+        Посмотри весь список и выбери любой{" "}
+        <b>
+          <i>бесплатный</i>
+        </b>{" "}
+        подарок и нажми на него.
       </p>
     </div>
   );

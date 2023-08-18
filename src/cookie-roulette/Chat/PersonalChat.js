@@ -1,22 +1,19 @@
-import './css/personal-chat.css';
+import "./css/personal-chat.css";
 
-import React, {useRef} from 'react';
-import {inject, observer} from "mobx-react";
+import React, { useRef } from "react";
+import { inject, observer } from "mobx-react";
 
 import Messages from "./Messages";
 import Input from "./Input";
 import Talk from "./Talk";
 
-function PersonalChat({store, active, talks}) {
-
+function PersonalChat({ store, active, talks }) {
   const container = useRef();
   const content = () => {
     const t = [];
 
-    if(talks.size === 0) {
-      return (
-        <span className="no-chats">Здесь будут ваши личные чаты</span>
-      );
+    if (talks.size === 0) {
+      return <span className="no-chats">Здесь будут ваши личные чаты</span>;
     }
 
     talks.forEach((value, key) => {
@@ -26,33 +23,39 @@ function PersonalChat({store, active, talks}) {
     return t;
   };
 
-  const style = ()=> {
-    if(store.chat.talkClosed) return {display: 'none'};
+  const style = () => {
+    if (store.chat.talkClosed) return { display: "none" };
     return {};
   };
 
   return (
-    <section className={'personal-chat ' + active}>
+    <section className={"personal-chat " + active}>
       <section className="personal-chats custom-scroll" ref={container}>
-        { content() }
+        {content()}
       </section>
-      <section className={ 'personal-content' + store.chat.talkState }>
+      <section className={"personal-content" + store.chat.talkState}>
         <div className="pc-header">
-          <div onClick={ () => store.chat.clickBackToPersonalMessages() }><i/>Назад</div>
-          <div>{ store.chat.talkPlayer.name }</div>
+          <div onClick={() => store.chat.clickBackToPersonalMessages()}>
+            <i />
+            Назад
+          </div>
+          <div>{store.chat.talkPlayer.name}</div>
         </div>
-        <Messages messages={ store.chat.personalMessages } />
-        <footer style={ style() }>
+        <Messages messages={store.chat.personalMessages} />
+        <footer style={style()}>
           <Input to={store.chat.talkPlayer.id} />
           <input
             type="button"
             value="►"
-            onClick={ () => store.chat.send({key: 'Enter'}, store.chat.talkPlayer.id)}
+            onClick={() =>
+              store.chat.send({ key: "Enter" }, store.chat.talkPlayer.id)
+            }
+            tabIndex="-1"
           />
         </footer>
       </section>
-  </section>
-);
+    </section>
+  );
 }
 
-export default inject('store')( observer(PersonalChat) );
+export default inject("store")(observer(PersonalChat));

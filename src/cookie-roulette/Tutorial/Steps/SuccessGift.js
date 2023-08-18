@@ -1,21 +1,23 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from "react";
 
-function SuccessGift({tutorial, store}) {
+function SuccessGift({ tutorial, store }) {
   useEffect(() => {
-    const from = store.user.data.sex === 1 ? '5' : '1';
-
+    const from = store.user.data.sex === 1 ? "5" : "1";
+    store.amplitude.trackTutorialStep("Sent Gift");
     //tutorial.closeShadowLayer();
-    tutorial._accentItem('.roulette-table');
-    store.chat.sendLocalMessage(from, 'Привет! Спасибо за подарок, очень приятно :)', store.user.id);
+    tutorial._accentItem(".roulette-table");
+    store.chat.sendLocalMessage(
+      from,
+      "Привет! Спасибо за подарок, очень приятно :)",
+      store.user.id
+    );
 
     setTimeout(() => {
-      tutorial.setStep('personalMessage');
+      tutorial.setStep("personalMessage");
     }, 3000);
   }, []);
 
-  return (
-    <div />
-  );
+  return <div />;
 }
 
 export default SuccessGift;

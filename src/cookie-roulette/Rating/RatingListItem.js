@@ -1,19 +1,21 @@
-import './css/rating-list-item.css';
+import "./css/rating-list-item.css";
 
-import React from 'react';
-import {inject, observer} from "mobx-react";
+import React from "react";
+import { inject, observer } from "mobx-react";
 
-function RatingListItem({store, position, data}) {
-
+function RatingListItem({ store, position, data }) {
   const openProfile = () => {
+    store.profile.emitRatingData(store.user.id, data.id);
+
     store.profile.toggleMyProfile(data.id === store.user.id);
-    store.profile.setData(data);
+    // store.profile.setData(data);
     store.app.keep(true);
+    store.history.push("/profile");
     store.profile.toggleProfile();
   };
 
   const positionContent = () => {
-    switch(position) {
+    switch (position) {
       case 1:
         return <i className="gold center-XY" />;
 
@@ -23,7 +25,7 @@ function RatingListItem({store, position, data}) {
       case 3:
         return <i className="bronze center-XY" />;
 
-      case '>1000':
+      case ">1000":
         return <span className="max-position center-XY">{position}</span>;
 
       default:
@@ -34,25 +36,40 @@ function RatingListItem({store, position, data}) {
   const style = { width: store.app.size.ratingListItem.height };
   const photo = { backgroundImage: `url('${data.photo}')` };
 
-  if(!data.id) return <article className="rating-list-item" style={store.app.size.ratingListItem} />;
+  if (!data.id)
+    return (
+      <article
+        className="rating-list-item"
+        style={store.app.size.ratingListItem}
+      />
+    );
 
   const countOnType = () => {
     return data[store.rating.type];
   };
 
   return (
-    <article className="rating-list-item" onClick={ () => openProfile() } style={store.app.size.ratingListItem} >
-      <div className="r-position" style={style}> { positionContent() }</div>
-      <div className="r-photo" style={style} >
+    <article
+      className="rating-list-item"
+      onClick={() => openProfile()}
+      style={store.app.size.ratingListItem}
+    >
+      <div className="r-position" style={style}>
+        {" "}
+        {positionContent()}
+      </div>
+      <div className="r-photo" style={style}>
         <i className="center-XY" style={photo} />
       </div>
-      <span className="r-name center-Y">{ data.fullName }</span>
-      <i className={ "r-kiss-icon rating-icon-" + store.rating.type } style={style} />
-      <span className="r-kisses center-Y">{ countOnType() }</span>
+      <span className="r-name center-Y">{data.fullName}</span>
+      <i
+        className={"r-kiss-icon rating-icon-" + store.rating.type}
+        style={style}
+      />
+      <span className="r-kisses center-Y">{countOnType()}</span>
       <div className="r-separator" />
     </article>
   );
 }
 
-
-export default inject('store')( observer(RatingListItem) );
+export default inject("store")(observer(RatingListItem));

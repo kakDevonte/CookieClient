@@ -1,4 +1,4 @@
-import {action, makeObservable, observable} from "mobx";
+import { action, makeObservable, observable } from "mobx";
 import Collection from "../../helpers/Collection";
 
 const chatMessageLimit = 50;
@@ -6,12 +6,19 @@ const chatMessageLimit = 50;
 class ChatStore {
   _messages = new Map();
   _personal = new Map();
-  _typeChat = 'common';
-  _text = '';
-  _talkState = '';
-  _talkPlayer = {id: null};
+  _typeChat = "common";
+  _text = "";
+  _talkState = "";
+  _talkPlayer = { id: null };
   _countNewMessages = 0;
-  _mode = 'global';
+  _mode = "global";
+  _state = "";
+  _report = {
+    name: "",
+    id: null,
+    text: "",
+    date: null,
+  };
 
   constructor(store) {
     makeObservable(this, {
@@ -22,6 +29,8 @@ class ChatStore {
       _talkState: observable,
       _talkPlayer: observable,
       _countNewMessages: observable,
+      _state: observable,
+      _report: observable,
 
       updateMessages: action,
       setText: action,
@@ -29,66 +38,107 @@ class ChatStore {
       setTalkState: action,
       setTalkPlayer: action,
       _talkRead: action,
-      reopenTalk: action
+      reopenTalk: action,
     });
 
     this._store = store;
   }
 
-  get mode() { return this._mode; }
-  get messages() { return this._messages; }
-  get talks() { return this._personal; }
-  get text() { return this._text; }
-  get typeChat(){ return this._typeChat; }
-  get talkState(){ return this._talkState; }
-  get talkPlayer(){ return this._talkPlayer; }
-  get countNewMessages () { return this._countNewMessages; }
+  get state() {
+    return this._state;
+  }
+  get report() {
+    return this._report;
+  }
+  get mode() {
+    return this._mode;
+  }
+  get messages() {
+    return this._messages;
+  }
+  get talks() {
+    return this._personal;
+  }
+  get text() {
+    return this._text;
+  }
+  get typeChat() {
+    return this._typeChat;
+  }
+  get talkState() {
+    return this._talkState;
+  }
+  get talkPlayer() {
+    return this._talkPlayer;
+  }
+  get countNewMessages() {
+    return this._countNewMessages;
+  }
   get talkClosed() {
     const talk = this._personal.get(this._talkPlayer.id);
 
-    if(talk) return talk.messages.get('talk-closed');
+    if (talk) return talk.messages.get("talk-closed");
   }
 
   get personalMessages() {
     const talk = this._personal.get(this._talkPlayer.id);
 
-    if(talk) {
+    if (talk) {
       return talk.messages;
-    }else{
+    } else {
       return [];
     }
   }
 
-  setMode(mode) { this._mode = mode;}
+  setMode(mode) {
+    this._mode = mode;
+  }
+
+  setReport(data) {
+    this._report = data;
+  }
+
+  setState(state) {
+    if (state === this._state) return;
+    this._state = state;
+  }
+
+  toggleModal() {
+    if (this._state === "") {
+      this.setState(" opened");
+    } else if (this._state === " opened") {
+      this.setState("");
+    }
+  }
 
   setTypeChat(type) {
-    if(this._typeChat === type) return;
+    if (this._typeChat === type) return;
     this._typeChat = type;
   }
 
-  setTalkState(state){
-    if(this._talkState === state) return;
+  setTalkState(state) {
+    if (this._talkState === state) return;
     this._talkState = state;
   }
 
   setTalkPlayer(player) {
-    if(this._talkPlayer.id === player.id) return;
+    if (this._talkPlayer.id === player.id) return;
     this._talkPlayer = player;
   }
 
   setText(value) {
-    if(this._text === value) return;
+    if (this._text === value) return;
     this._text = value;
   }
 
   reopenTalk(player) {
-    if(!player) return;
+    if (!player) return;
 
     const talk = this._personal.get(player.id);
     let message;
 
-    if(talk && talk.messages.get('talk-closed')) {
-      talk.messages.delete('talk-closed');
+    if (talk && talk.messages.get("talk-closed")) {
+      talk.messages.delete("talk-closed");
       message = Collection.takeLast(talk.messages);
 
       talk.date = message.date;
@@ -101,46 +151,63 @@ class ChatStore {
   //   this._countNewMessages = count;
   // }
 
-  input(event){
-    if( event.key === 'Enter' ) return;
-    this.setText(event.target.value);
+  input(event) {
+    if (event.key === "Enter") return;
+    if (event.target.value.length > 120) return;
+
+    const result = event.target.value.replace(
+      /[^\p{L}\p{N}\p{P}\p{Z}^$\n]/gu,
+      ""
+    );
+    this.setText(result);
   }
 
   send(event, to) {
-    if(event.key !== 'Enter') return;
+    if (event.key !== "Enter") return;
+    // if (event.keyCode === 9) return;
+
+    const toUser = this._store.table.findPlayer(to);
+
+    if (this._store.app.stage !== "tutorial") {
+      if (this._mode !== "global") if (!toUser[0] && !toUser[1]) return;
+    }
+    // if(this._store.table)
 
     const text = this._text.trim();
-    if(text === '') return;
+    if (text === "") return;
+
+    if (text.match(/.+\.\w\w.*/gi)) return;
 
     const message = {
-      from: this._store.user.id,
+      uid: this._store.user.id,
       text: text,
-      to: to
+      to: to,
     };
 
-    this.setText('');
+    this.setText("");
 
-    if(this._mode === 'global') {
-      this._store.socket.emit('user-message', message);
+    if (this._mode === "global") {
+      this._store.amplitude.trackMessages();
+      this._store.socket.emit("user-message", message);
     } else {
       this.sendLocalMessage(this._store.user.id, text, to);
-      
-      if(this._store.tutorial.step === 'writeMessage') {
+
+      if (this._store.tutorial.step === "writeMessage") {
         setTimeout(() => {
-          this._store.tutorial.setStep('endTutorial');
-        }, 250);
+          this._store.tutorial.setStep("endTutorial");
+        }, 2250);
       }
     }
   }
 
   sendLocalMessage(from, text, to) {
     const message = {
-      id: new Date().getTime() + '',
+      id: new Date().getTime() + "",
       from: this._store.tutorial.fromInfo(from),
       text,
       date: Date.now(),
       to: to ? this._store.tutorial.fromInfo(to) : null,
-      notice: !!to
+      notice: !!to,
     };
 
     this.updateMessages([message]);
@@ -149,13 +216,16 @@ class ChatStore {
   updateMessages(list) {
     let uid;
 
-    if(list === 'clear') {
+    if (list === "clear") {
       this._personal.clear();
       this._messages.clear();
     } else {
       list.forEach((message) => {
-        if(message.to) {
-          uid = message.to.id === this._store.user.id ? message.from.id : message.to.id;
+        if (message.to) {
+          uid =
+            message.to.id === this._store.user.id
+              ? message.from.id
+              : message.to.id;
           this._updatePersonalMessages(message, uid);
         } else {
           this._updateCommon(message);
@@ -167,7 +237,7 @@ class ChatStore {
   _updateCommon(message) {
     const messages = this._messages;
 
-    if(messages.get(message.id)) return;
+    if (messages.get(message.id)) return;
     messages.set(message.id, message);
 
     ChatStore._checkLimit(messages);
@@ -180,12 +250,12 @@ class ChatStore {
     talk.date = message.date;
     talk.lastMessage = message.text;
 
-    if(this._needCounted(uid) && message.notice) {
+    if (this._needCounted(uid) && message.notice) {
       talk.count++;
       this._countNewMessages++;
     }
 
-    if(talk.messages.get(message.id)) return;
+    if (talk.messages.get(message.id)) return;
     talk.messages.set(message.id, message);
 
     ChatStore._checkLimit(talk.messages);
@@ -193,13 +263,13 @@ class ChatStore {
     this._personal.set(uid, talk);
   }
 
-  _needCounted(id){
-    if(this._talkState === ' opened' && this._talkPlayer.id === id) return;
+  _needCounted(id) {
+    if (this._talkState === " opened" && this._talkPlayer.id === id) return;
     return true;
   }
 
   static _checkLimit(messages) {
-    if(messages.size > chatMessageLimit) {
+    if (messages.size > chatMessageLimit) {
       Collection.remove(messages, 0);
     }
   }
@@ -208,9 +278,9 @@ class ChatStore {
     let talk = this._personal.get(uid);
     let player, seat;
 
-    if(talk) return talk;
+    if (talk) return talk;
 
-    if(this._mode === 'global') {
+    if (this._mode === "global") {
       [player, seat] = this._store.table.findPlayer(uid);
     } else {
       [player, seat] = this._store.tutorial.findPlayer(uid);
@@ -221,7 +291,7 @@ class ChatStore {
       seat,
       messages: new Map(),
       count: 0,
-      date: null
+      date: null,
     };
 
     this._personal.set(uid, talk);
@@ -230,24 +300,24 @@ class ChatStore {
   }
 
   clickChangeTypeChat(type) {
-    if(type === 'common') this.setTypeChat('common');
-    if(type === 'personal') this.setTypeChat('personal');
+    if (type === "common") this.setTypeChat("common");
+    if (type === "personal") this.setTypeChat("personal");
   }
 
-  clickOpenTalk(player){
+  clickOpenTalk(player) {
     this.setTalkPlayer(player);
     this._talkRead(player.id);
-    this.setTalkState(' opened');
+    this.setTalkState(" opened");
   }
 
   clickBackToPersonalMessages() {
-    this.setTalkState('');
+    this.setTalkState("");
   }
 
   _talkRead(id) {
     const talk = this._personal.get(id);
 
-    if(talk){
+    if (talk) {
       this._countNewMessages -= talk.count;
       talk.count = 0;
     }

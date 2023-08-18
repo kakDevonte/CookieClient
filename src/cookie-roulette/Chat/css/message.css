@@ -8,13 +8,19 @@
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
 }
 
-.chat .message legend{
+.chat .message span {
+  display: block;
+  width: 100%;
+  word-wrap:break-word;
+}
+
+.chat .message div{
   display: inline-block;
   font-weight: 700;
   margin-right: 5px;
 }
 
-.chat .message.gift legend {
+.chat .message.gift div {
   font-weight: 500;
 }
 
@@ -48,3 +54,13 @@
 .chat .message .colored-5{ color: #cc18d3; }
 .chat .message .colored-6{ color: #ffdc00; }
 .chat .message .colored-7{ color: #00d2d3; }
+
+.complain-btn{
+  position: absolute;
+  cursor: pointer;
+  display: block;
+  width: 2em;
+  right: 2%;
+  top: 50%;
+  transform: translateY(-50%);
+}

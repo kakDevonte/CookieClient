@@ -1,0 +1,51 @@
+.text-date {
+    position: absolute;
+    width: 100%;
+    bottom: 20%;
+    font-size: 15px;
+    color: white;
+
+    text-align: center;
+    /*left: 50%;*/
+    /*transform: translateX(-50%);*/
+}
+.input-date {
+    position: absolute;
+    /*width: 100%;*/
+    bottom: 15%;
+    font-size: 15px;
+    /*color: white;*/
+
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.image-date {
+    opacity: 0.7;
+}
+.message-date {
+    z-index: 3;
+}
+
+.btn-date{
+    position: absolute;
+    /*width: 100%;*/
+    bottom: 5%;
+
+    left: 50%;
+    transform: translateX(-50%);
+
+    background-color: #e7e7e7;
+    font-family: Gotham Pro;
+    font-weight: 500;
+    color: black;
+    border: none;
+    padding: 1em 2em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+
+    cursor: pointer;
+}

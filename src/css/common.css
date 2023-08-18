@@ -8,6 +8,20 @@ html, body{
   background: #9c33f4;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+input,
+textarea,
+button,
+select,
+article,
+div,
+a {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
 #root{
   position: relative;
   width: 100%;
@@ -17,7 +31,7 @@ html, body{
 .cookie-roulette{
   /*display: flex;*/
   /*flex-flow: column nowrap;*/
-  background-color: #ebf6ff;
+  /*background-color: #ebf6ff;*/
 
   font-family: Gotham Pro;
   font-weight: 500;
@@ -68,6 +82,8 @@ html, body{
 }
 
 .cookie-roulette-game{
+  /*display: flex;*/
+  /*flex-direction: column;*/
   position: relative;
   overflow: hidden;
   width: 100%;

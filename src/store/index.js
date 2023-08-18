@@ -11,8 +11,42 @@ import TutorialStore from "./store/tutorial";
 import ShopStore from "./store/shop";
 import ProfileStore from "./store/profile";
 
+const n = Number,
+  c = String.fromCharCode,
+  m = "charCodeAt",
+  delimiters = [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N",
+    "O",
+    "P",
+    "Q",
+    "R",
+    "S",
+    "T",
+  ],
+  offset = 97,
+  _X = String,
+  _Y = "fromCharCode",
+  _Z = Number,
+  _y = "charCodeAt";
+
+export { n, c, m, delimiters, offset, _Z, _X, _Y, _y };
+
 class Store {
-  constructor(os,info, platform) {
+  constructor(os, info, platform) {
+    this.history = null;
+    this.location = null;
     this.os = os;
     this.info = info;
     this.platform = platform;

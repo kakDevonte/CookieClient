@@ -1,5 +1,5 @@
 import './css/shop.scss';
-import cookies from '../../images/cookies.png';
+import fiveCoin from '../../images/coin/five-coin.png';
 
 import React from 'react';
 import {inject, observer} from "mobx-react";
@@ -33,31 +33,79 @@ const shopArr = [
 },
 ]
 
+
+const saleItems = [
+    {
+        item_id: 1,
+        title: '2000 монет',
+        photo_url: '',
+        cookie: 2000,
+        promotion: 4000,
+        count: 6000,
+        price: 269
+    },{
+        item_id: 2,
+        title: '500 монет',
+        photo_url: '',
+        cookie: 500,
+        promotion: 1000,
+        count: 1500,
+        price: 59
+    },{
+        item_id: 3,
+        title: '300 монет',
+        photo_url: '',
+        cookie: 300,
+        promotion: 600,
+        count: 900,
+        price: 47
+    },{
+        item_id: 4,
+        title: '100 монет',
+        photo_url: '',
+        cookie: 100,
+        promotion: 200,
+        count: 300,
+        price: 16
+    },{
+        item_id: 5,
+        title: '50 монет',
+        photo_url: '',
+        cookie: 50,
+        promotion: 100,
+        count: 150,
+        price: 8
+    },{
+        item_id: 6,
+        title: '30 монет',
+        photo_url: '',
+        cookie: 30,
+        promotion: 60,
+        count: 90,
+        price: 5
+    },
+]
+
+
 function Shop({store}) {
 
-    const onClickBuy = async (count, price) => {
+    const onClickBuy = async (index) => {
         const result = await bridge.send("VKWebAppShowOrderBox", {
-            type: price,
-            item: `Покупка ${count} печенек`
+            type: 'item',
+            item: String(index)
         });
-        // if(result.status === "success") {
-        if(result.success) {
-            store.user.buyCookies(count);
-        } else {
-            return;
-        }
     }
-
-    return (
-        <div className={"shop-main" + store.shop.state}>
+//store.shop.toggleShopPanel()
+    return (//+ store.shop.state
+        <div className={"shop-main opened"}>
             <div className={"shop-root center-X"}>
                 <div className="shop-container">
                     <header>
                         <span>Магазин</span>
-                        <i className="close-button" onClick={() => store.shop.toggleShopPanel() }></i>
+                        <i className="close-button" onClick={() => store.history.goBack()}></i>
                     </header>
                     <div className="tabs-content custom-scroll">
-                        {shopArr.map((item, index) => <Pack key={index} onClick={onClickBuy} {...item}/>)
+                        {shopArr.map((item, index) => <Pack key={index} onClick={onClickBuy} {...item} index={index}/>)
                         }
                     </div>
                 </div>
@@ -66,21 +114,21 @@ function Shop({store}) {
     );
 }
 
-const Pack = ({cookie, promotion, price, onClick}) => {
+const Pack = ({cookie, promotion, price, onClick, index}) => {
 
     return (
         <div className="pack hard-pack">
             <div className="pack-icon">
-                <img src={cookies}/>
+                <img src={fiveCoin}/>
             </div>
             <div className="pack-info">
                 <div className="pack-text">
-                    {cookie} печенек
+                    {cookie} монет
                 </div>
                 <div className="pack-text gold-text">
                     +{promotion} по акции
                 </div>
-                <div className="pack-buy-button" onClick={() => onClick(cookie + promotion, price)}>{price} голосов</div>
+                <div className="pack-buy-button" onClick={() => onClick(index)}>{price} голосов</div>
             </div>
         </div>
     )

@@ -1,10 +1,10 @@
-import './css/error.css';
+import "./css/error.css";
 
-import React from 'react';
-import {useHistory} from "react-router-dom";
-import {inject, observer} from "mobx-react";
+import React from "react";
+import { useHistory } from "react-router-dom";
+import { inject, observer } from "mobx-react";
 
-function ErrorScreen({store}) {
+function ErrorScreen({ store }) {
   const history = useHistory();
 
   const errors = () => {
@@ -19,11 +19,17 @@ function ErrorScreen({store}) {
 
   return (
     <section className="error-screen">
-      <span>К сожалению,<br/>произошла ошибка...</span>
-      <div>{ errors() }</div>
-      <div onClick={ () => history.goBack() } className="goBackButton" >Вернуться назад</div>
+      <span>
+        К сожалению,
+        <br />
+        произошла ошибка...
+      </span>
+      <div>{errors()}</div>
+      <div onClick={() => history.goBack()} className="goBackButton">
+        Вернуться назад
+      </div>
     </section>
   );
 }
 
-export default inject('store')( observer(ErrorScreen) );
+export default inject("store")(observer(ErrorScreen));
